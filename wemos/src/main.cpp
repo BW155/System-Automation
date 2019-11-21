@@ -1,7 +1,7 @@
 using namespace std;
 
 #include <arduino.h>
-#include <domobject.h>
+#include "domobjects/domobject.h"
 
 DomObject* object;
 
@@ -17,7 +17,6 @@ void setup() {
     Chair chair;
     object = &chair;
     #endif
-
 
     Serial.begin(9600);
     Serial.println(object->getName());
