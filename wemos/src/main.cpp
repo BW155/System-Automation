@@ -2,28 +2,25 @@ using namespace std;
 
 #include <arduino.h>
 #include "domobjects/domobject.h"
+#include <wifi.h>
 
-DomObject* object;
+/// Get the right configuration (Decided at compile-time)
+#ifdef BED
+Bed object;
+#endif
+
+#ifdef CHAIR
+Chair object;
+#endif
 
 void setup() {
-
-    /// Get the right configuration (Decided at compile-time)
-    #ifdef BED
-    Bed bed;
-    object = &bed;
-    #endif
-
-    #ifdef CHAIR
-    Chair chair;
-    object = &chair;
-    #endif
-
     Serial.begin(9600);
-    Serial.println(object->getName());
-    Serial.println(object->getSensors());
+    wifiSetup();
+    Serial.println("Hi, my name is " + object.getName());
 }
 
 void loop() {
-
+    delay(100);
+    handleWifi(&object);
 }
 

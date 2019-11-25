@@ -1,4 +1,6 @@
 #include <WString.h>
+#include "ArduinoJson-v6.13.0.h"
+#include "../components.h"
 
 #ifndef DOMOBJECT
 #define DOMOBJECT
@@ -6,7 +8,7 @@
 class DomObject {
     public:
         virtual String getName();
-        virtual String getSensors();
+        virtual void getSensors(JsonArray&);
         virtual void writeActuators();
     protected:
         String name;
@@ -15,14 +17,14 @@ class DomObject {
 class Bed: public DomObject {
     public:
         String getName() override;
-        String getSensors() override;
+        void getSensors(JsonArray&) override;
         void writeActuators() override;
 };
 
 class Chair: public DomObject {
     public:
         String getName() override;
-        String getSensors() override;
+        void getSensors(JsonArray&) override;
         void writeActuators() override;
 };
 
