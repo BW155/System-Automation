@@ -1,7 +1,7 @@
 #include <wifi.h>
 
-const char* ssid = "";
-const char* password = "";
+const char* ssid = "de Berlijnse muur";
+const char* password = "adolfhitler";
 
 WiFiServer wifiServer(8080);
 
@@ -11,7 +11,7 @@ void wifiSetup() {
 
     // Wifi connection
     Serial.println();
-    Serial.println();
+    Serial.println("==================");
     Serial.print("Connecting to: ");
     Serial.println(ssid);
 
@@ -29,6 +29,7 @@ void wifiSetup() {
 
     Serial.println("Server starts...");
     wifiServer.begin();
+    Serial.println("==================");
 }
 
 void handleWifi(DomObject* object) {
@@ -47,7 +48,7 @@ void handleWifi(DomObject* object) {
         DeserializationError error = deserializeJson(doc, data);
         if (error) {
             Serial.println(error.c_str());
-            String result = constructResult(error.c_str());
+            String result = constructErrorResult(error.c_str());
             client.print(result);
             return;
         }
@@ -72,7 +73,7 @@ void handleWifi(DomObject* object) {
     }
 }
 
-String constructResult(const char* error) {
+String constructErrorResult(const char* error) {
     const size_t capacity = JSON_OBJECT_SIZE(0) + JSON_OBJECT_SIZE(2);
     DynamicJsonDocument doc(capacity);
 

@@ -7,8 +7,7 @@
 
 void wifiSetup();
 void handleWifi(DomObject*);
-String constructResult(const char*);
-String constructResult(JsonObject);
+String constructErrorResult(const char*);
 
 
 #endif
