@@ -26,7 +26,6 @@ void writeActuators(int output) {
 ///////////////////
 /// Get Sensors ///
 ///////////////////
-
 unsigned int getForceSensor() {
     Wire.requestFrom(0x36, 4);
     unsigned int anin0 = Wire.read() & 0x03;

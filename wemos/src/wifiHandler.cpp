@@ -34,6 +34,7 @@ void handleWifi(DomObject* object) {
 
     // Check if client is connected
     if (client && client.connected()) {
+        delay(10);
         Serial.println("Client connected");
         delay(60);
 
