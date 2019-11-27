@@ -81,6 +81,7 @@ String constructErrorResult(const char* error) {
     doc.createNestedObject("result");
 
     String output;
+    serializeJson(doc, output);
     return output;
 }
 
