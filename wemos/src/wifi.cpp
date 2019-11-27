@@ -17,6 +17,7 @@ void wifiSetup() {
 
     WiFi.begin(ssid, password);
 
+    // Wait for wifi to connect
     while (WiFi.status() != WL_CONNECTED) {
         delay(500);
         Serial.print(".");
@@ -33,6 +34,7 @@ void wifiSetup() {
 }
 
 void handleWifi(DomObject* object) {
+    // Check if wifi is still connected, if not, reconnect
     if (WiFi.status() != WL_CONNECTED) {
         WiFi.begin(ssid, password);
 
@@ -45,6 +47,7 @@ void handleWifi(DomObject* object) {
     WiFiClient client = wifiServer.available();
     String data = "";
 
+    // Check if client is connected
     if (client && client.connected()) {
         Serial.println("Client connected");
 
@@ -52,9 +55,11 @@ void handleWifi(DomObject* object) {
             data += (char) client.read();
         }
             
-        Serial.println("Data:    " + data);
+        // Deserializing json
         DynamicJsonDocument doc(1024);
         DeserializationError error = deserializeJson(doc, data);
+
+        // If there is an error, send error result back to client
         if (error) {
             Serial.println(error.c_str());
             String result = constructErrorResult(error.c_str());
@@ -62,6 +67,7 @@ void handleWifi(DomObject* object) {
             return;
         }
 
+        // Check if message is meant for me
         if (doc[String("name")] == object->getName()) {
             Serial.println("This message is for me");
             DynamicJsonDocument resultDoc(1024);
@@ -78,6 +84,8 @@ void handleWifi(DomObject* object) {
             client.print(result);
         } else {
             Serial.println("This message is not for me");
+            String error = constructErrorResult("MessageNotForMe");
+            client.print(error);
         }
     }
 }
