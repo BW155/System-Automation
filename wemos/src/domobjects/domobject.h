@@ -10,8 +10,6 @@ class DomObject {
         virtual String getName();
         virtual void getSensors(JsonArray&);
         virtual void writeActuators();
-    protected:
-        String name;
 };
 
 class Bed: public DomObject {
