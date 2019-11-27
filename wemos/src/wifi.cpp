@@ -33,6 +33,15 @@ void wifiSetup() {
 }
 
 void handleWifi(DomObject* object) {
+    if (WiFi.status() != WL_CONNECTED) {
+        WiFi.begin(ssid, password);
+
+        while (WiFi.status() != WL_CONNECTED) {
+            delay(500);
+            Serial.print(".");
+        }
+    }
+
     WiFiClient client = wifiServer.available();
     String data = "";
 
