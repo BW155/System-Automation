@@ -14,14 +14,8 @@ void wifiSetup() {
     Serial.println("==================");
     Serial.print("Connecting to: ");
     Serial.println(ssid);
-
-    WiFi.begin(ssid, password);
-
-    // Wait for wifi to connect
-    while (WiFi.status() != WL_CONNECTED) {
-        delay(500);
-        Serial.print(".");
-    }
+    
+    connectWifi();
 
     Serial.println("");
     Serial.println("WiFi connected");  
@@ -36,12 +30,7 @@ void wifiSetup() {
 void handleWifi(DomObject* object) {
     // Check if wifi is still connected, if not, reconnect
     if (WiFi.status() != WL_CONNECTED) {
-        WiFi.begin(ssid, password);
-
-        while (WiFi.status() != WL_CONNECTED) {
-            delay(500);
-            Serial.print(".");
-        }
+        connectWifi();
     }
 
     WiFiClient client = wifiServer.available();
@@ -102,3 +91,13 @@ String constructErrorResult(const char* error) {
     return output;
 }
 
+void connectWifi() {
+    WiFi.begin(ssid, password);
+
+    while (WiFi.status() != WL_CONNECTED) {
+        delay(500);
+        Serial.print(".");
+    }
+    Serial.println();
+    Serial.println("Reconnected");
+}

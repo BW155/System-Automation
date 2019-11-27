@@ -5,13 +5,9 @@ String Chair::getName() {
 }
 
 void Chair::getSensors(JsonArray& arr) {
-    char output[64];
-    const int capacity = JSON_OBJECT_SIZE(1);
-    StaticJsonDocument<capacity> doc;
-
-    doc["ForceSensor"] = getForceSensor();
-
-    serializeJson(doc, output);
+    JsonObject forceSensor = arr.createNestedObject();
+    forceSensor["name"] = "ForceSensor";
+    forceSensor["value"] = getForceSensor();
 }
 
 void Chair::writeActuators() {

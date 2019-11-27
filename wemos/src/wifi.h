@@ -8,6 +8,7 @@
 void wifiSetup();
 void handleWifi(DomObject*);
 String constructErrorResult(const char*);
+void connectWifi();
 
 
 #endif
