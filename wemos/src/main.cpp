@@ -1,8 +1,11 @@
 using namespace std;
 
-#include <arduino.h>
+#include <Wire.h>
+#include <Arduino.h>
 #include "domobjects/domobject.h"
+#include "components.h"
 #include <wifi.h>
+#include <string>
 
 /// Get the right configuration (Decided at compile-time)
 #ifdef BED
@@ -15,12 +18,28 @@ Chair object;
 
 void setup() {
     Serial.begin(9600);
+    delay(1000);
     wifiSetup();
     Serial.println("Hi, my name is " + object.getName());
+    return;
+
+    Wire.begin();
+
+    // Config maxi 16647 (analog part)
+    Wire.beginTransmission(0x36);
+    Wire.write(byte(0xA2));
+    Wire.write(byte(0x03));
+    Wire.endTransmission();
+
+    // Config 
+    Wire.beginTransmission(0x38);
+    Wire.write(byte(0x03));
+    Wire.write(byte(0x0F));
+    Wire.endTransmission();
 }
 
 void loop() {
-    delay(100);
     handleWifi(&object);
+    delay(200);
 }
 

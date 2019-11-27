@@ -38,10 +38,21 @@ void handleWifi(DomObject* object) {
 
     // Check if client is connected
     if (client && client.connected()) {
+        delay(10);
         Serial.println("Client connected");
 
         while (client.available() > 0) {
             data += (char) client.read();
+        }
+
+        Serial.print("Data: ");
+        Serial.println(data);
+
+        if (data == "hello") {
+            Serial.println("HELLO");
+            client.print(object->getName());
+            client.stop();
+            return;
         }
             
         // Deserializing json
@@ -76,6 +87,7 @@ void handleWifi(DomObject* object) {
             String error = constructErrorResult("MessageNotForMe");
             client.print(error);
         }
+        client.stop();
     }
 }
 
