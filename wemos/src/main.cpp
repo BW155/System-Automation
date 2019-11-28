@@ -20,8 +20,8 @@ void setup() {
     Serial.begin(9600);
     delay(1000);
     wifiSetup();
-    Serial.println("Hi, my id is " + String(object.getId()));
 
+    Serial.println("Hi, my id is " + String(object.getId()));
     Wire.begin();
 
     // Config maxi 16647 (analog part)
