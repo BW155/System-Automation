@@ -1,4 +1,4 @@
-#include <wifi.h>
+#include <wifiHandler.h>
 
 const char* ssid = "de Berlijnse muur";
 const char* password = "adolfhitler";
@@ -38,11 +38,17 @@ void handleWifi(DomObject* object) {
 
     // Check if client is connected
     if (client && client.connected()) {
-        delay(10);
         Serial.println("Client connected");
+        delay(60);
 
         while (client.available() > 0) {
             data += (char) client.read();
+        }
+
+        if (data == "") {
+            Serial.print("NoDataReceived");
+            client.print(constructErrorResult("NoDataReceived"));
+            return;
         }
 
         Serial.print("Data: ");
@@ -58,6 +64,9 @@ void handleWifi(DomObject* object) {
         // Deserializing json
         DynamicJsonDocument doc(1024);
         DeserializationError error = deserializeJson(doc, data);
+        JsonArray actuators = doc["actuators"];
+        
+        object->writeActuators(actuators);
 
         // If there is an error, send error result back to client
         if (error) {
@@ -87,6 +96,7 @@ void handleWifi(DomObject* object) {
             String error = constructErrorResult("MessageNotForMe");
             client.print(error);
         }
+
         client.stop();
     }
 }
