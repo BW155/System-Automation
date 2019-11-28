@@ -10,6 +10,6 @@ void Chair::getSensors(JsonArray& arr) {
     forceSensor["value"] = getForceSensor();
 }
 
-void Chair::writeActuators() {
+void Chair::writeActuators(JsonArray& actuators) {
     
 }
