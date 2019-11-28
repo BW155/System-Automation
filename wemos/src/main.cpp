@@ -2,10 +2,10 @@ using namespace std;
 
 #include <Wire.h>
 #include <Arduino.h>
+#include <string>
 #include "domobjects/domobject.h"
 #include "components.h"
-#include <wifi.h>
-#include <string>
+#include "wifiHandler.h"
 
 /// Get the right configuration (Decided at compile-time)
 #ifdef BED
@@ -21,7 +21,6 @@ void setup() {
     delay(1000);
     wifiSetup();
     Serial.println("Hi, my name is " + object.getName());
-    return;
 
     Wire.begin();
 
@@ -40,6 +39,6 @@ void setup() {
 
 void loop() {
     handleWifi(&object);
-    delay(200);
+    delay(20);
 }
 
