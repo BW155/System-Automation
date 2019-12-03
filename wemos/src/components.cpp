@@ -1,4 +1,35 @@
 #include "components.h"
+#include <Wire.h>
+#include <Servo.h>
+
+/////////////////////
+/// Setup         ///
+/////////////////////
+
+Servo servo;
+
+void initI2C() {
+    Wire.begin();
+
+    //Config PCA9554
+    Wire.beginTransmission(0x38);
+    Wire.write(byte(0x03));    //DDR      
+    Wire.write(byte(0x0F));    //d7-4 output, d3-0 input     
+    Wire.endTransmission();
+
+     //Config MAX11647
+    Wire.beginTransmission(0x36);
+    Wire.write(byte(0xA2));          
+    Wire.write(byte(0x03));  
+    Wire.endTransmission();
+}
+
+void initServo() {
+    servo.attach(14);
+}
+
+
+
 
 /////////////////////
 /// Set Actuators ///
@@ -10,6 +41,10 @@ void setLed(bool state) {
     Wire.write(byte(0x01));
     Wire.write(led);
     Wire.endTransmission();
+}
+
+void setServo(int angle) {
+    servo.write(angle);
 }
 
 ///////////////////
@@ -48,4 +83,14 @@ void resetButton() {
 // Loop that the main loop goes through to check components that require more realtime checking, like buttons.
 void componentCheckLoop() {
     getButton();
+}
+
+bool getButton(int n) {
+    if(n == 1){
+        return getInput(0);
+    }else if(n == 2){
+        return getInput(1);
+    }else{
+        return false;
+    }
 }

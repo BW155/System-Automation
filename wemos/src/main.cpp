@@ -16,6 +16,10 @@ Bed object;
 Chair object;
 #endif
 
+#ifdef DOOR
+Deur object;
+#endif
+
 void setup() {
     Serial.begin(9600);
     delay(1000);
