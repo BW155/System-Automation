@@ -30,13 +30,13 @@ bool getButton() {
     Wire.endTransmission();
     Wire.requestFrom(0x38, 1);
     unsigned int inputs = Wire.read();
-    if (inputs & 0x01) {
+    if (inputs & BED_BUTTON) {
         static_button_state = true;
     }
     if (static_button_state) {
         return true;
     }
-    return inputs & 0x01;
+    return inputs & BED_BUTTON;
 }
 
 void resetButton() {

@@ -3,6 +3,7 @@
 
 #ifndef COMPONENTS
 #define COMPONENTS
+#define BED_BUTTON = 0x01;
 
 /////////////////////
 /// Set Actuators ///
