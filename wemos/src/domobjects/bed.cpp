@@ -1,4 +1,5 @@
 #include "domobject.h"
+#include "components.h"
 
 String Bed::getName() {
     return "Bed";
@@ -12,6 +13,7 @@ void Bed::getSensors(JsonArray& arr) {
     JsonObject button = arr.createNestedObject();
     button["name"] = "PushButton";
     button["value"] = getButton();
+    resetButton();
 }
 
 void Bed::writeActuators(JsonArray& actuators) {

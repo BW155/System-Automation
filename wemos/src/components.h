@@ -15,4 +15,14 @@ void setLed(bool state);
 unsigned int getForceSensor();
 bool getButton();
 
+/////////////////////
+/// Miscellaneous ///
+/////////////////////
+
+// States if the button was pressed for the sensor data receiver.
+static bool static_button_state;
+
+void componentCheckLoop();
+void resetButton();
+
 #endif
