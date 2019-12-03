@@ -6,4 +6,4 @@ String DomObject::getName() {
 
 void DomObject::getSensors(JsonArray& arr) {}
 
-void DomObject::writeActuators() {}
+void DomObject::writeActuators(JsonArray& actuators) {}
