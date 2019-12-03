@@ -34,4 +34,6 @@ void initServo();
 void componentCheckLoop();
 void resetButton();
 
+bool getButton(int n);
+
 #endif
