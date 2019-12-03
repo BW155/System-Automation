@@ -27,6 +27,7 @@ void writeActuators(int output) {
 ///////////////////
 /// Get Sensors ///
 ///////////////////
+
 unsigned int getForceSensor() {
     Wire.requestFrom(0x36, 4);
     unsigned int anin0 = Wire.read() & 0x03;
@@ -54,9 +55,9 @@ void resetButton() {
     static_button_state = false;
 }
 
-////////////////////////////////////////
 
 // Loop that the main loop goes through to check components that require more realtime checking, like buttons.
 void componentCheckLoop() {
     getButton();
 }
+
