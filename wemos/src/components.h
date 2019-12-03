@@ -26,4 +26,6 @@ static bool static_button_state;
 void componentCheckLoop();
 void resetButton();
 
+bool getButton(int n);
+
 #endif
