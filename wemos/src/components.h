@@ -12,4 +12,6 @@ void setLed(bool state);
 ///////////////////
 double getForceSensor();
 
+bool getButton(int n);
+
 #endif
