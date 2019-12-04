@@ -6,7 +6,6 @@ using namespace std;
 #include "domobjects/domobject.h"
 #include "components.h"
 #include "wifiHandler.h"
-#include "wifi.h"
 
 /// Get the right configuration (Decided at compile-time)
 #ifdef BED
@@ -24,7 +23,7 @@ Door object;
 void setup() {
     Serial.begin(9600);
     delay(1000);
-    wifiSetup();
+    //wifiSetup();
     Serial.println("Hi, my name is " + object.getName());
 
     Wire.begin();
@@ -40,11 +39,12 @@ void setup() {
     Wire.write(byte(0x03));
     Wire.write(byte(0x0F));
     Wire.endTransmission();
+
+    initServo();
 }
 
 void loop() {
-    handleWifi(&object);
+    //handleWifi(&object);
     delay(20);
     componentCheckLoop();
 }
-
