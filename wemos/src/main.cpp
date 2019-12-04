@@ -23,7 +23,7 @@ Door object;
 void setup() {
     Serial.begin(9600);
     delay(1000);
-    wifiSetup();
+    //wifiSetup();
     Serial.println("Hi, my name is " + object.getName());
 
     Wire.begin();
@@ -44,7 +44,7 @@ void setup() {
 }
 
 void loop() {
-    handleWifi(&object);
+    //handleWifi(&object);
     delay(20);
     componentCheckLoop();
 }

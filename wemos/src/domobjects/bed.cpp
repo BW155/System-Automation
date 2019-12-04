@@ -12,7 +12,7 @@ void Bed::getSensors(JsonArray& arr) {
 
     JsonObject button = arr.createNestedObject();
     button["name"] = "PushButton";
-    button["value"] = getButton();
+    button["value"] = getButton(0);
     resetButton();
 }
 
