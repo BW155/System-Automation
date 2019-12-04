@@ -64,9 +64,6 @@ void handleWifi(DomObject* object) {
         // Deserializing json
         DynamicJsonDocument doc(1024);
         DeserializationError error = deserializeJson(doc, data);
-        JsonArray actuators = doc["actuators"];
-        
-        object->writeActuators(actuators);
 
         // If there is an error, send error result back to client
         if (error) {
@@ -78,6 +75,9 @@ void handleWifi(DomObject* object) {
 
         // Check if message is meant for me
         if (doc[String("name")] == object->getName()) {
+            JsonArray actuators = doc["actuators"];
+            object->writeActuators(actuators);
+
             Serial.println("This message is for me");
             DynamicJsonDocument resultDoc(1024);
 

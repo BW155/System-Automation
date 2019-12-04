@@ -11,5 +11,11 @@ void Chair::getSensors(JsonArray& arr) {
 }
 
 void Chair::writeActuators(JsonArray& actuators) {
-    
+    JsonObject led = actuators[0];
+    int l = led["value"];
+
+    JsonObject vib = actuators[1];
+    int v = vib["value"];
+
+    setChairActuators(l, v);
 }

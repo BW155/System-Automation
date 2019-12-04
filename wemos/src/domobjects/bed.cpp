@@ -19,5 +19,5 @@ void Bed::getSensors(JsonArray& arr) {
 void Bed::writeActuators(JsonArray& actuators) {
     JsonObject led = actuators[0];
     int l = led["value"];
-    setLed(l);
+    setBedActuators(l);
 }

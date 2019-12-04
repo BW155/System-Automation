@@ -4,11 +4,20 @@
 /// Set Actuators ///
 /////////////////////
 
-void setLed(bool state) {
-    int led = state << 4;
+void setChairActuators(bool led, bool vibrationMotor) {
+    int output = (led << 4) | (vibrationMotor << 5);
+    writeActuators(output);
+}
+
+void setBedActuators(bool led) {
+    int output = (led << 4);
+    writeActuators(output);
+}
+
+void writeActuators(int output) {
     Wire.beginTransmission(0x38);
     Wire.write(byte(0x01));
-    Wire.write(led);
+    Wire.write(byte(output));
     Wire.endTransmission();
 }
 
@@ -49,3 +58,4 @@ void resetButton() {
 void componentCheckLoop() {
     getButton();
 }
+
