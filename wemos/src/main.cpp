@@ -6,6 +6,7 @@ using namespace std;
 #include "domobjects/domobject.h"
 #include "components.h"
 #include "wifiHandler.h"
+#include "wifi.h"
 
 /// Get the right configuration (Decided at compile-time)
 #ifdef BED

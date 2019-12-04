@@ -28,4 +28,6 @@ void resetButton();
 
 bool getButton(int n);
 
+bool getButton(int n);
+
 #endif
