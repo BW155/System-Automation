@@ -58,3 +58,4 @@ void resetButton() {
 void componentCheckLoop() {
     getButton();
 }
+
