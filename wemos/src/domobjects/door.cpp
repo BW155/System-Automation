@@ -5,11 +5,14 @@ String Door::getName() {
 }
 
 void Door::getSensors(JsonArray& arr) {
-    JsonObject forceSensor = arr.createNestedObject();
-    forceSensor["name"] = "ForceSensor";
-    forceSensor["value"] = getForceSensor();
+    JsonObject buttons = arr.createNestedObject();
+    buttons["name"] = "Buttons";
+    buttons["button 1"] = getButton(0);
+    buttons["button 2"] = getButton(1);
 }
 
 void Door::writeActuators(JsonArray& actuators) {
-    
+    JsonObject servo = actuators[0];
+    int angle = servo["value"];
+    setServo(angle);
 }

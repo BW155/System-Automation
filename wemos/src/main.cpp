@@ -38,11 +38,12 @@ void setup() {
     Wire.write(byte(0x03));
     Wire.write(byte(0x0F));
     Wire.endTransmission();
+
+    initServo();
 }
 
 void loop() {
-    handleWifi(&object);
+    //handleWifi(&object);
     delay(20);
     componentCheckLoop();
 }
-
