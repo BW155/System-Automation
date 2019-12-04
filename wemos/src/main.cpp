@@ -43,7 +43,7 @@ void setup() {
 }
 
 void loop() {
-    //handleWifi(&object);
+    handleWifi(&object);
     delay(20);
     componentCheckLoop();
 }
