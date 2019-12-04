@@ -16,12 +16,15 @@ Bed object;
 Chair object;
 #endif
 
+#ifdef Pillar
+Pillar object;
+#endif
+
 void setup() {
     Serial.begin(9600);
     delay(1000);
     wifiSetup();
     Serial.println("Hi, my name is " + object.getName());
-
     Wire.begin();
 
     // Config maxi 16647 (analog part)
@@ -42,4 +45,3 @@ void loop() {
     delay(20);
     componentCheckLoop();
 }
-
