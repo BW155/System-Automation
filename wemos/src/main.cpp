@@ -16,6 +16,10 @@ Bed object;
 Chair object;
 #endif
 
+#ifdef Pillar
+Pillar object;
+#endif
+
 void setup() {
     Serial.begin(9600);
     delay(1000);
@@ -42,4 +46,3 @@ void loop() {
     delay(20);
     componentCheckLoop();
 }
-
