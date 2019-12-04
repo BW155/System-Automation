@@ -3,16 +3,19 @@
 
 #ifndef COMPONENTS
 #define COMPONENTS
-#define BED_BUTTON = 0x01;
+#define BED_BUTTON 0x01
 
 /////////////////////
 /// Set Actuators ///
 /////////////////////
 void setLed(bool state);
+void setFridgeFan();
+double thermistor(int RawADC);
 
 ///////////////////
 /// Get Sensors ///
 ///////////////////
+double getFridgeTempSensor(int choice);
 unsigned int getForceSensor();
 bool getButton();
 
