@@ -65,13 +65,13 @@ bool getButton() {
     Wire.endTransmission();
     Wire.requestFrom(0x38, 1);
     unsigned int inputs = Wire.read();
-    if (inputs & BED_BUTTON) {
+    if (inputs & 0x01) {
         static_button_state = true;
     }
     if (static_button_state) {
         return true;
     }
-    return inputs & BED_BUTTON;
+    return inputs & 0x01;
 }
 
 void resetButton() {
@@ -85,12 +85,3 @@ void componentCheckLoop() {
     getButton();
 }
 
-bool getButton(int n) {
-    if(n == 1){
-        return getInput(0);
-    }else if(n == 2){
-        return getInput(1);
-    }else{
-        return false;
-    }
-}
