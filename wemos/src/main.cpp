@@ -17,7 +17,7 @@ Chair object;
 #endif
 
 #ifdef DOOR
-Deur object;
+Door object;
 #endif
 
 void setup() {
