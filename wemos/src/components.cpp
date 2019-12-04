@@ -12,6 +12,14 @@ void setLed(bool state) {
     Wire.endTransmission();
 }
 
+void setVibrationMotor(bool state) {
+    int motor = state << 5;
+    Wire.beginTransmission(0x38);
+    Wire.write(byte(0x01));
+    Wire.write(motor);
+    Wire.endTransmission();
+}
+
 ///////////////////
 /// Get Sensors ///
 ///////////////////

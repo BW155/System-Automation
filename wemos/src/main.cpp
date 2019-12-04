@@ -41,5 +41,9 @@ void loop() {
     handleWifi(&object);
     delay(20);
     componentCheckLoop();
+    setVibrationMotor(true);
+    delay(200);
+    setVibrationMotor(false)
+    delay(200);
 }
 
