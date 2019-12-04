@@ -26,4 +26,11 @@ class Chair: public DomObject {
         void writeActuators(JsonArray&) override;
 };
 
+class Pillar: public DomObject {
+    public:
+        String getName() override;
+        void getSensors(JsonArray&) override;
+        void writeActuators(JsonArray&) override;
+};
+
 #endif
