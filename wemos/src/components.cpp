@@ -1,5 +1,16 @@
 #include "components.h"
 
+
+
+double thermistor(int RawADC) {  //Function to perform the fancy math of the Steinhart-Hart equation
+    double temperature;
+    temperature = log(((10240000/RawADC) - 10000));
+    temperature = 1 / (0.001129148 + (0.000234125 + (0.0000000876741 * temperature * temperature ))* temperature );
+    temperature = temperature - 273.15;              // Convert Kelvin to Celsius
+ return temperature;
+}
+
+
 /////////////////////
 /// Set Actuators ///
 /////////////////////
@@ -22,15 +33,6 @@ void setFridgeFan(){
   Wire.endTransmission(); 
 }
 
-double thermistor(int RawADC) {  //Function to perform the fancy math of the Steinhart-Hart equation
-
- double temperature;
- temperature = log(((10240000/RawADC) - 10000));
- temperature = 1 / (0.001129148 + (0.000234125 + (0.0000000876741 * temperature * temperature ))* temperature );
- temperature = temperature - 273.15;              // Convert Kelvin to Celsius
- //temperature = (temperature * 9.0)/ 5.0 + 32.0; // Celsius to Fahrenheit - comment out this line if you need Celsius
- return temperature;
-}
 
 ///////////////////
 /// Get Sensors ///
@@ -44,24 +46,18 @@ double getFridgeTempSensor(int choice){
   unsigned int anin1 = Wire.read()&0x03;  
   anin1=anin1<<8;
   anin1 = anin1|Wire.read(); 
+  Serial.print("analog in 0: ");
+  Serial.println(anin0);   
+  Serial.print("analog in 1: ");
+  Serial.println(anin1);   
+  Serial.println("");
 
-  Serial.print("Fridge inside: ");
-    Serial.print(thermistor(anin0));
-    Serial.print("Fridge outside: ");
-    Serial.println(thermistor(anin1));
-    Serial.println(" ");
-  
-  //Temp sensor inside 
-  if(choice = 0){
-      double value = thermistor(anin0);
-      return value;
+  if(choice == 0){
+       return thermistor(anin0);
   }
-  //Temp sensor outside
-  if(choice = 1){
-      double value = thermistor(anin1);
-      return value;
+  if(choice == 1){
+       return thermistor(anin1);
   }
-  return -10;
 }
 
 

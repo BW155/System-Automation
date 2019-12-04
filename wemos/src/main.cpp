@@ -19,7 +19,7 @@ Chair object;
 void setup() {
     Serial.begin(9600);
     delay(1000);
-    //wifiSetup();
+    wifiSetup();
     Serial.println("Hi, my name is " + object.getName());
 
     Wire.begin();
@@ -46,30 +46,12 @@ void setup() {
 }
 
 void loop() {
-   // handleWifi(&object);
+    handleWifi(&object);
     delay(20);
     componentCheckLoop();
     setFridgeFan();
-
-
-
-
-  Wire.requestFrom(0x36, 4);   
-  unsigned int anin0 = Wire.read()&0x03;  
-  anin0=anin0<<8;
-  anin0 = anin0|Wire.read();  
-  unsigned int anin1 = Wire.read()&0x03;  
-  anin1=anin1<<8;
-  anin1 = anin1|Wire.read(); 
-  Serial.print("analog in 0: ");
-  Serial.println(anin0);   
-  Serial.print("analog in 1: ");
-  Serial.println(anin1);   
-  Serial.println("");
-
-
-  Serial.println(thermistor(anin0));
-  Serial.println(thermistor(anin1));
+    Serial.println(getFridgeTempSensor(0));
+    Serial.println(getFridgeTempSensor(1));
   delay(1000);
 }
 
