@@ -41,9 +41,15 @@ void loop() {
     handleWifi(&object);
     delay(20);
     componentCheckLoop();
-    setVibrationMotor(true);
-    delay(200);
-    setVibrationMotor(false)
-    delay(200);
+
+    setChairActuators(true, true);
+    Serial.println("true");
+
+    delay(1000);
+
+    setChairActuators(false, false);
+    Serial.println("false");
+
+    delay(1000);
 }
 

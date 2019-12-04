@@ -8,7 +8,8 @@
 /////////////////////
 /// Set Actuators ///
 /////////////////////
-void setLed(bool state);
+void setBedActuators(bool);
+void setChairActuators(bool, bool);
 
 ///////////////////
 /// Get Sensors ///
