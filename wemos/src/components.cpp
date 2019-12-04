@@ -4,32 +4,21 @@
 /// Set Actuators ///
 /////////////////////
 
-void setLed(bool state) {
-    int led = state << 4;
-    Wire.beginTransmission(0x38);
-    Wire.write(byte(0x01));
-    Wire.write(led);
-    Wire.endTransmission();
-}
-
-void setVibrationMotor(bool state) {
-    int motor = state << 8;
-    Wire.beginTransmission(0x38);
-    Wire.write(byte(0x01));
-    Wire.write(byte(0x10000000));
-    Wire.endTransmission();
-}
-
 void setChairActuators(bool led, bool vibrationMotor) {
     int output = (led << 4) | (vibrationMotor << 5);
+    writeActuators(output);
+}
+
+void setBedActuators(bool led) {
+    int output = (led << 4);
+    writeActuators(output);
+}
+
+void writeActuators(int output) {
     Wire.beginTransmission(0x38);
     Wire.write(byte(0x01));
     Wire.write(byte(output));
     Wire.endTransmission();
-}
-
-void setBedActuators(bool led) {
-
 }
 
 ///////////////////

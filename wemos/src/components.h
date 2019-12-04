@@ -8,12 +8,15 @@
 /////////////////////
 /// Set Actuators ///
 /////////////////////
+
 void setBedActuators(bool);
 void setChairActuators(bool, bool);
+void writeActuators(int);
 
 ///////////////////
 /// Get Sensors ///
 ///////////////////
+
 unsigned int getForceSensor();
 bool getButton();
 
