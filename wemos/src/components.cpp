@@ -15,6 +15,8 @@ void setBedActuators(bool led) {
 }
 
 void writeActuators(int output) {
+    Serial.print("Output Actuators: ");
+    Serial.println(output);
     Wire.beginTransmission(0x38);
     Wire.write(byte(0x01));
     Wire.write(byte(output));

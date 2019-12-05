@@ -1,8 +1,8 @@
 #include "domobject.h"
 #include "components.h"
 
-String Bed::getName() {
-    return "Bed";
+int Bed::getId() {
+    return 1;
 }
 
 void Bed::getSensors(JsonArray& arr) {
