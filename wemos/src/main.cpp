@@ -18,9 +18,6 @@ Chair object;
 
 void setup() {
     Serial.begin(9600);
-    wifiSetup();
-    Serial.println("Hi, my id is " + String(object.getId()));
-
     Wire.begin();
 
     // Config maxi 16647 (analog part)
@@ -34,6 +31,11 @@ void setup() {
     Wire.write(byte(0x03));
     Wire.write(byte(0x0F));
     Wire.endTransmission();
+
+    writeActuators(0);
+
+    wifiSetup();
+    Serial.println("Hi, my id is " + String(object.getId()));
 }
 
 void loop() {
