@@ -56,7 +56,7 @@ void handleWifi(DomObject* object) {
 
         if (data == "hello") {
             Serial.println("HELLO");
-            client.print(object->getName());
+            client.print(object->getId());
             client.stop();
             return;
         }
@@ -74,10 +74,7 @@ void handleWifi(DomObject* object) {
         }
 
         // Check if message is meant for me
-        if (doc[String("name")] == object->getName()) {
-            JsonArray actuators = doc["actuators"];
-            object->writeActuators(actuators);
-
+        if (doc[Int("id")] == object->getId()) {
             Serial.println("This message is for me");
             DynamicJsonDocument resultDoc(1024);
 
