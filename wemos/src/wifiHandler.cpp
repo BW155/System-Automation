@@ -17,10 +17,6 @@ void wifiSetup() {
     
     connectWifi();
 
-    Serial.println("");
-    Serial.println("WiFi connected");  
-    Serial.println("IP address: ");
-    Serial.println(WiFi.localIP());
 
     Serial.println("Server starts...");
     wifiServer.begin();
@@ -74,7 +70,10 @@ void handleWifi(DomObject* object) {
         }
 
         // Check if message is meant for me
-        if (doc[Int("id")] == object->getId()) {
+        if (doc[String("id")] == object->getId()) {
+            JsonArray actuators = doc["actuators"];
+            object->writeActuators(actuators);
+
             Serial.println("This message is for me");
             DynamicJsonDocument resultDoc(1024);
 
@@ -94,6 +93,7 @@ void handleWifi(DomObject* object) {
             client.print(error);
         }
 
+        Serial.println();
         client.stop();
     }
 }
@@ -118,5 +118,7 @@ void connectWifi() {
         Serial.print(".");
     }
     Serial.println();
-    Serial.println("Reconnected");
+    Serial.println("WiFi connected");  
+    Serial.println("IP address: ");
+    Serial.println(WiFi.localIP());
 }
