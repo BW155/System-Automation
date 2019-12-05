@@ -8,6 +8,11 @@ void Chair::getSensors(JsonArray& arr) {
     JsonObject forceSensor = arr.createNestedObject();
     forceSensor["name"] = "ForceSensor";
     forceSensor["value"] = getForceSensor();
+
+    JsonObject button = arr.createNestedObject();
+    forceSensor["name"] = "Button";
+    forceSensor["value"] = getButton();
+    resetButton();
 }
 
 void Chair::writeActuators(JsonArray& actuators) {
