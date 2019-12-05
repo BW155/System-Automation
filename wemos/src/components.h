@@ -24,7 +24,6 @@ bool getButton();
 
 void getGassensor();
 int getButtonPillar();
-void getGassensor();
 
 /////////////////////
 /// Miscellaneous ///
@@ -37,6 +36,5 @@ static bool pillar_button_state;
 void componentCheckLoop();
 void resetButton();
 void resetPillarButton();
-
 
 #endif
