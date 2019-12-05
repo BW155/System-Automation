@@ -6,23 +6,22 @@ String Pillar::getName() {
 }
 
 void Pillar::getSensors(JsonArray& arr) {
-    JsonObject forceSensor = arr.createNestedObject();
-    forceSensor["name"] = "Gassensor";
-    forceSensor["value"] = getGassensor();
+    JsonObject GasSensor = arr.createNestedObject();
+    GasSensor["name"] = "Gassensor";
+    GasSensor["value"] = getGassensor();
 
-    JsonObject button = arr.createNestedObject();
-    button["name"] = "ButtonPillar";
-    button["value"] = getButtonPillar();
-    resetButton();
+    JsonObject buttonPillar = arr.createNestedObject();
+    buttonPillar["name"] = "ButtonPillar";
+    buttonPillar["value"] = getButtonPillar();
+    resetPillarButton();
 }
 
 void Pillar::writeActuators(JsonArray& actuators) {
     JsonObject PillarLed = actuators[0];
     int PillarLed = PillarLed["value"];
+    setLedBuzzer(PillarLed);
     
     JsonObject Buzzer = actuators[1];
     int Buzzer = Buzzer["value"];
-
-    int outputs = PillarLed + Buzzer;
-    setLedBuzzer(outputs);
+    setLedBuzzer(Buzzer);
 }

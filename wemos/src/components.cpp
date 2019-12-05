@@ -4,6 +4,14 @@
 /// Set Actuators ///
 /////////////////////
 
+void setLed(bool state) { 
+    int led = state << 4; 
+    Wire.beginTransmission(0x38); 
+    Wire.write(byte(0x01)); 
+    Wire.write(led); 
+    Wire.endTransmission();
+}
+
 int setLedBuzzer(int outputs) {
   Wire.beginTransmission(0x38);
   Wire.write(byte(0x01));
