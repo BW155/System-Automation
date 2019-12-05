@@ -74,20 +74,6 @@ int getButtonPillar() {
     return inputs & pillar_button_state;
 }
 
-int getButtonPillar() {
-    Wire.beginTransmission(0x38);
-    Wire.write(byte(0x00));
-    Wire.endTransmission();
-    Wire.requestFrom(0x38, 1);
-    unsigned int inputs = Wire.read();
-    if (inputs & PILLAR_BUTTON){
-        pillar_button_state = true;
-    }
-    if (pillar_button_state){
-        return true;
-    }
-    return inputs & pillar_button_state;
-}
 
 void resetButton() {
     static_button_state = false;
