@@ -44,5 +44,4 @@ void loop() {
     handleWifi(&object);
     delay(20);
     componentCheckLoop();
-    componentSet();
 }
