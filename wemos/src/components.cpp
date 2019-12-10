@@ -52,19 +52,43 @@ unsigned int getForceSensor() {
     return anin0;
 }
 
-bool getButton() {
+bool getButton(int n) {
     Wire.beginTransmission(0x38);
     Wire.write(byte(0x00));
     Wire.endTransmission();
     Wire.requestFrom(0x38, 1);
     unsigned int inputs = Wire.read();
-    if (inputs & BED_BUTTON) {
-        static_button_state = true;
+    return inputs & 1 << n;
+}
+
+bool getDoorButton1() {
+    Wire.beginTransmission(0x38);
+    Wire.write(byte(0x00));
+    Wire.endTransmission();
+    Wire.requestFrom(0x38, 1);
+    unsigned int inputs = Wire.read();
+    if (inputs & DOOR_BUTTON_1) {
+        static_button_1_state = true;
     }
-    if (static_button_state) {
+    if (static_button_1_state) {
         return true;
     }
-    return inputs & BED_BUTTON;
+    return inputs & DOOR_BUTTON_1;
+}
+
+bool getDoorButton2() {
+    Wire.beginTransmission(0x38);
+    Wire.write(byte(0x00));
+    Wire.endTransmission();
+    Wire.requestFrom(0x38, 1);
+    unsigned int inputs = Wire.read();
+    if (inputs & DOOR_BUTTON_2) {
+        static_button_2_state = true;
+    }
+    if (static_button_2_state) {
+        return true;
+    }
+    return inputs & DOOR_BUTTON_2;
 }
 
 bool getDoorButton1() {
