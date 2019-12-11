@@ -71,7 +71,7 @@ void handleWifi(DomObject* object) {
 
         // Check if message is meant for me
         if (doc[String("id")] == object->getId()) {
-            JsonArray actuators = doc["actuators"];
+            JsonObject actuators = doc["actuators"];
             object->writeActuators(actuators);
 
             Serial.println("This message is for me");
@@ -79,9 +79,8 @@ void handleWifi(DomObject* object) {
 
             resultDoc["error"] = "";
 
-            JsonObject root = resultDoc.createNestedObject("result");
-            JsonArray arr = root.createNestedArray("sensors");
-            object->getSensors(arr);
+            JsonObject sensors = resultDoc.createNestedObject("sensors");
+            object->getSensors(sensors);
 
             String result;
             serializeJson(resultDoc, result);

@@ -8,29 +8,29 @@
 class DomObject {
     public:
         virtual int getId();
-        virtual void getSensors(JsonArray&);
-        virtual void writeActuators(JsonArray&);
+        virtual void getSensors(JsonObject&);
+        virtual void writeActuators(JsonObject&);
 };
 
 class Bed: public DomObject {
     public:
         int getId() override;
-        void getSensors(JsonArray&) override;
-        void writeActuators(JsonArray&) override;
+        void getSensors(JsonObject&) override;
+        void writeActuators(JsonObject&) override;
 };
 
 class Chair: public DomObject {
     public:
         int getId() override;
-        void getSensors(JsonArray&) override;
-        void writeActuators(JsonArray&) override;
+        void getSensors(JsonObject&) override;
+        void writeActuators(JsonObject&) override;
 };
 
 class Door: public DomObject {
     public:
         int getId() override;
-        void getSensors(JsonArray&) override;
-        void writeActuators(JsonArray&) override;
+        void getSensors(JsonObject&) override;
+        void writeActuators(JsonObject&) override;
 };
 
 #endif

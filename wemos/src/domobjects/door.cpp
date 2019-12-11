@@ -4,17 +4,14 @@ int Door::getId() {
     return 7;
 }
 
-void Door::getSensors(JsonArray& arr) {
-    JsonObject buttons = arr.createNestedObject();
-    buttons["name"] = "Buttons";
-    buttons["button 1"] = getDoorButton1();
-    buttons["button 2"] = getDoorButton2();
+void Door::getSensors(JsonObject& obj) {
+    obj["button 1"] = getDoorButton1();
+    obj["button 2"] = getDoorButton2();
     resetButton();
 }
 
-void Door::writeActuators(JsonArray& actuators) {
-    JsonObject servo = actuators[0];
-    int value = servo["value"];
+void Door::writeActuators(JsonObject& actuators) {
+    int value = actuators["servo"];
     switch (value) {
         case -1:
             setServo(170);
