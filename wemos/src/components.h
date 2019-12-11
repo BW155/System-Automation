@@ -10,8 +10,11 @@ double thermistor(int RawADC);
 /////////////////////
 /// Set Actuators ///
 /////////////////////
-void setLed(bool state);
 void setFridgeFan(bool state);
+
+void setBedActuators(bool);
+void setChairActuators(bool, bool);
+void writeActuators(int);
 
 ///////////////////
 /// Get Sensors ///

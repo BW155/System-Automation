@@ -7,21 +7,21 @@
 
 class DomObject {
     public:
-        virtual String getName();
+        virtual int getId();
         virtual void getSensors(JsonArray&);
         virtual void writeActuators(JsonArray&);
 };
 
 class Bed: public DomObject {
     public:
-        String getName() override;
+        int getId() override;
         void getSensors(JsonArray&) override;
         void writeActuators(JsonArray&) override;
 };
 
 class Chair: public DomObject {
     public:
-        String getName() override;
+        int getId() override;
         void getSensors(JsonArray&) override;
         void writeActuators(JsonArray&) override;
 };

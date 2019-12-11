@@ -15,12 +15,22 @@ double thermistor(int RawADC) {  //Function to perform the fancy math of the Ste
 /// Set Actuators ///
 /////////////////////
 
+void setChairActuators(bool led, bool vibrationMotor) {
+    int output = (led << 4) | (vibrationMotor << 5);
+    writeActuators(output);
+}
 
-void setLed(bool state) {
-    int led = state << 4;
+void setBedActuators(bool led) {
+    int output = (led << 4);
+    writeActuators(output);
+}
+
+void writeActuators(int output) {
+    Serial.print("Output Actuators: ");
+    Serial.println(output);
     Wire.beginTransmission(0x38);
     Wire.write(byte(0x01));
-    Wire.write(led);
+    Wire.write(byte(output));
     Wire.endTransmission();
 }
 
@@ -102,3 +112,4 @@ void resetButton() {
 void componentCheckLoop() {
     getButton();
 }
+

@@ -18,10 +18,6 @@ Chair object;
 
 void setup() {
     Serial.begin(9600);
-    delay(1000);
-    wifiSetup();
-    Serial.println("Hi, my name is " + object.getName());
-
     Wire.begin();
 
     // Config maxi 16647 (analog part)
@@ -36,14 +32,10 @@ void setup() {
     Wire.write(byte(0x0F));
     Wire.endTransmission();
 
-  //Config PCA9554
-  //Inside loop for debugging purpose (hot plugging wemos module into i/o board). 
-  //IO0-IO3 as input, IO4-IO7 as output.
-  Wire.beginTransmission(0x38);
-  Wire.write(byte(0x03));          
-  Wire.write(byte(0x0F));         
-  Wire.endTransmission();
-  setFridgeFan(1);
+    writeActuators(0);
+
+    wifiSetup();
+    Serial.println("Hi, my id is " + String(object.getId()));
 }
 
 void loop() {

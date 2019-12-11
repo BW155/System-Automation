@@ -1,8 +1,8 @@
 #include "domobject.h"
 #include "components.h"
 
-String Bed::getName() {
-    return "Bed";
+int Bed::getId() {
+    return 1;
 }
 
 void Bed::getSensors(JsonArray& arr) {
@@ -19,5 +19,5 @@ void Bed::getSensors(JsonArray& arr) {
 void Bed::writeActuators(JsonArray& actuators) {
     JsonObject led = actuators[0];
     int l = led["value"];
-    setLed(l);
+    setBedActuators(l);
 }
