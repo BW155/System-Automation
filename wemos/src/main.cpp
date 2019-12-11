@@ -16,6 +16,10 @@ Bed object;
 Chair object;
 #endif
 
+#ifdef PILLAR
+Pillar object;
+#endif
+
 #ifdef DOOR
 Door object;
 #endif
