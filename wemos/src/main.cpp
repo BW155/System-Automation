@@ -3,10 +3,10 @@ using namespace std;
 #include <Wire.h>
 #include <Arduino.h>
 #include <string>
-#include <Adafruit_NeoPixel.h>
 #include "domobjects/domobject.h"
 #include "components.h"
 #include "wifiHandler.h"
+
 
 /// Get the right configuration (Decided at compile-time)
 #ifdef BED

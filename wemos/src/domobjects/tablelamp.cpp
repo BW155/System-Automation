@@ -1,15 +1,15 @@
 #include "domobject.h"
 
-String Chair::getName() {
-    return "TableLamp";
+int TableLamp::getId() {
+    return 3;
 }
 
-void Chair::getSensors(JsonArray& arr) {
-    JsonObject forceSensor = arr.createNestedObject();
-    forceSensor["name"] = "ForceSensor";
-    forceSensor["value"] = getForceSensor();
+void TableLamp::getSensors(JsonArray& arr) {
+    JsonObject motionSensor = arr.createNestedObject();
+    motionSensor["name"] = "motionSensor";
+    motionSensor["value"] = getMotionSensor();
 }
 
-void Chair::writeActuators(JsonArray& actuators) {
+void TableLamp::writeActuators(JsonArray& actuators) {
     
 }
