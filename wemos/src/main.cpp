@@ -28,10 +28,6 @@ Adafruit_NeoPixel led(1, D5, NEO_GRB + NEO_KHZ800);
 
 void setup() {
     Serial.begin(9600);
-    delay(1000);
-    wifiSetup();
-    Serial.println("Hi, my name is " + object.getName());
-
     Wire.begin();
 
     // Config maxi 16647 (analog part)
@@ -50,6 +46,10 @@ void setup() {
     led.show();
     led.setBrightness(255);
 
+    writeActuators(0);
+
+    wifiSetup();
+    Serial.println("Hi, my id is " + String(object.getId()));
 }
 
 void loop() {

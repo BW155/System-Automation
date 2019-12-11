@@ -17,10 +17,6 @@ void wifiSetup() {
     
     connectWifi();
 
-    Serial.println("");
-    Serial.println("WiFi connected");  
-    Serial.println("IP address: ");
-    Serial.println(WiFi.localIP());
 
     Serial.println("Server starts...");
     wifiServer.begin();
@@ -56,7 +52,7 @@ void handleWifi(DomObject* object) {
 
         if (data == "hello") {
             Serial.println("HELLO");
-            client.print(object->getName());
+            client.print(object->getId());
             client.stop();
             return;
         }
@@ -64,9 +60,6 @@ void handleWifi(DomObject* object) {
         // Deserializing json
         DynamicJsonDocument doc(1024);
         DeserializationError error = deserializeJson(doc, data);
-        JsonArray actuators = doc["actuators"];
-        
-        object->writeActuators(actuators);
 
         // If there is an error, send error result back to client
         if (error) {
@@ -77,7 +70,10 @@ void handleWifi(DomObject* object) {
         }
 
         // Check if message is meant for me
-        if (doc[String("name")] == object->getName()) {
+        if (doc[String("id")] == object->getId()) {
+            JsonArray actuators = doc["actuators"];
+            object->writeActuators(actuators);
+
             Serial.println("This message is for me");
             DynamicJsonDocument resultDoc(1024);
 
@@ -97,6 +93,7 @@ void handleWifi(DomObject* object) {
             client.print(error);
         }
 
+        Serial.println();
         client.stop();
     }
 }
@@ -121,5 +118,7 @@ void connectWifi() {
         Serial.print(".");
     }
     Serial.println();
-    Serial.println("Reconnected");
+    Serial.println("WiFi connected");  
+    Serial.println("IP address: ");
+    Serial.println(WiFi.localIP());
 }

@@ -1,7 +1,7 @@
 #include "domobject.h"
 
-String DomObject::getName() {
-    return "NONE";
+int DomObject::getId() {
+    return 0;
 }
 
 void DomObject::getSensors(JsonArray& arr) {}
