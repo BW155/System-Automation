@@ -43,13 +43,14 @@ void setup() {
   Wire.write(byte(0x03));          
   Wire.write(byte(0x0F));         
   Wire.endTransmission();
+  setFridgeFan(1);
 }
 
 void loop() {
     handleWifi(&object);
     delay(20);
     componentCheckLoop();
-    setFridgeFan();
+    getFridgeClicker();
     Serial.print("Binnen Koelkast Temperatuur: "); Serial.println(getFridgeTempSensor(0));
     Serial.print("Buiten Koelkast Temperatuur: "); Serial.println(getFridgeTempSensor(1));
     Serial.println(" ");

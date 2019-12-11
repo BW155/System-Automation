@@ -11,13 +11,14 @@ double thermistor(int RawADC);
 /// Set Actuators ///
 /////////////////////
 void setLed(bool state);
-void setFridgeFan();
+void setFridgeFan(bool state);
 
 ///////////////////
 /// Get Sensors ///
 ///////////////////
 double getFridgeTempSensor(int choice);
 void getFridgeFan();
+void getFridgeClicker();
 unsigned int getForceSensor();
 bool getButton();
 

@@ -24,19 +24,31 @@ void setLed(bool state) {
     Wire.endTransmission();
 }
 
-
-void setFridgeFan(){
+void setFridgeFan(int bool){
   //Set PCA9554 outputs (IO44-IO7)
   Wire.beginTransmission(0x38); 
   Wire.write(byte(0x01));            
-  Wire.write(byte(1<<4));            
+  Wire.write(byte(bool<<4));            
   Wire.endTransmission(); 
 }
 
 void getFridgeClicker(){
-
+    Wire.beginTransmission(0x38);
+    Wire.write(byte(0x00));
+    Wire.endTransmission();
+    Wire.requestFrom(0x38, 1);
+    unsigned int anin0 = Wire.read() & 0x01;
+    Serial.print("Clicker: ");
+    Serial.println(anin0);
 }
 
+void setPeltier(){
+    
+}
+
+void turnOffFridge(){
+    setFridgeFan(0);
+}
 
 ///////////////////
 /// Get Sensors ///
