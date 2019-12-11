@@ -42,12 +42,9 @@ void writeActuators(int output) {
     Wire.endTransmission();
 }
 
-<<<<<<< HEAD
-=======
 void setServo(int angle) {
     servo.write(angle);
 }
->>>>>>> development
 
 ///////////////////
 /// Get Sensors ///

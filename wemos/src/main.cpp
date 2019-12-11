@@ -16,13 +16,12 @@ Bed object;
 Chair object;
 #endif
 
-<<<<<<< HEAD
 #ifdef PILLAR
 Pillar object;
-=======
+#endif
+
 #ifdef DOOR
 Door object;
->>>>>>> development
 #endif
 
 void setup() {
@@ -52,8 +51,4 @@ void loop() {
     handleWifi(&object);
     delay(20);
     componentCheckLoop();
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> development
