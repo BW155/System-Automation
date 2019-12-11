@@ -104,19 +104,19 @@ void setServo(int angle) {
 ///////////////////
 
 double getFridgeTempSensor(int choice){
-  Wire.requestFrom(0x36, 4);   
-  unsigned int anin0 = Wire.read() & 0x03;  
-  anin0 = anin0 << 8;
-  anin0 = anin0 | Wire.read();  
-  unsigned int anin1 = Wire.read() & 0x03;  
-  anin1 = anin1 << 8;
-  anin1 = anin1 | Wire.read(); 
-  if (choice == 0){
+    Wire.requestFrom(0x36, 4);   
+    unsigned int anin0 = Wire.read() & 0x03;  
+    anin0 = anin0 << 8;
+    anin0 = anin0 | Wire.read();  
+    unsigned int anin1 = Wire.read() & 0x03;  
+    anin1 = anin1 << 8;
+    anin1 = anin1 | Wire.read(); 
+    if (choice == 0){
        return calculateThermistor(anin0);
-  }
-  if (choice == 1){
-       return calculateThermistor(anin1);
-  }
+    }
+    if (choice == 1){
+        return calculateThermistor(anin1);
+    }
 }
 
 unsigned int getForceSensor() { 

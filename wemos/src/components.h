@@ -1,6 +1,6 @@
 #include <Wire.h>
 #include <Arduino.h>
-#include "Adafruit_NeoPixel.h"
+#include <Adafruit_NeoPixel.h>
 
 #ifndef COMPONENTS
 #define COMPONENTS
