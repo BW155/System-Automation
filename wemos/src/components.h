@@ -13,12 +13,11 @@ double calculateThermistor(int RawADC);
 /////////////////////
 /// Set Actuators ///
 /////////////////////
-void setFridgeFan(bool state);
+void setFridgeActuators(bool);
 void setBedActuators(bool);
 void setChairActuators(bool, bool);
 void writeActuators(int);
 void setPeltier(bool state);
-void turnOffFridge(bool state);
 void setPillarActuators(bool, bool);
 void setLed(bool state);
 void setServo(int);
@@ -28,7 +27,7 @@ void setServo(int);
 ///////////////////
 double getFridgeTempSensor(int choice);
 void getFridgeFan();
-void getFridgeClicker();
+int getFridgeClicker();
 unsigned int getForceSensor();
 bool getButton();
 bool getDoorButton1();

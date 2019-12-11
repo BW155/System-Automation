@@ -43,6 +43,12 @@ void setPillarActuators(bool led, bool buzzer){
     writeActuators(output);
 }
 
+void setFridgeActuators(bool fridge){
+    int output = (fridge << 4);
+    writeActuators(output);
+    setPeltier(fridge);
+}
+
 void writeActuators(int output) {
     Serial.print("Output Actuators: ");
     Serial.println(output);
@@ -53,15 +59,7 @@ void writeActuators(int output) {
     Wire.endTransmission();
 }
 
-void setFridgeFan(bool state){
-  //Set PCA9554 outputs (IO44-IO7)
-    Wire.beginTransmission(0x38); 
-    Wire.write(byte(0x01));            
-    Wire.write(byte(state<<4));            
-    Wire.endTransmission(); 
-}
-
-void getFridgeClicker(){
+int getFridgeClicker(){
     Wire.beginTransmission(0x38);
     Wire.write(byte(0x00));
     Wire.endTransmission();
@@ -69,6 +67,7 @@ void getFridgeClicker(){
     unsigned int anin0 = Wire.read() & 0x01;
     Serial.print("Clicker: ");
     Serial.println(anin0);
+    return anin0;
 }
 
 //Set Peltier Module Fridge
@@ -78,10 +77,7 @@ void setPeltier(bool state){
     digitalWrite(14, state);
 }
 
-void turnOffFridge(bool state){
-    setFridgeFan(state);
-    setPeltier(state);
-    void setServo(int angle) {
+void setServo(int angle) {
     servo.write(angle);
 }
 
@@ -105,13 +101,6 @@ double getFridgeTempSensor(int choice){
   }
 }
 
-
-unsigned int getForceSensor() {
-    Wire.requestFrom(0x36, 4);
-    unsigned int anin0 = Wire.read() & 0x03;
-    anin0 = anin0 << 8;
-    anin0 = anin0 | Wire.read();
-    return anin0;
 unsigned int getForceSensor() { 
     Wire.requestFrom(0x36, 4); 
     unsigned int anin0 = Wire.read() & 0x03; 

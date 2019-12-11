@@ -1,11 +1,11 @@
-using namespace std;
-
 #include <Wire.h>
 #include <Arduino.h>
 #include <string>
 #include "domobjects/domobject.h"
 #include "components.h"
 #include "wifiHandler.h"
+
+using namespace std;
 
 // Get the right configuration (Decided at compile-time)
 #ifdef BED
@@ -22,6 +22,10 @@ Pillar object;
 
 #ifdef DOOR
 Door object;
+#endif
+
+#ifdef FRIDGE
+Fridge object;
 #endif
 
 void setup() {
@@ -51,12 +55,4 @@ void loop() {
     handleWifi(&object);
     delay(20);
     componentCheckLoop();
-    turnOffFridge(1);
-    getFridgeClicker();
-    Serial.print("Binnen Koelkast Temperatuur: "); Serial.println(getFridgeTempSensor(0));
-    Serial.print("Buiten Koelkast Temperatuur: "); Serial.println(getFridgeTempSensor(1));
-    Serial.println(" ");
-    delay(1000);
-}
-
 }

@@ -40,4 +40,11 @@ class Door: public DomObject {
         void writeActuators(JsonArray&) override;
 };
 
+class Fridge: public DomObject{
+    public:
+        int getId() override;
+        void getSensors(JsonArray&) override;
+        void writeActuators(JsonArray&) override;
+};
+
 #endif
