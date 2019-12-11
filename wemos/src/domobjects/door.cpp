@@ -15,24 +15,18 @@ void Door::getSensors(JsonArray& arr) {
 void Door::writeActuators(JsonArray& actuators) {
     JsonObject servo = actuators[0];
     int value = servo["value"];
-    switch (value)
-    {
-    case -1:
-        setServo(170);
-        break;
-
-    case 0:
-        setServo(80);
-        break;
-    
-    case 1:
-        setServo(0);
-        break;
-
-    default:
-        setServo(80);
-        break;
+    switch (value) {
+        case -1:
+            setServo(170);
+            break;
+        case 0:
+            setServo(80);
+            break;
+        case 1:
+            setServo(0);
+            break;
+        default:
+            setServo(80);
+            break;
     }
-    ;
-    
 }
