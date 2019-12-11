@@ -114,7 +114,7 @@ double getFridgeTempSensor(int choice){
   if (choice == 0){
        return calculateThermistor(anin0);
   }
-  if(choice == 1){
+  if (choice == 1){
        return calculateThermistor(anin1);
   }
 }
