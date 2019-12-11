@@ -7,8 +7,6 @@ using namespace std;
 #include "components.h"
 #include "wifiHandler.h"
 
-
-
 /// Get the right configuration (Decided at compile-time)
 #ifdef BED
 Bed object;
@@ -21,9 +19,6 @@ Chair object;
 #ifdef TABLELAMP
 TableLamp object;
 #endif
-
-
-
 
 #ifdef PILLAR
 Pillar object;
@@ -48,12 +43,8 @@ void setup() {
     Wire.write(byte(0x03));
     Wire.write(byte(0x0F));
     Wire.endTransmission();
-
-
-
     writeActuators(0);
     initServo();
-
     wifiSetup();
     Serial.println("Hi, my id is " + String(object.getId()));
 }
@@ -61,8 +52,5 @@ void setup() {
 void loop() {
     handleWifi(&object);
     delay(20);
-    componentCheckLoop();
-   
+    componentCheckLoop();  
 }
-
-

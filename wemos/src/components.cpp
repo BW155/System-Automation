@@ -1,7 +1,7 @@
 #include "components.h"
-Adafruit_NeoPixel led(1, D5, NEO_GRB + NEO_KHZ800);
 #include <Wire.h>
 #include <Servo.h>
+Adafruit_NeoPixel led(1, D5, NEO_GRB + NEO_KHZ800);
 
 /////////////////////
 /// Setup         ///
@@ -46,14 +46,14 @@ void writeActuators(int output) {
     Wire.endTransmission();
 }
 
-void setLamp(bool state){
+void setLamp(bool state) {
     led.begin();
     led.show();
-    for(uint8_t i=0; i<255; i++){
-        if(state){
+    for(uint8_t i = 0; i < 255; i++) {
+        if(state) {
             led.setBrightness(i);
         } else {
-            led.setBrightness(255-i);
+            led.setBrightness(255 - i);
         }
         led.setPixelColor(0, 255, 255, 255);
         led.show();
@@ -138,13 +138,13 @@ bool getDoorButton2() {
     return inputs & DOOR_BUTTON_2;
 }
 unsigned int getMotionSensor() {
-  Wire.beginTransmission(0x38); 
-  Wire.write(byte(0x00));      
-  Wire.endTransmission();
-  Wire.requestFrom(0x38, 1);   
-  unsigned int inputs = Wire.read();  
+    Wire.beginTransmission(0x38); 
+    Wire.write(byte(0x00));      
+    Wire.endTransmission();
+    Wire.requestFrom(0x38, 1);   
+    unsigned int inputs = Wire.read();  
 
-  return inputs & 0x01;
+    return inputs & 0x01;
 }
 
 void resetButton() {
@@ -165,7 +165,6 @@ int getGassensor() {
     return anin0;
 }
 
-
 ///////////////////////////////
 // Loop that the main loop goes through to check components that require more realtime checking, like buttons.
 ///////////////////////////////
@@ -177,4 +176,3 @@ void componentCheckLoop(){
     getDoorButton1();
     getDoorButton2();
 }
-
