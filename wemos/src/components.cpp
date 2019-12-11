@@ -36,6 +36,13 @@ void setPillarActuators(bool led, bool buzzer){
     writeActuators(output);
 }
 
+void setWallActuators(bool window, bool led) {
+    int output = (window << 4);
+    writeActuators(output);
+    Serial.println(led);
+    setLamp(led);
+}
+
 void writeActuators(int output) {
     Serial.print("Output Actuators: ");
     Serial.println(output);
@@ -44,6 +51,34 @@ void writeActuators(int output) {
     Wire.write(byte(0x01));
     Wire.write(byte(output));
     Wire.endTransmission();
+}
+
+void ledScreen(int output) {
+    Wire.beginTransmission(0x38);
+    Wire.write(byte(0x01));                  
+    Wire.write(byte(output<<4));   
+    Wire.endTransmission();
+
+    Serial.println(" ");
+    Serial.print("Digital out: ");
+    Serial.println(output&0x0F);
+}
+
+int getWallSensors(int choice) {
+    Wire.requestFrom(0x36, 4);   
+    unsigned int anin0 = Wire.read() & 0x03;  
+    anin0 = anin0 << 8;
+    anin0 = anin0 | Wire.read();  
+    if (choice == 0) {
+        return anin0;
+    }
+
+    unsigned int anin1 = Wire.read() & 0x03;  
+    anin1 = anin1 << 8;
+    anin1 = anin1 | Wire.read(); 
+    if (choice == 1) {
+        return anin1;
+    }
 }
 
 void setLamp(bool state) {

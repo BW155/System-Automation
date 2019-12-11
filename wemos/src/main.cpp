@@ -28,6 +28,10 @@ Pillar object;
 Door object;
 #endif
 
+#ifdef DOOR
+Wall object;
+#endif
+
 void setup() {
     Serial.begin(9600);
     Wire.begin();
