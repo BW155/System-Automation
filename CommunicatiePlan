@@ -1,0 +1,32 @@
+Bool x
+int y
+u_int8 z
+String err
+
+//Bed
+Pi stuurt:		{"id":1, "actuators":{"led":x}}
+Wemos stuurt:	{"error":"err", "sensors":{"forceSensor":y, "button":x}}
+
+//Chair
+Pi stuurt:		{"id":2, "actuators":{"led":x, "Vibrator": x}}
+Wemos stuurt:	{"error":"err", "sensors":{"forceSensor":y, "button":x}}
+
+//Schemerlamp
+Pi stuurt:		{"id":3, "actuators":{"led":x}}
+Wemos stuurt:	{"error":"err", "sensors":{"motionSensor":x, "button":x}}
+
+//Zuil
+Pi stuurt:		{"id":4, "actuators":{"led":x, "buzzer":x}}
+Wemos stuurt:	{"error":"err", "sensors":{"gasSensor":x, "button":x}}
+
+//Muur
+Pi stuurt:		{"id":5, "actuators":{"led":z, "window":x}}
+Wemos stuurt:	{"error":"err", "sensors":{"dimmer":y, "LDR":y}}
+
+//Koelkast
+Pi stuurt:		{"id":6, "actuators":{"cooling":x}}
+Wemos stuurt:	{"error":"err", "sensors":{"thermometer1":y,"thermometer2":y, "openClose":x}}
+
+//Deur
+Pi stuurt:		{"id":7, "actuators":{"led1":x, "led2":x, "servo":x}}
+Wemos stuurt:	{"error":"err", "sensors":{"button1":x, "button2":x}}
