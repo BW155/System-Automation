@@ -1,7 +1,7 @@
 #include "domobject.h"
 
-String Door::getName() {
-    return "Door";
+int Door::getId() {
+    return 7;
 }
 
 void Door::getSensors(JsonArray& arr) {

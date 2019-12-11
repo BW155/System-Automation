@@ -28,14 +28,7 @@ class Chair: public DomObject {
 
 class Door: public DomObject {
     public:
-        String getName() override;
-        void getSensors(JsonArray&) override;
-        void writeActuators(JsonArray&) override;
-};
-
-class Door: public DomObject {
-    public:
-        String getName() override;
+        int getId() override;
         void getSensors(JsonArray&) override;
         void writeActuators(JsonArray&) override;
 };
