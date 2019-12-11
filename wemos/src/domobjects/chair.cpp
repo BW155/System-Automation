@@ -5,13 +5,13 @@ int Chair::getId() {
 }
 
 void Chair::getSensors(JsonObject& obj) {
-    obj["ForceSensor"] = getForceSensor();
-    obj["Button"] = getButton();
+    obj["forceSensor"] = getForceSensor();
+    obj["button"] = getButton();
     resetButton();
 }
 
 void Chair::writeActuators(JsonObject& actuators) {
     int l = actuators["led"];
-    int v = actuators["vib"];
+    int v = actuators["vibrator"];
     setChairActuators(l, v);
 }

@@ -6,8 +6,8 @@ int Bed::getId() {
 }
 
 void Bed::getSensors(JsonObject& obj) {
-    obj["ForceSensor"] = getForceSensor();
-    obj["PushButton"] = getButton();
+    obj["forceSensor"] = getForceSensor();
+    obj["button"] = getButton();
     resetButton();
 }
 

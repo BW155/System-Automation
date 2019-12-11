@@ -5,8 +5,8 @@ int Wall::getId() {
 }
 
 void Wall::getSensors(JsonObject& obj) {
-    obj["LDRSensor"] = getWallSensors(0);
-    obj["Pot"] = getWallSensors(1);
+    obj["LDR"] = getWallSensors(0);
+    obj["dimmer"] = getWallSensors(1);
 }
 
 void Wall::writeActuators(JsonObject& actuators) {

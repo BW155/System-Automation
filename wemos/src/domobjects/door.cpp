@@ -5,14 +5,17 @@ int Door::getId() {
 }
 
 void Door::getSensors(JsonObject& obj) {
-    obj["button 1"] = getDoorButton1();
-    obj["button 2"] = getDoorButton2();
+    obj["button1"] = getDoorButton1();
+    obj["button2"] = getDoorButton2();
     resetButton();
 }
 
 void Door::writeActuators(JsonObject& actuators) {
-    int value = actuators["servo"];
-    switch (value) {
+    int led1 = actuators["led1"];
+    int led2 = actuators["led2"];
+    setDoorActuators(led1, led2);
+    int servoValue = actuators["servo"];
+    switch (servoValue) {
         case -1:
             setServo(170);
             break;

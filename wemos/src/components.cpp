@@ -43,6 +43,11 @@ void setWallActuators(bool window, bool led) {
     setLamp(led);
 }
 
+void setDoorActuators(bool led1, bool led2) {
+    int output = (led1 << 4) | (led2 << 5);
+    writeActuators(output);
+}
+
 void writeActuators(int output) {
     Serial.print("Output Actuators: ");
     Serial.println(output);

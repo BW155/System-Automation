@@ -19,6 +19,7 @@ void setChairActuators(bool, bool);
 void writeActuators(int);
 void setTableActuators(bool);
 void setWallActuators(bool, bool);
+void setDoorActuators(bool, bool);
 void setLamp(bool);
 void setPillarActuators(bool, bool);
 void setLed(bool);
