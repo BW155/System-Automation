@@ -74,7 +74,6 @@ int getButtonPillar() {
     return inputs & pillar_button_state;
 }
 
-
 void resetButton() {
     static_button_state = false;
 }
@@ -89,6 +88,7 @@ void getGassensor() {
     anin0 = anin0 << 8;
     anin0 = anin0 | Wire.read();
 }
+
 
 ///////////////////////////////
 // Loop that the main loop goes through to check components that require more realtime checking, like buttons.
