@@ -53,4 +53,12 @@ class Wall: public DomObject {
         void getSensors(JsonObject&) override;
         void writeActuators(JsonObject&) override;
 };
+
+class Fridge: public DomObject{
+    public:
+        int getId() override;
+        void getSensors(JsonObject&) override;
+        void writeActuators(JsonObject&) override;
+};
+
 #endif
