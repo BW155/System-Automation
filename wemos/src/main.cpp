@@ -47,7 +47,6 @@ void loop() {
     handleWifi(&object);
     delay(20);
     componentCheckLoop();
-<<<<<<< HEAD
     turnOffFridge(1);
     getFridgeClicker();
     Serial.print("Binnen Koelkast Temperatuur: "); Serial.println(getFridgeTempSensor(0));
@@ -56,6 +55,3 @@ void loop() {
     delay(1000);
 }
 
-=======
-}
->>>>>>> development

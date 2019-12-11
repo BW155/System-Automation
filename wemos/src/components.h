@@ -16,13 +16,10 @@ void setFridgeFan(bool state);
 void setBedActuators(bool);
 void setChairActuators(bool, bool);
 void writeActuators(int);
-<<<<<<< HEAD
 void setPeltier(bool state);
 void turnOffFridge(bool state);
-=======
 void setLed(bool state);
 void setServo(int);
->>>>>>> development
 
 ///////////////////
 /// Get Sensors ///

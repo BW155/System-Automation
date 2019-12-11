@@ -47,7 +47,6 @@ void writeActuators(int output) {
     Wire.endTransmission();
 }
 
-<<<<<<< HEAD
 void setFridgeFan(bool state){
   //Set PCA9554 outputs (IO44-IO7)
     Wire.beginTransmission(0x38); 
@@ -76,10 +75,8 @@ void setPeltier(bool state){
 void turnOffFridge(bool state){
     setFridgeFan(state);
     setPeltier(state);
-=======
 void setServo(int angle) {
     servo.write(angle);
->>>>>>> development
 }
 
 ///////////////////
