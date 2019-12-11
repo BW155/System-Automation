@@ -4,22 +4,13 @@ int Wall::getId() {
     return 2;
 }
 
-void Wall::getSensors(JsonArray& arr) {
-    JsonObject ldr = arr.createNestedObject();
-    ldr["name"] = "LDRSensor";
-    ldr["value"] = getWallSensors(0);
-
-    JsonObject pot = arr.createNestedObject();
-    pot["name"] = "Pot";
-    pot["value"] = getWallSensors(1);
+void Wall::getSensors(JsonObject& obj) {
+    obj["LDRSensor"] = getWallSensors(0);
+    obj["Pot"] = getWallSensors(1);
 }
 
-void Wall::writeActuators(JsonArray& actuators) {
-    JsonObject led = actuators[0];
-    int l = led["value"];
-
-    JsonObject vib = actuators[1];
-    int v = vib["value"];
-
-    setWallActuators(l, v);
+void Wall::writeActuators(JsonObject& actuators) {
+    int window = actuators["window"];
+    int led = actuators["led"];
+    setWallActuators(window, led);
 }

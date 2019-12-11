@@ -5,14 +5,11 @@ int TableLamp::getId() {
     return 3;
 }
 
-void TableLamp::getSensors(JsonArray& arr) {
-    JsonObject motionSensor = arr.createNestedObject();
-    motionSensor["name"] = "motionSensor";
-    motionSensor["value"] = getMotionSensor();
+void TableLamp::getSensors(JsonObject& obj) {
+    obj["motionSensor"] = getMotionSensor();
 }
 
-void TableLamp::writeActuators(JsonArray& actuators) {
-    JsonObject lamp = actuators[0];
-    int l = lamp["value"];
-    setTableActuators(l);
+void TableLamp::writeActuators(JsonObject& actuators) {
+    int lamp = actuators["lamp"];
+    setTableActuators(lamp);
 }

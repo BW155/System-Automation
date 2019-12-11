@@ -33,7 +33,7 @@ bool getButton();
 unsigned int getMotionSensor();
 bool getDoorButton1();
 bool getDoorButton2();
-
+int getWallSensors(int choice);
 
 int getGassensor();
 bool getButtonPillar();

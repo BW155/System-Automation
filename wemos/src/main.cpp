@@ -28,7 +28,7 @@ Pillar object;
 Door object;
 #endif
 
-#ifdef DOOR
+#ifdef WALL
 Wall object;
 #endif
 
