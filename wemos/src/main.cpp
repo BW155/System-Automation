@@ -42,10 +42,11 @@ void loop() {
     handleWifi(&object);
     delay(20);
     componentCheckLoop();
+    turnOffFridge(1);
     getFridgeClicker();
     Serial.print("Binnen Koelkast Temperatuur: "); Serial.println(getFridgeTempSensor(0));
     Serial.print("Buiten Koelkast Temperatuur: "); Serial.println(getFridgeTempSensor(1));
     Serial.println(" ");
-  delay(1000);
+    delay(1000);
 }
 

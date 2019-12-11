@@ -5,16 +5,17 @@
 #define COMPONENTS
 #define BED_BUTTON 0x01
 
-double thermistor(int RawADC);
+double calculateThermistor(int RawADC);
 
 /////////////////////
 /// Set Actuators ///
 /////////////////////
 void setFridgeFan(bool state);
-
 void setBedActuators(bool);
 void setChairActuators(bool, bool);
 void writeActuators(int);
+void setPeltier(bool state);
+void turnOffFridge(bool state);
 
 ///////////////////
 /// Get Sensors ///
