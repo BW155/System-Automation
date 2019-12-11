@@ -4,7 +4,7 @@
 #ifndef COMPONENTS
 #define COMPONENTS
 #define BED_BUTTON 0x01
-#define PILLAR_BUTTON 0x01;
+#define PILLAR_BUTTON 0x01
 
 /////////////////////
 /// Set Actuators ///
@@ -13,7 +13,7 @@
 void setBedActuators(bool);
 void setChairActuators(bool, bool);
 void writeActuators(int);
-int setLedBuzzer(int outputs);
+void setPillarActuators(bool, bool);
 
 ///////////////////
 /// Get Sensors ///
@@ -22,8 +22,8 @@ int setLedBuzzer(int outputs);
 unsigned int getForceSensor();
 bool getButton();
 
-void getGassensor();
-int getButtonPillar();
+int getGassensor();
+bool getButtonPillar();
 
 /////////////////////
 /// Miscellaneous ///

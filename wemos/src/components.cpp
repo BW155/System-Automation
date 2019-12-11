@@ -14,6 +14,11 @@ void setBedActuators(bool led) {
     writeActuators(output);
 }
 
+void setPillarActuators(bool led, bool buzzer){
+    int output = (led << 5) | (buzzer << 4);
+    writeActuators(output);
+}
+
 void writeActuators(int output) {
     Serial.print("Output Actuators: ");
     Serial.println(output);
@@ -21,13 +26,6 @@ void writeActuators(int output) {
     Wire.beginTransmission(0x38);
     Wire.write(byte(0x01));
     Wire.write(byte(output));
-    Wire.endTransmission();
-}
-
-int setLedBuzzer(int outputs) {
-    Wire.beginTransmission(0x38);
-    Wire.write(byte(0x01));
-    Wire.write(byte(outputs << 4));
     Wire.endTransmission();
 }
 
@@ -59,7 +57,7 @@ bool getButton() {
     return inputs & BED_BUTTON;
 }
 
-int getButtonPillar() {
+bool getButtonPillar() {
     Wire.beginTransmission(0x38);
     Wire.write(byte(0x00));
     Wire.endTransmission();
@@ -82,11 +80,12 @@ void resetPillarButton() {
     pillar_button_state = false;
 }
 
-void getGassensor() {
+int getGassensor() {
     Wire.requestFrom(0x36, 4);
     unsigned int anin0 = Wire.read() & 0x03;
     anin0 = anin0 << 8;
     anin0 = anin0 | Wire.read();
+    return anin0;
 }
 
 
@@ -97,5 +96,6 @@ void getGassensor() {
 void componentCheckLoop(){
     getGassensor();
     getButtonPillar();
+    getButton();
 }
 

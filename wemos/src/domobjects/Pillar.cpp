@@ -1,8 +1,8 @@
 #include "domobject.h"
 #include "components.h"
 
-String Pillar::getName() {
-    return "Pillar";
+int Pillar::getId() {
+    return 4;
 }
 
 void Pillar::getSensors(JsonArray& arr) {
@@ -18,10 +18,9 @@ void Pillar::getSensors(JsonArray& arr) {
 
 void Pillar::writeActuators(JsonArray& actuators) {
     JsonObject PillarLed = actuators[0];
-    int PillarLed = PillarLed["value"];
-    setLedBuzzer(PillarLed);
-    
+    int PL = PillarLed["value"];
+        
     JsonObject Buzzer = actuators[1];
-    int Buzzer = Buzzer["value"];
-    setLedBuzzer(Buzzer);
+    int Buzz = Buzzer["value"];
+    setPillarActuators(PL, Buzz);
 }

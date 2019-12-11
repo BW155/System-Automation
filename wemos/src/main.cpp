@@ -16,7 +16,7 @@ Bed object;
 Chair object;
 #endif
 
-#ifdef Pillar
+#ifdef PILLAR
 Pillar object;
 #endif
 
