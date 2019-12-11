@@ -14,8 +14,6 @@ void initServo() {
     servo.write(80);
 }
 
-
-
 double calculateThermistor(int RawADC) {  //Function to perform the fancy math of the Steinhart-Hart equation
     double temperature;
     temperature = log(((10240000/RawADC) - 10000));
@@ -116,7 +114,7 @@ double getFridgeTempSensor(int choice){
   if (choice == 0){
        return calculateThermistor(anin0);
   }
-  if( choice == 1){
+  if(choice == 1){
        return calculateThermistor(anin1);
   }
 }
