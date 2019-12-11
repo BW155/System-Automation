@@ -33,6 +33,10 @@ void setFridgeFan(){
   Wire.endTransmission(); 
 }
 
+void getFridgeClicker(){
+
+}
+
 
 ///////////////////
 /// Get Sensors ///
@@ -46,12 +50,6 @@ double getFridgeTempSensor(int choice){
   unsigned int anin1 = Wire.read()&0x03;  
   anin1=anin1<<8;
   anin1 = anin1|Wire.read(); 
-  Serial.print("analog in 0: ");
-  Serial.println(anin0);   
-  Serial.print("analog in 1: ");
-  Serial.println(anin1);   
-  Serial.println("");
-
   if(choice == 0){
        return thermistor(anin0);
   }
@@ -87,8 +85,6 @@ bool getButton() {
 void resetButton() {
     static_button_state = false;
 }
-
-////////////////////////////////////////
 
 // Loop that the main loop goes through to check components that require more realtime checking, like buttons.
 void componentCheckLoop() {

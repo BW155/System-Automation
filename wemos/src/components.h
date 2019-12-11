@@ -17,8 +17,10 @@ void setFridgeFan();
 /// Get Sensors ///
 ///////////////////
 double getFridgeTempSensor(int choice);
+void getFridgeFan();
 unsigned int getForceSensor();
 bool getButton();
+
 
 /////////////////////
 /// Miscellaneous ///
