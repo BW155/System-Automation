@@ -16,8 +16,13 @@ Bed object;
 Chair object;
 #endif
 
+<<<<<<< HEAD
 #ifdef PILLAR
 Pillar object;
+=======
+#ifdef DOOR
+Door object;
+>>>>>>> development
 #endif
 
 void setup() {
@@ -37,6 +42,7 @@ void setup() {
     Wire.endTransmission();
 
     writeActuators(0);
+    initServo();
 
     wifiSetup();
     Serial.println("Hi, my id is " + String(object.getId()));
@@ -46,4 +52,8 @@ void loop() {
     handleWifi(&object);
     delay(20);
     componentCheckLoop();
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> development
