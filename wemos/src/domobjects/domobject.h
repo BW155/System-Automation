@@ -27,11 +27,24 @@ class Chair: public DomObject {
 };
 
 class TableLamp: public DomObject {
+     public:
+        int getId() override;
+        void getSensors(JsonArray&) override;
+        void writeActuators(JsonArray&) override;
+};
+
+class Pillar: public DomObject {
     public:
         int getId() override;
         void getSensors(JsonArray&) override;
         void writeActuators(JsonArray&) override;
 };
 
+class Door: public DomObject {
+    public:
+        int getId() override;
+        void getSensors(JsonArray&) override;
+        void writeActuators(JsonArray&) override;
+};
 
 #endif

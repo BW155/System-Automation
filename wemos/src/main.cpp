@@ -25,6 +25,13 @@ TableLamp object;
 
 
 
+#ifdef PILLAR
+Pillar object;
+#endif
+
+#ifdef DOOR
+Door object;
+#endif
 
 void setup() {
     Serial.begin(9600);
@@ -45,6 +52,7 @@ void setup() {
 
 
     writeActuators(0);
+    initServo();
 
     wifiSetup();
     Serial.println("Hi, my id is " + String(object.getId()));
