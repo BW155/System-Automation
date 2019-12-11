@@ -1,5 +1,3 @@
-using namespace std;
-
 #include <Wire.h>
 #include <Arduino.h>
 #include <string>
@@ -7,7 +5,9 @@ using namespace std;
 #include "components.h"
 #include "wifiHandler.h"
 
-/// Get the right configuration (Decided at compile-time)
+using namespace std;
+
+// Get the right configuration (Decided at compile-time)
 #ifdef BED
 Bed object;
 #endif
@@ -26,6 +26,10 @@ Pillar object;
 
 #ifdef DOOR
 Door object;
+#endif
+
+#ifdef FRIDGE
+Fridge object;
 #endif
 
 void setup() {

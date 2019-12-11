@@ -14,6 +14,15 @@ void initServo() {
     servo.write(80);
 }
 
+double calculateThermistor(int RawADC) {  //Function to perform the fancy math of the Steinhart-Hart equation
+    double temperature;
+    temperature = log(((10240000/RawADC) - 10000));
+    temperature = 1 / (0.001129148 + (0.000234125 + (0.0000000876741 * temperature * temperature ))* temperature );
+    temperature = temperature - 273.15;              // Convert Kelvin to Celsius
+    return temperature;
+}
+
+
 /////////////////////
 /// Set Actuators ///
 /////////////////////
@@ -36,6 +45,12 @@ void setPillarActuators(bool led, bool buzzer){
     writeActuators(output);
 }
 
+void setFridgeActuators(bool fridge){
+    int output = (fridge << 4);
+    writeActuators(output);
+    setPeltier(fridge);
+}
+
 void writeActuators(int output) {
     Serial.print("Output Actuators: ");
     Serial.println(output);
@@ -44,6 +59,24 @@ void writeActuators(int output) {
     Wire.write(byte(0x01));
     Wire.write(byte(output));
     Wire.endTransmission();
+}
+
+int getFridgeClicker(){
+    Wire.beginTransmission(0x38);
+    Wire.write(byte(0x00));
+    Wire.endTransmission();
+    Wire.requestFrom(0x38, 1);
+    unsigned int anin0 = Wire.read() & 0x01;
+    Serial.print("Clicker: ");
+    Serial.println(anin0);
+    return anin0;
+}
+
+//Set Peltier Module Fridge
+void setPeltier(bool state){
+    void setPeltier(bool state);
+    pinMode(14, OUTPUT);
+    digitalWrite(14, state);
 }
 
 void setLamp(bool state) {
@@ -69,6 +102,22 @@ void setServo(int angle) {
 ///////////////////
 /// Get Sensors ///
 ///////////////////
+
+double getFridgeTempSensor(int choice){
+    Wire.requestFrom(0x36, 4);   
+    unsigned int anin0 = Wire.read() & 0x03;  
+    anin0 = anin0 << 8;
+    anin0 = anin0 | Wire.read();  
+    unsigned int anin1 = Wire.read() & 0x03;  
+    anin1 = anin1 << 8;
+    anin1 = anin1 | Wire.read(); 
+    if (choice == 0){
+       return calculateThermistor(anin0);
+    }
+    if (choice == 1){
+        return calculateThermistor(anin1);
+    }
+}
 
 unsigned int getForceSensor() { 
     Wire.requestFrom(0x36, 4); 
