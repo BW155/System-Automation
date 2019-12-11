@@ -17,12 +17,9 @@ void setFridgeFan(bool state);
 void setBedActuators(bool);
 void setChairActuators(bool, bool);
 void writeActuators(int);
-<<<<<<< HEAD
 void setPeltier(bool state);
 void turnOffFridge(bool state);
-=======
 void setPillarActuators(bool, bool);
->>>>>>> development
 void setLed(bool state);
 void setServo(int);
 
@@ -38,11 +35,8 @@ bool getDoorButton1();
 bool getDoorButton2();
 
 
-<<<<<<< HEAD
-=======
 int getGassensor();
 bool getButtonPillar();
->>>>>>> development
 
 /////////////////////
 /// Miscellaneous ///

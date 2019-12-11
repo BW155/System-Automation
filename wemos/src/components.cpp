@@ -20,7 +20,7 @@ double calculateThermistor(int RawADC) {  //Function to perform the fancy math o
     temperature = log(((10240000/RawADC) - 10000));
     temperature = 1 / (0.001129148 + (0.000234125 + (0.0000000876741 * temperature * temperature ))* temperature );
     temperature = temperature - 273.15;              // Convert Kelvin to Celsius
- return temperature;
+    return temperature;
 }
 
 
@@ -81,7 +81,7 @@ void setPeltier(bool state){
 void turnOffFridge(bool state){
     setFridgeFan(state);
     setPeltier(state);
-void setServo(int angle) {
+    void setServo(int angle) {
     servo.write(angle);
 }
 
