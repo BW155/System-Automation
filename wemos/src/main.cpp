@@ -16,6 +16,10 @@ Bed object;
 Chair object;
 #endif
 
+#ifdef DOOR
+Door object;
+#endif
+
 void setup() {
     Serial.begin(9600);
     Wire.begin();
@@ -33,6 +37,7 @@ void setup() {
     Wire.endTransmission();
 
     writeActuators(0);
+    initServo();
 
     wifiSetup();
     Serial.println("Hi, my id is " + String(object.getId()));
@@ -42,6 +47,7 @@ void loop() {
     handleWifi(&object);
     delay(20);
     componentCheckLoop();
+<<<<<<< HEAD
     turnOffFridge(1);
     getFridgeClicker();
     Serial.print("Binnen Koelkast Temperatuur: "); Serial.println(getFridgeTempSensor(0));
@@ -50,3 +56,6 @@ void loop() {
     delay(1000);
 }
 
+=======
+}
+>>>>>>> development
