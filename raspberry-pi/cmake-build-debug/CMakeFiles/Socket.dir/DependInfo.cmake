@@ -4,8 +4,8 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/LarsLinux/Documenten/Socket/Socket.cpp" "/home/LarsLinux/Documenten/Socket/cmake-build-debug/CMakeFiles/Socket.dir/Socket.cpp.o"
-  "/home/LarsLinux/Documenten/Socket/main.cpp" "/home/LarsLinux/Documenten/Socket/cmake-build-debug/CMakeFiles/Socket.dir/main.cpp.o"
+  "/home/LarsLinux/Documenten/System-Automation/raspberry-pi/Socket.cpp" "/home/LarsLinux/Documenten/System-Automation/raspberry-pi/cmake-build-debug/CMakeFiles/Socket.dir/Socket.cpp.o"
+  "/home/LarsLinux/Documenten/System-Automation/raspberry-pi/main.cpp" "/home/LarsLinux/Documenten/System-Automation/raspberry-pi/cmake-build-debug/CMakeFiles/Socket.dir/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

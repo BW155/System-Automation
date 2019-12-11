@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/LarsLinux/Documenten/Socket/Socket.h
+/home/LarsLinux/Documenten/System-Automation/raspberry-pi/Socket.h
 stdio.h
 -
 sys/socket.h
@@ -20,7 +20,7 @@ string.h
 bits/stdc++.h
 -
 
-/home/LarsLinux/Documenten/Socket/json.hpp
+/home/LarsLinux/Documenten/System-Automation/raspberry-pi/json.hpp
 algorithm
 -
 cassert
@@ -354,7 +354,7 @@ limits
 type_traits
 -
 
-/home/LarsLinux/Documenten/Socket/main.cpp
+/home/LarsLinux/Documenten/System-Automation/raspberry-pi/main.cpp
 stdio.h
 -
 sys/socket.h
@@ -368,7 +368,7 @@ string.h
 bits/stdc++.h
 -
 Socket.h
-/home/LarsLinux/Documenten/Socket/Socket.h
+/home/LarsLinux/Documenten/System-Automation/raspberry-pi/Socket.h
 json.hpp
-/home/LarsLinux/Documenten/Socket/json.hpp
+/home/LarsLinux/Documenten/System-Automation/raspberry-pi/json.hpp
 

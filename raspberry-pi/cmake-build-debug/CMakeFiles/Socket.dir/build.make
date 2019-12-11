@@ -34,19 +34,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /home/LarsLinux/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/193.5233.103/bin/cmake/linux/bin/cmake
+CMAKE_COMMAND = /home/LarsLinux/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/193.5233.144/bin/cmake/linux/bin/cmake
 
 # The command to remove a file.
-RM = /home/LarsLinux/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/193.5233.103/bin/cmake/linux/bin/cmake -E remove -f
+RM = /home/LarsLinux/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/193.5233.144/bin/cmake/linux/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/LarsLinux/Documenten/Socket
+CMAKE_SOURCE_DIR = /home/LarsLinux/Documenten/System-Automation/raspberry-pi
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/LarsLinux/Documenten/Socket/cmake-build-debug
+CMAKE_BINARY_DIR = /home/LarsLinux/Documenten/System-Automation/raspberry-pi/cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/Socket.dir/depend.make
@@ -59,29 +59,29 @@ include CMakeFiles/Socket.dir/flags.make
 
 CMakeFiles/Socket.dir/main.cpp.o: CMakeFiles/Socket.dir/flags.make
 CMakeFiles/Socket.dir/main.cpp.o: ../main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/LarsLinux/Documenten/Socket/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Socket.dir/main.cpp.o"
-	/usr/bin/arm-linux-gnueabihf-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Socket.dir/main.cpp.o -c /home/LarsLinux/Documenten/Socket/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/LarsLinux/Documenten/System-Automation/raspberry-pi/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Socket.dir/main.cpp.o"
+	/usr/bin/arm-linux-gnueabihf-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Socket.dir/main.cpp.o -c /home/LarsLinux/Documenten/System-Automation/raspberry-pi/main.cpp
 
 CMakeFiles/Socket.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Socket.dir/main.cpp.i"
-	/usr/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/LarsLinux/Documenten/Socket/main.cpp > CMakeFiles/Socket.dir/main.cpp.i
+	/usr/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/LarsLinux/Documenten/System-Automation/raspberry-pi/main.cpp > CMakeFiles/Socket.dir/main.cpp.i
 
 CMakeFiles/Socket.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Socket.dir/main.cpp.s"
-	/usr/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/LarsLinux/Documenten/Socket/main.cpp -o CMakeFiles/Socket.dir/main.cpp.s
+	/usr/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/LarsLinux/Documenten/System-Automation/raspberry-pi/main.cpp -o CMakeFiles/Socket.dir/main.cpp.s
 
 CMakeFiles/Socket.dir/Socket.cpp.o: CMakeFiles/Socket.dir/flags.make
 CMakeFiles/Socket.dir/Socket.cpp.o: ../Socket.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/LarsLinux/Documenten/Socket/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Socket.dir/Socket.cpp.o"
-	/usr/bin/arm-linux-gnueabihf-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Socket.dir/Socket.cpp.o -c /home/LarsLinux/Documenten/Socket/Socket.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/LarsLinux/Documenten/System-Automation/raspberry-pi/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Socket.dir/Socket.cpp.o"
+	/usr/bin/arm-linux-gnueabihf-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Socket.dir/Socket.cpp.o -c /home/LarsLinux/Documenten/System-Automation/raspberry-pi/Socket.cpp
 
 CMakeFiles/Socket.dir/Socket.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Socket.dir/Socket.cpp.i"
-	/usr/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/LarsLinux/Documenten/Socket/Socket.cpp > CMakeFiles/Socket.dir/Socket.cpp.i
+	/usr/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/LarsLinux/Documenten/System-Automation/raspberry-pi/Socket.cpp > CMakeFiles/Socket.dir/Socket.cpp.i
 
 CMakeFiles/Socket.dir/Socket.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Socket.dir/Socket.cpp.s"
-	/usr/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/LarsLinux/Documenten/Socket/Socket.cpp -o CMakeFiles/Socket.dir/Socket.cpp.s
+	/usr/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/LarsLinux/Documenten/System-Automation/raspberry-pi/Socket.cpp -o CMakeFiles/Socket.dir/Socket.cpp.s
 
 # Object files for target Socket
 Socket_OBJECTS = \
@@ -95,7 +95,7 @@ Socket: CMakeFiles/Socket.dir/main.cpp.o
 Socket: CMakeFiles/Socket.dir/Socket.cpp.o
 Socket: CMakeFiles/Socket.dir/build.make
 Socket: CMakeFiles/Socket.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/LarsLinux/Documenten/Socket/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable Socket"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/LarsLinux/Documenten/System-Automation/raspberry-pi/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable Socket"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Socket.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -108,6 +108,6 @@ CMakeFiles/Socket.dir/clean:
 .PHONY : CMakeFiles/Socket.dir/clean
 
 CMakeFiles/Socket.dir/depend:
-	cd /home/LarsLinux/Documenten/Socket/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/LarsLinux/Documenten/Socket /home/LarsLinux/Documenten/Socket /home/LarsLinux/Documenten/Socket/cmake-build-debug /home/LarsLinux/Documenten/Socket/cmake-build-debug /home/LarsLinux/Documenten/Socket/cmake-build-debug/CMakeFiles/Socket.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/LarsLinux/Documenten/System-Automation/raspberry-pi/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/LarsLinux/Documenten/System-Automation/raspberry-pi /home/LarsLinux/Documenten/System-Automation/raspberry-pi /home/LarsLinux/Documenten/System-Automation/raspberry-pi/cmake-build-debug /home/LarsLinux/Documenten/System-Automation/raspberry-pi/cmake-build-debug /home/LarsLinux/Documenten/System-Automation/raspberry-pi/cmake-build-debug/CMakeFiles/Socket.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/Socket.dir/depend
 

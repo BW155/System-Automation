@@ -16,15 +16,23 @@ using namespace std;
 int counter;
 //Socket *sockets;
 
-Socket bedje; // NOLINT(cert-err58-cpp)
+Socket sockets[7]; // NOLINT(cert-err58-cpp)
 
 void discoverDevices();
-void communicate(char*,int);
-bool checkConnectedDevices();
-json toJson(string);
-string toCharArray(json);
 
-void sendSimpleMessage(char*,int,Socket);
+void communicate(char* buffer,int valread);
+void communicateBed(char* buffer, int valread);
+void communicateChair(char* buffer, int valread);
+void communicateLamp(char* buffer, int valread);
+void communicatePillar(char* buffer, int valread);
+void communicateWall(char* buffer, int valread);
+void communicateFridge(char* buffer, int valread);
+void communicateDoor(char* buffer, int valread);
+
+bool checkConnectedDevices();
+
+json toJson(string jsonString);
+string toCharArray(json jsonObj);
 
 int main(int argc, char const *argv[])
 {
@@ -32,12 +40,14 @@ int main(int argc, char const *argv[])
     discoverDevices();
     char buffer[1024] = {0};
     int valread;
-    if (!checkConnectedDevices()) {sendSimpleMessage(buffer,valread,bedje);return -1;}
-    while(counter >= 0) {
-        if (counter == 7) {counter = 0;}
+//    if (!checkConnectedDevices()) {sendSimpleMessage(buffer,valread);return -1;}
+    counter = 1;
+    while(counter > 0) {
+//        if (counter == 8) {counter = 1;}
+        if (counter == 2) { break;}
 
         communicate(buffer, valread);
-
+        printf("\n");
         counter++;
     }
     return 0;
@@ -54,7 +64,7 @@ string toCharArray(json jsonObj) {
 
 bool checkConnectedDevices() {
     if (counter != 6) {
-        printf("not all devices connected");
+        printf("not all devices connected\n");
         return 0;
     }
     else {
@@ -69,7 +79,7 @@ void discoverDevices() {
     const char *IPGROUP = "192.168.2.";
     char *IP;
     int Device;
-    for (int x = 182; x < 191; x+=10) {
+    for (int x = 182; x < 185; x+=10) {
         stringstream ss;
         ss << IPGROUP << x;
         const std::string tmp = ss.str();
@@ -90,51 +100,50 @@ void discoverDevices() {
         switch (Device) {
             case 1 : {
                 Socket bed(1, "bed", IP);
-                printf("Bed was made");
-//                sockets[counter] = bed;
-                bedje = bed;
+                printf("Bed was made\n");
+                sockets[1] = bed;
                 counter++;
                 break;
             }
             case 2 : {
                 Socket chair(2, "chair", IP);
                 printf("Chair was made");
-//                sockets[counter] = chair;
+                sockets[2] = chair;
                 counter++;
                 break;
             }
             case 3 : {
                 Socket tableLamp(3,"tableLamp", IP);
                 printf("Lamp was made");
-//                sockets[counter] = tableLamp;
+                sockets[3] = tableLamp;
                 counter++;
                 break;
             }
             case 4 : {
                 Socket pillar(1, "pillar", IP);
                 printf("Pillar was made");
-//                sockets[counter] = pillar;
+                sockets[4] = pillar;
                 counter++;
                 break;
             }
             case 5 : {
                 Socket wall(1, "wall", IP);
                 printf("Wall was made");
-//                sockets[counter] = wall;
+                sockets[5] = wall;
                 counter++;
                 break;
             }
             case 6 : {
                 Socket fridge(1, "fridge", IP);
                 printf("Fridge was made");
-//                sockets[counter] = fridge;
+                sockets[6] = fridge;
                 counter++;
                 break;
             }
             case 7 : {
                 Socket door(1, "door", IP);
                 printf("Door was made");
-//                sockets[counter] = door;
+                sockets[7] = door;
                 counter++;
                 break;
             }
@@ -146,19 +155,172 @@ void discoverDevices() {
 
 void communicate(char* buffer, int valread) {
     //dosomething
-//    send(sockets[counter].sock , "iets hier" , strlen("ja lengte") , 0 );
-//    valread = read(sockets[counter].sock , buffer, 1024);
+    switch (counter) {
+        case 1: {
+            communicateBed(buffer,valread);
+        }
+        case 2: {
+            communicateChair(buffer, valread);
+        }
+        case 3: {
+            communicateLamp(buffer, valread);
+        }
+        case 4: {
+            communicatePillar(buffer, valread);
+        }
+        case 5: {
+            communicateWall(buffer, valread);
+        }
+        case 6: {
+            communicateFridge(buffer, valread);
+        }
+        case 7: {
+            communicateDoor(buffer, valread);
+        }
+    }
+
 }
 
-void sendSimpleMessage(char *buffer, int valread, Socket bedje) {
+bool x = true;
+int y = 1;
+u_int8_t z = 255;
+
+void communicateBed(char* buffer, int valread) {
     json Message = {
-            {"id", 1},
+            {"id",1},
             {"actuators", {
-                                  {"led", 1}
-                          }
+                          {"led", x}
+                  }
             }
     };
-    send(bedje.sock, toCharArray(Message).c_str(), strlen(toCharArray(Message).c_str()), 0);
-    valread = read(bedje.sock, buffer, 1024);
-    printf("%s/n", buffer);
+    send(sockets[counter].sock, toCharArray(Message).c_str(), strlen(toCharArray(Message).c_str()), 0);
+    valread = read(sockets[counter].sock, buffer, 1024);
+    json Result = toJson(buffer);
+    printf("Bed:\n");
+    printf("ForceSensor: ");
+    printf("%s\n",Result["sensors"]["forceSensor"].dump().c_str());
+    printf("Button: ");
+    printf("%s\n",Result["sensors"]["button"].dump().c_str());
+    printf("\n");
+}
+
+void communicateChair(char* buffer, int valread) {
+    json Message = {
+            {"id",2},
+            {"actuators", {
+                          {"led", x},
+                          {"Vibrator", x}
+                  }
+            }
+    };
+    send(sockets[counter].sock, toCharArray(Message).c_str(), strlen(toCharArray(Message).c_str()), 0);
+    valread = read(sockets[counter].sock, buffer, 1024);
+    json Result = toJson(buffer);
+    printf("Chair:\n");
+    printf("ForceSensor: ");
+    printf("%s\n",Result["sensors"]["forceSensor"].dump().c_str());
+    printf("Button: ");
+    printf("%s\n",Result["sensors"]["button"].dump().c_str());
+    printf("\n");
+}
+
+void communicateLamp(char* buffer, int valread) {
+    json Message = {
+            {"id",3},
+            {"actuators", {
+                          {"led", x}
+                  }
+            }
+    };
+    send(sockets[counter].sock, toCharArray(Message).c_str(), strlen(toCharArray(Message).c_str()), 0);
+    valread = read(sockets[counter].sock, buffer, 1024);
+    json Result = toJson(buffer);
+    printf("Lamp:\n");
+    printf("MotionSensor: ");
+    printf("%s\n",Result["sensors"]["motionSensor"].dump().c_str());
+    printf("Button: ");
+    printf("%s\n",Result["sensors"]["button"].dump().c_str());
+    printf("\n");
+}
+
+void communicatePillar(char* buffer, int valread) {
+    json Message = {
+            {"id",4},
+            {"actuators", {
+                          {"led", x},
+                          {"buzzer",x}
+                  }
+            }
+    };
+    send(sockets[counter].sock, toCharArray(Message).c_str(), strlen(toCharArray(Message).c_str()), 0);
+    valread = read(sockets[counter].sock, buffer, 1024);
+    json Result = toJson(buffer);
+    printf("Pillar:\n");
+    printf("GasSensor: ");
+    printf("%s\n",Result["sensors"]["gasSensor"].dump().c_str());
+    printf("Button: ");
+    printf("%s\n",Result["sensors"]["button"].dump().c_str());
+    printf("\n");
+}
+
+void communicateWall(char* buffer, int valread) {
+    json Message = {
+            {"id",5},
+            {"actuators", {
+                          {"led", z},
+                          {"window", x}
+                  }
+            }
+    };
+    send(sockets[counter].sock, toCharArray(Message).c_str(), strlen(toCharArray(Message).c_str()), 0);
+    valread = read(sockets[counter].sock, buffer, 1024);
+    json Result = toJson(buffer);
+    printf("Wall:\n");
+    printf("Dimmer: ");
+    printf("%s\n",Result["sensors"]["dimmer"].dump().c_str());
+    printf("LDR: ");
+    printf("%s\n",Result["sensors"]["LDR"].dump().c_str());
+    printf("\n");
+}
+
+void communicateFridge(char* buffer, int valread) {
+    json Message = {
+            {"id",6},
+            {"actuators", {
+                          {"cooling", x}
+                  }
+            }
+    };
+    send(sockets[counter].sock, toCharArray(Message).c_str(), strlen(toCharArray(Message).c_str()), 0);
+    valread = read(sockets[counter].sock, buffer, 1024);
+    json Result = toJson(buffer);
+    printf("Fridge:\n");
+    printf("Inside: ");
+    printf("%s\n",Result["sensors"]["inside"].dump().c_str());
+    printf("Outside :");
+    printf("%s\n",Result["sensors"]["outside"].dump().c_str());
+    printf("DoorOpen: ");
+    printf("%s\n", Result["sensors"]["doorOpen"].dump().c_str());
+    printf("\n");
+}
+
+void communicateDoor(char* buffer, int valread) {
+    json Message = {
+            {"id",7},
+            {"actuators", {
+                          {"led1", x},
+                          {"led2", x},
+                          {"servo", y}
+                  }
+            }
+    };
+    send(sockets[counter].sock, toCharArray(Message).c_str(), strlen(toCharArray(Message).c_str()), 0);
+    valread = read(sockets[counter].sock, buffer, 1024);
+    json Result = toJson(buffer);
+    printf("Door:\n");
+    printf("Button 1: ");
+    printf("%s\n",Result["sensors"]["button1"].dump().c_str());
+    printf("Button 2: ");
+    printf("%s\n",Result["sensors"]["button2"].dump().c_str());
+    printf("\n");
 }
