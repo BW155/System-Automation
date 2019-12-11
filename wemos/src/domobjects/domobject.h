@@ -25,6 +25,7 @@ class Chair: public DomObject {
         void getSensors(JsonArray&) override;
         void writeActuators(JsonArray&) override;
 };
+
 class TableLamp: public DomObject {
     public:
         int getId() override;
