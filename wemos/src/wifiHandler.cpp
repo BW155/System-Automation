@@ -60,7 +60,7 @@ void handleWifi(DomObject* object) {
         // Deserializing json
         DynamicJsonDocument doc(1024);
         DeserializationError error = deserializeJson(doc, data);
-        JsonArray actuators = doc["actuators"];
+        JsonObject actuators = doc["actuators"];
         
         object->writeActuators(actuators);
 

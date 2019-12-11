@@ -29,8 +29,8 @@ class Chair: public DomObject {
 class Pillar: public DomObject {
     public:
         int getId() override;
-        void getSensors(JsonArray&) override;
-        void writeActuators(JsonArray&) override;
+        void getSensors(JsonObject&) override;
+        void writeActuators(JsonObject&) override;
 };
 
 class Door: public DomObject {
