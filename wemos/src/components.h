@@ -41,3 +41,5 @@ void componentCheckLoop();
 void resetButton();
 
 #endif
+#include "time.h"
+
