@@ -50,8 +50,8 @@ void loop() {
     delay(20);
     componentCheckLoop();
     setFridgeFan();
-    Serial.print("Buiten Koelkast Temperatuur: "); Serial.println(getFridgeTempSensor(0));
-    Serial.print("Binnen Koelkast Temperatuur: "); Serial.println(getFridgeTempSensor(1));
+    Serial.print("Binnen Koelkast Temperatuur: "); Serial.println(getFridgeTempSensor(0));
+    Serial.print("Buiten Koelkast Temperatuur: "); Serial.println(getFridgeTempSensor(1));
     Serial.println(" ");
   delay(1000);
 }
