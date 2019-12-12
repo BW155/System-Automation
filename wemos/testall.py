@@ -3,6 +3,7 @@ import socket
 import binascii
 import json
 import math
+import _thread
 
 
 TCP_IP = '192.168.2.'
@@ -47,6 +48,7 @@ def routine():
             ips[data.decode("utf-8")] = ip
             print("Found: ", data, " on ", ip)
 
+
     for i in ips:
         print()
         ip = ips[i]
@@ -58,7 +60,6 @@ def routine():
 def send(ip, message):
     try:
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        print("connecting to: ", ip)
         s.settimeout(0.5)
         s.connect((ip, TCP_PORT))
         s.send(bytes(str(message), "utf8"))
@@ -69,7 +70,29 @@ def send(ip, message):
         print("exception: ", e)
         return ""
 
+text = [""] * 7
+
+def live_sensors(i):
+    global text
+    while 1:
+        ip = ips[i]
+        data = send(ip, COMMANDSN[i])
+        js = json.loads(data)
+        try:
+            js = js["sensors"]
+            text[int(i)] = str(js) + "\n"
+        except KeyError as e:
+            print(i, ip, data, e)
+
+        time.sleep(0.01)
+
 
 if __name__ == "__main__":
     routine()
+    for i in ips:
+        _thread.start_new_thread( live_sensors, (i, ) )
+
+    while 1:
+        time.sleep(0.1)
+        print(text)
 

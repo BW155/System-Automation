@@ -8,6 +8,7 @@
 #define PILLAR_BUTTON 0x01
 #define DOOR_BUTTON_1 0x01
 #define DOOR_BUTTON_2 0x02
+#define FASTLED_ALLOW_INTERRUPTS 0
 
 #ifdef WALL
 #define NUM_LEDS 3 

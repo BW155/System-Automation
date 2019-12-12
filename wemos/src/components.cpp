@@ -115,14 +115,15 @@ void setPeltier(bool state){
 
 void setLamp(bool state) {
     Serial.println(state);
+
     for(uint8_t i = 0; i < NUM_LEDS; i++) {
         if (state) {
             leds[i] = CRGB::Red; 
         } else {
-            leds[i] = CRGB::Black;
+            leds[i] = CRGB::Black; 
         }
-        FastLED.show();
     }
+    FastLED.show();
 }
 
 
