@@ -5,7 +5,7 @@ using namespace std;
 
 
 int main(){
-        TimeClass t1;
+    TimeClass t1;
     t1.initTimeValues();
     while(1){
 
