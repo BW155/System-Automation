@@ -7,12 +7,12 @@ void TimeClass::initTimeValues(){
     minutes = 0;
     hours = 0;
     seconds = 0;
+    
+    //Increase every seconds with 15 minutes of simulation time
+    timeMultiplier = 20;
 }
 
 void TimeClass::autoIncreaseTime(){
-    //Increase every seconds with 15 minutes of simulation time
-    timeMultiplier = 15;
-
     time_t curTime, prevTime;
     double diff_t;
 
@@ -32,21 +32,21 @@ void TimeClass::autoIncreaseTime(){
         }
 
         //Debug purposes
-        /*
+        
         cout << "hours: "  << hours   << endl;
         cout << "Minutes: "<< minutes << endl;
         cout << "seconds: "<< seconds << endl;
         cout << " " << endl;
-        */
 
-        minutes += diff_t * 15;
+
+        minutes += diff_t * timeMultiplier;
     }
     
     //Seconds since january first 1970
     prevTime = curTime;
 }
 
-//Moet nog geschreven worden. Het doel
+//Moet nog geschreven worden. Het doel is om evt voor test purposes time zelf aan te passen
 void TimeClass::manualIncreaseTime(){
 
 }
