@@ -44,6 +44,7 @@ void handleWifi(DomObject* object) {
         if (data == "") {
             Serial.print("NoDataReceived");
             client.print(constructErrorResult("NoDataReceived"));
+            client.stop();
             return;
         }
 
@@ -62,13 +63,12 @@ void handleWifi(DomObject* object) {
         DeserializationError error = deserializeJson(doc, data);
         JsonObject actuators = doc["actuators"];
         
-        object->writeActuators(actuators);
-
         // If there is an error, send error result back to client
         if (error) {
             Serial.println(error.c_str());
             String result = constructErrorResult(error.c_str());
             client.print(result);
+            client.stop();
             return;
         }
 
@@ -96,8 +96,9 @@ void handleWifi(DomObject* object) {
         }
 
         Serial.println();
-        client.stop();
     }
+
+    client.stop();
 }
 
 String constructErrorResult(const char* error) {
