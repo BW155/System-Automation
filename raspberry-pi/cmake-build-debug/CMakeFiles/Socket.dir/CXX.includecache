@@ -371,4 +371,6 @@ Socket.h
 /home/LarsLinux/Documenten/System-Automation/raspberry-pi/Socket.h
 json.hpp
 /home/LarsLinux/Documenten/System-Automation/raspberry-pi/json.hpp
+netinet/tcp.h
+-
 

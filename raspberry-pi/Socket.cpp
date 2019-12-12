@@ -40,4 +40,22 @@ string Socket::getIP() {return IP;}
 string Socket::getName() {return name;}
 void Socket::setName(string name_) {name = name_;}
 
+void Socket::connectionTest() {
+    if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0)
+    {
+        printf("\n Socket creation error \n");
+    }
+    sock_addr.sin_family = AF_INET;
+    sock_addr.sin_port = htons(PORT);
+    if(inet_pton(AF_INET, IP, &sock_addr.sin_addr)<=0)
+    {
+        printf("\nInvalid address/ Address not supported \n");
+    }
+
+    if (connect(sock, (struct sockaddr *)&sock_addr, sizeof(sock_addr)) < 0)
+    {
+        printf("\nConnection Failed \n");
+    }
+}
+
 

@@ -18,13 +18,14 @@ class Socket {
 private:
     int id;
     string name;
-    const char *IP;
+    char *IP;
 public:
     int getId();
     int sock;
     string getIP();
     string getName();
     void setName(string name_);
+    void connectionTest();
     struct sockaddr_in sock_addr;
 
     Socket();
