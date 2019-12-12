@@ -1,22 +1,22 @@
 <?php
 
 class Functions
-{
-$db = null;
-
-  public function saveData($data)
+{  
+  public function setData($object, $action)
   {
 
     # Make db connection
-  	$redis = new Redis();
+    $redis = new Redis();
     $redis->connect("127.0.0.1",6379);
     $redis->auth("redbanaan");
+
     # process data
-    $db = $this->db;
+     $redis->set($object, $action);
+     $getBack = $redis->get($object);     
 
-    # check if results
-    return true;
-  }
-
+    # verify the set
+    return $getBack;
+  }     
 
 }
+
