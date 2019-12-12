@@ -1,17 +1,22 @@
 #include "components.h"
 #include <Wire.h>
 #include <Servo.h>
-Adafruit_NeoPixel led(1, D5, NEO_GRB + NEO_KHZ800);
+
 
 /////////////////////
 /// Setup         ///
 /////////////////////
 
 Servo servo;
+CRGB leds[NUM_LEDS];
 
 void initServo() {
     servo.attach(14);
     servo.write(80);
+}
+
+void initLed() {
+    FastLED.addLeds<NEOPIXEL, D5>(leds, NUM_LEDS);
 }
 
 double calculateThermistor(int RawADC) {  //Function to perform the fancy math of the Steinhart-Hart equation
@@ -48,7 +53,6 @@ void setPillarActuators(bool led, bool buzzer){
 void setWallActuators(bool window, bool led) {
     int output = (window << 4);
     writeActuators(output);
-    Serial.println(led);
     setLamp(led);
 }
 
@@ -73,16 +77,6 @@ void writeActuators(int output) {
     Wire.endTransmission();
 }
 
-void ledScreen(int output) {
-    Wire.beginTransmission(0x38);
-    Wire.write(byte(0x01));                  
-    Wire.write(byte(output<<4));   
-    Wire.endTransmission();
-
-    Serial.println(" ");
-    Serial.print("Digital out: ");
-    Serial.println(output&0x0F);
-}
 
 int getWallSensors(int choice) {
     Wire.requestFrom(0x36, 4);   
@@ -120,17 +114,14 @@ void setPeltier(bool state){
 }
 
 void setLamp(bool state) {
-    led.begin();
-    led.show();
-    for(uint8_t i = 0; i < 255; i++) {
-        if(state) {
-            led.setBrightness(i);
+    Serial.println(state);
+    for(uint8_t i = 0; i < NUM_LEDS; i++) {
+        if (state) {
+            leds[i] = CRGB::Red; 
         } else {
-            led.setBrightness(255 - i);
+            leds[i] = CRGB::Black;
         }
-        led.setPixelColor(0, 255, 255, 255);
-        led.show();
-       // delay(5);
+        FastLED.show();
     }
 }
 

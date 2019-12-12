@@ -10,6 +10,6 @@ void TableLamp::getSensors(JsonObject& obj) {
 }
 
 void TableLamp::writeActuators(JsonObject& actuators) {
-    int lamp = actuators["lamp"];
+    int lamp = actuators["led"];
     setTableActuators(lamp);
 }

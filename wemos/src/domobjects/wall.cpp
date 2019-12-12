@@ -1,7 +1,7 @@
 #include "domobject.h"
 
 int Wall::getId() {
-    return 2;
+    return 5;
 }
 
 void Wall::getSensors(JsonObject& obj) {

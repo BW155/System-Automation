@@ -54,6 +54,7 @@ void setup() {
 
     writeActuators(0);
     initServo();
+    initLed();
     wifiSetup();
 
     Serial.println("Hi, my id is " + String(object.getId()));
