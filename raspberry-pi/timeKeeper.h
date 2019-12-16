@@ -1,5 +1,8 @@
 #include <time.h>
+#include <unistd.h>
 #include <iostream>
+#include <sstream>
+#include <strings.h>
 #include <stdlib.h>
 
 
@@ -9,8 +12,8 @@
 class TimeClass{
     public:
         void autoIncreaseTime();
-        void manualIncreaseTime();
-        void manualDecreaseTime();
+        void setTime();
+        int  getTime(int);
         void initTimeValues();
     private:
         int minutes;

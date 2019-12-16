@@ -21,12 +21,12 @@ void TimeClass::autoIncreaseTime(){
     diff_t = difftime(curTime,prevTime);
 
     //Prevent huge diff_t value first time
-    if(diff_t > 0 && diff_t < 1000){
+    if(diff_t > 0 ){
         if(minutes >= 60){
             if(hours >= 23){
                 hours = 0;
             }else{
-                hours++;
+                hours++;    
             }
             minutes = 0;
         }
@@ -46,11 +46,15 @@ void TimeClass::autoIncreaseTime(){
     prevTime = curTime;
 }
 
-//Moet nog geschreven worden. Het doel is om evt voor test purposes time zelf aan te passen
-void TimeClass::manualIncreaseTime(){
+void TimeClass::setTime(){
 
 }
 
-void TimeClass::manualDecreaseTime(){
+int TimeClass::getTime(int x){
+    if(x == 0)
+        return seconds;
+    if(x == 1)
+        return hours;
 
+    return 0;
 }
