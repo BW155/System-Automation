@@ -4,7 +4,41 @@
 CMakeFiles/Socket.dir/Socket.cpp.o: ../Socket.cpp
 CMakeFiles/Socket.dir/Socket.cpp.o: ../Socket.h
 
+CMakeFiles/Socket.dir/domObjects/bed.cpp.o: ../domObjects/bed.cpp
+
+CMakeFiles/Socket.dir/domObjects/chair.cpp.o: ../domObjects/chair.cpp
+
 CMakeFiles/Socket.dir/main.cpp.o: ../Socket.h
 CMakeFiles/Socket.dir/main.cpp.o: ../json.hpp
 CMakeFiles/Socket.dir/main.cpp.o: ../main.cpp
+CMakeFiles/Socket.dir/main.cpp.o: ../redis/hiredis/hiredis.h
+CMakeFiles/Socket.dir/main.cpp.o: ../redis/hiredis/read.h
+CMakeFiles/Socket.dir/main.cpp.o: ../redis/hiredis/sds.h
+CMakeFiles/Socket.dir/main.cpp.o: ../redis/redis-plus-plus/src/sw/redis++/command.h
+CMakeFiles/Socket.dir/main.cpp.o: ../redis/redis-plus-plus/src/sw/redis++/command_args.h
+CMakeFiles/Socket.dir/main.cpp.o: ../redis/redis-plus-plus/src/sw/redis++/command_options.h
+CMakeFiles/Socket.dir/main.cpp.o: ../redis/redis-plus-plus/src/sw/redis++/connection.h
+CMakeFiles/Socket.dir/main.cpp.o: ../redis/redis-plus-plus/src/sw/redis++/connection_pool.h
+CMakeFiles/Socket.dir/main.cpp.o: ../redis/redis-plus-plus/src/sw/redis++/errors.h
+CMakeFiles/Socket.dir/main.cpp.o: ../redis/redis-plus-plus/src/sw/redis++/pipeline.h
+CMakeFiles/Socket.dir/main.cpp.o: ../redis/redis-plus-plus/src/sw/redis++/queued_redis.h
+CMakeFiles/Socket.dir/main.cpp.o: ../redis/redis-plus-plus/src/sw/redis++/queued_redis.hpp
+CMakeFiles/Socket.dir/main.cpp.o: ../redis/redis-plus-plus/src/sw/redis++/redis++.h
+CMakeFiles/Socket.dir/main.cpp.o: ../redis/redis-plus-plus/src/sw/redis++/redis.h
+CMakeFiles/Socket.dir/main.cpp.o: ../redis/redis-plus-plus/src/sw/redis++/redis.hpp
+CMakeFiles/Socket.dir/main.cpp.o: ../redis/redis-plus-plus/src/sw/redis++/redis_cluster.h
+CMakeFiles/Socket.dir/main.cpp.o: ../redis/redis-plus-plus/src/sw/redis++/redis_cluster.hpp
+CMakeFiles/Socket.dir/main.cpp.o: ../redis/redis-plus-plus/src/sw/redis++/reply.h
+CMakeFiles/Socket.dir/main.cpp.o: ../redis/redis-plus-plus/src/sw/redis++/sentinel.h
+CMakeFiles/Socket.dir/main.cpp.o: ../redis/redis-plus-plus/src/sw/redis++/shards.h
+CMakeFiles/Socket.dir/main.cpp.o: ../redis/redis-plus-plus/src/sw/redis++/shards_pool.h
+CMakeFiles/Socket.dir/main.cpp.o: ../redis/redis-plus-plus/src/sw/redis++/subscriber.h
+CMakeFiles/Socket.dir/main.cpp.o: ../redis/redis-plus-plus/src/sw/redis++/transaction.h
+CMakeFiles/Socket.dir/main.cpp.o: ../redis/redis-plus-plus/src/sw/redis++/utils.h
+CMakeFiles/Socket.dir/main.cpp.o: /usr/arm-linux-gnueabihf/include/stdio.h
+CMakeFiles/Socket.dir/main.cpp.o: /usr/arm-linux-gnueabihf/include/sys/time.h
+CMakeFiles/Socket.dir/main.cpp.o: /usr/arm-linux-gnueabihf/include/sys/types.h
+CMakeFiles/Socket.dir/main.cpp.o: /usr/lib/gcc-cross/arm-linux-gnueabihf/8/include/stdarg.h
+CMakeFiles/Socket.dir/main.cpp.o: /usr/lib/gcc-cross/arm-linux-gnueabihf/8/include/stdint-gcc.h
+CMakeFiles/Socket.dir/main.cpp.o: /usr/lib/gcc-cross/arm-linux-gnueabihf/8/include/stdint.h
 

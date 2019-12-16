@@ -11,8 +11,8 @@
 
 using namespace std;
 #define PORT 8080
-Socket::Socket() {}
-Socket::Socket(int id_, string name_, char *IP_) {
+Socket::Socket() {connected = 0;}
+Socket::Socket(int id_, string name_,const char *IP_) {
     id = id_;
     IP = IP_;
     name = name_;
@@ -33,14 +33,19 @@ Socket::Socket(int id_, string name_, char *IP_) {
     if (connect(sock, (struct sockaddr *)&sock_addr, sizeof(sock_addr)) < 0)
     {
         printf("\nConnection Failed \n");
+        connected = false;
     }
+    else {
+        connected = true;
+    }
+
 }
 int Socket::getId() {return id;}
 string Socket::getIP() {return IP;}
 string Socket::getName() {return name;}
 void Socket::setName(string name_) {name = name_;}
 
-void Socket::connectionTest() {
+void Socket::makeConnection() {
     if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0)
     {
         printf("\n Socket creation error \n");
@@ -49,13 +54,17 @@ void Socket::connectionTest() {
     sock_addr.sin_port = htons(PORT);
     if(inet_pton(AF_INET, IP, &sock_addr.sin_addr)<=0)
     {
-        printf("\nInvalid address/ Address not supported \n");
+//        printf("\nInvalid address/ Address not supported \n");
     }
 
     if (connect(sock, (struct sockaddr *)&sock_addr, sizeof(sock_addr)) < 0)
     {
         printf("\nConnection Failed \n");
     }
+}
+
+bool Socket::getConnected() {
+    return connected;
 }
 
 

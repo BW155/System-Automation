@@ -70,32 +70,137 @@ CMakeFiles/Socket.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Socket.dir/main.cpp.s"
 	/usr/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/LarsLinux/Documenten/System-Automation/raspberry-pi/main.cpp -o CMakeFiles/Socket.dir/main.cpp.s
 
-CMakeFiles/Socket.dir/Socket.cpp.o: CMakeFiles/Socket.dir/flags.make
-CMakeFiles/Socket.dir/Socket.cpp.o: ../Socket.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/LarsLinux/Documenten/System-Automation/raspberry-pi/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Socket.dir/Socket.cpp.o"
-	/usr/bin/arm-linux-gnueabihf-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Socket.dir/Socket.cpp.o -c /home/LarsLinux/Documenten/System-Automation/raspberry-pi/Socket.cpp
+CMakeFiles/Socket.dir/Socket/Socket.cpp.o: CMakeFiles/Socket.dir/flags.make
+CMakeFiles/Socket.dir/Socket/Socket.cpp.o: ../Socket/Socket.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/LarsLinux/Documenten/System-Automation/raspberry-pi/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Socket.dir/Socket/Socket.cpp.o"
+	/usr/bin/arm-linux-gnueabihf-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Socket.dir/Socket/Socket.cpp.o -c /home/LarsLinux/Documenten/System-Automation/raspberry-pi/Socket/Socket.cpp
 
-CMakeFiles/Socket.dir/Socket.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Socket.dir/Socket.cpp.i"
-	/usr/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/LarsLinux/Documenten/System-Automation/raspberry-pi/Socket.cpp > CMakeFiles/Socket.dir/Socket.cpp.i
+CMakeFiles/Socket.dir/Socket/Socket.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Socket.dir/Socket/Socket.cpp.i"
+	/usr/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/LarsLinux/Documenten/System-Automation/raspberry-pi/Socket/Socket.cpp > CMakeFiles/Socket.dir/Socket/Socket.cpp.i
 
-CMakeFiles/Socket.dir/Socket.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Socket.dir/Socket.cpp.s"
-	/usr/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/LarsLinux/Documenten/System-Automation/raspberry-pi/Socket.cpp -o CMakeFiles/Socket.dir/Socket.cpp.s
+CMakeFiles/Socket.dir/Socket/Socket.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Socket.dir/Socket/Socket.cpp.s"
+	/usr/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/LarsLinux/Documenten/System-Automation/raspberry-pi/Socket/Socket.cpp -o CMakeFiles/Socket.dir/Socket/Socket.cpp.s
+
+CMakeFiles/Socket.dir/domObjects/bed.cpp.o: CMakeFiles/Socket.dir/flags.make
+CMakeFiles/Socket.dir/domObjects/bed.cpp.o: ../domObjects/bed.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/LarsLinux/Documenten/System-Automation/raspberry-pi/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Socket.dir/domObjects/bed.cpp.o"
+	/usr/bin/arm-linux-gnueabihf-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Socket.dir/domObjects/bed.cpp.o -c /home/LarsLinux/Documenten/System-Automation/raspberry-pi/domObjects/bed.cpp
+
+CMakeFiles/Socket.dir/domObjects/bed.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Socket.dir/domObjects/bed.cpp.i"
+	/usr/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/LarsLinux/Documenten/System-Automation/raspberry-pi/domObjects/bed.cpp > CMakeFiles/Socket.dir/domObjects/bed.cpp.i
+
+CMakeFiles/Socket.dir/domObjects/bed.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Socket.dir/domObjects/bed.cpp.s"
+	/usr/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/LarsLinux/Documenten/System-Automation/raspberry-pi/domObjects/bed.cpp -o CMakeFiles/Socket.dir/domObjects/bed.cpp.s
+
+CMakeFiles/Socket.dir/domObjects/chair.cpp.o: CMakeFiles/Socket.dir/flags.make
+CMakeFiles/Socket.dir/domObjects/chair.cpp.o: ../domObjects/chair.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/LarsLinux/Documenten/System-Automation/raspberry-pi/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Socket.dir/domObjects/chair.cpp.o"
+	/usr/bin/arm-linux-gnueabihf-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Socket.dir/domObjects/chair.cpp.o -c /home/LarsLinux/Documenten/System-Automation/raspberry-pi/domObjects/chair.cpp
+
+CMakeFiles/Socket.dir/domObjects/chair.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Socket.dir/domObjects/chair.cpp.i"
+	/usr/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/LarsLinux/Documenten/System-Automation/raspberry-pi/domObjects/chair.cpp > CMakeFiles/Socket.dir/domObjects/chair.cpp.i
+
+CMakeFiles/Socket.dir/domObjects/chair.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Socket.dir/domObjects/chair.cpp.s"
+	/usr/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/LarsLinux/Documenten/System-Automation/raspberry-pi/domObjects/chair.cpp -o CMakeFiles/Socket.dir/domObjects/chair.cpp.s
+
+CMakeFiles/Socket.dir/domObjects/lamp.cpp.o: CMakeFiles/Socket.dir/flags.make
+CMakeFiles/Socket.dir/domObjects/lamp.cpp.o: ../domObjects/lamp.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/LarsLinux/Documenten/System-Automation/raspberry-pi/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/Socket.dir/domObjects/lamp.cpp.o"
+	/usr/bin/arm-linux-gnueabihf-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Socket.dir/domObjects/lamp.cpp.o -c /home/LarsLinux/Documenten/System-Automation/raspberry-pi/domObjects/lamp.cpp
+
+CMakeFiles/Socket.dir/domObjects/lamp.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Socket.dir/domObjects/lamp.cpp.i"
+	/usr/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/LarsLinux/Documenten/System-Automation/raspberry-pi/domObjects/lamp.cpp > CMakeFiles/Socket.dir/domObjects/lamp.cpp.i
+
+CMakeFiles/Socket.dir/domObjects/lamp.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Socket.dir/domObjects/lamp.cpp.s"
+	/usr/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/LarsLinux/Documenten/System-Automation/raspberry-pi/domObjects/lamp.cpp -o CMakeFiles/Socket.dir/domObjects/lamp.cpp.s
+
+CMakeFiles/Socket.dir/domObjects/wall.cpp.o: CMakeFiles/Socket.dir/flags.make
+CMakeFiles/Socket.dir/domObjects/wall.cpp.o: ../domObjects/wall.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/LarsLinux/Documenten/System-Automation/raspberry-pi/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/Socket.dir/domObjects/wall.cpp.o"
+	/usr/bin/arm-linux-gnueabihf-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Socket.dir/domObjects/wall.cpp.o -c /home/LarsLinux/Documenten/System-Automation/raspberry-pi/domObjects/wall.cpp
+
+CMakeFiles/Socket.dir/domObjects/wall.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Socket.dir/domObjects/wall.cpp.i"
+	/usr/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/LarsLinux/Documenten/System-Automation/raspberry-pi/domObjects/wall.cpp > CMakeFiles/Socket.dir/domObjects/wall.cpp.i
+
+CMakeFiles/Socket.dir/domObjects/wall.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Socket.dir/domObjects/wall.cpp.s"
+	/usr/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/LarsLinux/Documenten/System-Automation/raspberry-pi/domObjects/wall.cpp -o CMakeFiles/Socket.dir/domObjects/wall.cpp.s
+
+CMakeFiles/Socket.dir/domObjects/door.cpp.o: CMakeFiles/Socket.dir/flags.make
+CMakeFiles/Socket.dir/domObjects/door.cpp.o: ../domObjects/door.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/LarsLinux/Documenten/System-Automation/raspberry-pi/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/Socket.dir/domObjects/door.cpp.o"
+	/usr/bin/arm-linux-gnueabihf-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Socket.dir/domObjects/door.cpp.o -c /home/LarsLinux/Documenten/System-Automation/raspberry-pi/domObjects/door.cpp
+
+CMakeFiles/Socket.dir/domObjects/door.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Socket.dir/domObjects/door.cpp.i"
+	/usr/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/LarsLinux/Documenten/System-Automation/raspberry-pi/domObjects/door.cpp > CMakeFiles/Socket.dir/domObjects/door.cpp.i
+
+CMakeFiles/Socket.dir/domObjects/door.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Socket.dir/domObjects/door.cpp.s"
+	/usr/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/LarsLinux/Documenten/System-Automation/raspberry-pi/domObjects/door.cpp -o CMakeFiles/Socket.dir/domObjects/door.cpp.s
+
+CMakeFiles/Socket.dir/domObjects/fridge.cpp.o: CMakeFiles/Socket.dir/flags.make
+CMakeFiles/Socket.dir/domObjects/fridge.cpp.o: ../domObjects/fridge.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/LarsLinux/Documenten/System-Automation/raspberry-pi/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/Socket.dir/domObjects/fridge.cpp.o"
+	/usr/bin/arm-linux-gnueabihf-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Socket.dir/domObjects/fridge.cpp.o -c /home/LarsLinux/Documenten/System-Automation/raspberry-pi/domObjects/fridge.cpp
+
+CMakeFiles/Socket.dir/domObjects/fridge.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Socket.dir/domObjects/fridge.cpp.i"
+	/usr/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/LarsLinux/Documenten/System-Automation/raspberry-pi/domObjects/fridge.cpp > CMakeFiles/Socket.dir/domObjects/fridge.cpp.i
+
+CMakeFiles/Socket.dir/domObjects/fridge.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Socket.dir/domObjects/fridge.cpp.s"
+	/usr/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/LarsLinux/Documenten/System-Automation/raspberry-pi/domObjects/fridge.cpp -o CMakeFiles/Socket.dir/domObjects/fridge.cpp.s
+
+CMakeFiles/Socket.dir/domObjects/pillar.cpp.o: CMakeFiles/Socket.dir/flags.make
+CMakeFiles/Socket.dir/domObjects/pillar.cpp.o: ../domObjects/pillar.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/LarsLinux/Documenten/System-Automation/raspberry-pi/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/Socket.dir/domObjects/pillar.cpp.o"
+	/usr/bin/arm-linux-gnueabihf-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Socket.dir/domObjects/pillar.cpp.o -c /home/LarsLinux/Documenten/System-Automation/raspberry-pi/domObjects/pillar.cpp
+
+CMakeFiles/Socket.dir/domObjects/pillar.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Socket.dir/domObjects/pillar.cpp.i"
+	/usr/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/LarsLinux/Documenten/System-Automation/raspberry-pi/domObjects/pillar.cpp > CMakeFiles/Socket.dir/domObjects/pillar.cpp.i
+
+CMakeFiles/Socket.dir/domObjects/pillar.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Socket.dir/domObjects/pillar.cpp.s"
+	/usr/bin/arm-linux-gnueabihf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/LarsLinux/Documenten/System-Automation/raspberry-pi/domObjects/pillar.cpp -o CMakeFiles/Socket.dir/domObjects/pillar.cpp.s
 
 # Object files for target Socket
 Socket_OBJECTS = \
 "CMakeFiles/Socket.dir/main.cpp.o" \
-"CMakeFiles/Socket.dir/Socket.cpp.o"
+"CMakeFiles/Socket.dir/Socket/Socket.cpp.o" \
+"CMakeFiles/Socket.dir/domObjects/bed.cpp.o" \
+"CMakeFiles/Socket.dir/domObjects/chair.cpp.o" \
+"CMakeFiles/Socket.dir/domObjects/lamp.cpp.o" \
+"CMakeFiles/Socket.dir/domObjects/wall.cpp.o" \
+"CMakeFiles/Socket.dir/domObjects/door.cpp.o" \
+"CMakeFiles/Socket.dir/domObjects/fridge.cpp.o" \
+"CMakeFiles/Socket.dir/domObjects/pillar.cpp.o"
 
 # External object files for target Socket
 Socket_EXTERNAL_OBJECTS =
 
 Socket: CMakeFiles/Socket.dir/main.cpp.o
-Socket: CMakeFiles/Socket.dir/Socket.cpp.o
+Socket: CMakeFiles/Socket.dir/Socket/Socket.cpp.o
+Socket: CMakeFiles/Socket.dir/domObjects/bed.cpp.o
+Socket: CMakeFiles/Socket.dir/domObjects/chair.cpp.o
+Socket: CMakeFiles/Socket.dir/domObjects/lamp.cpp.o
+Socket: CMakeFiles/Socket.dir/domObjects/wall.cpp.o
+Socket: CMakeFiles/Socket.dir/domObjects/door.cpp.o
+Socket: CMakeFiles/Socket.dir/domObjects/fridge.cpp.o
+Socket: CMakeFiles/Socket.dir/domObjects/pillar.cpp.o
 Socket: CMakeFiles/Socket.dir/build.make
 Socket: CMakeFiles/Socket.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/LarsLinux/Documenten/System-Automation/raspberry-pi/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable Socket"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/LarsLinux/Documenten/System-Automation/raspberry-pi/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking CXX executable Socket"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Socket.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

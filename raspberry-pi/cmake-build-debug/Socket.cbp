@@ -90,10 +90,55 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/LarsLinux/Documenten/System-Automation/raspberry-pi/Socket.cpp">
+		<Unit filename="/home/LarsLinux/Documenten/System-Automation/raspberry-pi/Socket/Socket.cpp">
 			<Option target="Socket"/>
 		</Unit>
-		<Unit filename="/home/LarsLinux/Documenten/System-Automation/raspberry-pi/Socket.h">
+		<Unit filename="/home/LarsLinux/Documenten/System-Automation/raspberry-pi/Socket/Socket.h">
+			<Option target="Socket"/>
+		</Unit>
+		<Unit filename="/home/LarsLinux/Documenten/System-Automation/raspberry-pi/domObjects/bed.cpp">
+			<Option target="Socket"/>
+		</Unit>
+		<Unit filename="/home/LarsLinux/Documenten/System-Automation/raspberry-pi/domObjects/bed.h">
+			<Option target="Socket"/>
+		</Unit>
+		<Unit filename="/home/LarsLinux/Documenten/System-Automation/raspberry-pi/domObjects/chair.cpp">
+			<Option target="Socket"/>
+		</Unit>
+		<Unit filename="/home/LarsLinux/Documenten/System-Automation/raspberry-pi/domObjects/chair.h">
+			<Option target="Socket"/>
+		</Unit>
+		<Unit filename="/home/LarsLinux/Documenten/System-Automation/raspberry-pi/domObjects/door.cpp">
+			<Option target="Socket"/>
+		</Unit>
+		<Unit filename="/home/LarsLinux/Documenten/System-Automation/raspberry-pi/domObjects/door.h">
+			<Option target="Socket"/>
+		</Unit>
+		<Unit filename="/home/LarsLinux/Documenten/System-Automation/raspberry-pi/domObjects/fridge.cpp">
+			<Option target="Socket"/>
+		</Unit>
+		<Unit filename="/home/LarsLinux/Documenten/System-Automation/raspberry-pi/domObjects/fridge.h">
+			<Option target="Socket"/>
+		</Unit>
+		<Unit filename="/home/LarsLinux/Documenten/System-Automation/raspberry-pi/domObjects/lamp.cpp">
+			<Option target="Socket"/>
+		</Unit>
+		<Unit filename="/home/LarsLinux/Documenten/System-Automation/raspberry-pi/domObjects/lamp.h">
+			<Option target="Socket"/>
+		</Unit>
+		<Unit filename="/home/LarsLinux/Documenten/System-Automation/raspberry-pi/domObjects/pillar.cpp">
+			<Option target="Socket"/>
+		</Unit>
+		<Unit filename="/home/LarsLinux/Documenten/System-Automation/raspberry-pi/domObjects/pillar.h">
+			<Option target="Socket"/>
+		</Unit>
+		<Unit filename="/home/LarsLinux/Documenten/System-Automation/raspberry-pi/domObjects/wall.cpp">
+			<Option target="Socket"/>
+		</Unit>
+		<Unit filename="/home/LarsLinux/Documenten/System-Automation/raspberry-pi/domObjects/wall.h">
+			<Option target="Socket"/>
+		</Unit>
+		<Unit filename="/home/LarsLinux/Documenten/System-Automation/raspberry-pi/includes.h">
 			<Option target="Socket"/>
 		</Unit>
 		<Unit filename="/home/LarsLinux/Documenten/System-Automation/raspberry-pi/main.cpp">

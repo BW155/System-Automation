@@ -123,32 +123,221 @@ Socket/fast:
 	$(MAKE) -f CMakeFiles/Socket.dir/build.make CMakeFiles/Socket.dir/build
 .PHONY : Socket/fast
 
-Socket.o: Socket.cpp.o
+Socket/Socket.o: Socket/Socket.cpp.o
 
-.PHONY : Socket.o
+.PHONY : Socket/Socket.o
 
 # target to build an object file
-Socket.cpp.o:
-	$(MAKE) -f CMakeFiles/Socket.dir/build.make CMakeFiles/Socket.dir/Socket.cpp.o
-.PHONY : Socket.cpp.o
+Socket/Socket.cpp.o:
+	$(MAKE) -f CMakeFiles/Socket.dir/build.make CMakeFiles/Socket.dir/Socket/Socket.cpp.o
+.PHONY : Socket/Socket.cpp.o
 
-Socket.i: Socket.cpp.i
+Socket/Socket.i: Socket/Socket.cpp.i
 
-.PHONY : Socket.i
+.PHONY : Socket/Socket.i
 
 # target to preprocess a source file
-Socket.cpp.i:
-	$(MAKE) -f CMakeFiles/Socket.dir/build.make CMakeFiles/Socket.dir/Socket.cpp.i
-.PHONY : Socket.cpp.i
+Socket/Socket.cpp.i:
+	$(MAKE) -f CMakeFiles/Socket.dir/build.make CMakeFiles/Socket.dir/Socket/Socket.cpp.i
+.PHONY : Socket/Socket.cpp.i
 
-Socket.s: Socket.cpp.s
+Socket/Socket.s: Socket/Socket.cpp.s
 
-.PHONY : Socket.s
+.PHONY : Socket/Socket.s
 
 # target to generate assembly for a file
-Socket.cpp.s:
-	$(MAKE) -f CMakeFiles/Socket.dir/build.make CMakeFiles/Socket.dir/Socket.cpp.s
-.PHONY : Socket.cpp.s
+Socket/Socket.cpp.s:
+	$(MAKE) -f CMakeFiles/Socket.dir/build.make CMakeFiles/Socket.dir/Socket/Socket.cpp.s
+.PHONY : Socket/Socket.cpp.s
+
+domObjects/bed.o: domObjects/bed.cpp.o
+
+.PHONY : domObjects/bed.o
+
+# target to build an object file
+domObjects/bed.cpp.o:
+	$(MAKE) -f CMakeFiles/Socket.dir/build.make CMakeFiles/Socket.dir/domObjects/bed.cpp.o
+.PHONY : domObjects/bed.cpp.o
+
+domObjects/bed.i: domObjects/bed.cpp.i
+
+.PHONY : domObjects/bed.i
+
+# target to preprocess a source file
+domObjects/bed.cpp.i:
+	$(MAKE) -f CMakeFiles/Socket.dir/build.make CMakeFiles/Socket.dir/domObjects/bed.cpp.i
+.PHONY : domObjects/bed.cpp.i
+
+domObjects/bed.s: domObjects/bed.cpp.s
+
+.PHONY : domObjects/bed.s
+
+# target to generate assembly for a file
+domObjects/bed.cpp.s:
+	$(MAKE) -f CMakeFiles/Socket.dir/build.make CMakeFiles/Socket.dir/domObjects/bed.cpp.s
+.PHONY : domObjects/bed.cpp.s
+
+domObjects/chair.o: domObjects/chair.cpp.o
+
+.PHONY : domObjects/chair.o
+
+# target to build an object file
+domObjects/chair.cpp.o:
+	$(MAKE) -f CMakeFiles/Socket.dir/build.make CMakeFiles/Socket.dir/domObjects/chair.cpp.o
+.PHONY : domObjects/chair.cpp.o
+
+domObjects/chair.i: domObjects/chair.cpp.i
+
+.PHONY : domObjects/chair.i
+
+# target to preprocess a source file
+domObjects/chair.cpp.i:
+	$(MAKE) -f CMakeFiles/Socket.dir/build.make CMakeFiles/Socket.dir/domObjects/chair.cpp.i
+.PHONY : domObjects/chair.cpp.i
+
+domObjects/chair.s: domObjects/chair.cpp.s
+
+.PHONY : domObjects/chair.s
+
+# target to generate assembly for a file
+domObjects/chair.cpp.s:
+	$(MAKE) -f CMakeFiles/Socket.dir/build.make CMakeFiles/Socket.dir/domObjects/chair.cpp.s
+.PHONY : domObjects/chair.cpp.s
+
+domObjects/door.o: domObjects/door.cpp.o
+
+.PHONY : domObjects/door.o
+
+# target to build an object file
+domObjects/door.cpp.o:
+	$(MAKE) -f CMakeFiles/Socket.dir/build.make CMakeFiles/Socket.dir/domObjects/door.cpp.o
+.PHONY : domObjects/door.cpp.o
+
+domObjects/door.i: domObjects/door.cpp.i
+
+.PHONY : domObjects/door.i
+
+# target to preprocess a source file
+domObjects/door.cpp.i:
+	$(MAKE) -f CMakeFiles/Socket.dir/build.make CMakeFiles/Socket.dir/domObjects/door.cpp.i
+.PHONY : domObjects/door.cpp.i
+
+domObjects/door.s: domObjects/door.cpp.s
+
+.PHONY : domObjects/door.s
+
+# target to generate assembly for a file
+domObjects/door.cpp.s:
+	$(MAKE) -f CMakeFiles/Socket.dir/build.make CMakeFiles/Socket.dir/domObjects/door.cpp.s
+.PHONY : domObjects/door.cpp.s
+
+domObjects/fridge.o: domObjects/fridge.cpp.o
+
+.PHONY : domObjects/fridge.o
+
+# target to build an object file
+domObjects/fridge.cpp.o:
+	$(MAKE) -f CMakeFiles/Socket.dir/build.make CMakeFiles/Socket.dir/domObjects/fridge.cpp.o
+.PHONY : domObjects/fridge.cpp.o
+
+domObjects/fridge.i: domObjects/fridge.cpp.i
+
+.PHONY : domObjects/fridge.i
+
+# target to preprocess a source file
+domObjects/fridge.cpp.i:
+	$(MAKE) -f CMakeFiles/Socket.dir/build.make CMakeFiles/Socket.dir/domObjects/fridge.cpp.i
+.PHONY : domObjects/fridge.cpp.i
+
+domObjects/fridge.s: domObjects/fridge.cpp.s
+
+.PHONY : domObjects/fridge.s
+
+# target to generate assembly for a file
+domObjects/fridge.cpp.s:
+	$(MAKE) -f CMakeFiles/Socket.dir/build.make CMakeFiles/Socket.dir/domObjects/fridge.cpp.s
+.PHONY : domObjects/fridge.cpp.s
+
+domObjects/lamp.o: domObjects/lamp.cpp.o
+
+.PHONY : domObjects/lamp.o
+
+# target to build an object file
+domObjects/lamp.cpp.o:
+	$(MAKE) -f CMakeFiles/Socket.dir/build.make CMakeFiles/Socket.dir/domObjects/lamp.cpp.o
+.PHONY : domObjects/lamp.cpp.o
+
+domObjects/lamp.i: domObjects/lamp.cpp.i
+
+.PHONY : domObjects/lamp.i
+
+# target to preprocess a source file
+domObjects/lamp.cpp.i:
+	$(MAKE) -f CMakeFiles/Socket.dir/build.make CMakeFiles/Socket.dir/domObjects/lamp.cpp.i
+.PHONY : domObjects/lamp.cpp.i
+
+domObjects/lamp.s: domObjects/lamp.cpp.s
+
+.PHONY : domObjects/lamp.s
+
+# target to generate assembly for a file
+domObjects/lamp.cpp.s:
+	$(MAKE) -f CMakeFiles/Socket.dir/build.make CMakeFiles/Socket.dir/domObjects/lamp.cpp.s
+.PHONY : domObjects/lamp.cpp.s
+
+domObjects/pillar.o: domObjects/pillar.cpp.o
+
+.PHONY : domObjects/pillar.o
+
+# target to build an object file
+domObjects/pillar.cpp.o:
+	$(MAKE) -f CMakeFiles/Socket.dir/build.make CMakeFiles/Socket.dir/domObjects/pillar.cpp.o
+.PHONY : domObjects/pillar.cpp.o
+
+domObjects/pillar.i: domObjects/pillar.cpp.i
+
+.PHONY : domObjects/pillar.i
+
+# target to preprocess a source file
+domObjects/pillar.cpp.i:
+	$(MAKE) -f CMakeFiles/Socket.dir/build.make CMakeFiles/Socket.dir/domObjects/pillar.cpp.i
+.PHONY : domObjects/pillar.cpp.i
+
+domObjects/pillar.s: domObjects/pillar.cpp.s
+
+.PHONY : domObjects/pillar.s
+
+# target to generate assembly for a file
+domObjects/pillar.cpp.s:
+	$(MAKE) -f CMakeFiles/Socket.dir/build.make CMakeFiles/Socket.dir/domObjects/pillar.cpp.s
+.PHONY : domObjects/pillar.cpp.s
+
+domObjects/wall.o: domObjects/wall.cpp.o
+
+.PHONY : domObjects/wall.o
+
+# target to build an object file
+domObjects/wall.cpp.o:
+	$(MAKE) -f CMakeFiles/Socket.dir/build.make CMakeFiles/Socket.dir/domObjects/wall.cpp.o
+.PHONY : domObjects/wall.cpp.o
+
+domObjects/wall.i: domObjects/wall.cpp.i
+
+.PHONY : domObjects/wall.i
+
+# target to preprocess a source file
+domObjects/wall.cpp.i:
+	$(MAKE) -f CMakeFiles/Socket.dir/build.make CMakeFiles/Socket.dir/domObjects/wall.cpp.i
+.PHONY : domObjects/wall.cpp.i
+
+domObjects/wall.s: domObjects/wall.cpp.s
+
+.PHONY : domObjects/wall.s
+
+# target to generate assembly for a file
+domObjects/wall.cpp.s:
+	$(MAKE) -f CMakeFiles/Socket.dir/build.make CMakeFiles/Socket.dir/domObjects/wall.cpp.s
+.PHONY : domObjects/wall.cpp.s
 
 main.o: main.cpp.o
 
@@ -186,9 +375,30 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... Socket"
 	@echo "... edit_cache"
-	@echo "... Socket.o"
-	@echo "... Socket.i"
-	@echo "... Socket.s"
+	@echo "... Socket/Socket.o"
+	@echo "... Socket/Socket.i"
+	@echo "... Socket/Socket.s"
+	@echo "... domObjects/bed.o"
+	@echo "... domObjects/bed.i"
+	@echo "... domObjects/bed.s"
+	@echo "... domObjects/chair.o"
+	@echo "... domObjects/chair.i"
+	@echo "... domObjects/chair.s"
+	@echo "... domObjects/door.o"
+	@echo "... domObjects/door.i"
+	@echo "... domObjects/door.s"
+	@echo "... domObjects/fridge.o"
+	@echo "... domObjects/fridge.i"
+	@echo "... domObjects/fridge.s"
+	@echo "... domObjects/lamp.o"
+	@echo "... domObjects/lamp.i"
+	@echo "... domObjects/lamp.s"
+	@echo "... domObjects/pillar.o"
+	@echo "... domObjects/pillar.i"
+	@echo "... domObjects/pillar.s"
+	@echo "... domObjects/wall.o"
+	@echo "... domObjects/wall.i"
+	@echo "... domObjects/wall.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

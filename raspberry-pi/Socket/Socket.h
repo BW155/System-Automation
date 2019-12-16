@@ -18,18 +18,20 @@ class Socket {
 private:
     int id;
     string name;
-    char *IP;
+    const char *IP;
+    bool connected;
 public:
     int getId();
     int sock;
+    bool getConnected();
     string getIP();
     string getName();
     void setName(string name_);
-    void connectionTest();
+    void makeConnection();
     struct sockaddr_in sock_addr;
 
     Socket();
-    Socket(int id_,string name_,char *IP_);
+    Socket(int id_,string name_,const char *IP_);
 };
 
 #endif //SOCKET_SOCKET_H
