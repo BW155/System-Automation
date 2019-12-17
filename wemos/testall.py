@@ -40,7 +40,7 @@ def millis():
 
 def routine():
     HELLO = "hello"
-    for i in range(1, 10):
+    for i in range(180, 200):
         print()
         ip = TCP_IP + str(i)
         data = send(ip, HELLO)
