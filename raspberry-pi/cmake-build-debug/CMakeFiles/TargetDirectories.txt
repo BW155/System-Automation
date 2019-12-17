@@ -1,3 +1,0 @@
-/home/LarsLinux/Documenten/System-Automation/raspberry-pi/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/LarsLinux/Documenten/System-Automation/raspberry-pi/cmake-build-debug/CMakeFiles/Socket.dir
-/home/LarsLinux/Documenten/System-Automation/raspberry-pi/cmake-build-debug/CMakeFiles/edit_cache.dir
