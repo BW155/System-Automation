@@ -4,6 +4,6 @@ int DomObject::getId() {
     return 0;
 }
 
-void DomObject::getSensors(JsonArray& arr) {}
+void DomObject::getSensors(JsonObject& obj) {}
 
-void DomObject::writeActuators(JsonArray& actuators) {}
+void DomObject::writeActuators(JsonObject& actuators) {}

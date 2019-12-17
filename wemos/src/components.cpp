@@ -1,22 +1,27 @@
 #include "components.h"
 #include <Wire.h>
 #include <Servo.h>
-Adafruit_NeoPixel led(1, D5, NEO_GRB + NEO_KHZ800);
+
 
 /////////////////////
 /// Setup         ///
 /////////////////////
 
 Servo servo;
+CRGB leds[NUM_LEDS];
 
 void initServo() {
     servo.attach(14);
     servo.write(80);
 }
 
+void initLed() {
+    FastLED.addLeds<NEOPIXEL, D5>(leds, NUM_LEDS);
+}
+
 double calculateThermistor(int RawADC) {  //Function to perform the fancy math of the Steinhart-Hart equation
     double temperature;
-    temperature = log(((10240000/RawADC) - 10000));
+    temperature = log(((10240000 / RawADC) - 10000));
     temperature = 1 / (0.001129148 + (0.000234125 + (0.0000000876741 * temperature * temperature ))* temperature );
     temperature = temperature - 273.15;              // Convert Kelvin to Celsius
     return temperature;
@@ -45,6 +50,17 @@ void setPillarActuators(bool led, bool buzzer){
     writeActuators(output);
 }
 
+void setWallActuators(bool window, bool led) {
+    int output = (window << 4);
+    writeActuators(output);
+    setLamp(led);
+}
+
+void setDoorActuators(bool led1, bool led2) {
+    int output = (led1 << 4) | (led2 << 5);
+    writeActuators(output);
+}
+
 void setFridgeActuators(bool fridge){
     int output = (fridge << 4);
     writeActuators(output);
@@ -59,6 +75,24 @@ void writeActuators(int output) {
     Wire.write(byte(0x01));
     Wire.write(byte(output));
     Wire.endTransmission();
+}
+
+
+int getWallSensors(int choice) {
+    Wire.requestFrom(0x36, 4);   
+    unsigned int anin0 = Wire.read() & 0x03;  
+    anin0 = anin0 << 8;
+    anin0 = anin0 | Wire.read();  
+    if (choice == 0) {
+        return anin0;
+    }
+
+    unsigned int anin1 = Wire.read() & 0x03;  
+    anin1 = anin1 << 8;
+    anin1 = anin1 | Wire.read(); 
+    if (choice == 1) {
+        return anin1;
+    }
 }
 
 int getFridgeClicker(){
@@ -80,18 +114,20 @@ void setPeltier(bool state){
 }
 
 void setLamp(bool state) {
-    led.begin();
-    led.show();
-    for(uint8_t i = 0; i < 255; i++) {
-        if(state) {
-            led.setBrightness(i);
-        } else {
-            led.setBrightness(255 - i);
+    Serial.println(state);
+
+    for (int8_t u = 0; u < 255; u++) {
+        for (uint8_t i = 0; i < NUM_LEDS; i++) {
+            if (state) {
+                FastLED.setBrightness(u);
+                leds[i] = CRGB::Red; 
+            } else {
+                FastLED.setBrightness(255 - u);
+                leds[i] = CRGB::Black; 
+            }
         }
-        led.setPixelColor(0, 255, 255, 255);
-        led.show();
-       // delay(5);
     }
+    FastLED.show();
 }
 
 

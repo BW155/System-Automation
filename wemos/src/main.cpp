@@ -28,6 +28,10 @@ Pillar object;
 Door object;
 #endif
 
+#ifdef WALL
+Wall object;
+#endif    
+
 #ifdef FRIDGE
 Fridge object;
 #endif
@@ -47,9 +51,12 @@ void setup() {
     Wire.write(byte(0x03));
     Wire.write(byte(0x0F));
     Wire.endTransmission();
+
     writeActuators(0);
     initServo();
+    initLed();
     wifiSetup();
+
     Serial.println("Hi, my id is " + String(object.getId()));
 }
 
