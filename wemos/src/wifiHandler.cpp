@@ -44,6 +44,7 @@ void handleWifi(DomObject* object) {
         if (data == "") {
             Serial.print("NoDataReceived");
             client.print(constructErrorResult("NoDataReceived"));
+            client.stop();
             return;
         }
 
@@ -60,21 +61,20 @@ void handleWifi(DomObject* object) {
         // Deserializing json
         DynamicJsonDocument doc(1024);
         DeserializationError error = deserializeJson(doc, data);
-        JsonArray actuators = doc["actuators"];
+        JsonObject actuators = doc["actuators"];
         
-        object->writeActuators(actuators);
-
         // If there is an error, send error result back to client
         if (error) {
             Serial.println(error.c_str());
             String result = constructErrorResult(error.c_str());
             client.print(result);
+            client.stop();
             return;
         }
 
         // Check if message is meant for me
         if (doc[String("id")] == object->getId()) {
-            JsonArray actuators = doc["actuators"];
+            JsonObject actuators = doc["actuators"];
             object->writeActuators(actuators);
 
             Serial.println("This message is for me");
@@ -82,9 +82,8 @@ void handleWifi(DomObject* object) {
 
             resultDoc["error"] = "";
 
-            JsonObject root = resultDoc.createNestedObject("result");
-            JsonArray arr = root.createNestedArray("sensors");
-            object->getSensors(arr);
+            JsonObject sensors = resultDoc.createNestedObject("sensors");
+            object->getSensors(sensors);
 
             String result;
             serializeJson(resultDoc, result);
@@ -97,8 +96,9 @@ void handleWifi(DomObject* object) {
         }
 
         Serial.println();
-        client.stop();
     }
+
+    client.stop();
 }
 
 String constructErrorResult(const char* error) {

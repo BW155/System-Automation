@@ -5,19 +5,13 @@ int Bed::getId() {
     return 1;
 }
 
-void Bed::getSensors(JsonArray& arr) {
-    JsonObject forceSensor = arr.createNestedObject();
-    forceSensor["name"] = "ForceSensor";
-    forceSensor["value"] = getForceSensor();
-
-    JsonObject button = arr.createNestedObject();
-    button["name"] = "PushButton";
-    button["value"] = getButton();
+void Bed::getSensors(JsonObject& obj) {
+    obj["forceSensor"] = getForceSensor();
+    obj["button"] = getButton();
     resetButton();
 }
 
-void Bed::writeActuators(JsonArray& actuators) {
-    JsonObject led = actuators[0];
-    int l = led["value"];
+void Bed::writeActuators(JsonObject& actuators) {
+    int l = actuators["led"];
     setBedActuators(l);
 }
