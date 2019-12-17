@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+    #object-card-holder>div {
+        float: left;
+    }
+
+    .object-card {
+        width: 200px;
+        height: 400px;
+        margin: 15px;
+    }
+
+    .container {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+    }
+    hr {
+        height: 1px;
+        color: #AAAAAA;
+        background-color: #AAAAAA;
+        border: none;
+    }
+</style>
+
+<div id="object-card-holder">
+    {% for o in objects %}
+    <div class="object-card card">
+        <h5 style="margin-left: 10px; margin-top: 10px;">{{ o.name }}</h5>
+        <hr size="2px">
+
+        <b style="margin-top: 10px; margin-left: 10px">Sensoren</b>
+        <div class="card-content">
+            {% for s in o["sensors"]%}
+            <p>{{ s.name }}: {{ s.value }}</p>
+            {% endfor %}
+        </div>
+
+        <b style="margin-top: 10px; margin-left: 10px">Acties</b>
+        <hr size="2px">
+        <div class="card-content">
+            {% for i in o["buttons"] %}
+            <button class="btn green btn-small" onclick="onButtonClick({{o.id, i.item_id}})">{{ i.text }}</button>
+            {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
+{% block scripts %}
+<script>
+    function onButtonClick(id, item_id) {
+        
+    }
+</script>
+{% endblock %}

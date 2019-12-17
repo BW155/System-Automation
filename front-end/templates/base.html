@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>System-Automation</title>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="/static/css/materialize.min.css" media="screen,projection" />
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="indigo">
+        <div class="nav-wrapper">
+            <a href="#!" class="brand-logo center">System-Automation</a>
+            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <ul class="left hide-on-med-and-down">
+                <li><a href="/">Hoofdpagina</a></li>
+                {% if current_user.is_authenticated %}
+                <li><a href="/dashboard">Dashboard</a></li>
+                <li><a href="/logout">Uitloggen</a></li>
+                {% else %}
+                <li><a href="/login">Inloggen</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+
+    <ul class="sidenav" id="mobile-demo">
+        <li><a href="/">Hoofdpagina</a></li>
+        {% if current_user.is_authenticated %}
+        <li><a href="/interface">Interface</a></li>
+        <li><a href="/logout">Uitloggen</a></li>
+        {% else %}
+        <li><a href="/login">Inloggen</a></li>
+        {% endif %}
+    </ul>
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+    </div>
+    <!--JavaScript at end of body for optimized loading-->
+    <script type="text/javascript" src="/static/js/materialize.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var elems = document.querySelectorAll('.sidenav');
+            var instances = M.Sidenav.init(elems, null);
+        });
+    </script>
+    {% block scripts %}
+    {% endblock %}
+</body>
+
+</html>
