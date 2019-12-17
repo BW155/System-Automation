@@ -21,17 +21,12 @@ def index():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
-    # Here we use a class of some kind to represent and validate our
-    # client-side form data. For example, WTForms is a library that will
-    # handle this for us, and we use a custom LoginForm to validate.
     if flask.request.method == "POST":
-        username = flask.request.form["username"]
-        password = flask.request.form["password"]
+        username = flask.request.form.get("username")
+        password = flask.request.form.get("password")
 
         user = User.query.filter_by(username=username).first()
         if user is not None and user.verify_password(password):
-            # Login and validate the user.
-            # user should be an instance of your `User` class
             login_user(user)
 
             flask.flash("Logged in successfully.")
