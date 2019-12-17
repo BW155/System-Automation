@@ -14,6 +14,12 @@ db = SQLAlchemy(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
 
+
 from .db_models import User
 from .methods import index, login
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(user_id)
 
