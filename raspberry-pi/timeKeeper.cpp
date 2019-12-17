@@ -13,12 +13,14 @@ void TimeClass::initTimeValues(){
 }
 
 void TimeClass::autoIncreaseTime(){
-    time_t curTime, prevTime;
+    time_t curTime;
+    static time_t prevTime;
     double diff_t;
 
-    curTime = time(NULL);
+    time(&curTime);
 
-    diff_t = difftime(curTime,prevTime);
+    if(prevTime != 0 )
+        diff_t = difftime(curTime,prevTime);
 
     //Prevent huge diff_t value first time
     if(diff_t > 0 ){
@@ -28,11 +30,12 @@ void TimeClass::autoIncreaseTime(){
             }else{
                 hours++;    
             }
-            minutes = 0;
+            //Calculates the difference above 60 and resets minutes to this value
+            int diff = minutes - 60;
+            minutes = diff;
         }
 
         //Debug purposes
-        
         cout << "hours: "  << hours   << endl;
         cout << "Minutes: "<< minutes << endl;
         cout << "seconds: "<< seconds << endl;
@@ -40,21 +43,32 @@ void TimeClass::autoIncreaseTime(){
 
 
         minutes += diff_t * timeMultiplier;
+        //Seconds since january first 1970
     }
-    
-    //Seconds since january first 1970
     prevTime = curTime;
 }
 
-void TimeClass::setTime(){
+void TimeClass::setTime(string TimeMultiplier, string Hours, string Minutes, string Seconds){
+    //Cur means remain current value of given variable.
+    if(TimeMultiplier == "cur" || Hours == "cur" || Minutes == "cur" || Seconds == "cur"){
+        //Do nothing
+    }
+    if(TimeMultiplier != "cur")
+        timeMultiplier = stoi(TimeMultiplier);
+    if(Hours != "cur")
+        hours   = stoi(Hours);
+    if(Minutes != "cur")
+        minutes = stoi(Minutes);
+    if(Seconds != "cur")
+        seconds = stoi(Seconds);
 
 }
 
-int TimeClass::getTime(int x){
-    if(x == 0)
-        return seconds;
-    if(x == 1)
-        return hours;
+int* TimeClass::getTime(){
+    static int arr[3];
+    arr[0] = hours;
+    arr[1] = minutes;
+    arr[2] = seconds;
 
-    return 0;
+    return arr;
 }

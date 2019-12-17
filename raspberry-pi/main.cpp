@@ -1,19 +1,16 @@
 #include <stdlib.h>
 #include "timeKeeper.h"
-
+#include <time.h>
 using namespace std;
 
 
 int main(){
     TimeClass t1;
     t1.initTimeValues();
-    bool called = false;
-
-    
+    t1.setTime("60", "0", "0", "0");
     while(1){
         t1.autoIncreaseTime();
-        if(t1.getTime(1) == 20){
-            //cout << t1.getTime(1) << endl;
-        }
+        int *p = t1.getTime();
+        t1.setTime("11", "cur", "cur" , "cur");
     }
 }
