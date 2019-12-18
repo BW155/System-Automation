@@ -31,6 +31,7 @@ public:
     string getName();
     void setName(string name_);
     void makeConnection();
+    json sendRecieve(char*, char*);
     struct sockaddr_in sock_addr;
     char* sendReceive(char* message);
 

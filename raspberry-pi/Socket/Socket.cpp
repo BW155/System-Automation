@@ -11,7 +11,9 @@
 
 using namespace std;
 #define PORT 8080
+
 Socket::Socket() {connected = 0;}
+
 Socket::Socket(int id_, string name_,const char *IP_) {
     id = id_;
     IP = IP_;
@@ -40,6 +42,7 @@ Socket::Socket(int id_, string name_,const char *IP_) {
     }
 
 }
+
 int Socket::getId() {return id;}
 string Socket::getIP() {return IP;}
 string Socket::getName() {return name;}
