@@ -2,7 +2,7 @@ import threading
 from time import sleep
 import socket
 import json
-from system_automation.objects import objects
+from system_automation.objects import objects, set_objects, check_objects_change
 
 bind_ip = '127.0.0.1'
 bind_port = 9001
@@ -41,14 +41,18 @@ def process_message(message):
         return "Error"
 
     if messsage_type == 1:
-        return "1"
+        return "1" if check_objects_change() else "0"
 
     if messsage_type == 2:
         return json.dumps(objects)
 
     if messsage_type == 3:
-        objects = message["data"]
-        return "1"
+        data = message.get("data")
+        if data:
+            set_objects(message["data"])
+            return "1"
+        else:
+            return "0"
 
 
 def start_data_socket_thread():

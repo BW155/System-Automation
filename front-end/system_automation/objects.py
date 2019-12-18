@@ -1,4 +1,6 @@
 
+tmp_objects = []
+
 objects = [
     {"id": 1, "actuators": {"led": 1},                          "sensors": {"forceSensor": 1, "button": 1}},
     {"id": 2, "actuators": {"led": 1, "vibrator": 1},           "sensors": {"forceSensor": 1, "button": 1}},
@@ -8,6 +10,16 @@ objects = [
     {"id": 6, "actuators": {"cooling": 1},                      "sensors": {"thermometer1": 1,"thermometer2": 1, "openClose": 1}},
     {"id": 7, "actuators": {"led1": 1, "led2": 1, "servo": 1},  "sensors": {"button1": 1, "button2": 1}}
 ]
+
+
+def set_objects(objs):
+    global objects, tmp_objects
+    tmp_objects = objects
+    objects = objs
+
+
+def check_objects_change():
+    return tmp_objects == objects
 
 
 def process_sensors(obj_id, sensors=[], pi_sensors=[]):
