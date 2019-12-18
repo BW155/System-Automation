@@ -2,6 +2,7 @@ import threading
 from time import sleep
 import socket
 import json
+from json import JSONDecodeError
 from system_automation.objects import objects, set_objects, check_objects_change
 
 bind_ip = '127.0.0.1'
@@ -25,17 +26,22 @@ def data_socket_routine():
         conn, addr = server.accept()
         data = conn.recv(BUFFER_SIZE)
         if not data: break
-        data = data.decode('utf-8')
-        print("received data: ", data)
-        resp = process_message(data)
+        message = data.decode('utf-8')
+        print("received data: ", message)
+        resp = process_message(message)
         conn.send(bytes(resp, "utf-8"))
         sleep(0.5) # sleep 1 second
 
 
 def process_message(message):
     global objects
-    message = json.loads(message)
-    messsage_type = message.get("type")
+    js = None
+    try:
+        js = json.loads(message)
+    except JSONDecodeError:
+        return "JSONError"
+
+    messsage_type = js.get("type")
 
     if not messsage_type:
         return "Error"
@@ -47,12 +53,14 @@ def process_message(message):
         return json.dumps(objects)
 
     if messsage_type == 3:
-        data = message.get("data")
+        data = js.get("data")
         if data:
-            set_objects(message["data"])
+            set_objects(data)
             return "1"
         else:
             return "0"
+
+    return "UNKOWN"
 
 
 def start_data_socket_thread():
