@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
+    <generated>
+      <config projectName="Socket" targetName="Socket" />
+    </generated>
+  </component>
+  <component name="CMakeSettings" AUTO_RELOAD="true">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="48493064-b7ab-41f9-81ab-d066af42a2b4" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Socket/webSocket.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Socket/webSocket.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/domObjects/domObject.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/domObjects/domObject.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Socket/Socket.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Socket/Socket.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Socket/Socket.h" beforeDir="false" afterPath="$PROJECT_DIR$/Socket/Socket.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes.h" beforeDir="false" afterPath="$PROJECT_DIR$/includes.h" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="IgnoredFileRootStore">
+    <option name="generatedRoots">
+      <set>
+        <option value="$PROJECT_DIR$/.idea" />
+      </set>
+    </option>
+  </component>
+  <component name="ProjectId" id="1UkCtP8R8awrADdz52AqH0HenbD" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/CMakeLists.txt" />
+    <property name="settings.editor.selected.configurable" value="file.status.colors" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Socket" />
+      <recent name="$PROJECT_DIR$/json" />
+      <recent name="$PROJECT_DIR$/redis/redis-plus-plus/src" />
+      <recent name="$PROJECT_DIR$/domObjects" />
+      <recent name="$PROJECT_DIR$/redis" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/redis-plus-plus/src/sw/redis++" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Socket" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Socket" TARGET_NAME="Socket" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Socket" RUN_TARGET_NAME="Socket">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="48493064-b7ab-41f9-81ab-d066af42a2b4" name="Default Changelist" comment="" />
+      <created>1575891419058</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1575891419058</updated>
+      <workItem from="1575891420522" duration="187000" />
+      <workItem from="1575900523269" duration="34000" />
+      <workItem from="1575907793382" duration="943000" />
+      <workItem from="1576055836521" duration="1930000" />
+      <workItem from="1576063077689" duration="4480000" />
+      <workItem from="1576070699356" duration="9973000" />
+      <workItem from="1576149814761" duration="3957000" />
+      <workItem from="1576235833762" duration="6469000" />
+      <workItem from="1576415733068" duration="1831000" />
+      <workItem from="1576493303281" duration="2877000" />
+      <workItem from="1576496226032" duration="1132000" />
+      <workItem from="1576504392573" duration="15000" />
+      <workItem from="1576508399220" duration="2274000" />
+      <workItem from="1576511330604" duration="2763000" />
+      <workItem from="1576518206738" duration="3658000" />
+      <workItem from="1576572682490" duration="583000" />
+      <workItem from="1576573295472" duration="2659000" />
+      <workItem from="1576578262621" duration="110000" />
+      <workItem from="1576588272990" duration="1685000" />
+      <workItem from="1576663539615" duration="1605000" />
+      <workItem from="1576673037369" duration="1574000" />
+      <workItem from="1576674613814" duration="1339000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/hiredis/redis-plus-plus" />
+      <path value="$PROJECT_DIR$/redis-plus-plus/hiredis" />
+    </ignored-roots>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="436" y="199" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1576497660380">
+      <screen x="36" y="0" width="1884" height="1080" />
+    </state>
+    <state x="436" y="199" key="#com.intellij.execution.impl.EditConfigurationsDialog/36.0.1884.1080@36.0.1884.1080" timestamp="1576497660380" />
+    <state x="786" y="260" width="378" height="562" key="#com.intellij.ide.util.MemberChooser" timestamp="1576590584087">
+      <screen x="36" y="0" width="1884" height="1080" />
+    </state>
+    <state x="786" y="260" width="378" height="562" key="#com.intellij.ide.util.MemberChooser/36.0.1884.1080@36.0.1884.1080" timestamp="1576590584087" />
+    <state x="711" y="350" width="528" height="502" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1576674831807">
+      <screen x="0" y="0" width="1920" height="1200" />
+    </state>
+    <state x="711" y="350" width="528" height="502" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.1200.1920.1080/0.0.1920.1200@0.0.1920.1200" timestamp="1576674831807" />
+    <state x="735" y="317" width="428" height="484" key="FileChooserDialogImpl" timestamp="1576674601887">
+      <screen x="0" y="0" width="1920" height="1200" />
+    </state>
+    <state x="735" y="317" width="428" height="484" key="FileChooserDialogImpl/0.1200.1920.1080/0.0.1920.1200@0.0.1920.1200" timestamp="1576674601887" />
+    <state x="757" y="285" width="428" height="513" key="FileChooserDialogImpl/36.0.1884.1080@36.0.1884.1080" timestamp="1576497688089" />
+    <state x="221" y="296" key="SettingsEditor" timestamp="1576574238741">
+      <screen x="0" y="0" width="1920" height="1200" />
+    </state>
+    <state x="221" y="296" key="SettingsEditor/0.1200.1920.1080/0.0.1920.1200@0.0.1920.1200" timestamp="1576574238741" />
+    <state x="253" y="266" key="SettingsEditor/36.0.1884.1080@36.0.1884.1080" timestamp="1576497607574" />
+    <state x="474" y="296" key="SettingsEditor/36.0.3804.1200@36.0.3804.1200" timestamp="1576056324890" />
+    <state x="657" y="428" key="com.intellij.ide.util.TipDialog" timestamp="1576673046234">
+      <screen x="0" y="0" width="1920" height="1200" />
+    </state>
+    <state x="657" y="428" key="com.intellij.ide.util.TipDialog/0.1200.1920.1080/0.0.1920.1200@0.0.1920.1200" timestamp="1576673046234" />
+    <state x="681" y="385" key="com.intellij.ide.util.TipDialog/36.0.1884.1080@36.0.1884.1080" timestamp="1576588273132" />
+    <state x="608" y="0" width="1312" height="1154" key="dock-window-1" timestamp="1576673047424">
+      <screen x="0" y="0" width="1920" height="1200" />
+    </state>
+    <state x="608" y="0" width="1312" height="1154" key="dock-window-1/0.1200.1920.1080/0.0.1920.1200@0.0.1920.1200" timestamp="1576673047424" />
+    <state x="637" y="0" width="1287" height="1038" key="dock-window-1/36.0.1884.1080@36.0.1884.1080" timestamp="1576589193980" />
+    <state x="703" y="455" width="544" height="172" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1576518445491">
+      <screen x="36" y="0" width="1884" height="1080" />
+    </state>
+    <state x="703" y="455" width="544" height="172" key="vcs.readOnlyHandler.ReadOnlyStatusDialog/36.0.1884.1080@36.0.1884.1080" timestamp="1576518445491" />
+  </component>
+</project>

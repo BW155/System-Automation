@@ -1,0 +1,4 @@
+/home/LarsLinux/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/193.5233.144/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_COMPILER=/usr/bin/arm-linux-gnueabihf-g++ -G "CodeBlocks - Unix Makefiles" /home/LarsLinux/Documenten/System-Automation/raspberry-pi
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/LarsLinux/Documenten/System-Automation/raspberry-pi/cmake-build-debug

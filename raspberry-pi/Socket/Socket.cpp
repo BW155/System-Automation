@@ -67,4 +67,18 @@ bool Socket::getConnected() {
     return connected;
 }
 
+char* Socket::sendReceive(char *message) {
+    makeConnection();
+    char buffer[1024] = {0};
+    send(sock, message, strlen(message), 0);
+    int valread = read(sock, buffer, 1024);
+    close(sock);
+    if (buffer[0] == NULL) {
+        return "-1";
+    }
+    else {
+        return buffer;
+    }
+}
+
 
