@@ -37,6 +37,9 @@
             {% for s in o["sensors"]%}
                 <p>{{ s.name }}: {{ s.value }}</p>
             {% endfor %}
+            {% for s in o["actuators"]%}
+                <p>{{ s.name }}: {{ s.value }}</p>
+            {% endfor %}
         </div>
 
         <hr size="2px" style="margin-bottom: 10px">

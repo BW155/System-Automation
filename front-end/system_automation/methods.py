@@ -2,6 +2,7 @@ import flask
 from flask_login import login_required, login_user, logout_user
 from . import app, User
 import system_automation.objects as objects
+from system_automation.objects import web_translate_objects
 
 
 @app.route("/")
@@ -37,6 +38,6 @@ def logout():
 @app.route("/dashboard")
 @login_required
 def interface():
-    return flask.render_template("dashboard.html", objects=objects.objects)
+    return flask.render_template("dashboard.html", objects=web_translate_objects())
 
 
