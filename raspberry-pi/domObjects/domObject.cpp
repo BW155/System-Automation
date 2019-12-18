@@ -4,9 +4,11 @@
 
 #include "domObject.h"
 
-domObject::domObject(webSocket &s) {
-    python = &s;
+domObject::domObject(webSocket *s) {
+    python = s;
     wemos = Socket();
+    TimeClass obj1 (5,0,0,0);
+    timeObj = &obj1;
 }
 
 json domObject::toJson(char* jsonString) {
@@ -19,4 +21,9 @@ char* domObject::toCharArray(json jsonObj) {
     char *result = new char[temp.length()+1];
     strcpy(result, temp.c_str());
     return result;
+}
+
+TimeClass* domObject::getTimePointer(){
+    timeObj->autoIncreaseTime();
+    return timeObj;
 }

@@ -15,6 +15,6 @@
 #include "domObjects/lamp.h"
 #include "domObjects/wall.h"
 #include "domObjects/pillar.h"
-#include "domObjects/fridge.h"
+#include <domObjects/fridge.h>
 #include "domObjects/door.h"
 #include "domObjects/domObject.h"

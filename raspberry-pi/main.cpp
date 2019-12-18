@@ -1,16 +1,14 @@
 // Lars Hartog
+#include <domObjects/fridge.h>
 #include "includes.h"
 
 
 using json = nlohmann::json;
 using namespace std;
 
-
 #define PORT 8080
 int counter;
 Socket sockets[8]; // NOLINT(cert-err58-cpp)
-
-//auto redis = Redis("tcp://127.0.0.1");
 
 json toJson(char* jsonString) {
     json jsonObj;
