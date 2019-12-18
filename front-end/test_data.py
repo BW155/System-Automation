@@ -1,6 +1,6 @@
 import os
 
-from system_automation import db, User
+from system_automation import db, User, Role
 
 
 if __name__ == "__main__":
@@ -8,7 +8,10 @@ if __name__ == "__main__":
         os.remove("test_db.sqlite")
     db.create_all()
 
-    user = User("test", "test")
-    db.session.add(user)
+    guard = User("guard", "test", Role.GUARD)
+    parent = User("parent", "test", Role.PARENT)
+
+    db.session.add(guard)
+    db.session.add(parent)
     db.session.commit()
 

@@ -15,7 +15,7 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 
 
-from .db_models import User
+from .db_models import User, Role
 from .methods import index, login
 
 

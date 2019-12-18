@@ -1,17 +1,7 @@
 import flask
 from flask_login import login_required, login_user, logout_user
 from . import app, User
-
-
-objects = [
-    {"name": "Bed"},
-    {"name": "Stoel"},
-    {"name": "Zuil"},
-    {"name": "Koelkast"},
-    {"name": "Deur", "buttons": [{"item_id": 1, "text": "open/dicht"}], "sensors": [{"name": "Is open", "value": False}]},
-    {"name": "Tafel Lamp"},
-    {"name": "Muur"}
-]
+import system_automation.objects as objects
 
 
 @app.route("/")
@@ -47,6 +37,6 @@ def logout():
 @app.route("/dashboard")
 @login_required
 def interface():
-    return flask.render_template("dashboard.html", objects=objects)
+    return flask.render_template("dashboard.html", objects=objects.objects)
 
 
