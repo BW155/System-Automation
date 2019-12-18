@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 <style>
-    #object-card-holder>div {
+    #object-card-holder > div {
         float: left;
     }
 
@@ -28,20 +28,24 @@
     {% for o in objects %}
     <div class="object-card card">
         <h5 style="margin-left: 10px; margin-top: 10px;">{{ o.name }}</h5>
-        <hr size="2px">
 
-        <b style="margin-left: 10px">Sensoren</b>
+        <hr size="2px" style="margin-bottom: 10px">
+        <b style="margin-left: 10px">Status</b>
+        <hr size="2px" style="margin-top: 10px">
+
         <div class="card-content">
             {% for s in o["sensors"]%}
-            <p>{{ s.name }}: {{ s.value }}</p>
+                <p>{{ s.name }}: {{ s.value }}</p>
             {% endfor %}
         </div>
 
-        <b style="margin-top: 10px; margin-left: 10px">Acties</b>
-        <hr size="2px">
+        <hr size="2px" style="margin-bottom: 10px">
+        <b style="margin-left: 10px">Acties</b>
+        <hr size="2px" style="margin-top: 10px">
+
         <div class="card-content">
             {% for i in o["buttons"] %}
-            <button class="btn green btn-small" onclick="onButtonClick({{o.id, i.item_id}})">{{ i.text }}</button>
+                <button class="btn green btn-small" onclick="onButtonClick({{o.id, i.item_id}})">{{ i.text }}</button>
             {% endfor %}
         </div>
     </div>

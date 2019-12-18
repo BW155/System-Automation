@@ -79,8 +79,41 @@
 	top:2px;
 }
 
+
+.blue-button {
+	box-shadow: 0px 2px 6px 0px #000000;
+	background:linear-gradient(to bottom, #0505f5 5%, #0059ff 100%);
+	background-color:#0505f5;
+	border-radius:150px;
+	border:2px solid #22329c;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size: calc(100% + 1vw);
+	padding:32px 20px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #010300;
+    height: 30vw;
+    width: 30vw;
+    max-width: 250px;
+    max-height: 250px;
+}
+.blue-button:hover {
+	background:linear-gradient(to bottom, #0059ff 5%, #0505f5 100%);
+	background-color:#0059ff;
+}
+.blue-button:active {
+	position:relative;
+	top:2px;
+}
+
 td {
     text-align: center;
+}
+
+button > i {
+    font-size: calc(100% + 5vw) !important;
 }
 </style>
 <table>
@@ -94,10 +127,10 @@ td {
     </tr>
     <tr>
         <td>
-            <button class="red-button">HELP</button>
+            <button class="red-button"><i class="material-icons">warning</i></button>
         </td>
         <td>
-            <button class="red-button">NAAR BUITEN</button>
+            <button class="blue-button">NAAR BUITEN</button>
         </td>
     </tr>
 </table>
