@@ -13,38 +13,48 @@ void TimeClass::autoIncreaseTime(){
     time_t curTime;
     static time_t prevTime;
     double diff_t;
+    double totalTime;
+    
+    //TimeMultiplier is in minutes
+    timeMultiplier *= 60;
 
     time(&curTime);
-
     //Calculate time difference between current time and previous time.
     if(prevTime != 0 )
         diff_t = difftime(curTime,prevTime);
 
-    minutes += diff_t * timeMultiplier;
+    totalTime = diff_t * timeMultiplier;
     
-    if(diff_t > 0 ){
-            if(minutes >= 120){
-                //Calculates the amount of hours as minutes
-                int temp = minutes/60;
-                hours += temp;
-                minutes -= temp * 60;
-
-                if(hours >= 23)
+    if(diff_t > 0){
+        if(totalTime >= 3600){
+            while((totalTime - 3600) >= 0 ){
+                hours++;
+                if(hours > 23)
                     hours = 0;
+                totalTime -= 3600;
             }
-            if(minutes >= 60){
-                if(hours >= 23){
-                    hours = 0;
-                }else{
-                    hours++;
-                }
-            //Calculates the difference above 60 and resets minutes to this value
-                    int diff = minutes - 60;
-                    minutes = diff;
-                
         }
-
-
+        if(totalTime > 0){
+            while((totalTime - 60) >= 0){
+                minutes++;
+                if(minutes >= 60){
+                    hours++;
+                    minutes = 0;
+                }
+                totalTime -= 60;
+            }
+        }
+        if(totalTime > 0){
+            while (totalTime > 0){
+                seconds++;
+                if(seconds >= 60){
+                    minutes++;
+                    seconds = 0;
+                }
+                totalTime -= 1;
+            }
+            
+        }
         //Debug purposes
         cout << "hours: "  << hours   << endl;
         cout << "Minutes: "<< minutes << endl;
@@ -60,7 +70,7 @@ void TimeClass::setTime(string TimeMultiplier, string Hours, string Minutes, str
         //Do nothing
     }
     if(TimeMultiplier != "cur")
-        timeMultiplier = stoi(TimeMultiplier);
+        timeMultiplier = stod(TimeMultiplier);
     if(Hours != "cur")
         hours   = stoi(Hours);
     if(Minutes != "cur")

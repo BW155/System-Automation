@@ -19,7 +19,7 @@ class TimeClass{
         int minutes;
         int hours;
         int seconds;
-        int timeMultiplier;
+        double timeMultiplier;
 };
 
 #endif
