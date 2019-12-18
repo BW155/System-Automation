@@ -1,18 +1,45 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="card">
-    <div class="card-content">
-        <form method="POST">
-            <p>
-                Gebruikersnaam:
-                <input type="text" name="username">
-            </p>
-            <p>
-                Password:
-                <input type="password" name="password">
-            </p>
-            <input type="submit" class="btn pink" value="Inloggen">
-        </form>
+<style>
+.outer {
+  display: table;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.middle {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.inner {
+  margin-left: auto;
+  margin-right: auto;
+  width: 400px;
+}
+</style>
+<div class="outer">
+    <div class="middle">
+        <div class="inner">
+            <div class="card">
+                <div class="card-content">
+                    <form method="POST">
+                        <div class="input-field">
+                            <label for="username">Gebruikersnaam</label>
+                            <input id="username" type="text" name="username">
+                        </div>
+                        <div class="input-field">
+                            <label for="password">Password</label>
+                            <input id="password" type="password" name="password">
+                        </div>
+                        <input type="submit" class="btn pink" value="Inloggen">
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}
