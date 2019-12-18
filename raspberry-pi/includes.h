@@ -7,8 +7,7 @@
 #include "Socket/Socket.h"
 #include "json/json.hpp"
 #include <netinet/tcp.h>
-#include "redis/hiredis/hiredis.h"
-//#include "redis/redis-plus-plus/src/sw/redis++/redis++.h"
+#include "timeKeeper.h"
 
 #include "domObjects/bed.h"
 #include "domObjects/chair.h"

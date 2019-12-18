@@ -5,7 +5,22 @@
 using json = nlohmann::json;
 using namespace std;
 
-//using namespace sw::redis;using namespace std;
+
+int main(){
+    TimeClass t1(5,0,0,0);
+
+    
+
+    while(1){
+        int* p = t1.getTime();
+        t1.autoIncreaseTime();
+        t1.setTime("130", "cur", "cur", "cur");
+
+        //sleep(0.5);
+    }
+}
+
+/*//using namespace sw::redis;using namespace std;
 
 
 #define PORT 8080
@@ -354,3 +369,5 @@ int main(int argc, char const *argv[])
     }
     return 0;
 }
+
+*/

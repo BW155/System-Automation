@@ -2,14 +2,11 @@
 
 using namespace std;
 
-
-void TimeClass::initTimeValues(){
-    minutes = 0;
-    hours = 0;
-    seconds = 0;
-    
-    //Increase every seconds with 15 minutes of simulation time
-    timeMultiplier = 20;
+TimeClass::TimeClass(int t, int h, int m, int s){
+    timeMultiplier = t;
+    hours = h;
+    minutes = m;
+    seconds = s;
 }
 
 void TimeClass::autoIncreaseTime(){
@@ -19,31 +16,40 @@ void TimeClass::autoIncreaseTime(){
 
     time(&curTime);
 
+    //Calculate time difference between current time and previous time.
     if(prevTime != 0 )
         diff_t = difftime(curTime,prevTime);
 
-    //Prevent huge diff_t value first time
+    minutes += diff_t * timeMultiplier;
+    
     if(diff_t > 0 ){
-        if(minutes >= 60){
-            if(hours >= 23){
-                hours = 0;
-            }else{
-                hours++;    
+            if(minutes >= 120){
+                //Calculates the amount of hours as minutes
+                int temp = minutes/60;
+                hours += temp;
+                minutes -= temp * 60;
+
+                if(hours >= 23)
+                    hours = 0;
             }
+            if(minutes >= 60){
+                if(hours >= 23){
+                    hours = 0;
+                }else{
+                    hours++;
+                }
             //Calculates the difference above 60 and resets minutes to this value
-            int diff = minutes - 60;
-            minutes = diff;
+                    int diff = minutes - 60;
+                    minutes = diff;
+                
         }
+
 
         //Debug purposes
         cout << "hours: "  << hours   << endl;
         cout << "Minutes: "<< minutes << endl;
         cout << "seconds: "<< seconds << endl;
         cout << " " << endl;
-
-
-        minutes += diff_t * timeMultiplier;
-        //Seconds since january first 1970
     }
     prevTime = curTime;
 }

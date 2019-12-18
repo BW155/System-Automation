@@ -11,10 +11,10 @@
 
 class TimeClass{
     public:
+        TimeClass(int, int, int, int);
         void autoIncreaseTime();
         void setTime(std::string, std::string, std::string, std::string);
         int*  getTime();
-        void initTimeValues();
     private:
         int minutes;
         int hours;
