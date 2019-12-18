@@ -30923,7 +30923,7 @@ class TimeClass{
         int minutes;
         int hours;
         int seconds;
-        int timeMultiplier;
+        int localMultiplier;
 };
 # 2 "/home/zep/Documents/System-Automation/raspberry-pi/timeKeeper.cpp" 2
 
@@ -30936,7 +30936,7 @@ void TimeClass::initTimeValues(){
     seconds = 0;
 
 
-    timeMultiplier = 20;
+    localMultiplier = 20;
 }
 
 void TimeClass::autoIncreaseTime(){
@@ -30965,14 +30965,14 @@ void TimeClass::autoIncreaseTime(){
         cout << " " << endl;
 
 
-        minutes += diff_t * timeMultiplier;
+        minutes += diff_t * localMultiplier;
 
     }
     prevTime = curTime;
 }
 
-void TimeClass::setTime(string TimeMultiplier, string Hours, string Minutes, string Seconds){
-    timeMultiplier = stoi(TimeMultiplier);
+void TimeClass::setTime(string localMultiplier, string Hours, string Minutes, string Seconds){
+    localMultiplier = stoi(localMultiplier);
     hours = stoi(Hours);
     minutes = stoi(Minutes);
     seconds = stoi(Seconds);

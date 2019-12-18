@@ -12,18 +12,15 @@ TimeClass::TimeClass(int t, int h, int m, int s){
 void TimeClass::autoIncreaseTime(){
     time_t curTime;
     static time_t prevTime;
-    double diff_t;
-    double totalTime;
-    
-    //TimeMultiplier is in minutes
-    timeMultiplier *= 60;
+    double diff_t, totalTime;
+    int localMultiplier = timeMultiplier * 60;
 
     time(&curTime);
     //Calculate time difference between current time and previous time.
     if(prevTime != 0 )
         diff_t = difftime(curTime,prevTime);
 
-    totalTime = diff_t * timeMultiplier;
+    totalTime = diff_t * localMultiplier;
     
     if(diff_t > 0){
         if(totalTime >= 3600){
