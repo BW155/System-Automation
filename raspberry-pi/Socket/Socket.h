@@ -11,6 +11,9 @@
 #include <unistd.h>
 #include <string.h>
 #include <bits/stdc++.h>
+#include "../json/json.hpp"
+
+using json = nlohmann::json;
 using namespace std;
 #define PORT 8080
 
@@ -29,6 +32,7 @@ public:
     void setName(string name_);
     void makeConnection();
     struct sockaddr_in sock_addr;
+    char* sendReceive(char* message);
 
     Socket();
     Socket(int id_,string name_,const char *IP_);

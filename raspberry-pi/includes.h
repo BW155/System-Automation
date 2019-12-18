@@ -5,6 +5,7 @@
 #include <string.h>
 #include <bits/stdc++.h>
 #include "Socket/Socket.h"
+#include "Socket/webSocket.h"
 #include "json/json.hpp"
 #include <netinet/tcp.h>
 #include "timeKeeper.h"
@@ -16,3 +17,4 @@
 #include "domObjects/pillar.h"
 #include "domObjects/fridge.h"
 #include "domObjects/door.h"
+#include "domObjects/domObject.h"
