@@ -12,14 +12,22 @@ objects = [
 ]
 
 
-def set_objects(objs):
+def set_object(obj):
     global objects, tmp_objects
     tmp_objects = objects
-    objects = objs
+    for i in objects:
+        if obj["id"] == i["id"]:
+            i = obj
+            return True
+    return False
 
 
-def check_objects_change():
-    return tmp_objects == objects
+def check_objects_change(obj_id):
+    for i in objects:
+        for u in tmp_objects:
+            if i["id"] == obj_id and u["id"] == obj_id and i == u:
+                return False
+    return True
 
 
 def process_sensors(obj_id, sensors=[], pi_sensors=[]):
@@ -27,8 +35,6 @@ def process_sensors(obj_id, sensors=[], pi_sensors=[]):
 
 
 def process_actuators(obj_id, actuators=[], pi_actuators=[]):
-    if actuators:
-        pass
     pass
 
 
@@ -39,6 +45,10 @@ def web_translate_objects():
         web_objects.append(translate_object(o))
 
     return web_objects
+
+
+def translate_object_name(obj_id):
+    return {"1": "Bed", "2": "Stoel", "3": "SchemerLamp", "4": "Zuil", "5": "Muur", "6": "Koelkast", "7": "Deur"}[str(obj_id)]
 
 
 def translate_object(obj):
@@ -134,6 +144,4 @@ def translate_component(obj_id, sensorname):
     return "LEEG"
 
 
-def translate_object_name(obj_id):
-    return {"1": "Bed", "2": "Stoel", "3": "SchemerLamp", "4": "Zuil", "5": "Muur", "6": "Koelkast", "7": "Deur"}[str(obj_id)]
 

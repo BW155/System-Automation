@@ -20,11 +20,10 @@ def login():
         if user is not None and user.verify_password(password):
             login_user(user)
 
-            flask.flash("Logged in successfully.")
-
+            flask.flash("Logged in successfully.", "good")
             return flask.redirect(flask.url_for("interface"))
         else:
-            return "Error"
+            flask.flash("Gebruikersnaam of Wachtwoord verkeerd", "error")
     return flask.render_template("login.html")
 
 
@@ -32,6 +31,7 @@ def login():
 @login_required
 def logout():
     logout_user()
+    flask.flash("Uitgelogd", "good")
     return flask.redirect(flask.url_for("index"))
 
 
