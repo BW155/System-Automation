@@ -24,6 +24,7 @@ CMakeFiles/System_Automation.dir/raspberry-pi/domObjects/domObject.cpp.o
 CMakeFiles/System_Automation.dir/raspberry-pi/domObjects/door.cpp.o
  /home/zep/Documents/System-Automation/raspberry-pi/domObjects/door.cpp
 CMakeFiles/System_Automation.dir/raspberry-pi/domObjects/fridge.cpp.o
+ ../raspberry-pi/json/json.hpp
  /home/zep/Documents/System-Automation/raspberry-pi/Socket/Socket.h
  /home/zep/Documents/System-Automation/raspberry-pi/Socket/webSocket.h
  /home/zep/Documents/System-Automation/raspberry-pi/domObjects/domObject.h
@@ -54,7 +55,6 @@ CMakeFiles/System_Automation.dir/raspberry-pi/main.cpp.o
  /home/zep/Documents/System-Automation/raspberry-pi/domObjects/pillar.h
  /home/zep/Documents/System-Automation/raspberry-pi/domObjects/wall.h
  /home/zep/Documents/System-Automation/raspberry-pi/includes.h
- /home/zep/Documents/System-Automation/raspberry-pi/json/json.hpp
  /home/zep/Documents/System-Automation/raspberry-pi/main.cpp
  /home/zep/Documents/System-Automation/raspberry-pi/timeKeeper.h
 CMakeFiles/System_Automation.dir/raspberry-pi/timeKeeper.cpp.o
