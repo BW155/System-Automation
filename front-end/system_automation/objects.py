@@ -157,5 +157,3 @@ def translate_component(obj_id, sensorname):
     print("NAME NOT FOUND: ", name)
     return "LEEG"
 
-
-

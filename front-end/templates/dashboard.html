@@ -60,5 +60,14 @@
     function onButtonClick(id, item_id) {
         
     }
+    setInterval(function() {
+        $.get("/api/interface_notifications", function(data) {
+            data = JSON.parse(data);
+            for (var i = 0; i < data.length; i++) {
+                $('<div id="my_div1" class="blue">This is MY DIV 1</div>').appendTo('body');
+                M.toast({html: data[i].message});
+            }
+        });
+    }, 1000)
 </script>
 {% endblock %}

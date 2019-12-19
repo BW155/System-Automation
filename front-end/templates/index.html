@@ -102,18 +102,23 @@ button > i {
     <button class="int-button green-button" onclick="onButtonClick([4, 5], 'led'); onButtonClick([7], 'led1');">LICHT Muur,Zuil,Deur</button>
 </div>
 <div class="button-holder">
-    <button class="int-button red-button"><i class="material-icons">warning</i></button>
-    <button class="int-button blue-button">NAAR BUITEN</button>
+    <button class="int-button red-button" onclick="onNotifButtonClick(0)"><i class="material-icons">warning</i></button>
+    <button class="int-button blue-button" onclick="onNotifButtonClick(1)">NAAR BUITEN</button>
 </div>
 {% endblock %}
 {% block scripts %}
 <script>
     function onButtonClick(obj_ids, action) {
         for (var i = 0; i < obj_ids.length; i++) {
-            $.post("/api/basic_interface/" + obj_ids[i] + "," + action, function(data) {
+            $.post("/api/interface/" + obj_ids[i] + "," + action, function(data) {
                  M.toast({html: data == 1 ? "Actie uitgevoerd" : "Mislukt"});
             });
         }
+    }
+    function onNotifButtonClick(type) {
+        $.post("/api/interface_notifications/" + type, function(data) {
+             M.toast({html: data == 1 ? "Actie uitgevoerd" : "Mislukt"});
+        });
     }
 </script>
 {% endblock %}

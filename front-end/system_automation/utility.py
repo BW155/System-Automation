@@ -1,5 +1,6 @@
-from system_automation import User, 
-from flask import current_user
+from system_automation import User
+from flask_login import current_user
+from functools import wraps
 
 def roles_allowed(roles=list()):
     def decorator(f):
