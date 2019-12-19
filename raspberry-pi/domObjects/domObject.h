@@ -13,7 +13,7 @@
 using json = nlohmann::json;
 
 class domObject {
-private:
+protected:
     Socket wemos;
     webSocket* python;
     virtual char* wemosMessage() = 0;
@@ -25,6 +25,9 @@ public:
     json toJson(char* jsonString);
     char* toCharArray(json jsonObj);
     domObject(webSocket *s);
+<<<<<<< HEAD
     virtual TimeClass* getTimePointer();
+=======
+>>>>>>> development
 };
 #endif //RASPBERRY_PI_DOMOBJECT_H
