@@ -5,8 +5,10 @@
 #ifndef SOCKET_BED_H
 #define SOCKET_BED_H
 
+
 #include "domObject.h"
 #include "../Socket/Socket.h"
+#include "json/json.hpp"
 
 class fridge : public domObject{
 private:
