@@ -6,11 +6,17 @@
 #define SOCKET_BED_H
 
 #include "../Socket/Socket.h"
+#include "domObject.h"
 
-class lamp {
+
+class lamp: public domObject {
 private:
+bool motionSensor;
+bool led;
+
 
 public:
-
+lamp(char * IP, webSocket *s);
+void stuurLamp();
 };
 #endif //SOCKET_BED_H
