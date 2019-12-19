@@ -34,6 +34,8 @@ bool checkConnectedDevices() {
     }
 }
 void discoverDevices() {
+    TimeClass obj1 (5,0,0,0);
+
     for (int x = 1; x < 8; x++) {
         sockets[x] = Socket();
     }
@@ -186,17 +188,6 @@ char *wallMessage(bool x, uint8_t z) {
             {"actuators", {
                           {"led", z},
                           {"window", x}
-                  }
-            }
-    };
-    char *message = toCharArray(Message);
-    return message;
-}
-char *fridgeMessage(bool x) {
-    json Message = {
-            {"id",6},
-            {"actuators", {
-                          {"cooling", x}
                   }
             }
     };

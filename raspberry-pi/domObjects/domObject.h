@@ -24,10 +24,7 @@ public:
     virtual void update() = 0;
     json toJson(char* jsonString);
     char* toCharArray(json jsonObj);
-    domObject(webSocket *s);
-<<<<<<< HEAD
+    domObject(webSocket *s, TimeClass *t);
     virtual TimeClass* getTimePointer();
-=======
->>>>>>> development
 };
 #endif //RASPBERRY_PI_DOMOBJECT_H
