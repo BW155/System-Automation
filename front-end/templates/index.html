@@ -22,12 +22,9 @@
     text-align: center;
 }
 
-.red-button {
+.int-button {
 	box-shadow: 0px 2px 6px 0px #000000;
-	background:linear-gradient(to bottom, #f50505 5%, #ff5900 100%);
-	background-color:#f50505;
 	border-radius:150px;
-	border:2px solid #9c2232;
 	display:inline-block;
 	cursor:pointer;
 	color:#ffffff;
@@ -40,72 +37,41 @@
     width: 30vw;
     max-width: 250px;
     max-height: 250px;
+}
+
+.int-button:active {
+	position:relative;
+	top:2px;
+}
+
+.red-button {
+	background:linear-gradient(to bottom, #f50505 5%, #ff5900 100%);
+	background-color:#f50505;
+	border:2px solid #9c2232;
 }
 .red-button:hover {
 	background:linear-gradient(to bottom, #ff5900 5%, #f50505 100%);
 	background-color:#ff5900;
 }
-.red-button:active {
-	position:relative;
-	top:2px;
-}
-
 
 .green-button {
-	box-shadow: 0px 2px 6px 0px #000000;
-	background:linear-gradient(to bottom, #05f505 5%, #59ff00 100%);
-	background-color:#05f505;
-	border-radius:150px;
+	background:linear-gradient(to bottom, #008f00 5%, #00da00 100%);
+	background-color:#008f00;
 	border:2px solid #229c32;
-	display:inline-block;
-	cursor:pointer;
-	color:#ffffff;
-	font-family:Arial;
-	font-size: calc(100% + 1vw);
-	padding:32px 20px;
-	text-decoration:none;
-	text-shadow:0px 1px 0px #010300;
-    height: 30vw;
-    width: 30vw;
-    max-width: 250px;
-    max-height: 250px;
 }
 .green-button:hover {
-	background:linear-gradient(to bottom, #59ff00 5%, #05f505 100%);
-	background-color:#59ff00;
+	background:linear-gradient(to bottom, #00da00 5%, #008f00 100%);
+	background-color:#00da00;
 }
-.green-button:active {
-	position:relative;
-	top:2px;
-}
-
 
 .blue-button {
-	box-shadow: 0px 2px 6px 0px #000000;
 	background:linear-gradient(to bottom, #0505f5 5%, #0059ff 100%);
 	background-color:#0505f5;
-	border-radius:150px;
 	border:2px solid #22329c;
-	display:inline-block;
-	cursor:pointer;
-	color:#ffffff;
-	font-family:Arial;
-	font-size: calc(100% + 1vw);
-	padding:32px 20px;
-	text-decoration:none;
-	text-shadow:0px 1px 0px #010300;
-    height: 30vw;
-    width: 30vw;
-    max-width: 250px;
-    max-height: 250px;
 }
 .blue-button:hover {
 	background:linear-gradient(to bottom, #0059ff 5%, #0505f5 100%);
 	background-color:#0059ff;
-}
-.blue-button:active {
-	position:relative;
-	top:2px;
 }
 
 td {
@@ -115,23 +81,40 @@ td {
 button > i {
     font-size: calc(100% + 5vw) !important;
 }
+
+.button-holder > button {
+    float: left;
+    margin: 15px;
+}
+.button-holder {
+    float: left;
+}
+.container {
+    width: 100%;
+    left: 0;
+    text-align: center;
+}
 </style>
-<table>
-    <tr>
-        <td>
-            <button class="green-button">LICHT 1</button>
-        </td>
-        <td>
-            <button class="green-button">LICHT 2</button>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <button class="red-button"><i class="material-icons">warning</i></button>
-        </td>
-        <td>
-            <button class="blue-button">NAAR BUITEN</button>
-        </td>
-    </tr>
-</table>
+<div class="button-holder">
+    <button class="int-button green-button" onclick="onButtonClick([1], 'led')">LICHT BED</button>
+    <button class="int-button green-button" onclick="onButtonClick([2], 'led')">LICHT STOEL</button>
+    <button class="int-button green-button" onclick="onButtonClick([3], 'led')">LICHT TAFELLAMP</button>
+    <button class="int-button green-button" onclick="onButtonClick([4, 5], 'led'); onButtonClick([7], 'led1');">LICHT Muur,Zuil,Deur</button>
+</div>
+<div class="button-holder">
+    <button class="int-button red-button"><i class="material-icons">warning</i></button>
+    <button class="int-button blue-button">NAAR BUITEN</button>
+</div>
 {% endblock %}
+{% block scripts %}
+<script>
+    function onButtonClick(obj_ids, action) {
+        for (var i = 0; i < obj_ids.length; i++) {
+            $.post("/api/basic_interface/" + obj_ids[i] + "," + action, function(data) {
+                 M.toast({html: data == 1 ? "Actie uitgevoerd" : "Mislukt"});
+            });
+        }
+    }
+</script>
+{% endblock %}
+

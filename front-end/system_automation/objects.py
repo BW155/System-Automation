@@ -30,12 +30,26 @@ def check_objects_change(obj_id):
     return True
 
 
-def process_sensors(obj_id, sensors=[], pi_sensors=[]):
-    pass
+def process_actuator(obj_id, actuator, toggle=True, value=None):
+    global objects
+    tmp_objects = objects
+    for o in objects:
+        if o["id"] == obj_id:
+            for a in o["actuators"]:
+                if a == actuator:
+                    if toggle:
+                        o["actuators"][a] = o["actuators"][a] ^ 1
+                    if value is not None:
+                        o["actuators"][a] = value
 
 
-def process_actuators(obj_id, actuators=[], pi_actuators=[]):
-    pass
+def get_actuator(obj_id, actuator):
+    for i in objects:
+        if i["id"] == obj_id:
+            for a in i["actuators"]:
+                if a == actuator:
+                    return i["actuators"][a]
+    return None
 
 
 def web_translate_objects():
