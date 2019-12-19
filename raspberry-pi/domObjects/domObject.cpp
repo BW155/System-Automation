@@ -5,7 +5,7 @@
 #include "domObject.h"
 
 domObject::domObject(webSocket *s) {
-    python = &s;
+    python = s;
     wemos = Socket();
 }
 

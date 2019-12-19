@@ -14,8 +14,12 @@ class webSocket {
 public:
     int sock;
     sockaddr_in sock_addr;
-    void send(char *sensors);
-    json receive();
+    char* receiveActuators(int id);
+    bool sendMessage(int id);
+    void sendAll(int id, json everything);
+    void makeConnection();
+    char *toCharArray(json jsonObj);
     webSocket();
+
 };
 #endif //SOCKET_WEBSOCKET_H
