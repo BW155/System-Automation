@@ -8,8 +8,8 @@ import time
 from datetime import datetime
 
 notification_templates = [
-    {"id": 0, "time": "", "title": "Alarm", "message": "Er is hulp nodig!!!"},
-    {"id": 1, "time": "", "title": "Naar Buiten", "message": "Patient wil naar buiten"}
+    {"id": 0, "not_id": 0, "time": "", "title": "Alarm", "message": "Er is hulp nodig!!!"},
+    {"id": 1, "not_id": 0, "time": "", "title": "Naar Buiten", "message": "Patient wil naar buiten"}
 ]
 
 notifications = []
@@ -42,13 +42,21 @@ def interface_api(action):
 @app.route("/api/interface_notifications/<int:notif_type>", methods=["POST"])
 def interface_notifications_post(notif_type):
     global notifications
+
+    if len(notifications) > 0:
+        not_id = notifications[-1]["not_id"] + 1
+    else:
+        not_id = 0
+
     if notif_type == 0:
         notif = notification_templates[0]
         notif["time"] = datetime.now().strftime("%d-%m-%Y %H:%M:%S")
+        notif["not_id"] = not_id
         notifications.append(notif)
     elif notif_type == 1:
         notif = notification_templates[1]
         notif["time"] = datetime.now().strftime("%d-%m-%Y %H:%M:%S")
+        notif["not_id"] = not_id
         notifications.append(notif)
     else:
         return "0"
@@ -60,20 +68,18 @@ def interface_notifications_post(notif_type):
 @roles_allowed([Role.GUARD])
 def interface_notifications():
     global notifications
+    cur_notifications = notifications
+    not_id = flask.request.args.get("not_id")
+    if not_id.isdigit():
+        cur_notifications = [n for n in notifications if n["not_id"] > int(not_id)]
+
     cur_time = time.time()
 
-    while len(notifications) == 0:
+    while len(cur_notifications) == 0:
         time.sleep(0.2)
         if time.time() - cur_time >= 9:
             return "TimeOut", 308
 
-    return json.dumps(notifications)
+    print(cur_notifications)
+    return json.dumps(cur_notifications)
 
-
-@app.route("/api/interface_notifications", methods=["DELETE"])
-@login_required
-@roles_allowed([Role.GUARD])
-def interface_notifications_delete():
-    global notifications
-    notifications = []
-    return "1"

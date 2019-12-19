@@ -2,7 +2,8 @@ import flask
 from flask_login import login_required, login_user, logout_user
 from . import app, User
 import system_automation.objects as objects
-from system_automation.objects import web_translate_objects
+from .objects import web_translate_objects
+from .api import notifications
 
 
 @app.route("/")
@@ -38,5 +39,4 @@ def logout():
 @app.route("/dashboard")
 @login_required
 def interface():
-    return flask.render_template("dashboard.html", objects=web_translate_objects())
-
+    return flask.render_template("dashboard.html", objects=web_translate_objects(), last_not_id=notifications[-1]["not_id"] if len(notifications) > 0 else -1)

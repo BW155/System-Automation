@@ -83,9 +83,9 @@
 
     }
 
-    function pollNotifications() {
+    function pollNotifications(id) {
         $.ajax({
-            url:"/api/interface_notifications",
+            url:"/api/interface_notifications?not_id=" + id,
             timeout: 10000,
             success: function(data) {
                 console.log(data);
@@ -103,27 +103,18 @@
                     var elem = document.getElementById("notifications");
                     var instance = M.Modal.getInstance(elem);
                     instance.open();
+                    pollNotifications(data[data.length - 1]["not_id"]);
+                } else {
+                    pollNotifications(id);
                 }
-                $.ajax({
-                    url: '/api/interface_notifications',
-                    type: 'DELETE',
-                    success: function(result) {
-                        M.toast({html: "Notificaties Geleegd"});
-                        pollNotifications();
-                    },
-                    error: function(jqXHR, textStatus, errorThrown) {
-                        console.log(jqXHR.status + "," + textStatus + ", " + errorThrown);
-                        pollNotifications();
-                    }
-                });
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.log(jqXHR.status + "," + textStatus + ", " + errorThrown);
-                pollNotifications();
+                pollNotifications(id);
             }
         });
     }
-    pollNotifications();
+    pollNotifications({{last_not_id}});
 
     function clearNotifications() {
         $("#notification-holder").empty();

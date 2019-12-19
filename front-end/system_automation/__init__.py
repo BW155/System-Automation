@@ -17,7 +17,7 @@ login_manager.init_app(app)
 
 from .db_models import User, Role
 from .methods import index, login
-from .api import dashboard_api, interface_api, interface_notifications, interface_notifications_post, interface_notifications_delete
+from .api import dashboard_api, interface_api, interface_notifications, interface_notifications_post
 
 
 @login_manager.user_loader
