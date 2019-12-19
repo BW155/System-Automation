@@ -13,10 +13,8 @@
 
 webSocket::webSocket() {
     sock = 0;
-    char *IP = "xo";
     struct sockaddr_in temp;
     sock_addr = temp;
-    makeConnection();
 }
 
 char* webSocket::toCharArray(json jsonObj) {
@@ -31,16 +29,25 @@ void webSocket::makeConnection() {
     {
         printf("\n Socket creation error \n");
     }
+    else {
+        cout<<"Socket Created"<<endl;
+    }
     sock_addr.sin_family = AF_INET;
     sock_addr.sin_port = htons(PORT);
     if(inet_pton(AF_INET, "127.0.0.1", &sock_addr.sin_addr)<=0)
     {
-//        printf("\nInvalid address/ Address not supported \n");
+        printf("\nInvalid address/ Address not supported \n");
+    }
+    else {
+        cout<<"adress supported"<<endl;
     }
 
     if (connect(sock, (struct sockaddr *)&sock_addr, sizeof(sock_addr)) < 0)
     {
         printf("\nConnection Failed \n");
+    }
+    else {
+        cout<<"connection made"<<endl;
     }
 }
 
@@ -51,26 +58,18 @@ bool webSocket::sendMessage(int id) {
     };
     makeConnection();
     char buffer[1024] = {0};
+    cout<<"sending"<<endl;
     send(sock, toCharArray(message), strlen(toCharArray(message)), 0);
+    cout<<"receiving"<<endl;
     int valread = read(sock, buffer, 1024);
     close(sock);
     return buffer[0] != 0;
 }
 
-char* webSocket::sendMessage(char *sensors) {
-    makeConnection();
-    char buffer[1024] = {0};
-    send(sock, sensors, strlen(sensors), 0);
-    int valread = read(sock, buffer, 1024);
-    char *result = buffer;
-    close(sock);
-    return result;
-}
-
-char* webSocket::receive(int id) {
-    json message{
+char* webSocket::receiveActuators(int id) {
+    json message {
             {"id",id},
-            {"type", 3}
+            {"type",1}
     };
     makeConnection();
     char buffer[1024] = {0};
@@ -79,4 +78,15 @@ char* webSocket::receive(int id) {
     char *result = buffer;
     close(sock);
     return result;
+}
+
+void webSocket::sendAll(int id, json everything) {
+    json message = everything;
+    message["id"] = id;
+    message["type"] = 3;
+    makeConnection();
+    char buffer[1024] = {0};
+    send(sock, toCharArray(message), strlen(toCharArray(message)), 0);
+    int valread = read(sock, buffer, 1024);
+    close(sock);
 }

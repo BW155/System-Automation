@@ -6,7 +6,8 @@
 using json = nlohmann::json;
 using namespace std;
 
-#define PORT 8080
+#define PORT 9001
+
 int counter;
 Socket sockets[8]; // NOLINT(cert-err58-cpp)
 
@@ -332,21 +333,26 @@ void communicate() {
 }
 int main(int argc, char const *argv[])
 {
-    counter = 0;
-    discoverDevices();
-    cout<<"\n"<<endl;
+//    counter = 0;
+//    discoverDevices();
+//    cout<<"\n"<<endl;
 //    if (!checkConnectedDevices()) {sendSimpleMessage(buffer,valread);return -1;}
-    counter = 1;
-    while(true) {
-        if (counter == 8) {counter = 1;}
-        if (sockets[counter].getConnected()) {
-            communicate();
-            counter++;
-            sleep(2);
-        }
-        else {
-            counter++;
-        }
+//    counter = 1;
+//    while(true) {
+//        if (counter == 8) {counter = 1;}
+//        if (sockets[counter].getConnected()) {
+//            communicate();
+//            counter++;
+//            sleep(2);
+//        }
+//        else {
+//            counter++;
+//        }
+//    }
+    webSocket tester;
+    while (true) {
+        cout << tester.sendMessage(1) << endl;
+        sleep(2);
     }
     return 0;
 }
