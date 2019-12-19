@@ -5,3 +5,4 @@ venv
 __PyCache__
 test_db.sqlite
 prod_db.sqlite
+*.pyc
