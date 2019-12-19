@@ -4,8 +4,14 @@ from . import app, User, Role
 from .objects import get_actuator, process_actuator
 from .utility import roles_allowed
 import json
+import time
+from datetime import datetime
 
-notification_templates = [{"title": "Alarm", "message": "Er is hulp nodig!!!"}, {"title": "Naar Buiten", "message": "Patient wil naar buiten"}]
+notification_templates = [
+    {"id": 0, "time": "", "title": "Alarm", "message": "Er is hulp nodig!!!"},
+    {"id": 1, "time": "", "title": "Naar Buiten", "message": "Patient wil naar buiten"}
+]
+
 notifications = []
 
 # api route for logged-in users
@@ -37,9 +43,16 @@ def interface_api(action):
 def interface_notifications_post(notif_type):
     global notifications
     if notif_type == 0:
-        notifications.append(notification_templates[0])
-    if notif_type == 1:
-        notifications.append(notification_templates[1])
+        notif = notification_templates[0]
+        notif["time"] = datetime.now().strftime("%d-%m-%Y %H:%M:%S")
+        notifications.append(notif)
+    elif notif_type == 1:
+        notif = notification_templates[1]
+        notif["time"] = datetime.now().strftime("%d-%m-%Y %H:%M:%S")
+        notifications.append(notif)
+    else:
+        return "0"
+    return "1"
 
 
 @app.route("/api/interface_notifications/", methods=["GET"])
@@ -47,6 +60,14 @@ def interface_notifications_post(notif_type):
 @roles_allowed([Role.GUARD])
 def interface_notifications():
     global notifications
+    cur_time = time.time()
+
+    while len(notifications) == 0:
+        time.sleep(0.2)
+        if time.time() - cur_time >= 9:
+            return "TimeOut", 308
+
+
     notifs_to_send = notifications
     notifications = []
     return json.dumps(notifs_to_send)

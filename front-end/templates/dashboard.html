@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
 <style>
-    #object-card-holder > div {
-        float: left;
-    }
+#object-card-holder > div {
+    float: left;
+}
 
     .object-card {
         width: 200px;
@@ -33,12 +33,18 @@
         <b style="margin-left: 10px">Status</b>
         <hr size="2px" style="margin-top: 10px">
 
-        <div class="card-content">
+        <div class="card-content" style="padding: 5px">
             {% for s in o["sensors"]%}
-                <p>{{ s.name }}: {{ s.value }}</p>
+            <div class="row" style="margin-bottom: 5px">
+                <p class="col s10" style="font-size: auto">{{s.name}}:</p>
+                <p class="col s2" id="{{ o.id }}{{ s.id }}"><b>{{ s.value }}</b></p>
+            </div>
             {% endfor %}
-            {% for s in o["actuators"]%}
-                <p>{{ s.name }}: {{ s.value }}</p>
+            {% for a in o["actuators"]%}
+            <div class="row" style="margin-bottom: 5px">
+                <p class="col s10" style="font-size: auto">{{a.name}}:</p>
+                <p class="col s2" id="{{ o.id }}{{ a.id }}"><b>{{ a.value }}</b></p>
+            </div>
             {% endfor %}
         </div>
 
@@ -48,26 +54,68 @@
 
         <div class="card-content">
             {% for i in o["buttons"] %}
-                <button class="btn green btn-small" onclick="onButtonClick({{o.id, i.item_id}})">{{ i.text }}</button>
+            <button class="btn green btn-small" onclick="onButtonClick({{o.id, i.item_id}})">{{ i.text }}</button>
             {% endfor %}
         </div>
     </div>
     {% endfor %}
 </div>
+
+<div id="notifications" class="modal">
+    <div class="modal-content">
+        <h4>Notificaties</h4>
+        <div id="notification-holder">
+            
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a class="modal-close waves-effect waves-green btn" 
+            style="width: 100%" 
+            onclick="clearNotifications()">
+            Sluiten
+        </a>
+    </div>
+</div>
 {% endblock %}
 {% block scripts %}
 <script>
     function onButtonClick(id, item_id) {
-        
+
     }
-    setInterval(function() {
-        $.get("/api/interface_notifications", function(data) {
-            data = JSON.parse(data);
-            for (var i = 0; i < data.length; i++) {
-                $('<div id="my_div1" class="blue">This is MY DIV 1</div>').appendTo('body');
-                M.toast({html: data[i].message});
+
+    function pollNotifications() {
+        $.ajax({
+            url:"/api/interface_notifications",
+            timeout: 10000,
+            success: function(data) {
+                console.log(data);
+                data = JSON.parse(data);
+                for (var i = 0; i < data.length; i++) {
+                    if (data[i].id == 0) {
+                        $("<p class=\"flow-text white-text\" style=\"background: red\">" 
+                            + data[i].time + " | " + data[i].message + "</p>").appendTo("#notification-holder");
+                    } else {
+                        $("<p class=\"flow-text white-text\" style=\"background: blue\">" 
+                            + data[i].time + " | " + data[i].message + "</p>").appendTo("#notification-holder");
+                    }
+                }
+                if (data.length > 0) {
+                    var elem = document.getElementById("notifications");
+                    var instance = M.Modal.getInstance(elem);
+                    instance.open();
+                }
+                pollNotifications();
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log(jqXHR.status + "," + textStatus + ", " + errorThrown);
+                pollNotifications();
             }
         });
-    }, 1000)
+    }
+    pollNotifications();
+
+    function clearNotifications() {
+        $("#notification-holder").empty();
+    }
 </script>
 {% endblock %}

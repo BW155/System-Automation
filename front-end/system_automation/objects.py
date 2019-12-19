@@ -73,17 +73,22 @@ def translate_object(obj):
 
     if sensors:
         web_sensors = [
-            {"name": translate_component(obj["id"], s), "value": sensors[s]}
+            {"id": s, "name": translate_component(obj["id"], s), "value": sensors[s]}
             for s in sensors
         ]
 
     if actuators:
         web_actuators = [
-            {"name": translate_component(obj["id"], a), "value": actuators[a]}
+            {"id": a, "name": translate_component(obj["id"], a), "value": actuators[a]}
             for a in actuators
         ]
 
-    return {"name": translate_object_name(obj["id"]), "sensors": web_sensors, "actuators": web_actuators}
+    return {
+        "id": obj["id"],
+        "name": translate_object_name(obj["id"]),
+        "sensors": web_sensors,
+        "actuators": web_actuators
+    }
 
 
 def translate_component(obj_id, sensorname):
