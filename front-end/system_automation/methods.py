@@ -40,4 +40,3 @@ def logout():
 def interface():
     return flask.render_template("dashboard.html", objects=web_translate_objects())
 
-

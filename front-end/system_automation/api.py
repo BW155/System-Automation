@@ -55,7 +55,7 @@ def interface_notifications_post(notif_type):
     return "1"
 
 
-@app.route("/api/interface_notifications/", methods=["GET"])
+@app.route("/api/interface_notifications", methods=["GET"])
 @login_required
 @roles_allowed([Role.GUARD])
 def interface_notifications():
@@ -67,8 +67,13 @@ def interface_notifications():
         if time.time() - cur_time >= 9:
             return "TimeOut", 308
 
+    return json.dumps(notifications)
 
-    notifs_to_send = notifications
+
+@app.route("/api/interface_notifications", methods=["DELETE"])
+@login_required
+@roles_allowed([Role.GUARD])
+def interface_notifications_delete():
+    global notifications
     notifications = []
-    return json.dumps(notifs_to_send)
-
+    return "1"

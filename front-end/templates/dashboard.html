@@ -104,7 +104,18 @@
                     var instance = M.Modal.getInstance(elem);
                     instance.open();
                 }
-                pollNotifications();
+                $.ajax({
+                    url: '/api/interface_notifications',
+                    type: 'DELETE',
+                    success: function(result) {
+                        M.toast({html: "Notificaties Geleegd"});
+                        pollNotifications();
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        console.log(jqXHR.status + "," + textStatus + ", " + errorThrown);
+                        pollNotifications();
+                    }
+                });
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.log(jqXHR.status + "," + textStatus + ", " + errorThrown);
