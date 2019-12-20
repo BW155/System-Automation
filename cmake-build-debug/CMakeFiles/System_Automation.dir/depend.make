@@ -23,14 +23,13 @@ CMakeFiles/System_Automation.dir/raspberry-pi/domObjects/domObject.cpp.o: ../ras
 
 CMakeFiles/System_Automation.dir/raspberry-pi/domObjects/door.cpp.o: ../raspberry-pi/domObjects/door.cpp
 
-CMakeFiles/System_Automation.dir/raspberry-pi/domObjects/fridge.cpp.o: ../raspberry-pi/json/json.hpp
-CMakeFiles/System_Automation.dir/raspberry-pi/domObjects/fridge.cpp.o: ../raspberry-pi/Socket/Socket.h
-CMakeFiles/System_Automation.dir/raspberry-pi/domObjects/fridge.cpp.o: ../raspberry-pi/Socket/webSocket.h
 CMakeFiles/System_Automation.dir/raspberry-pi/domObjects/fridge.cpp.o: ../raspberry-pi/domObjects/domObject.h
-CMakeFiles/System_Automation.dir/raspberry-pi/domObjects/fridge.cpp.o: ../raspberry-pi/domObjects/fridge.cpp
-CMakeFiles/System_Automation.dir/raspberry-pi/domObjects/fridge.cpp.o: ../raspberry-pi/domObjects/fridge.h
 CMakeFiles/System_Automation.dir/raspberry-pi/domObjects/fridge.cpp.o: ../raspberry-pi/json/json.hpp
 CMakeFiles/System_Automation.dir/raspberry-pi/domObjects/fridge.cpp.o: ../raspberry-pi/timeKeeper.h
+CMakeFiles/System_Automation.dir/raspberry-pi/domObjects/fridge.cpp.o: ../raspberry-pi/Socket/Socket.h
+CMakeFiles/System_Automation.dir/raspberry-pi/domObjects/fridge.cpp.o: ../raspberry-pi/Socket/webSocket.h
+CMakeFiles/System_Automation.dir/raspberry-pi/domObjects/fridge.cpp.o: ../raspberry-pi/domObjects/fridge.cpp
+CMakeFiles/System_Automation.dir/raspberry-pi/domObjects/fridge.cpp.o: ../raspberry-pi/domObjects/fridge.h
 
 CMakeFiles/System_Automation.dir/raspberry-pi/domObjects/lamp.cpp.o: ../raspberry-pi/domObjects/lamp.cpp
 
