@@ -10,15 +10,15 @@ using namespace std;
 
 webSocket pyt;
 vector<domObject> objects;
+TimeClass obj1 (10,0,0,0);
 
 bool checkConnectedDevices() {
     return objects.size() == 7;
 }
 
 void discoverDevices() {
-    TimeClass obj1 (10,0,0,0);
-
     
+
     const char *IPGROUP = "192.168.2.";
     char *IP;
     int Device;
