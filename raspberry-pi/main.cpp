@@ -19,6 +19,7 @@ using namespace std;
 
 webSocket pyt;
 vector<domObject> objects;
+TimeClass obj1 (10,0,0,0);
 
 bool checkConnectedDevices() {
     return objects.size() == 7;
@@ -107,8 +108,8 @@ bool init() {
     else if (in == 2) {
         return checkConnectedDevices();
     }
-    else {return checkConnectedDevices();
-        return false;
+    else {
+        return checkConnectedDevices();
     }
 }
 

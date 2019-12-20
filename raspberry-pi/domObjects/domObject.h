@@ -16,6 +16,7 @@ class domObject {
 protected:
     Socket wemos;
     webSocket* python;
+    TimeClass* timeObj;
     virtual char* wemosMessage() = 0;
     //virtual char* pythonMessage() = 0;
     TimeClass* timeObj;

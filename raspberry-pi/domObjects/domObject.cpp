@@ -3,9 +3,9 @@
 //
 
 #include "domObject.h"
+#include "timeKeeper.h"
 
-
-domObject::domObject(webSocket *s, TimeClass *t) {
+domObject::domObject(webSocket *s, TimeClass *t ) {
     python = s;
     wemos = Socket();
     timeObj = t;
