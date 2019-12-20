@@ -59,7 +59,7 @@
                     <label class="black-text">
                         {{ s["name"] }}:<br>
                         Uit
-                        <input type="checkbox" {{"checked" if s["value"]}}>
+                        <input type="checkbox" {{"checked" if s["value"] == 1 else ""}} onclick="actionUpdate({{o["id"]}}, '{{s["id"]}}', this.checked ? 1 : 0)">
                         <span class="lever"></span>
                         Aan
                     </label>
@@ -97,8 +97,15 @@
 {% endblock %}
 {% block scripts %}
 <script>
-    function onButtonClick(id, item_id) {
-
+    function actionUpdate(obj_id, actuator, value) {
+        $.ajax({
+            url:"/api/dashboard/" + obj_id,
+            method: "POST",
+            data: {"actuator": actuator, "value": value},
+            success: function(data) {
+                M.toast({html: "Actuator Updated"});
+            }
+        });
     }
 
     function pollNotifications(id) {

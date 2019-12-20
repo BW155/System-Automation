@@ -83,8 +83,14 @@
     <script src="/static/js/jquery-3.4.1.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            M.AutoInit();
-
+            document.addEventListener('DOMContentLoaded', function() {
+                var elems = document.querySelectorAll('.modal');
+                var instances = M.Modal.init(elems, options);
+            });
+            document.addEventListener('DOMContentLoaded', function() {
+                var elems = document.querySelectorAll('.sidenav');
+                var instances = M.Sidenav.init(elems, options);
+            });
             setTimeout(function() { 
                 $(".info-box").animate({
                     opacity: '0.0',

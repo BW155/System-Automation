@@ -1,7 +1,7 @@
 import flask
 from flask_login import login_required, login_user, logout_user
 from . import app, User, Role
-from .objects import get_actuator, process_actuator
+from .objects import get_actuator, process_actuator, set_actuator
 from .utility import roles_allowed
 import json
 import time
@@ -18,8 +18,14 @@ notifications = []
 # api route for logged-in users
 @app.route("/api/dashboard/<int:obj_id>", methods=["POST", "GET"])
 @login_required
+@roles_allowed([Role.GUARD])
 def dashboard_api(obj_id):
-    return ""
+    if flask.request.method == "POST":
+        actuator = flask.request.form.get("actuator")
+        value = flask.request.form.get("value")
+        return set_actuator(obj_id, actuator, value)
+    if flask.request.method == "GET":
+        pass
 
 
 # api route for non-logged-in users

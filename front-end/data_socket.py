@@ -12,13 +12,6 @@ BUFFER_SIZE = 1200
 
 
 class PiSocketServer(socketserver.BaseRequestHandler):
-    """
-    The request handler class for our server.
-
-    It is instantiated once per connection to the server, and must
-    override the handle() method to implement communication to the
-    client.
-    """
 
     def handle(self):
         # self.request is the TCP socket connected to the client

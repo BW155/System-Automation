@@ -52,6 +52,19 @@ def get_actuator(obj_id, actuator):
     return None
 
 
+def set_actuator(obj_id, actuator, value):
+    global objects
+    for i in objects:
+        if i["id"] == obj_id:
+            for a in i["actuators"]:
+                if a == actuator:
+                    if value.isdigit():
+                        i["actuators"][a] = int(value)
+                        print(i)
+                        return "1"
+    return "0"
+
+
 def web_translate_objects():
     web_objects = []
 
@@ -171,19 +184,19 @@ def translate_actions(obj):
     actions = {"switches": [], "buttons": [], "sliders": []}
 
     if obj_id in [1, 2, 3, 4]:
-        actions["switches"].append({"name": "Licht", "value": actuators["led"]})
+        actions["switches"].append({"id": "led", "name": "Licht", "value": actuators["led"]})
 
     if obj_id == 4:
-        actions["buttons"].append({"name": "Alarm Aan", "color": "green"})
-        actions["buttons"].append({"name": "Alarm Uit", "color": "red"})
+        actions["buttons"].append({"id": "buzzer", "name": "Alarm Aan", "color": "green"})
+        actions["buttons"].append({"id": "buzzer", "name": "Alarm Uit", "color": "red"})
 
     if obj_id == 5:
-        actions["sliders"].append({"name": "Dimmer", "value": actuators["led"]})
+        actions["sliders"].append({"id": "led", "name": "Dimmer", "value": actuators["led"]})
 
     if obj_id == 7:
-        actions["switches"].append({"name": "Licht1", "value": actuators["led1"]})
-        actions["switches"].append({"name": "Licht2", "value": actuators["led2"]})
-        actions["switches"].append({"name": "Deur Stand", "value": actuators["servo"]})
+        actions["switches"].append({"id": "led1", "name": "Licht1", "value": actuators["led1"]})
+        actions["switches"].append({"id": "led2", "name": "Licht2", "value": actuators["led2"]})
+        actions["switches"].append({"id": "servo", "name": "Deur Stand", "value": actuators["servo"]})
 
     return actions
 
