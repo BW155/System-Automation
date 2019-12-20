@@ -10,7 +10,7 @@
 
 using json = nlohmann::json ;
 
-fridge::fridge(char * IP, webSocket *s, TimeClass *t) : domObject(s, t), cooling(false), thermometer1(0), thermometer2(0), openClose(0) {
+Fridge::Fridge(char * IP, webSocket *s, TimeClass *t) : domObject(s, t), cooling(false), thermometer1(0), thermometer2(0), openClose(0) {
 }
 
 char* wemosMessage(bool cooling){
@@ -25,7 +25,7 @@ char* wemosMessage(bool cooling){
     return message;
 }
 
-void fridge::update(webSocket* ws, Socket* s){
+void Fridge::update(webSocket* ws, Socket* s){
      char *result, *sensors;
      static int prev_time;
      int start_time, cur_time;

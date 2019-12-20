@@ -11,13 +11,13 @@
 #include "../Socket/webSocket.h"
 #include "../json/json.hpp"
 
-class fridge : public domObject{
+class Fridge : public domObject{
 private:
     bool cooling;
     int thermometer1;
     int thermometer2;
     int openClose;
-    fridge(char * IP, webSocket *s, TimeClass *t);
+    Fridge(char * IP, webSocket *s, TimeClass *t);
     char* wemosMessage(bool cooling);
 public:
     void update(webSocket* ws, Socket* s);
