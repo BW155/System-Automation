@@ -7,7 +7,7 @@
 #include "webSocket.h"
 #include "../json/json.hpp"
 
-#define PORT 9001
+#define PORT2 9001
 
 
 
@@ -33,7 +33,7 @@ void webSocket::makeConnection() {
         cout<<"Socket Created"<<endl;
     }
     sock_addr.sin_family = AF_INET;
-    sock_addr.sin_port = htons(PORT);
+    sock_addr.sin_port = htons(PORT2);
     if(inet_pton(AF_INET, "127.0.0.1", &sock_addr.sin_addr)<=0)
     {
         printf("\nInvalid address/ Address not supported \n");
