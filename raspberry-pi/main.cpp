@@ -17,8 +17,6 @@ bool checkConnectedDevices() {
 }
 
 void discoverDevices() {
-    
-
     const char *IPGROUP = "192.168.2.";
     char *IP;
     int Device;
