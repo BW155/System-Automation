@@ -9,7 +9,7 @@
 #include "domObject.h"
 #include "../Socket/Socket.h"
 #include "../Socket/webSocket.h"
-#include "json/json.hpp"
+#include "../json/json.hpp"
 
 class fridge : public domObject{
 private:
@@ -17,9 +17,9 @@ private:
     int thermometer1;
     int thermometer2;
     int openClose;
-    fridge(char * IP, webSocket *s);
+    fridge(char * IP, webSocket *s, TimeClass *t);
     char* wemosMessage(bool cooling);
 public:
-    void update() override;
+    void update(webSocket* ws, Socket* s);
 };
 #endif //SOCKET_BED_H

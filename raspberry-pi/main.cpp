@@ -1,5 +1,5 @@
 // Lars Hartog
-#include <domObjects/fridge.h>
+#include "domObjects/fridge.h"
 #include "includes.h"
 
 
@@ -188,6 +188,17 @@ char *wallMessage(bool x, uint8_t z) {
             {"actuators", {
                           {"led", z},
                           {"window", x}
+                  }
+            }
+    };
+    char *message = toCharArray(Message);
+    return message;
+}
+char *fridgeMessage(bool x) {
+    json Message = {
+            {"id",6},
+            {"actuators", {
+                          {"cooling", x}
                   }
             }
     };

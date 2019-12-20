@@ -3,14 +3,14 @@
 //
 #include <jansson.h>
 #include "fridge.h"
-#include "../domObjects/domObject.h"
+#include <domObject.h>
 
 #define open 1
-#define close 0
+#define closed 0
 
 using json = nlohmann::json ;
 
-fridge::fridge(char * IP, webSocket *s) : domObject(s), cooling(false), thermometer1(0), thermometer2(0), openClose(0) {
+fridge::fridge(char * IP, webSocket *s, TimeClass *t) : domObject(s, t), cooling(false), thermometer1(0), thermometer2(0), openClose(0) {
 }
 
 char* wemosMessage(bool cooling){
@@ -25,16 +25,14 @@ char* wemosMessage(bool cooling){
     return message;
 }
 
-void fridge::update(){
-     char *result;
+void fridge::update(webSocket* ws, Socket* s){
+     char *result, *sensors;
      static int prev_time;
      int start_time, cur_time;
      bool state = 0;
 
-     fridge f1();
-     TimeClass *t2 = f1().getTimePointer();
+     TimeClass *t2 = getTimePointer();
      t2 -> autoIncreaseTime();
-
 
      //Ask for current time in seconds
      cur_time = t2->getTime()[0]*3600 + t2->getTime()[1]*60  + t2->getTime()[2];
@@ -45,15 +43,15 @@ void fridge::update(){
      }
      if((cur_time-start_time) > (5 * 60)){
         cooling = false;
-        sendReceive(wemosMessage(cooling));
+        char * message = wemosMessage(cooling);
      }
-
      if (openClose == closed && state == 0) {
          start_time = 0;
          state = 1;
          cooling = true;
          sendReceive(wemosMessage(cooling));
-
      }
+
+
 }
 
