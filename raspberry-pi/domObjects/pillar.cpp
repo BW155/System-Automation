@@ -2,7 +2,6 @@
 // Created by LarsLinux on 16-12-19.
 //
 #include "pillar.h"
-#include "domObject.h"
 
 using namespace std;
 using json = nlohmann::json;
@@ -43,8 +42,8 @@ void Pillar::update(){
 
     buzzer = Result["actuators"]["buzzer"];
     led = Result["actuators"]["led"];
-
-    json wemosMessage = {
+    buzzer = gassensor >= 930;
+    json wemos_Message = {
             {"id",4},
             {"actuators", {
                         {"led", led},
@@ -52,16 +51,16 @@ void Pillar::update(){
                     }
             }
     };
-    char *wemos_message = toCharArray(wemosMessage);
+    char *wemos_message = toCharArray(wemos_Message);
         
     char* receive_sensor = wemos.sendReceive(wemos_message);
-    json ReceiveSensor = toJson(receive_sensor);
+    json Receive_Sensor = toJson(receive_sensor);
 
-    if(gassensor == !ReceiveSensor["sensors"]["gasSensor"] || button == !ReceiveSensor["sensors"]["button"]){
-        gassensor = ReceiveSensor["sensors"]["gasSensor"];
-        button = ReceiveSensor["sensors"]["button"];
+    if(gassensor == !Receive_Sensor["sensors"]["gasSensor"] || button == !Receive_Sensor["sensors"]["button"]){
+        gassensor = Receive_Sensor["sensors"]["gasSensor"];
+        button = Receive_Sensor["sensors"]["button"];
 
-        buzzer = (gassensor >= 875);
+        buzzer = gassensor >= 930;
         
         json python_Message = {
                 {"id",4},

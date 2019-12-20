@@ -13,8 +13,6 @@
 #include "domObject.h"
 using namespace std;
 
-class door;
-
 class Pillar : public domObject{
 private:
     int gassensor;
@@ -25,8 +23,8 @@ private:
 public:
     Pillar(char*, webSocket*);
     bool get_buzzer();
-    virtual char* wemosMessage(json){};
-    virtual char* pythonMessage(bool, bool){};
+    virtual char* wemosMessage(json);
+    virtual char* pythonMessage(bool, bool);
     virtual void update();
 };
 #endif //SOCKET_BED_H
