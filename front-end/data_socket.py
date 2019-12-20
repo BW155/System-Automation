@@ -6,7 +6,7 @@ import json
 from json import JSONDecodeError
 from system_automation.objects import objects, set_object, check_objects_change
 
-bind_ip = '127.0.0.1'
+bind_ip = '0.0.0.0'
 bind_port = 9001
 BUFFER_SIZE = 1200
 

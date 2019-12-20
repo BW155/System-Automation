@@ -87,7 +87,8 @@ def translate_object(obj):
         "id": obj["id"],
         "name": translate_object_name(obj["id"]),
         "sensors": web_sensors,
-        "actuators": web_actuators
+        "actuators": web_actuators,
+        "actions": translate_actions(obj)
     }
 
 
@@ -161,4 +162,29 @@ def translate_component(obj_id, sensorname):
 
     print("NAME NOT FOUND: ", name)
     return "LEEG"
+
+
+def translate_actions(obj):
+    obj_id = obj["id"]
+    actuators = obj["actuators"]
+
+    actions = {"switches": [], "buttons": [], "sliders": []}
+
+    if obj_id in [1, 2, 3, 4]:
+        actions["switches"].append({"name": "Licht", "value": actuators["led"]})
+
+    if obj_id == 4:
+        actions["buttons"].append({"name": "Alarm Aan", "color": "green"})
+        actions["buttons"].append({"name": "Alarm Uit", "color": "red"})
+
+    if obj_id == 5:
+        actions["sliders"].append({"name": "Dimmer", "value": actuators["led"]})
+
+    if obj_id == 7:
+        actions["switches"].append({"name": "Licht1", "value": actuators["led1"]})
+        actions["switches"].append({"name": "Licht2", "value": actuators["led2"]})
+        actions["switches"].append({"name": "Deur Stand", "value": actuators["servo"]})
+
+    return actions
+
 

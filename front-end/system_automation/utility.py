@@ -12,8 +12,6 @@ def roles_allowed(roles=list()):
                 return f(*args, **kwargs)
 
             raise NotAuthorized()
-
         return decorated_function
-
     return decorator
 

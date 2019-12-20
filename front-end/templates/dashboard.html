@@ -6,15 +6,16 @@
 }
 
     .object-card {
-        width: 200px;
-        height: 400px;
-        margin: 15px;
+        width: auto;
+        min-height: 430px;
+        margin: 10px;
     }
 
     .container {
         margin: 0;
         padding: 0;
-        width: 100%;
+        width: 100vw;
+        max-width: none;
     }
     hr {
         height: 1px;
@@ -53,8 +54,25 @@
         <hr size="2px" style="margin-top: 10px">
 
         <div class="card-content">
-            {% for i in o["buttons"] %}
-            <button class="btn green btn-small" onclick="onButtonClick({{o.id, i.item_id}})">{{ i.text }}</button>
+            {% for s in o["actions"]["switches"] %}
+                <div class="switch">
+                    <label class="black-text">
+                        {{ s["name"] }}:<br>
+                        Uit
+                        <input type="checkbox" {{"checked" if s["value"]}}>
+                        <span class="lever"></span>
+                        Aan
+                    </label>
+                </div>
+            {% endfor %}
+            {% for r in o["actions"]["sliders"] %}
+                <p class="range-field">
+                    {{r["name"]}}:
+                    <input type="range" min="0" max="1024" value="{{r["value"]}}"/>
+                </p>
+            {% endfor %}
+            {% for b in o["actions"]["buttons"]%}
+                <button class="btn {{b["color"]}}" style="margin-top: 15px; font-size: 12px">{{b["name"]}}</button>
             {% endfor %}
         </div>
     </div>
