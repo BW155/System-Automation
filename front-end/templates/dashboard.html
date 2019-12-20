@@ -68,11 +68,11 @@
             {% for r in o["actions"]["sliders"] %}
                 <p class="range-field">
                     {{r["name"]}}:
-                    <input type="range" min="0" max="1024" value="{{r["value"]}}"/>
+                    <input type="range" min="0" max="1024" onclick="actionUpdate({{o["id"]}}, '{{r["id"]}}', this.value)" value="{{r["value"]}}"/>
                 </p>
             {% endfor %}
             {% for b in o["actions"]["buttons"]%}
-                <button class="btn {{b["color"]}}" style="margin-top: 15px; font-size: 12px">{{b["name"]}}</button>
+                <button class="btn {{b["color"]}}" onclick="actionUpdate({{o["id"]}}, '{{b["id"]}}', {{b["value"]}})" style="margin-top: 15px; font-size: 12px">{{b["name"]}}</button>
             {% endfor %}
         </div>
     </div>

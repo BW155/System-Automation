@@ -187,8 +187,8 @@ def translate_actions(obj):
         actions["switches"].append({"id": "led", "name": "Licht", "value": actuators["led"]})
 
     if obj_id == 4:
-        actions["buttons"].append({"id": "buzzer", "name": "Alarm Aan", "color": "green"})
-        actions["buttons"].append({"id": "buzzer", "name": "Alarm Uit", "color": "red"})
+        actions["buttons"].append({"id": "buzzer", "name": "Alarm Aan", "color": "green", "value": 1})
+        actions["buttons"].append({"id": "buzzer", "name": "Alarm Uit", "color": "red", "value": 0})
 
     if obj_id == 5:
         actions["sliders"].append({"id": "led", "name": "Dimmer", "value": actuators["led"]})
