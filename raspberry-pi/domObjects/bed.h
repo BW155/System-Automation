@@ -7,10 +7,10 @@
 
 #include "../Socket/Socket.h"
 
-class bed {
+class Bed {
 private:
 
 public:
 
 };
-#endif //SOCKET_BED_H
+#endif //SOCKET_BED_

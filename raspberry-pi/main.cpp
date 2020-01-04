@@ -1,15 +1,5 @@
 // Lars Hartog
-
-#include "domObjects/bed.h"
-#include "domObjects/chair.h"
-#include "domObjects/lamp.h"
-#include "domObjects/wall.h"
-#include "domObjects/pillar.h"
-#include "domObjects/fridge.h"
-#include "domObjects/door.h"
-#include "domObjects/domObject.h"
 #include "includes.h"
-
 
 using json = nlohmann::json;
 using namespace std;
@@ -17,9 +7,12 @@ using namespace std;
 
 #define PORT 8080
 
+
 webSocket pyt;
 vector<domObject> objects;
 TimeClass obj1 (10,0,0,0);
+
+
 
 bool checkConnectedDevices() {
     return objects.size() == 7;
@@ -47,6 +40,7 @@ void discoverDevices() {
             stringstream temp(buffer);
             temp >> Device;
             switch (Device) {
+                /*
                 case 1 : {
                     Bed b(IP, &pyt);
                     objects.push_back(b);
@@ -77,18 +71,21 @@ void discoverDevices() {
                     cout << "Wall was made\n" << endl;
                     break;
                 }
+                */
                 case 6 : {
-                    Fridge f(IP, &pyt);
+                    Fridge f(IP, &pyt, &obj1);
                     objects.push_back(f);
                     cout << "Fridge was made\n" << endl;
                     break;
                 }
+                /*
                 case 7 : {
                     Door d(IP, &pyt);
                     objects.push_back(d);
                     cout << "Door was made\n" << endl;
                     break;
                 }
+                */
                 default:
                     cout << "Not found, help\n" << endl;
             }

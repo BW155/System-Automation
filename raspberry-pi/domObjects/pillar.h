@@ -7,7 +7,7 @@
 
 #include "../Socket/Socket.h"
 
-class pillar {
+class Pillar {
 private:
 
 public:

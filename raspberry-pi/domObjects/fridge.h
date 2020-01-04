@@ -2,14 +2,14 @@
 // Created by Zep on 16-12-19.
 //
 
-#ifndef SOCKET_BED_H
-#define SOCKET_BED_H
-
-
 #include "domObject.h"
 #include "../Socket/Socket.h"
 #include "../Socket/webSocket.h"
 #include "../json/json.hpp"
+
+
+#ifndef FRIDGE_H
+#define FRIDGE_H
 
 class Fridge : public domObject{
 private:
@@ -17,9 +17,9 @@ private:
     int thermometer1;
     int thermometer2;
     int openClose;
-    Fridge(char * IP, webSocket *s, TimeClass *t);
-    char* wemosMessage(bool cooling);
+    char* wemosMessage();
 public:
-    void update(webSocket* ws, Socket* s);
+    void update() override;
+    Fridge(const char * IP, webSocket *s, TimeClass *t);
 };
 #endif //SOCKET_BED_H

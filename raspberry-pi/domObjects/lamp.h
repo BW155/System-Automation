@@ -7,7 +7,7 @@
 
 #include "../Socket/Socket.h"
 
-class lamp {
+class Lamp {
 private:
 
 public:

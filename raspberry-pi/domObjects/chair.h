@@ -7,7 +7,7 @@
 
 #include "../Socket/Socket.h"
 
-class chair {
+class Chair {
 private:
 
 public:

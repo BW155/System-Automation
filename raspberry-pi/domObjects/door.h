@@ -7,7 +7,7 @@
 
 #include "../Socket/Socket.h"
 
-class door {
+class Door {
 private:
 
 public:

@@ -17,15 +17,12 @@ protected:
     Socket wemos;
     webSocket* python;
     TimeClass* timeObj;
-    virtual char* wemosMessage() = 0;
-    //virtual char* pythonMessage() = 0;
-    TimeClass* timeObj;
     
 public:
     virtual void update() = 0;
     json toJson(char* jsonString);
     char* toCharArray(json jsonObj);
     domObject(webSocket *s, TimeClass *t);
-    virtual TimeClass* getTimePointer();
+    TimeClass* getTimePointer();
 };
 #endif //RASPBERRY_PI_DOMOBJECT_H
