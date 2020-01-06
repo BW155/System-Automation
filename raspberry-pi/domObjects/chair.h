@@ -2,12 +2,12 @@
 // Created by LarsLinux on 16-12-19.
 //
 
-#ifndef SOCKET_BED_H
-#define SOCKET_BED_H
+#ifndef CHAIR_H
+#define CHAIR_H
 
 #include "../Socket/Socket.h"
 
-class chair {
+class Chair {
 private:
 
 public:

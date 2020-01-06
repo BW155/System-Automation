@@ -15,8 +15,6 @@ class domObject {
 protected:
     Socket wemos;
     webSocket* python;
-    virtual char* wemosMessage() = 0;
-    virtual char* pythonMessage() = 0;
 public:
     virtual void update() = 0;
     json toJson(char* jsonString);

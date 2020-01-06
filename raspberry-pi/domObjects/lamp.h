@@ -2,12 +2,12 @@
 // Created by LarsLinux on 16-12-19.
 //
 
-#ifndef SOCKET_BED_H
-#define SOCKET_BED_H
+#ifndef LAMP_H
+#define LAMP_H
 
 #include "../Socket/Socket.h"
 
-class lamp {
+class Lamp {
 private:
 
 public:

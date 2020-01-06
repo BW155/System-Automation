@@ -2,8 +2,8 @@
 // Created by LarsLinux on 16-12-19.
 //
 
-#ifndef SOCKET_BED_H
-#define SOCKET_BED_H
+#ifndef PILLAR_H
+#define PILLAR_H
 
 #include "../Socket/Socket.h"
 #include <iostream>
@@ -12,6 +12,7 @@
 #include "../Socket/webSocket.h"
 #include "domObject.h"
 using namespace std;
+using json = nlohmann::json;
 
 class Pillar : public domObject{
 private:
@@ -21,10 +22,10 @@ private:
     bool buzzer;
     Socket socket;
 public:
-    Pillar(char*, webSocket*);
+    Pillar(const char*, webSocket*);
     bool get_buzzer();
-    virtual char* wemosMessage(json);
-    virtual char* pythonMessage(bool, bool);
-    virtual void update();
+    char* wemosMessage(json);
+    char* pythonMessage();
+    void update() override;
 };
 #endif //SOCKET_BED_H

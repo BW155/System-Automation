@@ -2,12 +2,12 @@
 // Created by LarsLinux on 16-12-19.
 //
 
-#ifndef SOCKET_BED_H
-#define SOCKET_BED_H
+#ifndef FRIDGE_H
+#define FRIDGE_H
 
 #include "../Socket/Socket.h"
 
-class fridge {
+class Fridge {
 private:
 
 public:

@@ -2,12 +2,12 @@
 // Created by LarsLinux on 16-12-19.
 //
 
-#ifndef SOCKET_BED_H
-#define SOCKET_BED_H
+#ifndef DOOR_H
+#define DOOR_H
 
 #include "../Socket/Socket.h"
 
-class door {
+class Door {
 private:
 
 public:

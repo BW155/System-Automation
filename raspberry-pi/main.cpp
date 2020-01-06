@@ -1,10 +1,9 @@
 // Lars Hartog
 #include "includes.h"
-
+#include "domObjects/pillar.h"
 
 using json = nlohmann::json;
 using namespace std;
-
 
 #define PORT 8080
 
@@ -35,48 +34,48 @@ void discoverDevices() {
             stringstream temp(buffer);
             temp >> Device;
             switch (Device) {
-                case 1 : {
-                    Bed b(IP, &pyt);
-                    objects.push_back(b);
-                    cout << "Bed was made\n" << endl;
-                    break;
-                }
-                case 2 : {
-                    Chair c(IP, &pyt);
-                    objects.push_back(c);
-                    cout << "Chair was made\n" << endl;
-                    break;
-                }
-                case 3 : {
-                    TableLamp t(IP, &pyt);
-                    objects.push_back(t);
-                    cout << "Lamp was made\n" << endl;
-                    break;
-                }
+//                case 1 : {
+//                    Bed b(IP, &pyt);
+//                    objects.push_back(&b);
+//                    cout << "Bed was made\n" << endl;
+//                    break;
+//                }
+//                case 2 : {
+//                    Chair c(IP, &pyt);
+//                    objects.push_back(c);
+//                    cout << "Chair was made\n" << endl;
+//                    break;
+//                }
+//                case 3 : {
+//                    TableLamp t(IP, &pyt);
+//                    objects.push_back(t);
+//                    cout << "Lamp was made\n" << endl;
+//                    break;
+//                }
                 case 4 : {
                     Pillar p(IP, &pyt);
                     objects.push_back(p);
                     cout << "Pillar was made\n" << endl;
                     break;
                 }
-                case 5 : {
-                    Wall w(IP, &pyt);
-                    objects.push_back(w);
-                    cout << "Wall was made\n" << endl;
-                    break;
-                }
-                case 6 : {
-                    Fridge f(IP, &pyt);
-                    objects.push_back(f);
-                    cout << "Fridge was made\n" << endl;
-                    break;
-                }
-                case 7 : {
-                    Door d(IP, &pyt);
-                    objects.push_back(d)
-                    cout << "Door was made\n" << endl;
-                    break;
-                }
+//                case 5 : {
+//                    Wall w(IP, &pyt);
+//                    objects.push_back(w);
+//                    cout << "Wall was made\n" << endl;
+//                    break;
+//                }
+//                case 6 : {
+//                    Fridge f(IP, &pyt);
+//                    objects.push_back(f);
+//                    cout << "Fridge was made\n" << endl;
+//                    break;
+//                }
+//                case 7 : {
+//                    Door d(IP, &pyt);
+//                    objects.push_back(d)
+//                    cout << "Door was made\n" << endl;
+//                    break;
+//                }
                 default:
                     cout << "Not found, help\n" << endl;
             }
