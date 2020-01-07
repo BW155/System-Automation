@@ -1,15 +1,19 @@
 // Lars Hartog
 #include "includes.h"
 
-
 using json = nlohmann::json;
 using namespace std;
 
 
 #define PORT 8080
 
+
 webSocket pyt;
-vector<domObject> objects;
+TimeClass obj1 (1,0,0,0);
+
+vector<domObject*> objects;
+Door tempT("x", &pyt);
+Fridge fridge("x", &pyt, &obj1);
 
 bool checkConnectedDevices() {
     return objects.size() == 7;
@@ -17,9 +21,9 @@ bool checkConnectedDevices() {
 
 void discoverDevices() {
     const char *IPGROUP = "192.168.2.";
-    char *IP;
+//    const char *IP;
     int Device;
-    for (int x = 180; x < 200; x+=1) {
+    for (int x = 196; x < 200; x+=1) {
         int valread;
         const char *hello = "hello";
         char buffer[1024] = {0};
@@ -35,45 +39,48 @@ void discoverDevices() {
             stringstream temp(buffer);
             temp >> Device;
             switch (Device) {
-                case 1 : {
-                    Bed b(IP, &pyt);
-                    objects.push_back(b);
-                    cout << "Bed was made\n" << endl;
-                    break;
-                }
-                case 2 : {
-                    Chair c(IP, &pyt);
-                    objects.push_back(c);
-                    cout << "Chair was made\n" << endl;
-                    break;
-                }
-                case 3 : {
-                    TableLamp t(IP, &pyt);
-                    objects.push_back(t);
-                    cout << "Lamp was made\n" << endl;
-                    break;
-                }
-                case 4 : {
-                    Pillar p(IP, &pyt);
-                    objects.push_back(p);
-                    cout << "Pillar was made\n" << endl;
-                    break;
-                }
-                case 5 : {
-                    Wall w(IP, &pyt);
-                    objects.push_back(w);
-                    cout << "Wall was made\n" << endl;
-                    break;
-                }
+//                case 1 : {
+//                    Bed b(IP, &pyt);
+//                    objects.push_back(b);
+//                    cout << "Bed was made\n" << endl;
+//                    break;
+//                }
+//                case 2 : {
+//                    Chair c(IP, &pyt);
+//                    objects.push_back(c);
+//                    cout << "Chair was made\n" << endl;
+//                    break;
+//                }
+//                case 3 : {
+//                    Lamp t(IP,&pyt);
+//                    objects.push_back(t);
+//                    tempT = &t;
+//                    cout << "Lamp was made\n" << endl;
+//                    break;
+//                }
+//                case 4 : {
+//                    Pillar p(IP, &pyt);
+//                    objects.push_back(p);
+//                    cout << "Pillar was made\n" << endl;
+//                    break;
+//                }
+//                case 5 : {
+//                    Wall w(IP, &pyt);
+//                    objects.push_back(w);
+//                    cout << "Wall was made\n" << endl;
+//                    break;
+//                }
                 case 6 : {
-                    Fridge f(IP, &pyt);
-                    objects.push_back(f);
+                    Fridge f(IP, &pyt, &obj1);
+                    fridge = f;
+//                    objects.push_back(f);
                     cout << "Fridge was made\n" << endl;
                     break;
                 }
                 case 7 : {
                     Door d(IP, &pyt);
-                    objects.push_back(d)
+//                    objects.push_back(d);
+                    tempT = d;
                     cout << "Door was made\n" << endl;
                     break;
                 }
@@ -104,11 +111,14 @@ bool init() {
 int main(int argc, char const *argv[])
 {
     bool run = init();
+    cout<<"init done"<<endl;
     while (run) {
-        for (int x = 0; x < objects.size(); x++) {
-            objects[x].update();
-        }
-        sleep(10);
+//        for (int x = 0; x < objects.size(); x++) {
+            //tempT.update();
+            fridge.update();
+//        }
+        sleep(5);
+        cout<<"rondje"<<endl;
     }
     return 0;
 }

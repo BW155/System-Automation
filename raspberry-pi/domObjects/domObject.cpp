@@ -8,6 +8,11 @@ domObject::domObject(webSocket *s) {
     python = s;
     wemos = Socket();
 }
+domObject::domObject(webSocket *s, TimeClass *t) {
+    python = s;
+    wemos = Socket();
+    timeObj = t;
+}
 
 json domObject::toJson(char* jsonString) {
     json jsonObj;
@@ -20,3 +25,4 @@ char* domObject::toCharArray(json jsonObj) {
     strcpy(result, temp.c_str());
     return result;
 }
+TimeClass* domObject::getTimePointer() {return timeObj;}

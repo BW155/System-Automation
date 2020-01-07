@@ -69,7 +69,7 @@ bool webSocket::sendMessage(int id) {
 char* webSocket::receiveActuators(int id) {
     json message {
             {"id",id},
-            {"type",1}
+            {"type",2}
     };
     makeConnection();
     char buffer[1024] = {0};
