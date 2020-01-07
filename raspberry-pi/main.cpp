@@ -103,8 +103,8 @@ bool init() {
     else if (in == 2) {
         return checkConnectedDevices();
     }
-    else {return checkConnectedDevices();
-        return false;
+    else {
+        return checkConnectedDevices();
     }
 }
 
