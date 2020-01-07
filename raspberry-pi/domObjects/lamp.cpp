@@ -6,7 +6,7 @@
 //Pi stuurt:		{"id":3, "actuators":{"led":x}}
 //Wemos stuurt:	{"error":"err", "sensors":{"motionSensor":x, "button":x}}
 
-Lamp::Lamp(const char * IP,webSocket *s): domObject(s), led(0), motionSensor(0){
+Lamp::Lamp(const char * IP,webSocket *s, TimeClass *t): domObject(s), led(0), motionSensor(0){
     Socket temp(3, "tableLamp", IP);
     domObject::wemos = temp;
 }

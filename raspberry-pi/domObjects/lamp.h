@@ -11,7 +11,7 @@
 
 class Lamp: public domObject {
 public:
-    Lamp(const char* IP, webSocket *s);
+    Lamp(const char* IP, webSocket *s, TimeClass *t);
     void stuurLamp();
     void update();
 
