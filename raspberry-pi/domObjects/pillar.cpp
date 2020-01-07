@@ -58,15 +58,13 @@ void Pillar::update(){
     char* receive_sensor = wemos.sendReceive(wemos_message);
     json Receive_Sensor = toJson(receive_sensor);
 
-    if(gassensor == !Receive_Sensor["sensors"]["gasSensor"] || button == !Receive_Sensor["sensors"]["button"]){
-        gassensor = Receive_Sensor["sensors"]["gasSensor"];
-        button = Receive_Sensor["sensors"]["button"];
+    gassensor = Receive_Sensor["sensors"]["gasSensor"];
+    button = Receive_Sensor["sensors"]["button"];
 
-        buzzer = gassensor >= 930;
-        
-        char *python_message = pythonMessage();
-        python->sendAll(4, *python_message); // stuur alle sensors, alleen als uit sendReceive blijkt dat er veranderingen zijn
-    }
+    buzzer = gassensor >= 930;
+    
+    char *python_message = pythonMessage();
+    python->sendAll(4, *python_message); // stuur alle sensors, alleen als uit sendReceive blijkt dat er veranderingen zijn
 }
 
 bool Pillar::get_buzzer(){
