@@ -1,0 +1,23 @@
+#object-card-holder > div {
+    float: left;
+}
+
+.object-card {
+    width: auto;
+    min-height: 430px;
+    margin: 10px;
+}
+
+.container {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    max-width: none;
+}
+
+hr {
+    height: 1px;
+    color: #AAAAAA;
+    background-color: #AAAAAA;
+    border: none;
+}

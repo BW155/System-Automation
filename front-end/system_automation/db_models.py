@@ -10,9 +10,9 @@ from flask_sqlalchemy import SQLAlchemy
 from system_automation import app, db
 
 
-class Role(enum.Enum):
-    PARENT = "PARENT"
-    GUARD = "GUARD"
+class Role(enum.IntEnum):
+    PARENT = 1
+    GUARD = 2
 
 
 class Model(db.Model):

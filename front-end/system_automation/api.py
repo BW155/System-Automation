@@ -1,15 +1,15 @@
 import flask
 from flask_login import login_required, login_user, logout_user
 from . import app, User, Role
-from .objects import get_actuator, process_actuator, set_actuator
+from .objects import get_actuator, process_actuator, set_actuator, get_objects
 from .utility import roles_allowed
 import json
 import time
 from datetime import datetime
 
 notification_templates = [
-    {"id": 0, "not_id": 0, "time": "", "title": "Alarm", "message": "Er is hulp nodig!!!"},
-    {"id": 1, "not_id": 0, "time": "", "title": "Naar Buiten", "message": "Patient wil naar buiten"}
+    {"id": 0, "time": "", "title": "Alarm", "message": "Er is hulp nodig!!!"},
+    {"id": 1, "time": "", "title": "Naar Buiten", "message": "Patient wil naar buiten"}
 ]
 
 notifications = []
@@ -18,14 +18,23 @@ notifications = []
 # api route for logged-in users
 @app.route("/api/dashboard/<int:obj_id>", methods=["POST", "GET"])
 @login_required
-@roles_allowed([Role.GUARD])
+@roles_allowed([Role.GUARD, Role.PARENT])
 def dashboard_api(obj_id):
     if flask.request.method == "POST":
         actuator = flask.request.form.get("actuator")
         value = flask.request.form.get("value")
         return set_actuator(obj_id, actuator, value)
     if flask.request.method == "GET":
-        pass
+        actuator = flask.request.form.get("actuator")
+        return get_actuator(obj_id, actuator)
+
+
+# api route for logged-in users to get objects
+@app.route("/api/dashboard/all", methods=["GET"])
+@login_required
+@roles_allowed([Role.GUARD, Role.PARENT])
+def dashboard_api_all():
+    return get_objects()
 
 
 # api route for non-logged-in users
@@ -68,21 +77,14 @@ def interface_notifications_post(notif_type):
 @login_required
 @roles_allowed([Role.GUARD])
 def interface_notifications():
-    cur_notifications = []
-    not_id = -1
-
-    req_not_id = flask.request.args.get("not_id")
-    if req_not_id.isdigit():
-        not_id = int(req_not_id)
-
-    cur_notifications = [n for n in notifications if n["not_id"] > int(not_id)]
     cur_time = time.time()
 
-    while len(cur_notifications) == 0:
-        cur_notifications = [n for n in notifications if n["not_id"] > int(not_id)]
+    while len(notifications) == 0:
         time.sleep(0.1)
         if time.time() - cur_time >= 9:
             return "TimeOut", 308
 
+    cur_notifications = notifications.copy()
+    del notifications[:]
     return json.dumps(cur_notifications)
 

@@ -33,44 +33,44 @@ def data_socket_routine():
 
 def process_message(message):
     global objects
-    js = None
     try:
         js = json.loads(message)
+
+        messsage_type = js.get("type")
+
+        if not messsage_type:
+            return "Error"
+
+        """
+        Type:
+        1 = Change Check
+        2 = Give Actuator Values
+        3 = Receive All
+        """
+        if messsage_type == 1:
+            obj_id = js.get("id")
+            if obj_id and obj_id >= 1 and obj_id <= 7:
+                return "1" if check_objects_change(obj_id) else "0"
+            return "UNKOWN ID"
+
+        if messsage_type == 2:
+            obj_id = js.get("id")
+            if obj_id and obj_id >= 1 and obj_id <= 7:
+                data = dict([i for i in objects if i["id"] == obj_id][0]).copy()
+                del data["sensors"]
+                return json.dumps(data)
+            return "UNKOWN ID"
+
+        if messsage_type == 3:
+            data = js.get("data")
+            if data:
+                set_object(data)
+                return "1"
+            return "0"
+
+        return "UNKOWN"
     except JSONDecodeError:
         return "JSONError"
-
-    print(js)
-    messsage_type = js.get("type")
-
-    if not messsage_type:
-        return "Error"
-
-    """
-    Type:
-    1 = Change Check
-    2 = Give Actuator Values
-    3 = Receive All
-    """
-    if messsage_type == 1:
-        obj_id = js.get("id")
-        if obj_id and obj_id >= 1 and obj_id <= 7:
-            return "1" if check_objects_change(obj_id) else "0"
-        return "UNKOWN ID"
-
-    if messsage_type == 2:
-        obj_id = js.get("id")
-        if obj_id and obj_id >= 1 and obj_id <= 7:
-            return json.dumps([i for i in objects if i["id"] == obj_id][0])
-        return "UNKOWN ID"
-
-    if messsage_type == 3:
-        data = js.get("data")
-        if data:
-            set_object(data)
-            return "1"
-        return "0"
-
-    return "UNKOWN"
 
 
 def start_data_socket_thread():

@@ -1,3 +1,5 @@
+import json
+from flask import jsonify
 
 tmp_objects = []
 
@@ -12,6 +14,10 @@ objects = [
 ]
 
 
+def get_objects():
+    return jsonify(web_translate_objects())
+
+
 def set_object(obj):
     global objects, tmp_objects
     tmp_objects = objects
@@ -23,16 +29,20 @@ def set_object(obj):
 
 
 def check_objects_change(obj_id):
+    global tmp_objects
     for i in objects:
         for u in tmp_objects:
             if i["id"] == obj_id and u["id"] == obj_id and i == u:
                 return False
+
+    tmp_objects = objects
     return True
 
 
 def process_actuator(obj_id, actuator, toggle=True, value=None):
-    global objects
+    global objects, tmp_objects
     tmp_objects = objects
+
     for o in objects:
         if o["id"] == obj_id:
             for a in o["actuators"]:
@@ -48,8 +58,9 @@ def get_actuator(obj_id, actuator):
         if i["id"] == obj_id:
             for a in i["actuators"]:
                 if a == actuator:
-                    return i["actuators"][a]
-    return None
+                    return json.dumps(i["actuators"][a])
+
+    return json.dumps({})
 
 
 def set_actuator(obj_id, actuator, value):
@@ -60,7 +71,6 @@ def set_actuator(obj_id, actuator, value):
                 if a == actuator:
                     if value.isdigit():
                         i["actuators"][a] = int(value)
-                        print(i)
                         return "1"
     return "0"
 
