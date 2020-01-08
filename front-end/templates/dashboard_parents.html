@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block styles %}
+<link rel="stylesheet" href="/static/css/dashboard.css"/>
+{% endblock %}
+
+{% block content %}
+<div id="object-card-holder">
+    {% for o in objects %}
+    <div class="object-card card">
+        <h5 style="margin-left: 10px; margin-top: 10px;">{{ o.name }}</h5>
+
+        <hr size="2px" style="margin-bottom: 10px">
+        <b style="margin-left: 10px">Status</b>
+        <hr size="2px" style="margin-top: 10px">
+
+        <div class="card-content" style="padding: 5px">
+            {% for s in o["sensors"]%}
+            <div class="row" style="margin-bottom: 5px">
+                <p class="col s10" style="font-size: auto">{{s.name}}:</p>
+                <p class="col s2" id="{{ o.id }}{{ s.id }}"><b>{{ s.value }}</b></p>
+            </div>
+            {% endfor %}
+            {% for a in o["actuators"]%}
+            <div class="row" style="margin-bottom: 5px">
+                <p class="col s10" style="font-size: auto">{{a.name}}:</p>
+                <p class="col s2" id="{{ o.id }}{{ a.id }}"><b>{{ a.value }}</b></p>
+            </div>
+            {% endfor %}
+        </div>
+
+        <hr size="2px" style="margin-bottom: 10px">
+        <b style="margin-left: 10px">Acties</b>
+        <hr size="2px" style="margin-top: 10px">
+
+        <div class="card-content">
+            {% for s in o["actions"]["switches"] %}
+                <div class="switch">
+                    <label class="black-text">
+                        {{ s["name"] }}:<br>
+                        Uit
+                        <input 
+                            type="checkbox" {{"checked" if s["value"] == 1 else ""}}
+                            onclick="actionUpdate({{o["id"]}}, '{{s["id"]}}', this.checked ? 1 : 0)">
+                        <span class="lever"></span>
+                        Aan
+                    </label>
+                </div>
+            {% endfor %}
+            {% for r in o["actions"]["sliders"] %}
+                <p class="range-field">
+                    {{r["name"]}}:
+                    <input 
+                        type="range"
+                        min="0"
+                        max="1024"
+                        onclick="actionUpdate({{o["id"]}}, '{{r["id"]}}', this.value)"
+                        value="{{r["value"]}}"/>
+                </p>
+            {% endfor %}
+            {% for b in o["actions"]["buttons"]%}
+                <button 
+                    class="btn {{b["color"]}}" 
+                    onclick="actionUpdate({{o["id"]}}, '{{b["id"]}}', {{b["value"]}})" 
+                    style="margin-top: 15px; font-size: 12px">{{b["name"]}}</button>
+            {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
+
+{% block scripts%}
+<script src="/static/js/dashboard.js"></script>
+{% endblock %}

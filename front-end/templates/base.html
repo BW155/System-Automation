@@ -23,6 +23,8 @@
             padding: 25px !important;
         }
     </style>
+    {% block styles %}
+    {% endblock %}
 </head>
 
 <body>
@@ -83,14 +85,10 @@
     <script src="/static/js/jquery-3.4.1.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            document.addEventListener('DOMContentLoaded', function() {
-                var elems = document.querySelectorAll('.modal');
-                var instances = M.Modal.init(elems, options);
-            });
-            document.addEventListener('DOMContentLoaded', function() {
-                var elems = document.querySelectorAll('.sidenav');
-                var instances = M.Sidenav.init(elems, options);
-            });
+            var elems = document.querySelectorAll('.modal');
+            var instances = M.Modal.init(elems, null);
+            elems = document.querySelectorAll('.sidenav');
+            instances = M.Sidenav.init(elems, null);
             setTimeout(function() { 
                 $(".info-box").animate({
                     opacity: '0.0',

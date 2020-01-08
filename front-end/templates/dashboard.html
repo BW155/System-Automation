@@ -1,82 +1,11 @@
 {% extends "base.html" %}
+
+{% block styles %}
+<link rel="stylesheet" href="/static/css/dashboard.css"/>
+{% endblock %}
+
 {% block content %}
-<style>
-#object-card-holder > div {
-    float: left;
-}
-
-    .object-card {
-        width: auto;
-        min-height: 430px;
-        margin: 10px;
-    }
-
-    .container {
-        margin: 0;
-        padding: 0;
-        width: 100vw;
-        max-width: none;
-    }
-    hr {
-        height: 1px;
-        color: #AAAAAA;
-        background-color: #AAAAAA;
-        border: none;
-    }
-</style>
-
 <div id="object-card-holder">
-    {% for o in objects %}
-    <div class="object-card card">
-        <h5 style="margin-left: 10px; margin-top: 10px;">{{ o.name }}</h5>
-
-        <hr size="2px" style="margin-bottom: 10px">
-        <b style="margin-left: 10px">Status</b>
-        <hr size="2px" style="margin-top: 10px">
-
-        <div class="card-content" style="padding: 5px">
-            {% for s in o["sensors"]%}
-            <div class="row" style="margin-bottom: 5px">
-                <p class="col s10" style="font-size: auto">{{s.name}}:</p>
-                <p class="col s2" id="{{ o.id }}{{ s.id }}"><b>{{ s.value }}</b></p>
-            </div>
-            {% endfor %}
-            {% for a in o["actuators"]%}
-            <div class="row" style="margin-bottom: 5px">
-                <p class="col s10" style="font-size: auto">{{a.name}}:</p>
-                <p class="col s2" id="{{ o.id }}{{ a.id }}"><b>{{ a.value }}</b></p>
-            </div>
-            {% endfor %}
-        </div>
-
-        <hr size="2px" style="margin-bottom: 10px">
-        <b style="margin-left: 10px">Acties</b>
-        <hr size="2px" style="margin-top: 10px">
-
-        <div class="card-content">
-            {% for s in o["actions"]["switches"] %}
-                <div class="switch">
-                    <label class="black-text">
-                        {{ s["name"] }}:<br>
-                        Uit
-                        <input type="checkbox" {{"checked" if s["value"] == 1 else ""}} onclick="actionUpdate({{o["id"]}}, '{{s["id"]}}', this.checked ? 1 : 0)">
-                        <span class="lever"></span>
-                        Aan
-                    </label>
-                </div>
-            {% endfor %}
-            {% for r in o["actions"]["sliders"] %}
-                <p class="range-field">
-                    {{r["name"]}}:
-                    <input type="range" min="0" max="1024" onclick="actionUpdate({{o["id"]}}, '{{r["id"]}}', this.value)" value="{{r["value"]}}"/>
-                </p>
-            {% endfor %}
-            {% for b in o["actions"]["buttons"]%}
-                <button class="btn {{b["color"]}}" onclick="actionUpdate({{o["id"]}}, '{{b["id"]}}', {{b["value"]}})" style="margin-top: 15px; font-size: 12px">{{b["name"]}}</button>
-            {% endfor %}
-        </div>
-    </div>
-    {% endfor %}
 </div>
 
 <div id="notifications" class="modal">
@@ -96,53 +25,74 @@
 </div>
 {% endblock %}
 {% block scripts %}
+{% raw %}
+<script src="/static/js/jsrender.min.js"></script>
+<script id="dom_object" type="text/x-jsrender">
+    <div class="object-card card">
+        <h5 style="margin-left: 10px; margin-top: 10px;">{{:name}}</h5>
+
+        <hr size="2px" style="margin-bottom: 10px">
+        <b style="margin-left: 10px">Status</b>
+        <hr size="2px" style="margin-top: 10px">
+
+        <div class="card-content" style="padding: 5px">
+            {{for sensors }}
+            <div class="row" style="margin-bottom: 5px">
+                <p class="col s10" style="font-size: auto">{{:name}}:</p>
+                <p class="col s2" id="{{ o.id }}{{ s.id }}"><b>{{:value }}</b></p>
+            </div>
+            {{/for}}
+            {{for actuators }}
+            <div class="row" style="margin-bottom: 5px">
+                <p class="col s10" style="font-size: auto">{{:name}}:</p>
+                <p class="col s2" id="{{ o.id }}{{ a.id }}"><b>{{:value}}</b></p>
+            </div>
+            {{/for}}
+        </div>
+
+        <hr size="2px" style="margin-bottom: 10px">
+        <b style="margin-left: 10px">Acties</b>
+        <hr size="2px" style="margin-top: 10px">
+
+        <div class="card-content">
+            {{for actions["switches"] ~o_id=id }}
+                <div class="switch">
+                    <label class="black-text">
+                        {{:name}}:<br>
+                        Uit
+                        <input 
+                            type="checkbox" {{if value == 1}}checked{{/if}}
+                            onclick="actionUpdate({{:~o_id}}, '{{:id}}', this.checked ? 1 : 0)">
+                        <span class="lever"></span>
+                        Aan
+                    </label>
+                </div>
+            {{/for}}
+            {{for actions["sliders"] ~o_id=id }}
+                <p class="range-field">
+                    {{:name}}:
+                    <input 
+                        type="range"
+                        min="0"
+                        max="1024"
+                        onclick="actionUpdate({{:~o_id}}, '{{:id}}', this.value)"
+                        value="{{:value}}"/>
+                </p>
+            {{/for}}
+            {{for actions["buttons"] ~o_id=id }}
+                <button 
+                    class="btn {{:color}}" 
+                    onclick="actionUpdate({{:~o_id}}, '{{:id}}', {{:value}})" 
+                    style="margin-top: 15px; font-size: 12px">{{:name}}</button>
+            {{/for}}
+        </div>
+    </div>
+</script>
+{% endraw %}
+
+<script src="/static/js/dashboard.js"></script>
+
 <script>
-    function actionUpdate(obj_id, actuator, value) {
-        $.ajax({
-            url:"/api/dashboard/" + obj_id,
-            method: "POST",
-            data: {"actuator": actuator, "value": value},
-            success: function(data) {
-                M.toast({html: "Actuator Updated"});
-            }
-        });
-    }
-
-    function pollNotifications(id) {
-        $.ajax({
-            url:"/api/interface_notifications?not_id=" + id,
-            timeout: 10000,
-            success: function(data) {
-                console.log(data);
-                data = JSON.parse(data);
-                for (var i = 0; i < data.length; i++) {
-                    if (data[i].id == 0) {
-                        $("<p class=\"flow-text white-text\" style=\"background: red\">" 
-                            + data[i].time + " | " + data[i].message + "</p>").appendTo("#notification-holder");
-                    } else {
-                        $("<p class=\"flow-text white-text\" style=\"background: blue\">" 
-                            + data[i].time + " | " + data[i].message + "</p>").appendTo("#notification-holder");
-                    }
-                }
-                if (data.length > 0) {
-                    var elem = document.getElementById("notifications");
-                    var instance = M.Modal.getInstance(elem);
-                    instance.open();
-                    pollNotifications(data[data.length - 1]["not_id"]);
-                } else {
-                    pollNotifications(id);
-                }
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                console.log(jqXHR.status + "," + textStatus + ", " + errorThrown);
-                pollNotifications(id);
-            }
-        });
-    }
     pollNotifications({{last_not_id}});
-
-    function clearNotifications() {
-        $("#notification-holder").empty();
-    }
 </script>
 {% endblock %}
