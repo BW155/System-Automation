@@ -4,7 +4,6 @@
 using json = nlohmann::json;
 using namespace std;
 
-
 #define PORT 8080
 
 
@@ -14,16 +13,19 @@ TimeClass obj1 (1,0,0,0);
 vector<domObject*> objects;
 Door tempT("x", &pyt);
 Fridge fridge("x", &pyt, &obj1);
+Pillar p("x", &pyt);
 
 bool checkConnectedDevices() {
     return objects.size() == 7;
 }
 
 void discoverDevices() {
+
     const char *IPGROUP = "192.168.2.";
 //    const char *IP;
     int Device;
-    for (int x = 196; x < 200; x+=1) {
+
+    for (int x = 191; x < 192; x+=1) {
         int valread;
         const char *hello = "hello";
         char buffer[1024] = {0};
@@ -58,12 +60,14 @@ void discoverDevices() {
 //                    cout << "Lamp was made\n" << endl;
 //                    break;
 //                }
-//                case 4 : {
-//                    Pillar p(IP, &pyt);
-//                    objects.push_back(p);
-//                    cout << "Pillar was made\n" << endl;
-//                    break;
-//                }
+                case 4 : {
+                    Pillar pillar(IP, &pyt);
+                    p = pillar;
+                    // objects.push_back(p);
+
+                    cout << "Pillar was made\n" << endl;
+                    break;
+                }
 //                case 5 : {
 //                    Wall w(IP, &pyt);
 //                    objects.push_back(w);
@@ -73,7 +77,6 @@ void discoverDevices() {
                 case 6 : {
                     Fridge f(IP, &pyt, &obj1);
                     fridge = f;
-//                    objects.push_back(f);
                     cout << "Fridge was made\n" << endl;
                     break;
                 }
@@ -114,7 +117,6 @@ int main(int argc, char const *argv[])
     cout<<"init done"<<endl;
     while (run) {
 //        for (int x = 0; x < objects.size(); x++) {
-            //tempT.update();
             fridge.update();
 //        }
         sleep(5);

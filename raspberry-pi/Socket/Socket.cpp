@@ -9,6 +9,7 @@
 #include <bits/stdc++.h>
 #include "Socket.h"
 
+using json = nlohmann::json ;
 using namespace std;
 #define PORT 8080
 Socket::Socket() {connected = 0;}
@@ -70,8 +71,10 @@ bool Socket::getConnected() {
 char* Socket::sendReceive(char *message) {
     char *temp;
     makeConnection();
+    cout<<"twee"<<endl;
     char buffer[1024] = {0};
     send(sock, message, strlen(message), 0);
+    cout<<"twwee.5"<<endl;
     int valread = read(sock, buffer, 1024);
     temp = buffer;
     close(sock);

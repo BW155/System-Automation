@@ -44,7 +44,7 @@ void webSocket::makeConnection() {
 
     if (connect(sock, (struct sockaddr *)&sock_addr, sizeof(sock_addr)) < 0)
     {
-        printf("\nConnection Failed \n");
+        printf("\nConnection Failed webSocket \n");
     }
     else {
         cout<<"connection made"<<endl;

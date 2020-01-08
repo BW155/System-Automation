@@ -9,8 +9,6 @@
 #include "domObject.h"
 #include "pillar.h"
 
-class Socket;
-
 class Door: public domObject{
 private:
     int servo;

@@ -2,15 +2,15 @@
 // Created by LarsLinux on 16-12-19.
 //
 
-#ifndef SOCKET_BED_H
-#define SOCKET_BED_H
+#ifndef BED_H
+#define BED_H
 
 #include "../Socket/Socket.h"
 
-class bed {
+class Bed {
 private:
 
 public:
 
 };
-#endif //SOCKET_BED_H
+#endif //SOCKET_BED_

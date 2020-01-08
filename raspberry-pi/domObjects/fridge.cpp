@@ -1,10 +1,10 @@
 //
 // Created by Zep on 16-12-19.
 //
+
 #include "fridge.h"
 #include "../Socket/Socket.h"
 #include "domObject.h"
-#include "../includes.h"
 
 #define open 1
 #define closed 0
@@ -14,10 +14,10 @@ using json = nlohmann::json ;
 Fridge::Fridge(const char * IP, webSocket *s, TimeClass *t) : domObject(s, t){
     cooling = false;
     thermometer1 = 0;
-    thermometer2 = 0;
+    thermometer2 = 0; 
     openClose = 0 ;
     Socket temp(6,"Fridge",IP);
-    domObject::wemos = temp;
+    wemos = temp;
 }
 
 char* Fridge::wemosMessage(){
@@ -45,34 +45,33 @@ json Fridge::pythonMessage() {
                    }
             }
     };
-    char *message = toCharArray(Message);
     return Message;
 }
 
 void Fridge::update(){
     //Logic for the fridge
-    char *result, *sensors;
-    json jsonResult;
-    static int prev_time;
-    int start_time, cur_time;
-    bool state = 0;
+     char *result;
+     json jsonResult;
+     static int start_time;
+     int cur_time;
+     bool state = 0;
 
-    TimeClass *t2 = getTimePointer();
-    t2 -> autoIncreaseTime();
-    //Ask for current time in seconds
-    cur_time = t2->getTime()[0]*3600 + t2->getTime()[1]*60  + t2->getTime()[2];
+     TimeClass *t2 = getTimePointer();
+     t2 -> autoIncreaseTime();
 
-    if (openClose == open && state == 1){
+     //Ask for current time in seconds
+     cur_time = t2->getTime()[0]*3600 + t2->getTime()[1]*60  + t2->getTime()[2];
+
+     if (openClose == open && state == 1){
         start_time = t2->getTime()[0]*3600 + t2->getTime()[1]*60  + t2->getTime()[2];
         state = 0;
-    }
-    if((cur_time-start_time) > (5 * 60)){
+     }
+     if((cur_time-start_time) > (5 * 60)){
         cooling = false;
         char * message = wemosMessage();
         result = wemos.sendReceive(message);
         jsonResult = toJson(result);
         updateAttributes(jsonResult);
-
     }
     if (openClose == closed && state == 0) {
         start_time = 0;
