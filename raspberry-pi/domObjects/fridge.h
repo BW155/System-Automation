@@ -20,6 +20,8 @@ private:
     char* wemosMessage();
     json pythonMessage();
     void updateAttributes(json);
+    bool state;
+    int start_time;
 public:
     void update() override;
     Fridge(const char * IP, webSocket *s, TimeClass *t);

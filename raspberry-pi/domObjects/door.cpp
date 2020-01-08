@@ -8,7 +8,7 @@
 
 using json = nlohmann::json;
 
-Door::Door(const char* IP, webSocket* w): domObject(w){
+Door::Door(const char* IP, webSocket* w, TimeClass *t): domObject(w, t){
     servo = 0;
     buttonOutside = false;
     buttonInside = false;
@@ -43,7 +43,6 @@ void Door::update() {
 
         //ledIn
         ledInside = jsonResult["actuators"]["led1"] == 1;
-//        ledInside = jsonResult["actuators"]["led1"];
         //ledOut
         ledOutside = time[0] < 6 || time[0] > 18 || buttonOutside;
         cout<<"klaar met py"<<endl;

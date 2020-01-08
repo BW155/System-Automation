@@ -20,8 +20,8 @@ private:
     char* wemosMessage(bool, bool, int);
     json pythonMessage();
 public:
-    Door(const char*, webSocket*);
-    //void setPillarPointer(Pillar*);
+    Door(const char*, webSocket*, TimeClass*);
+    void setPillarPointer(Pillar*);
     void update();
 
 };

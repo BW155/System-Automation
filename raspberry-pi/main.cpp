@@ -11,7 +11,7 @@ webSocket pyt;
 TimeClass obj1 (1,0,0,0);
 
 vector<domObject*> objects;
-Door tempT("x", &pyt);
+Door tempT("x", &pyt, &obj1);
 Fridge fridge("x", &pyt, &obj1);
 Pillar p("x", &pyt);
 Wall wall("x", &pyt);
@@ -27,7 +27,7 @@ void discoverDevices() {
 //    const char *IP;
     int Device;
 
-    for (int x = 187; x < 188; x+=1) {
+    for (int x = 197; x < 198; x+=1) {
         int valread;
         const char *hello = "hello";
         char buffer[1024] = {0};
@@ -85,7 +85,7 @@ void discoverDevices() {
                     break;
                 }
                 case 7 : {
-                    Door d(IP, &pyt);
+                    Door d(IP, &pyt, &obj1);
 //                    objects.push_back(d);
                     tempT = d;
                     cout << "Door was made\n" << endl;
@@ -121,9 +121,9 @@ int main(int argc, char const *argv[])
     cout<<"init done"<<endl;
     while (run) {
 //        for (int x = 0; x < objects.size(); x++) {
-            bed.update();
+            fridge.update();
 //        }
-//        sleep(1);
+        sleep(1);
 //        cout<<"rondje"<<endl;
     }
     return 0;
