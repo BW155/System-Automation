@@ -5,11 +5,18 @@ import socketserver
 import json
 from json import JSONDecodeError
 from system_automation.objects import objects, set_object, check_objects_change
+from system_automation.api import add_notification
 
 bind_ip = '0.0.0.0'
 bind_port = 9001
 BUFFER_SIZE = 1200
 
+pi_notification_templates = {
+    "1": ("Deur notificatie", "Timothy wil de deur openen"),
+    "2": ("Deur notificatie", "Iemand belt aan"),
+    "3": ("Bed notificatie", "Timothy is uit bed"),
+    "4": ("Koelkast notificatie", "Koelkast is open")
+}
 
 class PiSocketServer(socketserver.BaseRequestHandler):
 
@@ -46,6 +53,7 @@ def process_message(message):
         1 = Change Check
         2 = Give Actuator Values
         3 = Receive All
+        4 = Notification
         """
         if messsage_type == 1:
             obj_id = js.get("id")
@@ -67,6 +75,13 @@ def process_message(message):
                 set_object(data)
                 return "1"
             return "0"
+
+        if messsage_type == 4:
+            n_id = js.get("notification_id")
+            notification = pi_notification_templates[n_id]
+            if notification is not None:
+                add_notification(n_id, notification[0], notification[1])
+
 
         return "UNKOWN"
     except JSONDecodeError:

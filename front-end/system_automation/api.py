@@ -7,12 +7,19 @@ import json
 import time
 from datetime import datetime
 
+
 notification_templates = [
     {"id": 0, "time": "", "title": "Alarm", "message": "Er is hulp nodig!!!"},
     {"id": 1, "time": "", "title": "Naar Buiten", "message": "Patient wil naar buiten"}
 ]
 
+
 notifications = []
+
+
+def add_notification(n_id, title, notification):
+    global notifications
+    notifications.append({"id": n_id, "title": title, "message": notification})
 
 
 # api route for logged-in users
