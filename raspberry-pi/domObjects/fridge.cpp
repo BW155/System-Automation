@@ -31,10 +31,31 @@ char* Fridge::wemosMessage(){
     return message;
 }
 
+json Fridge::pythonMessage() {
+    json Message = {
+            {"id", 6},
+            {"actuators", {
+                           {"cooling", cooling},
+                   }
+            },
+            {"sensors", {
+                           {"thermometer1", thermometer1},
+                           {"thermometer2", thermometer2},
+                           {"open/close", openClose},
+                           {"cooling", cooling}
+                   }
+            }
+    };
+    char *message = toCharArray(Message);
+    return Message;
+}
+
 void Fridge::update(){
-     char *result, *sensors;
-     static int prev_time;
-     int start_time, cur_time;
+    //Logic for the fridge
+     char *result;
+     json jsonResult;
+     static int start_time;
+     int cur_time;
      bool state = 0;
 
      TimeClass *t2 = getTimePointer();
@@ -50,14 +71,26 @@ void Fridge::update(){
      if((cur_time-start_time) > (5 * 60)){
         cooling = false;
         char * message = wemosMessage();
+        result = sendReceive(message);
+        jsonResult = toJson(result);
+        updateAttributes(jsonResult);
+
      }
      if (openClose == closed && state == 0) {
          start_time = 0;
          state = 1;
          cooling = true;
-         sendReceive(wemosMessage());
+         result = sendReceive(wemosMessage());
+         jsonResult = toJson(result);
+         updateAttributes(jsonResult);
      }
-//
 
+}
+
+void Fridge::updateAttributes(json result){
+    thermometer1 = result["sensors"]["thermometer1"];
+    thermometer2 = result["sensors"]["thermometer2"];
+    openClose = result["sensors"]["openClose"];
+    python->sendAll(6,pythonMessage());
 }
 

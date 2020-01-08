@@ -18,6 +18,8 @@ private:
     int thermometer2;
     int openClose;
     char* wemosMessage();
+    json pythonMessage();
+    void updateAttributes(json);
 public:
     void update() override;
     Fridge(const char * IP, webSocket *s, TimeClass *t);
