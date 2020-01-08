@@ -1,6 +1,7 @@
 #include "components.h"
 #include <Wire.h>
 #include <Servo.h>
+#include <Ticker.h>
 
 
 /////////////////////
@@ -8,7 +9,9 @@
 /////////////////////
 
 Servo servo;
-CRGB leds[NUM_LEDS];
+int target;
+int bright = 0;
+Adafruit_NeoPixel ledje(NUM_LEDS, D5, NEO_GRB + NEO_KHZ800);
 
 void initServo() {
     servo.attach(14);
@@ -16,8 +19,10 @@ void initServo() {
 }
 
 void initLed() {
-    FastLED.addLeds<NEOPIXEL, D5>(leds, NUM_LEDS);
+    ledje.begin();
+    ledje.show();
 }
+
 
 double calculateThermistor(int RawADC) {  //Function to perform the fancy math of the Steinhart-Hart equation
     double temperature;
@@ -50,10 +55,10 @@ void setPillarActuators(bool led, bool buzzer){
     writeActuators(output);
 }
 
-void setWallActuators(bool window, bool led) {
+void setWallActuators(bool window, int value) {
     int output = (window << 4);
     writeActuators(output);
-    setLamp(led);
+    setWallLamp(value);
 }
 
 void setDoorActuators(bool led1, bool led2) {
@@ -115,21 +120,32 @@ void setPeltier(bool state){
 
 void setLamp(bool state) {
     Serial.println(state);
-
-    for (int8_t u = 0; u < 255; u++) {
-        for (uint8_t i = 0; i < NUM_LEDS; i++) {
-            if (state) {
-                FastLED.setBrightness(u);
-                leds[i] = CRGB::Red; 
-            } else {
-                FastLED.setBrightness(255 - u);
-                leds[i] = CRGB::Black; 
-            }
-        }
+    if(state){
+        target = 255;
     }
-    FastLED.show();
+    if(!state){
+        target = 0;
+    }
 }
 
+void setWallLamp(int value){
+    target = value;
+}
+
+void brightness(){
+    ledje.setBrightness(bright);
+    for (int i = 0; i < NUM_LEDS; i++) {
+        ledje.setPixelColor(i, 255, 50, 0);
+    }
+    ledje.show();
+    Serial.println(bright);
+    if(bright < target){
+        bright++;
+    }
+    if(bright > target){
+        bright--;
+    } 
+}
 
 void setServo(int angle) {
     servo.write(angle);

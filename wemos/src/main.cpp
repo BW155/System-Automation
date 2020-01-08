@@ -4,6 +4,7 @@
 #include "domobjects/domobject.h"
 #include "components.h"
 #include "wifiHandler.h"
+#include "Ticker.h"
 
 using namespace std;
 
@@ -35,6 +36,7 @@ Wall object;
 #ifdef FRIDGE
 Fridge object;
 #endif
+Ticker tick(brightness, 0.05);
 
 void setup() {
     Serial.begin(9600);
@@ -58,10 +60,13 @@ void setup() {
     wifiSetup();
 
     Serial.println("Hi, my id is " + String(object.getId()));
+    
+    tick.start();
 }
 
 void loop() {
     handleWifi(&object);
     delay(20);
-    componentCheckLoop();  
+    componentCheckLoop();
+    tick.update();  
 }
