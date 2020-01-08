@@ -75,6 +75,7 @@ void discoverDevices() {
                 case 6 : {
                     Fridge f(IP, &pyt, &obj1);
 //                    objects.push_back(f);
+                    fridge = f;
                     cout << "Fridge was made\n" << endl;
                     break;
                 }
@@ -114,8 +115,8 @@ int main(int argc, char const *argv[])
     cout<<"init done"<<endl;
     while (run) {
 //        for (int x = 0; x < objects.size(); x++) {
-            p.update();
-//            fridge.update();
+//            p.update();
+            fridge.update();
 //        }
         sleep(5);
         cout<<"rondje"<<endl;

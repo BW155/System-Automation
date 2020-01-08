@@ -71,8 +71,10 @@ bool Socket::getConnected() {
 char* Socket::sendReceive(char *message) {
     char *temp;
     makeConnection();
+    cout<<"twee"<<endl;
     char buffer[1024] = {0};
     send(sock, message, strlen(message), 0);
+    cout<<"twwee.5"<<endl;
     int valread = read(sock, buffer, 1024);
     temp = buffer;
     close(sock);
@@ -80,6 +82,7 @@ char* Socket::sendReceive(char *message) {
 //        return "-1";
 //    }
 //    else {
+        cout<<"drie"<<endl;
         return temp;
 //    }
 }

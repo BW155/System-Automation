@@ -17,6 +17,7 @@ Fridge::Fridge(const char * IP, webSocket *s, TimeClass *t) : domObject(s, t){
     thermometer2 = 0; 
     openClose = 0 ;
     Socket temp(6,"Fridge",IP);
+    wemos = temp;
 }
 
 char* Fridge::wemosMessage(){
@@ -46,7 +47,6 @@ json Fridge::pythonMessage() {
                    }
             }
     };
-    char *message = toCharArray(Message);
     return Message;
 }
 
@@ -80,7 +80,10 @@ void Fridge::update(){
          start_time = 0;
          state = 1;
          cooling = true;
-         result = wemos.sendReceive(wemosMessage());
+         cout<<"een"<<endl;
+         result = wemosMessage();
+         result = wemos.sendReceive(result);
+         cout<<"twee"<<endl;
          jsonResult = toJson(result);
          updateAttributes(jsonResult);
      }
