@@ -6,11 +6,25 @@
 #define DOOR_H
 
 #include "../Socket/Socket.h"
+#include "domObject.h"
+#include "pillar.h"
 
-class Door {
+class Socket;
+
+class Door: public domObject{
 private:
-
+    int servo;
+    bool buttonOutside;
+    bool buttonInside;
+    bool ledOutside;
+    bool ledInside;
+    domObject* pillar;
+    char* wemosMessage(bool, bool, int);
+    json pythonMessage();
 public:
+    Door(const char*, webSocket*);
+    //void setPillarPointer(Pillar*);
+    void update();
 
 };
-#endif //SOCKET_BED_H
+#endif //DOOR_H

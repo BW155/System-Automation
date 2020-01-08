@@ -24,8 +24,8 @@ private:
 public:
     Pillar(const char*, webSocket*);
     bool get_buzzer();
-    char* wemosMessage(json);
-    char* pythonMessage();
+    char* wemosMessage();
+    json pythonMessage();
     void update() override;
 };
 #endif //SOCKET_BED_H

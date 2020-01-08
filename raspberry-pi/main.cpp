@@ -1,14 +1,19 @@
 // Lars Hartog
 #include "includes.h"
-#include "domObjects/pillar.h"
 
 using json = nlohmann::json;
 using namespace std;
 
 #define PORT 8080
 
+
 webSocket pyt;
-vector<domObject> objects;
+TimeClass obj1 (1,0,0,0);
+
+vector<domObject*> objects;
+Door tempT("x", &pyt);
+Fridge fridge("x", &pyt, &obj1);
+Pillar p("x", &pyt);
 
 bool checkConnectedDevices() {
     return objects.size() == 7;
@@ -16,9 +21,9 @@ bool checkConnectedDevices() {
 
 void discoverDevices() {
     const char *IPGROUP = "192.168.2.";
-    char *IP;
+//    const char *IP;
     int Device;
-    for (int x = 180; x < 200; x+=1) {
+    for (int x = 196; x < 200; x+=1) {
         int valread;
         const char *hello = "hello";
         char buffer[1024] = {0};
@@ -36,7 +41,7 @@ void discoverDevices() {
             switch (Device) {
 //                case 1 : {
 //                    Bed b(IP, &pyt);
-//                    objects.push_back(&b);
+//                    objects.push_back(b);
 //                    cout << "Bed was made\n" << endl;
 //                    break;
 //                }
@@ -47,14 +52,17 @@ void discoverDevices() {
 //                    break;
 //                }
 //                case 3 : {
-//                    TableLamp t(IP, &pyt);
+//                    Lamp t(IP,&pyt);
 //                    objects.push_back(t);
+//                    tempT = &t;
 //                    cout << "Lamp was made\n" << endl;
 //                    break;
 //                }
                 case 4 : {
-                    Pillar p(IP, &pyt);
-                    objects.push_back(p);
+                    Pillar pillar(IP, &pyt);
+                    p = pillar;
+                    // objects.push_back(p);
+
                     cout << "Pillar was made\n" << endl;
                     break;
                 }
@@ -65,20 +73,22 @@ void discoverDevices() {
 //                    break;
 //                }
 //                case 6 : {
-//                    Fridge f(IP, &pyt);
+//                    Fridge f(IP, &pyt, &obj1);
+//                    fridge = f;
 //                    objects.push_back(f);
 //                    cout << "Fridge was made\n" << endl;
 //                    break;
 //                }
 //                case 7 : {
 //                    Door d(IP, &pyt);
-//                    objects.push_back(d)
+//                    objects.push_back(d);
+//                    tempT = d;
 //                    cout << "Door was made\n" << endl;
 //                    break;
 //                }
-                default:
-                    cout << "Not found, help\n" << endl;
-            }
+//                default:
+//                    cout << "Not found, help\n" << endl;
+           }
         }
     }
     cout<<"Device search done\n"<<endl;
@@ -103,11 +113,14 @@ bool init() {
 int main(int argc, char const *argv[])
 {
     bool run = init();
+    cout<<"init done"<<endl;
     while (run) {
         for (int x = 0; x < objects.size(); x++) {
-            objects[x].update();
+            p.update();
+//            fridge.update();
         }
-        sleep(10);
+        sleep(5);
+        cout<<"rondje"<<endl;
     }
     return 0;
 }
