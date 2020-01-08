@@ -58,7 +58,7 @@ void setPillarActuators(bool led, bool buzzer){
 void setWallActuators(bool window, int value) {
     int output = (window << 4);
     writeActuators(output);
-    setWallLamp(value);
+    setWallLamp((value-1) / 4.0);
 }
 
 void setDoorActuators(bool led1, bool led2) {
