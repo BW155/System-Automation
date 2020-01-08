@@ -5,14 +5,16 @@
 #include "domObject.h"
 #include "../timeKeeper.h"
 
-domObject::domObject(webSocket *s) {
+domObject::domObject(webSocket *s, int i) {
     python = s;
     wemos = Socket();
+    id = i;
 }
-domObject::domObject(webSocket *s, TimeClass *t) {
+domObject::domObject(webSocket *s, TimeClass *t, int i) {
     python = s;
     wemos = Socket();
     timeObj = t;
+    id = i;
 }
 
 json domObject::toJson(char* jsonString) {

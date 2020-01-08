@@ -44,7 +44,7 @@ void webSocket::makeConnection() {
 
     if (connect(sock, (struct sockaddr *)&sock_addr, sizeof(sock_addr)) < 0)
     {
-//        printf("\nConnection Failed webSocket \n");
+        printf("\nConnection Failed webSocket \n");
     }
     else {
 //        cout<<"connection made"<<endl;
@@ -62,8 +62,9 @@ bool webSocket::sendMessage(int id) {
     send(sock, toCharArray(message), strlen(toCharArray(message)), 0);
 //    cout<<"receiving"<<endl;
     int valread = read(sock, buffer, 1024);
+    int result = stoi(buffer);
     close(sock);
-    return buffer[0] != 0;
+    return result == 1;
 }
 
 char* webSocket::receiveActuators(int id) {

@@ -8,7 +8,7 @@
 
 using json = nlohmann::json;
 
-Door::Door(const char* IP, webSocket* w, TimeClass *t): domObject(w, t){
+Door::Door(const char* IP, webSocket* w, TimeClass *t): domObject(w, t, 7){
     servo = 0;
     buttonOutside = false;
     buttonInside = false;
@@ -23,29 +23,38 @@ void Door::update() {
     char* result;
     char* message;
     json jsonResult;
+    int jsonServo = servo;
 
     int time[] = {0,0,0,0}; // timeObject->getTime
     if(python->sendMessage(7)) {
         result = python->receiveActuators(7);
         jsonResult = toJson(result);
         //servo
-        cout<<result<<endl;
-        int serv = jsonResult["actuators"]["servo"];
-        cout<<serv<<endl;
-        if(serv != 0){
-            servo = jsonResult["actuators"]["servo"];
-            //}else if(pillar->get_buzzer() && buttonInside){
-            //    servo = 1;
-        }else{
-            servo = 0;
-        }
+        jsonServo = jsonResult["actuators"]["servo"];
+
 
 
         //ledIn
         ledInside = jsonResult["actuators"]["led1"] == 1;
+
         //ledOut
         ledOutside = time[0] < 6 || time[0] > 18 || buttonOutside;
-        cout<<"klaar met py"<<endl;
+    }
+    if(pillar->get_buzzer() && buttonInside) {
+        cout<<"een"<<endl;
+        if (servo == 1) {
+            servo = 0;
+        }
+        else {
+            servo = 1;
+        }
+    }else{
+        if(jsonServo != 0){
+            cout<<"twee"<<endl;
+            servo = jsonServo;
+        }else{
+            servo = 0;
+        }
     }
 
     //wemos
@@ -54,10 +63,7 @@ void Door::update() {
     jsonResult = toJson(result); //ontvangen van wemos
     buttonInside = jsonResult["sensors"]["button1"];
     buttonOutside = jsonResult["sensors"]["button2"];
-    cout<<"een"<<endl;
 
-
-//    message  = pythonMessage();
     python->sendAll(7, pythonMessage());
 }
 
@@ -94,6 +100,6 @@ json Door::pythonMessage() {
     return Message;
 }
 
-//void Door::setPillarPointer(Pillar* p){
-//    pillar = p;
-//}
+void Door::setPillarPointer(Pillar* p){
+    pillar = p;
+}

@@ -6,7 +6,7 @@
 
 using json = nlohmann::json;
 
-Bed::Bed(const char* IP, webSocket* w, TimeClass *t): domObject(w,t){
+Bed::Bed(const char* IP, webSocket* w, TimeClass *t): domObject(w,t, 1){
     led = false;
     forceSensor = 0;
     updateForce = 0;
@@ -93,7 +93,6 @@ void Bed::update(){
     //verstuur naar interface
     json Mes = pythonMessage();
     python->sendAll(1, Mes);
-    usleep(200000);
 }
 
 char* Bed::wemosMessage(){

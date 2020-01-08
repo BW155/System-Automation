@@ -8,17 +8,12 @@ using namespace std;
 
 
 webSocket pyt;
-TimeClass obj1 (1,0,0,0);
+TimeClass obj1 (20,0,0,0);
 
 vector<domObject*> objects;
-Door tempT("x", &pyt, &obj1);
-Fridge fridge("x", &pyt, &obj1);
-Pillar p("x", &pyt);
-Wall wall("x", &pyt);
-Bed bed("x", &pyt, &obj1);
 
 bool checkConnectedDevices() {
-    return objects.size() == 7;
+    return 1;
 }
 
 void discoverDevices() {
@@ -27,7 +22,7 @@ void discoverDevices() {
 //    const char *IP;
     int Device;
 
-    for (int x = 197; x < 198; x+=1) {
+    for (int x = 180; x < 200; x+=1) {
         int valread;
         const char *hello = "hello";
         char buffer[1024] = {0};
@@ -44,56 +39,46 @@ void discoverDevices() {
             temp >> Device;
             switch (Device) {
                 case 1 : {
-                    Bed b(IP, &pyt, &obj1);
-//                    objects.push_back(b);
-                    bed = b;
+                    objects.push_back(new Bed(IP,&pyt,&obj1));
                     cout << "Bed was made\n" << endl;
                     break;
                 }
-//                case 2 : {
-//                    Chair c(IP, &pyt);
-//                    objects.push_back(c);
-//                    cout << "Chair was made\n" << endl;
-//                    break;
-//                }
-//                case 3 : {
-//                    Lamp t(IP,&pyt);
-//                    objects.push_back(t);
-//                    tempT = &t;
-//                    cout << "Lamp was made\n" << endl;
-//                    break;
-//                }
+                case 2 : {
+                    objects.push_back(new Chair(IP, &pyt, &obj1));
+                    cout << "Chair was made\n" << endl;
+                    break;
+                }
+                case 3 : {
+                    objects.push_back(new Lamp(IP,&pyt,&obj1));
+                    cout << "Lamp was made\n" << endl;
+                    break;
+                }
                 case 4 : {
-                    Pillar pillar(IP, &pyt);
-                    p = pillar;
-                    // objects.push_back(p);
-
+                    objects.push_back(new Pillar(IP,&pyt));
                     cout << "Pillar was made\n" << endl;
                     break;
                 }
                 case 5 : {
-                    Wall w(IP, &pyt);
-//                    objects.push_back(w);
-                    wall = w;
+                    objects.push_back(new Wall(IP,&pyt));
                     cout << "Wall was made\n" << endl;
                     break;
                 }
                 case 6 : {
-                    Fridge f(IP, &pyt, &obj1);
-                    fridge = f;
+                    objects.push_back(new Fridge(IP,&pyt,&obj1));
                     cout << "Fridge was made\n" << endl;
                     break;
                 }
                 case 7 : {
-                    Door d(IP, &pyt, &obj1);
-//                    objects.push_back(d);
-                    tempT = d;
+                    objects.push_back(new Door(IP,&pyt,&obj1));
                     cout << "Door was made\n" << endl;
                     break;
                 }
                 default:
                     cout << "Not found, help\n" << endl;
             }
+        }
+        if (objects.size() == 7) {
+            x = 201;
         }
     }
     cout<<"Device search done\n"<<endl;
@@ -107,11 +92,20 @@ bool init() {
     if (in == 1) {
         return true;
     }
-    else if (in == 2) {
-        return checkConnectedDevices();
-    }
     else {
-        return checkConnectedDevices();
+        if (checkConnectedDevices()) {
+            for (int x = 0; x < objects.size(); x++) {
+                for (int y = 0; y < objects.size(); y++) {
+                    if (objects[x]->id == 7 && objects[y]->id == 4) {
+                        Door* door = dynamic_cast<Door*>(objects[x]);
+                        Pillar* pillar = dynamic_cast<Pillar*>(objects[y]);
+                        door->setPillarPointer(pillar);
+                    }
+                }
+            }
+            return 1;
+        }
+        return 0;
     }
 }
 
@@ -120,10 +114,11 @@ int main(int argc, char const *argv[])
     bool run = init();
     cout<<"init done"<<endl;
     while (run) {
-//        for (int x = 0; x < objects.size(); x++) {
-            fridge.update();
-//        }
-        sleep(1);
+        for (int x = 0; x < objects.size(); x++) {
+            cout<<objects[x]->id<<endl;
+            objects[x]->update();
+        }
+//        sleep(1);
 //        cout<<"rondje"<<endl;
     }
     return 0;

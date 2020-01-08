@@ -7,9 +7,9 @@
 
 using json = nlohmann::json;
 
-Wall::Wall(const char* IP, webSocket* w): domObject(w){
+Wall::Wall(const char* IP, webSocket* w): domObject(w, 5){
     led = 0;
-    window = 0;
+    window = false;
     dimmer = 0;
     LDR = 0;
     Socket temp(5, "wall", IP);
@@ -26,24 +26,24 @@ void Wall::update(){
     if(python->sendMessage(5)){
         result = python->receiveActuators(5);
         pythonResult = toJson(result);
+        led = pythonResult["actuators"]["led"];
     }
-
     //window
     if(pythonResult["actuators"]["window"] == 1){
         window = true;
     }else window = LDR < 500;
-
     //ledstrip
-    if(pythonResult["actuators"]["led"] != 0){
-        led = pythonResult["actuators"]["led"];
-    }else{
-        led = (dimmer/1024.0) * 256;
-    }
+
 
     //wemos
     message = wemosMessage();
     result = wemos.sendReceive(message);
+    cout<<result<<endl;
     wemosResult = toJson(result);
+    int temp = wemosResult["sensors"]["dimmer"];
+    if (dimmer - temp != 0) {
+        led = wemosResult["sensors"]["dimmer"];
+    }
     dimmer = wemosResult["sensors"]["dimmer"];
     LDR = wemosResult["sensors"]["LDR"];
 

@@ -11,7 +11,7 @@
 
 using json = nlohmann::json ;
 
-Fridge::Fridge(const char * IP, webSocket *s, TimeClass *t) : domObject(s, t){
+Fridge::Fridge(const char * IP, webSocket *s, TimeClass *t) : domObject(s, t, 6){
     cooling = false;
     thermometer1 = 0;
     thermometer2 = 0;

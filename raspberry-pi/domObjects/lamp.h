@@ -20,8 +20,9 @@ private:
     bool led;
     bool motionSensor;
     Socket socket;
+    int startTime;
     char* wemosMessage();
-    char* pythonMessage();
+    json pythonMessage();
 };
 
 

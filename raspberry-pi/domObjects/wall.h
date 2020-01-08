@@ -12,7 +12,7 @@ class Socket;
 
 class Wall: public domObject {
 private:
-    u_int8_t led;
+    u_int16_t led;
     bool window;
     int dimmer;
     int LDR;

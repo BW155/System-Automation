@@ -19,13 +19,13 @@ protected:
     TimeClass* timeObj;
 //    virtual char* wemosMessage() = 0;
 //    virtual char* pythonMessage() = 0;
-
 public:
+    int id;
     virtual void update() = 0;
     json toJson(char* jsonString);
     char* toCharArray(json jsonObj);
-    domObject(webSocket *s);
-    domObject(webSocket *s, TimeClass *t);
+    domObject(webSocket *, int);
+    domObject(webSocket *, TimeClass *, int);
     TimeClass *getTimePointer();
 };
 #endif //RASPBERRY_PI_DOMOBJECT_H

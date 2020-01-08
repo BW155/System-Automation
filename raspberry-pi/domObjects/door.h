@@ -16,7 +16,7 @@ private:
     bool buttonInside;
     bool ledOutside;
     bool ledInside;
-    domObject* pillar;
+    Pillar* pillar;
     char* wemosMessage(bool, bool, int);
     json pythonMessage();
 public:

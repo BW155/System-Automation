@@ -3,7 +3,7 @@
 //
 #include "pillar.h"
 
-Pillar::Pillar(const char* IP, webSocket *x) : domObject(x){
+Pillar::Pillar(const char* IP, webSocket *x) : domObject(x, 4){
     gassensor = 0;
     button = 0;
     led = 0;
@@ -44,22 +44,20 @@ json Pillar::pythonMessage() {
 void Pillar::update(){
     char *result;
     if(python->sendMessage(4)) { //als er verandering is
-        cout<<"verandering"<<endl;
         result = python->receiveActuators(4);
         json Result = toJson(result);
         buzzer = Result["actuators"]["buzzer"] == 1;
         led = Result["actuators"]["led"] == 1;
+        cout<<"een"<<endl;
     }
     
     char *wemos_message = wemosMessage();
      
     char* receive_sensor = wemos.sendReceive(wemos_message);
-    cout<<receive_sensor<<endl;
     json Receive_Sensor = toJson(receive_sensor);
 
     gassensor = Receive_Sensor["sensors"]["gasSensor"];
     button = Receive_Sensor["sensors"]["button"] == 1;
-    cout<<gassensor<<endl;
     buzzer = gassensor >= 900 || buzzer;
     
     json python_message = pythonMessage();
