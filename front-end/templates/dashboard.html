@@ -32,6 +32,9 @@
         <h5 style="margin-left: 10px; margin-top: 10px;">{{:name}}</h5>
 
         <hr size="2px" style="margin-bottom: 10px">
+        {% endraw %}
+        {% if role == 2 %}
+        {% raw %}
         <b style="margin-left: 10px">Status</b>
         <hr size="2px" style="margin-top: 10px">
 
@@ -51,6 +54,9 @@
         </div>
 
         <hr size="2px" style="margin-bottom: 10px">
+        {% endraw %}
+        {% endif %}
+        {% raw %}
         <b style="margin-left: 10px">Acties</b>
         <hr size="2px" style="margin-top: 10px">
 
@@ -93,6 +99,8 @@
 <script src="/static/js/dashboard.js"></script>
 
 <script>
+    {% if role == 2 %}
     pollNotifications({{last_not_id}});
+    {% endif %}
 </script>
 {% endblock %}

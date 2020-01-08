@@ -1,5 +1,6 @@
 import json
 from flask import jsonify
+import copy
 
 tmp_objects = []
 
@@ -19,8 +20,7 @@ def get_objects():
 
 
 def set_object(obj):
-    global objects, tmp_objects
-    tmp_objects = objects
+    global objects
     for i in objects:
         if obj["id"] == i["id"]:
             i = obj
@@ -30,18 +30,18 @@ def set_object(obj):
 
 def check_objects_change(obj_id):
     global tmp_objects
+
     for i in objects:
         for u in tmp_objects:
             if i["id"] == obj_id and u["id"] == obj_id and i == u:
                 return False
 
-    tmp_objects = objects
+    tmp_objects = copy.deepcopy(objects)
     return True
 
 
 def process_actuator(obj_id, actuator, toggle=True, value=None):
-    global objects, tmp_objects
-    tmp_objects = objects
+    global objects
 
     for o in objects:
         if o["id"] == obj_id:
