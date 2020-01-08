@@ -116,7 +116,7 @@ int main(int argc, char const *argv[])
         for (int x = 0; x < objects.size(); x++) {
             objects[x].update();
         }
-        sleep(10);
+        sleep(10);a
     }
     return 0;
 }
