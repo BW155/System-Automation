@@ -23,7 +23,7 @@ void discoverDevices() {
     const char *IPGROUP = "192.168.2.";
 //    const char *IP;
     int Device;
-    for (int x = 196; x < 200; x+=1) {
+    for (int x = 191; x < 192; x+=1) {
         int valread;
         const char *hello = "hello";
         char buffer[1024] = {0};
@@ -79,13 +79,13 @@ void discoverDevices() {
 //                    cout << "Fridge was made\n" << endl;
 //                    break;
 //                }
-//                case 7 : {
-//                    Door d(IP, &pyt);
+                case 7 : {
+                    Door d(IP, &pyt);
 //                    objects.push_back(d);
-//                    tempT = d;
-//                    cout << "Door was made\n" << endl;
-//                    break;
-//                }
+                    tempT = d;
+                    cout << "Door was made\n" << endl;
+                    break;
+                }
 //                default:
 //                    cout << "Not found, help\n" << endl;
            }
@@ -115,10 +115,10 @@ int main(int argc, char const *argv[])
     bool run = init();
     cout<<"init done"<<endl;
     while (run) {
-        for (int x = 0; x < objects.size(); x++) {
+//        for (int x = 0; x < objects.size(); x++) {
             p.update();
 //            fridge.update();
-        }
+//        }
         sleep(5);
         cout<<"rondje"<<endl;
     }

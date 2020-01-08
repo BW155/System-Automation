@@ -13,7 +13,6 @@ Pillar::Pillar(const char* IP, webSocket *x) : domObject(x){
 }
 
 char* Pillar::wemosMessage(){
-    buzzer = gassensor >= 930;
     json wemos_Message = {
             {"id",4},
             {"actuators", {
@@ -45,21 +44,23 @@ json Pillar::pythonMessage() {
 void Pillar::update(){
     char *result;
     if(python->sendMessage(4)) { //als er verandering is
+        cout<<"verandering"<<endl;
         result = python->receiveActuators(4);
         json Result = toJson(result);
-        buzzer = Result["actuators"]["buzzer"];
-        led = Result["actuators"]["led"];
+        buzzer = Result["actuators"]["buzzer"] == 1;
+        led = Result["actuators"]["led"] == 1;
     }
     
     char *wemos_message = wemosMessage();
      
     char* receive_sensor = wemos.sendReceive(wemos_message);
+    cout<<receive_sensor<<endl;
     json Receive_Sensor = toJson(receive_sensor);
 
     gassensor = Receive_Sensor["sensors"]["gasSensor"];
-    button = Receive_Sensor["sensors"]["button"];
-
-    buzzer = gassensor >= 930;
+    button = Receive_Sensor["sensors"]["button"] == 1;
+    cout<<gassensor<<endl;
+    buzzer = gassensor >= 900 || buzzer;
     
     json python_message = pythonMessage();
     python->sendAll(4, python_message); // stuur alle sensors, alleen als uit sendReceive blijkt dat er veranderingen zijn
