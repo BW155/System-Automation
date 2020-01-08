@@ -20,6 +20,7 @@ bool checkConnectedDevices() {
 }
 
 void discoverDevices() {
+
     const char *IPGROUP = "192.168.2.";
 //    const char *IP;
     int Device;
@@ -52,9 +53,8 @@ void discoverDevices() {
 //                    break;
 //                }
 //                case 3 : {
-//                    Lamp t(IP,&pyt);
+//                    Lamp t(IP, &pyt);
 //                    objects.push_back(t);
-//                    tempT = &t;
 //                    cout << "Lamp was made\n" << endl;
 //                    break;
 //                }
@@ -72,23 +72,21 @@ void discoverDevices() {
 //                    cout << "Wall was made\n" << endl;
 //                    break;
 //                }
-//                case 6 : {
-//                    Fridge f(IP, &pyt, &obj1);
-//                    fridge = f;
+                case 6 : {
+                    Fridge f(IP, &pyt, &obj1);
 //                    objects.push_back(f);
-//                    cout << "Fridge was made\n" << endl;
-//                    break;
-//                }
+                    cout << "Fridge was made\n" << endl;
+                    break;
+                }
                 case 7 : {
                     Door d(IP, &pyt);
 //                    objects.push_back(d);
-                    tempT = d;
                     cout << "Door was made\n" << endl;
                     break;
                 }
-//                default:
-//                    cout << "Not found, help\n" << endl;
-           }
+                default:
+                    cout << "Not found, help\n" << endl;
+            }
         }
     }
     cout<<"Device search done\n"<<endl;

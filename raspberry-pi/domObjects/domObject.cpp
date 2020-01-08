@@ -3,6 +3,7 @@
 //
 
 #include "domObject.h"
+#include "../timeKeeper.h"
 
 domObject::domObject(webSocket *s) {
     python = s;

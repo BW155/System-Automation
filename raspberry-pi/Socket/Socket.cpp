@@ -9,6 +9,7 @@
 #include <bits/stdc++.h>
 #include "Socket.h"
 
+using json = nlohmann::json ;
 using namespace std;
 #define PORT 8080
 Socket::Socket() {connected = 0;}

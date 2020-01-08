@@ -13,4 +13,4 @@ private:
 public:
 
 };
-#endif //SOCKET_BED_H
+#endif //SOCKET_BED_

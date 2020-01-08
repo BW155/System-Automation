@@ -8,7 +8,6 @@
 #include "domObject.h"
 #include "../timeKeeper.h"
 
-
 class Lamp: public domObject {
 public:
     Lamp(const char* IP, webSocket *s, TimeClass *t);
