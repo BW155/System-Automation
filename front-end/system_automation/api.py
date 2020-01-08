@@ -19,7 +19,7 @@ notifications = []
 
 def add_notification(n_id, title, notification):
     global notifications
-    notifications.append({"id": n_id, "title": title, "message": notification})
+    notifications.append({"id": n_id, "time": datetime.now().strftime("%d-%m-%Y %H:%M:%S"), "title": title, "message": notification})
 
 
 # api route for logged-in users
