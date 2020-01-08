@@ -6,11 +6,25 @@
 #define BED_H
 
 #include "../Socket/Socket.h"
+#include "domObject.h"
 
-class Bed {
+class Bed: public domObject {
 private:
+    bool led;
+    int forceSensor;
+    int updateForce;
+    bool button;
+    int counter;
+    bool buttonPressed;
+    int startTime;
+    int startTimeLed;
+    int startTimeWakker;
+    bool ledTimerStarted;
 
 public:
-
+    Bed(const char*, webSocket*, TimeClass*);
+    char* wemosMessage();
+    json pythonMessage();
+    void update();
 };
 #endif //SOCKET_BED_

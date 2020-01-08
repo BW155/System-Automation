@@ -22,18 +22,18 @@ Socket::Socket(int id_, string name_,const char *IP_) {
     sock_addr = temp;
     if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0)
     {
-        printf("\n Socket creation error \n");
+//        printf("\n Socket creation error \n");
     }
     sock_addr.sin_family = AF_INET;
     sock_addr.sin_port = htons(PORT);
     if(inet_pton(AF_INET, IP, &sock_addr.sin_addr)<=0)
     {
-        printf("\nInvalid address/ Address not supported \n");
+//        printf("\nInvalid address/ Address not supported \n");
     }
 
     if (connect(sock, (struct sockaddr *)&sock_addr, sizeof(sock_addr)) < 0)
     {
-        printf("\nConnection Failed \n");
+//        printf("\nConnection Failed \n");
         connected = false;
     }
     else {
@@ -49,7 +49,7 @@ void Socket::setName(string name_) {name = name_;}
 void Socket::makeConnection() {
     if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0)
     {
-        printf("\n Socket creation error \n");
+//        printf("\n Socket creation error \n");
     }
     sock_addr.sin_family = AF_INET;
     sock_addr.sin_port = htons(PORT);
@@ -60,7 +60,7 @@ void Socket::makeConnection() {
 
     if (connect(sock, (struct sockaddr *)&sock_addr, sizeof(sock_addr)) < 0)
     {
-        printf("\nConnection Failed \n");
+//        printf("\nConnection Failed \n");
     }
 }
 
@@ -71,10 +71,10 @@ bool Socket::getConnected() {
 char* Socket::sendReceive(char *message) {
     char *temp;
     makeConnection();
-    cout<<"twee"<<endl;
+//    cout<<"twee"<<endl;
     char buffer[1024] = {0};
     send(sock, message, strlen(message), 0);
-    cout<<"twwee.5"<<endl;
+//    cout<<"twwee.5"<<endl;
     int valread = read(sock, buffer, 1024);
     temp = buffer;
     close(sock);

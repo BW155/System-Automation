@@ -14,6 +14,8 @@ vector<domObject*> objects;
 Door tempT("x", &pyt);
 Fridge fridge("x", &pyt, &obj1);
 Pillar p("x", &pyt);
+Wall wall("x", &pyt);
+Bed bed("x", &pyt, &obj1);
 
 bool checkConnectedDevices() {
     return objects.size() == 7;
@@ -25,7 +27,7 @@ void discoverDevices() {
 //    const char *IP;
     int Device;
 
-    for (int x = 191; x < 192; x+=1) {
+    for (int x = 187; x < 188; x+=1) {
         int valread;
         const char *hello = "hello";
         char buffer[1024] = {0};
@@ -41,12 +43,13 @@ void discoverDevices() {
             stringstream temp(buffer);
             temp >> Device;
             switch (Device) {
-//                case 1 : {
-//                    Bed b(IP, &pyt);
+                case 1 : {
+                    Bed b(IP, &pyt, &obj1);
 //                    objects.push_back(b);
-//                    cout << "Bed was made\n" << endl;
-//                    break;
-//                }
+                    bed = b;
+                    cout << "Bed was made\n" << endl;
+                    break;
+                }
 //                case 2 : {
 //                    Chair c(IP, &pyt);
 //                    objects.push_back(c);
@@ -68,12 +71,13 @@ void discoverDevices() {
                     cout << "Pillar was made\n" << endl;
                     break;
                 }
-//                case 5 : {
-//                    Wall w(IP, &pyt);
+                case 5 : {
+                    Wall w(IP, &pyt);
 //                    objects.push_back(w);
-//                    cout << "Wall was made\n" << endl;
-//                    break;
-//                }
+                    wall = w;
+                    cout << "Wall was made\n" << endl;
+                    break;
+                }
                 case 6 : {
                     Fridge f(IP, &pyt, &obj1);
                     fridge = f;
@@ -117,10 +121,10 @@ int main(int argc, char const *argv[])
     cout<<"init done"<<endl;
     while (run) {
 //        for (int x = 0; x < objects.size(); x++) {
-            fridge.update();
+            bed.update();
 //        }
-        sleep(5);
-        cout<<"rondje"<<endl;
+//        sleep(1);
+//        cout<<"rondje"<<endl;
     }
     return 0;
 }

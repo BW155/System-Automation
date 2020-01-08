@@ -61,7 +61,11 @@ void setup() {
 }
 
 void loop() {
+while (1) {
     handleWifi(&object);
     delay(20);
-    componentCheckLoop();  
+    componentCheckLoop();
+  
+yield();
+}
 }

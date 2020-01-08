@@ -27,27 +27,27 @@ char* webSocket::toCharArray(json jsonObj) {
 void webSocket::makeConnection() {
     if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0)
     {
-        printf("\n Socket creation error \n");
+//        printf("\n Socket creation error \n");
     }
     else {
-        cout<<"Socket Created"<<endl;
+//        cout<<"Socket Created"<<endl;
     }
     sock_addr.sin_family = AF_INET;
     sock_addr.sin_port = htons(PORT2);
     if(inet_pton(AF_INET, "127.0.0.1", &sock_addr.sin_addr)<=0)
     {
-        printf("\nInvalid address/ Address not supported \n");
+//        printf("\nInvalid address/ Address not supported \n");
     }
     else {
-        cout<<"adress supported"<<endl;
+//        cout<<"adress supported"<<endl;
     }
 
     if (connect(sock, (struct sockaddr *)&sock_addr, sizeof(sock_addr)) < 0)
     {
-        printf("\nConnection Failed webSocket \n");
+//        printf("\nConnection Failed webSocket \n");
     }
     else {
-        cout<<"connection made"<<endl;
+//        cout<<"connection made"<<endl;
     }
 }
 
@@ -58,9 +58,9 @@ bool webSocket::sendMessage(int id) {
     };
     makeConnection();
     char buffer[1024] = {0};
-    cout<<"sending"<<endl;
+//    cout<<"sending"<<endl;
     send(sock, toCharArray(message), strlen(toCharArray(message)), 0);
-    cout<<"receiving"<<endl;
+//    cout<<"receiving"<<endl;
     int valread = read(sock, buffer, 1024);
     close(sock);
     return buffer[0] != 0;
