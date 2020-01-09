@@ -3,12 +3,18 @@
 //
 
 #include "domObject.h"
-#include "timeKeeper.h"
+#include "../timeKeeper.h"
 
-domObject::domObject(webSocket *s, TimeClass *t ) {
+domObject::domObject(webSocket *s, int i) {
+    python = s;
+    wemos = Socket();
+    id = i;
+}
+domObject::domObject(webSocket *s, TimeClass *t, int i) {
     python = s;
     wemos = Socket();
     timeObj = t;
+    id = i;
 }
 
 json domObject::toJson(char* jsonString) {
@@ -22,3 +28,4 @@ char* domObject::toCharArray(json jsonObj) {
     strcpy(result, temp.c_str());
     return result;
 }
+TimeClass* domObject::getTimePointer() {return timeObj;}

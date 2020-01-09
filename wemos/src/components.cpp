@@ -119,7 +119,6 @@ void setPeltier(bool state){
 }
 
 void setLamp(bool state) {
-    Serial.println(state);
     if(state){
         target = 255;
     }
@@ -138,7 +137,6 @@ void brightness(){
         ledje.setPixelColor(i, 255, 50, 0);
     }
     ledje.show();
-    Serial.println(bright);
     if(bright < target){
         bright++;
     }

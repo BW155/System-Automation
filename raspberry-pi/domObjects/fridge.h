@@ -1,16 +1,29 @@
 //
-// Created by LarsLinux on 16-12-19.
+// Created by Zep on 16-12-19.
 //
 
-#ifndef SOCKET_BED_H
-#define SOCKET_BED_H
-
+#include "domObject.h"
 #include "../Socket/Socket.h"
+#include "../Socket/webSocket.h"
+#include "../json/json.hpp"
 
-class fridge {
+
+#ifndef FRIDGE_H
+#define FRIDGE_H
+
+class Fridge : public domObject{
 private:
-
+    bool cooling;
+    int thermometer1;
+    int thermometer2;
+    int openClose;
+    char* wemosMessage();
+    json pythonMessage();
+    void updateAttributes(json);
+    bool state;
+    int start_time;
 public:
-
+    void update() override;
+    Fridge(const char * IP, webSocket *s, TimeClass *t);
 };
 #endif //SOCKET_BED_H
