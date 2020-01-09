@@ -15,6 +15,7 @@ private:
     int forceSensor,start_time_30min_check,start_time_max_massage;
     int start_timeOut;
     bool vibrator, button, timeOut;
+    int startTimeMedication;
     char* wemosMessage();
     json pythonMessage();
     void updateAttributes(json result);

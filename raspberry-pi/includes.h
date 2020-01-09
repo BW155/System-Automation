@@ -9,6 +9,8 @@
 #include "json/json.hpp"
 #include <netinet/tcp.h>
 #include "timeKeeper.h"
+#include <iostream>
+#include <fstream>
 
 #include "domObjects/bed.h"
 #include "domObjects/chair.h"

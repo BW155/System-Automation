@@ -73,6 +73,11 @@ void Fridge::update(){
 
     if((cur_time-start_time) > (5 * 60)){
         cooling = false;
+        json message = {
+                {"type", 4},
+                {"id", 4}
+        };
+        python->sendNotification(toCharArray(message));
 
     }
 

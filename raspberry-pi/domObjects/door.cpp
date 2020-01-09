@@ -64,7 +64,7 @@ void Door::update() {
     if (buttonOutside) {
         json message = {
                 {"type", 4},
-                {"id", 1}
+                {"id", 2}
         };
         python->sendNotification(toCharArray(message));
     }

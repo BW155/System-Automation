@@ -22,7 +22,7 @@ void discoverDevices() {
 //    const char *IP;
     int Device;
 
-    for (int x = 180; x < 200; x+=1) {
+    for (int x = 187; x < 188; x+=1) {
         int valread;
         const char *hello = "hello";
         char buffer[1024] = {0};

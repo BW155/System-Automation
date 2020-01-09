@@ -3,6 +3,9 @@
 //
 #include "bed.h"
 #include "../json/json.hpp"
+#include <fstream>
+#include <iostream>
+#include <string>
 
 using json = nlohmann::json;
 
@@ -86,13 +89,33 @@ void Bed::update(){
     }
 
     if (forceSensor - updateForce > 600 && currentTime - startTimeWakker > 480) {
-        cout<<"HIJ IS WAKKER MOTHERFUCKER"<<endl;
+        json message = {
+                {"type", 4},
+                {"id", 3}
+        };
+        python->sendNotification(toCharArray(message));
         startTimeWakker = currentTime;
     }
 
     //verstuur naar interface
     json Mes = pythonMessage();
     python->sendAll(1, Mes);
+
+    //log
+    ofstream myfile;
+    myfile.open("log.txt", ios::out | ios::app);
+    if (myfile.is_open()) {
+        myfile << domObject::timeObj->getTime()[0] << ":" << domObject::timeObj->getTime()[1] << ":"
+               << domObject::timeObj->getTime()[2] << "Bed: " << pythonMessage() << endl;
+        if  (myfile.bad()) {
+            cout<<"write failed"<<endl;
+        }
+
+    }
+    else {
+        cout<<"file not found"<<endl;
+    }
+    myfile.close();
 }
 
 char* Bed::wemosMessage(){

@@ -13,6 +13,7 @@ Chair::Chair(const char *IP, webSocket *s, TimeClass *t) : domObject(s, t, 2) {
     timeOut = false;
     Socket temp(2,"Chair",IP);
     domObject::wemos = temp;
+    startTimeMedication = 0;
 }
 
 using json = nlohmann::json ;
@@ -56,6 +57,35 @@ void Chair::update() {
     //Current time in seconds;
     cur_time = domObject::timeObj->getTime()[0]*3600 + domObject::timeObj->getTime()[1]*60 + domObject::timeObj->getTime()[2];
 
+    if (startTimeMedication == 0) {
+        startTimeMedication = cur_time;
+        json message = {
+                {"type", 4},
+                {"id", 5}
+        };
+        python->sendNotification(toCharArray(message));
+    } else if (cur_time-startTimeMedication > 599) {
+        json message = {
+                {"type", 4},
+                {"id", 6}
+        };
+        python->sendNotification(toCharArray(message));
+    } else if (cur_time-startTimeMedication > 1199) {
+        json message = {
+                {"type", 4},
+                {"id", 7}
+        };
+        python->sendNotification(toCharArray(message));
+    } else if (cur_time-startTimeMedication > 1799) {
+        json message = {
+                {"type", 4},
+                {"id", 8}
+        };
+        python->sendNotification(toCharArray(message));
+        if (cur_time-startTimeMedication > 2399) {
+            startTimeMedication = 0;
+        }
+    }
     result = wemos.sendReceive(wemosMessage());
     jsonResult = toJson(result);
     updateAttributes(jsonResult);
