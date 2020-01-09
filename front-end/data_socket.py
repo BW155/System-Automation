@@ -17,9 +17,9 @@ pi_notification_templates = {
     2: ("Iemand belt aan"),
     3: ("Timothy is uit bed"),
     4: ("Koelkast is open"),
-    5: ("Medicijnen 06:00"),
-    6: ("Medicijnen 12:00"),
-    7: ("Medicijnen 17:00"),
+    5: ("Medicijnen 09:00"),
+    6: ("Medicijnen 13:00"),
+    7: ("Medicijnen 18:00"),
     8: ("Medicijnen 23:00"),
 }
 
