@@ -1,6 +1,6 @@
 #include <Wire.h>
 #include <Arduino.h>
-#include "FastLED.h"
+#include "Adafruit_NeoPixel.h"
 
 #ifndef COMPONENTS
 #define COMPONENTS
@@ -8,7 +8,7 @@
 #define PILLAR_BUTTON 0x01
 #define DOOR_BUTTON_1 0x01
 #define DOOR_BUTTON_2 0x02
-#define FASTLED_ALLOW_INTERRUPTS 0
+
 
 #ifdef WALL
 #define NUM_LEDS 3 
@@ -17,7 +17,7 @@
 #endif
 
 double calculateThermistor(int RawADC);
-
+void brightness();
 /////////////////////
 /// Set Actuators ///
 /////////////////////
@@ -27,12 +27,13 @@ void setChairActuators(bool, bool);
 void writeActuators(int);
 void setPeltier(bool state);
 void setTableActuators(bool);
-void setWallActuators(bool, bool);
+void setWallActuators(bool, int);
 void setDoorActuators(bool, bool);
 void setLamp(bool);
 void setPillarActuators(bool, bool);
 void setLed(bool);
 void setServo(int);
+void setWallLamp(int);
 
 ///////////////////
 /// Get Sensors ///
