@@ -76,6 +76,12 @@ void Bed::update(){
         cout<<"epsoilepsieboy"<<endl;
         counter = 0;
         startTime = currentTime;
+        json message = {
+                {"type", 4},
+                {"id", 0}
+        };
+        python->sendNotification(toCharArray(message));
+        startTimeWakker = currentTime;
     }
 
     if (led && !ledTimerStarted) {
@@ -90,7 +96,7 @@ void Bed::update(){
         ledTimerStarted = false;
     }
 
-    if (forceSensor - updateForce > 600 && currentTime - startTimeWakker > 480) {
+    if (forceSensor - updateForce > 600 && currentTime - startTimeWakker > 600) {
         json message = {
                 {"type", 4},
                 {"id", 3}

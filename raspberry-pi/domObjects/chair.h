@@ -16,6 +16,9 @@ private:
     int start_timeOut;
     bool vibrator, button, timeOut;
     int startTimeMedication;
+    int updateForce;
+    int counter;
+    int startTime;
     char* wemosMessage();
     json pythonMessage();
     void updateAttributes(json result);
