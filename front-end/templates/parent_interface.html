@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block styles %}
+    <link rel="stylesheet" href="/static/css/index.css"/>
+    <style>
+
+        form {
+            display:inline-block;
+                margin: 15px;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-content">
+        <h5>Tijd om actie uit te voeren:</h5>
+        <h3 id="timer"></h3>
+    </div>
+</div>
+<div class="button-holder">
+    <form method="POST">
+        <input type="hidden" name="door" value="1">
+        <button class="int-button orange-button">Deur Openen</button>
+    </form>
+    <form method="POST">
+        <input type="hidden" name="door" value="0">
+        <button class="int-button orange-button">Deur Sluiten</button>
+    </form>
+</div>
+{% endblock %}
+
+{% block scripts%}
+    <script>
+        var time_started = parseInt(localStorage.getItem("time_started"));
+        var started = localStorage.getItem("started") == "true";
+        if (time_started === null || isNaN(time_started)) {
+            time_started = Date.now(); 
+            localStorage.setItem("time_started", time_started);
+        }
+        if (started === null) {
+            started = false;
+            localStorage.setItem("started", false);
+        }
+
+        function startTimer() {
+            if (started === false) {
+                started = true;
+            }
+            drawTimer(time_started + 30000 - Date.now());
+
+            var interval_id = 0;
+
+            interval_id = setInterval(function() {
+                var time_left = time_started + 30000 - Date.now();
+
+                if (time_left <= 0) {
+                    $("#timer").html("Bye Bye");
+                    localStorage.removeItem("time_started");
+                    localStorage.removeItem("started");
+                    window.location.href = "/logout"
+                    clearInterval(interval_id);
+                    return;
+                }
+
+                drawTimer(time_left);
+            }, 100);
+        }
+
+        function drawTimer(val) {
+            var formattedNumber = ("0" + ((val / 1000) | 0)).slice(-2);
+            $("#timer").html("00:" + formattedNumber);
+        }
+
+        startTimer();
+    </script>
+{% endblock %}

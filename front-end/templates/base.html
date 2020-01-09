@@ -35,7 +35,12 @@
             <ul class="left hide-on-med-and-down">
                 <li><a href="/">Hoofdpagina</a></li>
                 {% if current_user.is_authenticated %}
-                <li><a href="/dashboard">Dashboard</a></li>
+                {% if current_user.role == 1 %}
+                    <li><a href="/parent_interface">Interface Ouders</a></li>
+                {% endif %}
+                {% if current_user.role == 2 %}
+                    <li><a href="/guard_interface">Interface Guard</a></li>
+                {% endif %}
                 <li><a href="/logout">Uitloggen</a></li>
                 {% else %}
                 <li><a href="/login">Inloggen</a></li>
@@ -105,5 +110,5 @@
     {% block scripts %}
     {% endblock %}
 </body>
-
 </html>
+

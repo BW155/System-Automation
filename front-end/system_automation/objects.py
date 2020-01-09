@@ -5,13 +5,13 @@ import copy
 tmp_objects = []
 
 objects = [
-    {"id": 1, "actuators": {"led": 1},                          "sensors": {"forceSensor": 1, "button": 1}},
-    {"id": 2, "actuators": {"led": 1, "vibrator": 1},           "sensors": {"forceSensor": 1, "button": 1}},
-    {"id": 3, "actuators": {"led": 1},                          "sensors": {"motionSensor": 1, "button": 1}},
-    {"id": 4, "actuators": {"led": 1, "buzzer": 1},             "sensors": {"gasSensor": 1, "button": 1}},
-    {"id": 5, "actuators": {"led": 1, "window": 1},             "sensors": {"dimmer": 1, "LDR": 1}},
-    {"id": 6, "actuators": {"cooling": 1},                      "sensors": {"thermometer1": 1,"thermometer2": 1, "openClose": 1}},
-    {"id": 7, "actuators": {"led1": 1, "led2": 1, "servo": 1},  "sensors": {"button1": 1, "button2": 1}}
+    {"id": 1, "actuators": {"led": 0},                          "sensors": {"forceSensor": 0, "button": 0}},
+    {"id": 2, "actuators": {"led": 0, "vibrator": 0},           "sensors": {"forceSensor": 0, "button": 0}},
+    {"id": 3, "actuators": {"led": 0},                          "sensors": {"motionSensor": 0, "button": 0}},
+    {"id": 4, "actuators": {"led": 0, "buzzer": 0},             "sensors": {"gasSensor": 0, "button": 0}},
+    {"id": 5, "actuators": {"led": 0, "window": 0},             "sensors": {"dimmer": 0, "LDR": 0}},
+    {"id": 6, "actuators": {"cooling": 0},                      "sensors": {"thermometer1": 0,"thermometer2": 0, "openClose": 0}},
+    {"id": 7, "actuators": {"led1": 0, "led2": 0, "servo": 0},  "sensors": {"button1": 0, "button2": 0}}
 ]
 
 

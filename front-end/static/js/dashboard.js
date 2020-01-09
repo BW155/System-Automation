@@ -9,6 +9,10 @@ document.body.onmouseup = function() {
     mouseDown = 0;
 }
 
+$('.dimmer-slider')
+    .bind('touchstart', function(){ console.log("touchstart"); mouseDown = true; })
+    .bind('touchend', function(){ console.log("touchend"); this.click(); });
+
 function getObjects() {
     if (!mouseDown) {
         $.ajax({
@@ -38,9 +42,10 @@ function actionUpdate(obj_id, actuator, value) {
         method: "POST",
         data: {"actuator": actuator, "value": value},
         success: function(data) {
-            M.toast({html: "Bijgewerkt"});
+            // M.toast({html: "Bijgewerkt"});
         }
     });
+    mouseDown = false;
 }
 
 function pollNotifications(id) {
@@ -81,5 +86,5 @@ function clearNotifications() {
 
 getObjects();
 setInterval(function () {
-    //getObjects();
-}, 1000);
+    getObjects();
+}, 500);

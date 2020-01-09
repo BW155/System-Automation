@@ -2,6 +2,11 @@
 
 {% block styles %}
 <link rel="stylesheet" href="/static/css/dashboard.css"/>
+<style>
+.dimmer-slider {
+    height: 50px;
+}
+</style>
 {% endblock %}
 
 {% block content %}
@@ -12,13 +17,13 @@
     <div class="modal-content">
         <h4>Notificaties</h4>
         <div id="notification-holder">
-            
+
         </div>
     </div>
     <div class="modal-footer">
         <a class="modal-close waves-effect waves-green btn" 
-            style="width: 100%" 
-            onclick="clearNotifications()">
+           style="width: 100%" 
+           onclick="clearNotifications()">
             Sluiten
         </a>
     </div>
@@ -78,6 +83,7 @@
                 <p class="range-field">
                     {{:name}}:
                     <input 
+                        class="dimmer-slider"
                         type="range"
                         min="0"
                         max="1024"

@@ -1,0 +1,105 @@
+.outer {
+    display: table;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.middle {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.inner {
+    margin-left: auto;
+    margin-right: auto;
+    width: 400px;
+    text-align: center;
+}
+
+.int-button {
+	box-shadow: 0px 2px 6px 0px #000000;
+	border-radius:150px;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size: calc(100% + 1vw);
+	padding:32px 20px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #010300;
+    height: 30vw;
+    width: 30vw;
+    max-width: 250px;
+    max-height: 250px;
+}
+
+.int-button:active {
+	position:relative;
+	top:2px;
+}
+
+.red-button {
+	background:linear-gradient(to bottom, #f50505 5%, #ff5900 100%);
+	background-color:#f50505;
+	border:2px solid #9c2232;
+}
+.red-button:hover {
+	background:linear-gradient(to bottom, #ff5900 5%, #f50505 100%);
+	background-color:#ff5900;
+}
+
+.orange-button {
+	background:linear-gradient(to bottom, #f59105 5%, #bf7002 100%);
+	background-color:#f59105;
+	border:2px solid #8f5300;
+}
+.orange-button:hover {
+	background:linear-gradient(to bottom, #ffa42e 5%, #f59105 100%);
+	background-color:#ff5900;
+}
+
+.green-button {
+	background:linear-gradient(to bottom, #008f00 5%, #00da00 100%);
+	background-color:#008f00;
+	border:2px solid #229c32;
+}
+.green-button:hover {
+	background:linear-gradient(to bottom, #00da00 5%, #008f00 100%);
+	background-color:#00da00;
+}
+
+.blue-button {
+	background:linear-gradient(to bottom, #0505f5 5%, #0059ff 100%);
+	background-color:#0505f5;
+	border:2px solid #22329c;
+}
+.blue-button:hover {
+	background:linear-gradient(to bottom, #0059ff 5%, #0505f5 100%);
+	background-color:#0059ff;
+}
+
+td {
+    text-align: center;
+}
+
+button > i {
+    font-size: calc(100% + 5vw) !important;
+}
+
+.button-holder > button {
+    float: left;
+    margin: 15px;
+}
+.button-holder {
+    float: left;
+    text-align: center;
+    width: 100%;
+}
+.container {
+    width: 100%;
+    left: 0;
+    text-align: center;
+}
