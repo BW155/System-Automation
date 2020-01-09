@@ -17,8 +17,6 @@ protected:
     Socket wemos;
     webSocket* python;
     TimeClass* timeObj;
-//    virtual char* wemosMessage() = 0;
-//    virtual char* pythonMessage() = 0;
 public:
     int id;
     virtual void update() = 0;

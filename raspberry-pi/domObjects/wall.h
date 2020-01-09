@@ -8,8 +8,6 @@
 #include "../Socket/Socket.h"
 #include "domObject.h"
 
-class Socket;
-
 class Wall: public domObject {
 private:
     u_int16_t led;

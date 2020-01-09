@@ -78,12 +78,7 @@ char* Socket::sendReceive(char *message) {
     int valread = read(sock, buffer, 1024);
     temp = buffer;
     close(sock);
-//    if (buffer[0] == NULL) {
-//        return "-1";
-//    }
-//    else {
         return temp;
-//    }
 }
 
 
