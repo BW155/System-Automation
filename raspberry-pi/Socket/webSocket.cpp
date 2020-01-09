@@ -67,6 +67,14 @@ bool webSocket::sendMessage(int id) {
     return result == 1;
 }
 
+void webSocket::sendNotification(char *message) {
+    makeConnection();
+    char buffer[1024] = {0};
+    send(sock, message, strlen(message), 0);
+    int valread = read(sock, buffer, 1024);
+    close(sock);
+}
+
 char* webSocket::receiveActuators(int id) {
     json message {
             {"id",id},

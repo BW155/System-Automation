@@ -41,22 +41,33 @@ void Door::update() {
         ledOutside = time[0] < 6 || time[0] > 18 || buttonOutside;
     }
     if(pillar->get_buzzer() && buttonInside) {
-        cout<<"een"<<endl;
         if (servo == 1) {
             servo = 0;
         }
         else {
             servo = 1;
         }
+    }else if (buttonInside) {
+        json message = {
+                {"type", 4},
+                {"id", 1}
+        };
+        python->sendNotification(toCharArray(message));
     }else{
         if(jsonServo != 0){
-            cout<<"twee"<<endl;
             servo = jsonServo;
         }else{
             servo = 0;
         }
     }
 
+    if (buttonOutside) {
+        json message = {
+                {"type", 4},
+                {"id", 1}
+        };
+        python->sendNotification(toCharArray(message));
+    }
     //wemos
     message = wemosMessage(ledInside, ledOutside, servo); //verstuur dit naar wemos
     result = wemos.sendReceive(message);

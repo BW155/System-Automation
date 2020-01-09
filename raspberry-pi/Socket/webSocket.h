@@ -17,6 +17,7 @@ public:
     char* receiveActuators(int id);
     bool sendMessage(int id);
     void sendAll(int id, json everything);
+    void sendNotification(char *message);
     void makeConnection();
     char *toCharArray(json jsonObj);
     webSocket();

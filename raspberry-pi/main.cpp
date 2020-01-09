@@ -13,7 +13,7 @@ TimeClass obj1 (20,0,0,0);
 vector<domObject*> objects;
 
 bool checkConnectedDevices() {
-    return 1;
+    return objects.size() == 7;
 }
 
 void discoverDevices() {
@@ -103,9 +103,9 @@ bool init() {
                     }
                 }
             }
-            return 1;
+            return true;
         }
-        return 0;
+        return false;
     }
 }
 
@@ -115,11 +115,8 @@ int main(int argc, char const *argv[])
     cout<<"init done"<<endl;
     while (run) {
         for (int x = 0; x < objects.size(); x++) {
-            cout<<objects[x]->id<<endl;
             objects[x]->update();
         }
-//        sleep(1);
-//        cout<<"rondje"<<endl;
     }
     return 0;
 }
