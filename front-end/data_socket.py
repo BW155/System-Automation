@@ -78,6 +78,9 @@ def process_message(message):
             data = js.get("data")
             if data:
                 set_object(data)
+                if data["id"] == 4:
+                    if data["sensors"]["button"] == 1:
+                        add_notification(10, "NOODKNOP INGEDRUKT");
                 return "1"
             return "0"
 
