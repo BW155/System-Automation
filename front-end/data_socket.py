@@ -12,15 +12,15 @@ bind_port = 9001
 BUFFER_SIZE = 1200
 
 pi_notification_templates = {
-    0: ("Mogelijk heeft timmothy een epileptische aanval"),
-    1: ("Timothy wil de deur openen"),
-    2: ("Iemand belt aan"),
-    3: ("Timothy is uit bed"),
-    4: ("Koelkast is open"),
-    5: ("Medicijnen 09:00"),
-    6: ("Medicijnen 13:00"),
-    7: ("Medicijnen 18:00"),
-    8: ("Medicijnen 23:00"),
+    0: "Mogelijk heeft timmothy een epileptische aanval",
+    1: "Timothy wil de deur openen",
+    2: "Iemand belt aan",
+    3: "Timothy is uit bed",
+    4: "Koelkast is open",
+    5: "Medicijnen 09:00",
+    6: "Medicijnen 13:00",
+    7: "Medicijnen 18:00",
+    8: "Medicijnen 23:00",
 }
 
 class PiSocketServer(socketserver.BaseRequestHandler):
@@ -85,7 +85,7 @@ def process_message(message):
             n_id = js.get("id")
             notification = pi_notification_templates[n_id]
             if notification is not None:
-                add_notification(n_id, None, notification[0])
+                add_notification(n_id, None, notification)
                 return "1"
             return "0"
 
