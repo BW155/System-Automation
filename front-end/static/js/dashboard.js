@@ -25,9 +25,7 @@ function getObjects() {
                 }
             }
         })
-    } else {
-        
-    }
+    } 
 }
 
 function renderObjects() {

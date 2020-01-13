@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <title>System-Automation</title>
-    <link href="/static/css/icons.css" rel="stylesheet">
-    <link type="text/css" rel="stylesheet" href="/static/css/materialize.min.css" media="screen,projection" />
+    <head>
+        <title>System-Automation</title>
+        <link href="/static/css/icons.css" rel="stylesheet">
+        <link type="text/css" rel="stylesheet" href="/static/css/materialize.min.css" media="screen,projection" />
 
-    <!--Let browser know website is optimized for mobile-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-        }
+        <!--Let browser know website is optimized for mobile-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <style>
+* {
+    margin: 0;
+    padding: 0;
+}
         .info-box {
             width: 100%;
             padding: 15px;
@@ -22,93 +22,95 @@
         .error-box {
             padding: 25px !important;
         }
-    </style>
-    {% block styles %}
-    {% endblock %}
-</head>
+        </style>
+        {% block styles %}
+        {% endblock %}
+    </head>
 
-<body>
-    <nav class="indigo">
-        <div class="nav-wrapper">
-            <a href="#!" class="brand-logo center">Interface</a>
-            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-            <ul class="left hide-on-med-and-down">
-                <li><a href="/">Hoofdpagina</a></li>
-                {% if current_user.is_authenticated %}
-                {% if current_user.role == 1 %}
+    <body>
+        <nav class="indigo">
+            <div class="nav-wrapper">
+                <a href="#!" class="brand-logo center">Interface</a>
+                <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+                <ul class="left hide-on-med-and-down">
+                    <li><a href="/">Hoofdpagina</a></li>
+                    {% if current_user.is_authenticated %}
+                    {% if current_user.role == 1 %}
                     <li><a href="/parent_interface">Interface Ouders</a></li>
-                {% endif %}
-                {% if current_user.role == 2 %}
+                    {% endif %}
+                    {% if current_user.role == 2 %}
                     <li><a href="/guard_interface">Interface Guard</a></li>
-                {% endif %}
-                <li><a href="/logout">Uitloggen</a></li>
-                {% else %}
-                <li><a href="/login">Inloggen</a></li>
-                {% endif %}
+                    {% endif %}
+                    <li><a href="/logout">Uitloggen</a></li>
+                    {% else %}
+                    <li><a href="/login">Inloggen</a></li>
+                    {% endif %}
+                </ul>
+
+                <ul class="side-nav" id="mobile-demo">
+                    <li><a href="/">Hoofdpagina</a></li>
+                    {% if current_user.is_authenticated %}
+                    <li><a href="/interface">Interface</a></li>
+                    <li><a href="/logout">Uitloggen</a></li>
+                    {% else %}
+                    <li><a href="/login">Inloggen</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+
+        {% with errors = get_flashed_messages(category_filter=["error"]) %}
+        {% if errors %}
+        <div class="info-box error-box red white-text">
+            <ul class=flashes>
+                {% for message in errors %}
+                <li><b>{{ message }}</b></li>
+                {% endfor %}
             </ul>
         </div>
-    </nav>
-
-    {% with errors = get_flashed_messages(category_filter=["error"]) %}
-    {% if errors %}
-    <div class="info-box error-box red white-text">
-        <ul class=flashes>
-            {% for message in errors %}
-            <li><b>{{ message }}</b></li>
-            {% endfor %}
-        </ul>
-    </div>
-    {% endif %}
-    {% endwith %}
-    {% with goods = get_flashed_messages(category_filter=["good"]) %}
-    {% if goods %}
-    <div class="info-box green white-text">
-        <ul class=flashes>
-            {% for message in goods %}
-            <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-    </div>
-    {% endif %}
-    {% endwith %}
-
-    <ul class="sidenav" id="mobile-demo">
-        <li><a href="/">Hoofdpagina</a></li>
-        {% if current_user.is_authenticated %}
-        <li><a href="/interface">Interface</a></li>
-        <li><a href="/logout">Uitloggen</a></li>
-        {% else %}
-        <li><a href="/login">Inloggen</a></li>
         {% endif %}
-    </ul>
-    <div class="container">
-        {% block content %}
+        {% endwith %}
+        {% with goods = get_flashed_messages(category_filter=["good"]) %}
+        {% if goods %}
+        <div class="info-box green white-text">
+            <ul class=flashes>
+                {% for message in goods %}
+                <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+        {% endwith %}
+
+
+
+        <div class="container">
+            {% block content %}
+            {% endblock %}
+        </div>
+
+        <!--JavaScript at end of body for optimized loading-->
+        <script src="/static/js/jquery-3.4.1.min.js"></script>
+        <script type="text/javascript" src="/static/js/materialize.min.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                $(".button-collapse").sideNav();
+                $(".modal").modal();
+                setTimeout(function() { 
+                    $(".info-box").animate({
+                        opacity: '0.0',
+                        height: '0px',
+                        padding: '0',
+                    });
+                    $(".info-box > ul > li").animate({
+                        opacity: '0.0',
+                        height: '0px',
+                    });
+                }, 1300);
+            });
+        </script>
+        {% block scripts %}
         {% endblock %}
-    </div>
-    <!--JavaScript at end of body for optimized loading-->
-    <script type="text/javascript" src="/static/js/materialize.min.js"></script>
-    <script src="/static/js/jquery-3.4.1.min.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var elems = document.querySelectorAll('.modal');
-            var instances = M.Modal.init(elems, null);
-            elems = document.querySelectorAll('.sidenav');
-            instances = M.Sidenav.init(elems, null);
-            setTimeout(function() { 
-                $(".info-box").animate({
-                    opacity: '0.0',
-                    height: '0px',
-                    padding: '0',
-                });
-                $(".info-box > ul > li").animate({
-                    opacity: '0.0',
-                    height: '0px',
-                });
-            }, 1300);
-        });
-    </script>
-    {% block scripts %}
-    {% endblock %}
-</body>
+    </body>
 </html>
 
