@@ -1,11 +1,15 @@
 var objects = [];
 var mouseDown = 0;
 
-$('input[type="range"]').change(function () {
-    var val = ($(this).val() - $(this).attr('min')) / ($(this).attr('max') - $(this).attr('min'));
-    alert(val);
-    actionUpdate(5, "dimmer", val);
-});
+document.body.onmousedown = function() { 
+    mouseDown = 1;
+}
+
+document.body.onmouseup = function() {
+    mouseDown = 0;
+}
+
+
 
 function getObjects() {
     if (!mouseDown) {
@@ -26,6 +30,16 @@ function renderObjects() {
     var template = $.templates("#dom_object");
     var htmlOutput = template.render(objects);
     $("#object-card-holder").html(htmlOutput);
+    $('input[type="range"]').change(function () {
+        var val = $(this).val();
+        console.log(val);
+        actionUpdate(5, "led", val);
+    }).bind("touchstart", function() {
+        mouseDown = true;
+    }).bind("touchend", function() {
+        mouseDown = false;
+    });
+    var range = new RangeTouch('input[type="range"]', {});
 }
 
 function actionUpdate(obj_id, actuator, value) {
@@ -34,7 +48,7 @@ function actionUpdate(obj_id, actuator, value) {
         method: "POST",
         data: {"actuator": actuator, "value": value},
         success: function(data) {
-            M.toast({html: "Bijgewerkt"});
+            // M.toast({html: "Bijgewerkt"});
         }
     });
     mouseDown = false;
@@ -78,5 +92,5 @@ function clearNotifications() {
 
 getObjects();
 setInterval(function () {
-    // getObjects();
+    getObjects();
 }, 500);

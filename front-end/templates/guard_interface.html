@@ -87,7 +87,6 @@
                         type="range"
                         min="0"
                         max="1024"
-                        onclick="actionUpdate({{:~o_id}}, '{{:id}}', this.value)"
                         value="{{:value}}"/>
                 </p>
             {{/for}}
@@ -103,7 +102,7 @@
 {% endraw %}
 
 <script src="/static/js/dashboard.js?version={{cur_time}}"></script>
-<script src="/static/js/range-touch.min.js">
+<script src="/static/js/rangetouch.js"></script>
 
 <script>
     {% if role == 2 %}
