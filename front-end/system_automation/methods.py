@@ -1,3 +1,5 @@
+import time
+
 import flask
 from flask_login import login_required, login_user, logout_user, current_user
 
@@ -6,6 +8,10 @@ from .objects import web_translate_objects, set_actuator
 import system_automation.objects as objects
 from .api import notifications
 from .utility import roles_allowed
+
+@app.context_processor
+def inject_cur_time():
+    return {"cur_time": time.time()}
 
 @app.route("/")
 def index():
