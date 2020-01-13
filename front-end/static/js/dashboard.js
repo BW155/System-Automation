@@ -1,17 +1,11 @@
 var objects = [];
 var mouseDown = 0;
 
-document.body.onmousedown = function() { 
-    mouseDown = 1;
-}
-
-document.body.onmouseup = function() {
-    mouseDown = 0;
-}
-
-$('.dimmer-slider')
-    .bind('touchstart', function(){ console.log("touchstart"); mouseDown = true; })
-    .bind('touchend', function(){ console.log("touchend"); this.click(); });
+$('input[type="range"]').change(function () {
+    var val = ($(this).val() - $(this).attr('min')) / ($(this).attr('max') - $(this).attr('min'));
+    alert(val);
+    actionUpdate(5, "dimmer", val);
+});
 
 function getObjects() {
     if (!mouseDown) {
@@ -26,7 +20,7 @@ function getObjects() {
             }
         })
     } else {
-        
+
     }
 }
 
@@ -42,7 +36,7 @@ function actionUpdate(obj_id, actuator, value) {
         method: "POST",
         data: {"actuator": actuator, "value": value},
         success: function(data) {
-            // M.toast({html: "Bijgewerkt"});
+            M.toast({html: "Bijgewerkt"});
         }
     });
     mouseDown = false;
@@ -86,5 +80,5 @@ function clearNotifications() {
 
 getObjects();
 setInterval(function () {
-    getObjects();
+    // getObjects();
 }, 500);

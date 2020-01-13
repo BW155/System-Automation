@@ -75,7 +75,12 @@
     <ul class="sidenav" id="mobile-demo">
         <li><a href="/">Hoofdpagina</a></li>
         {% if current_user.is_authenticated %}
-        <li><a href="/interface">Interface</a></li>
+        {% if current_user.role == 1 %}
+            <li><a href="/parent_interface">Interface Ouders</a></li>
+        {% endif %}
+        {% if current_user.role == 2 %}
+            <li><a href="/guard_interface">Interface Guard</a></li>
+        {% endif %}
         <li><a href="/logout">Uitloggen</a></li>
         {% else %}
         <li><a href="/login">Inloggen</a></li>

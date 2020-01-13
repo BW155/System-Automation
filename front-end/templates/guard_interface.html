@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block styles %}
-<link rel="stylesheet" href="/static/css/dashboard.css"/>
+<link rel="stylesheet" href="/static/css/dashboard.css?version={{cur_time}}"/>
 <style>
 .dimmer-slider {
     height: 50px;
@@ -102,7 +102,8 @@
 </script>
 {% endraw %}
 
-<script src="/static/js/dashboard.js"></script>
+<script src="/static/js/dashboard.js?version={{cur_time}}"></script>
+<script src="/static/js/range-touch.min.js">
 
 <script>
     {% if role == 2 %}
