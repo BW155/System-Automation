@@ -9,10 +9,10 @@
         <!--Let browser know website is optimized for mobile-->
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <style>
-* {
-    margin: 0;
-    padding: 0;
-}
+        * {
+            margin: 0;
+            padding: 0;
+        }
         .info-box {
             width: 100%;
             padding: 15px;
@@ -21,6 +21,16 @@
         }
         .error-box {
             padding: 25px !important;
+        }
+        .user-view > .material-icons {
+            position: absolute;
+            font-size: 100px;
+            width: 250px;
+            text-align: center;
+            opacity: 0.5;
+        }
+        .user-view {
+            height: 150px;
         }
         </style>
         {% block styles %}
@@ -48,9 +58,37 @@
                 </ul>
 
                 <ul class="side-nav" id="mobile-demo">
+                    <li>
+                        <div class="user-view indigo">
+                            {% if current_user.is_authenticated %}
+                            {% if current_user.role == 1 %}
+                            <a href="#user">
+                                <div class="circle" style="background: white">
+                                    <i class="material-icons black-text" style="font-size: 40px; text-align: center; line-height: 1.6">people</i>
+                                </div>
+                            </a>
+                            <a><span class="white-text name">Rol: Ouders</span></a>
+                            {% endif %}
+                            {% if current_user.role == 2 %}
+                            <a href="#user">
+                                <div class="circle" style="background: white">
+                                    <i class="material-icons black-text" style="font-size: 40px; text-align: center; line-height: 1.6">alarm</i>
+                                </div>
+                            </a>
+                            <a><span class="white-text name">Rol: Guard</span></a>
+                            {% endif %}
+                            <a><span class="white-text email">{{current_user.username}}</span></a>
+                            {% endif %}
+                        </div>
+                    </li>
                     <li><a href="/">Hoofdpagina</a></li>
                     {% if current_user.is_authenticated %}
-                    <li><a href="/interface">Interface</a></li>
+                    {% if current_user.role == 1 %}
+                    <li><a href="/parent_interface">Interface Ouders</a></li>
+                    {% endif %}
+                    {% if current_user.role == 2 %}
+                    <li><a href="/guard_interface">Interface Guard</a></li>
+                    {% endif %}
                     <li><a href="/logout">Uitloggen</a></li>
                     {% else %}
                     <li><a href="/login">Inloggen</a></li>
@@ -89,7 +127,7 @@
 
         <!--JavaScript at end of body for optimized loading-->
         <script src="/static/js/jquery-3.4.1.min.js"></script>
-        <script src="/static/js/range-touch.min.js"></script>
+        <script src="/static/js/rangetouch.js"></script>
         <script type="text/javascript" src="/static/js/materialize.min.js"></script>
         <script>
             document.addEventListener('DOMContentLoaded', function() {

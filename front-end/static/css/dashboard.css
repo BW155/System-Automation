@@ -1,11 +1,8 @@
-#object-card-holder > div {
-    float: left;
-}
-
 .object-card {
-    width: auto;
-    min-height: 430px;
-    margin: 10px;
+    width: 170px;
+    margin: 5px;
+    vertical-align: top;
+    display: inline-block;
 }
 
 .container {

@@ -16,13 +16,13 @@
     function onButtonClick(obj_ids, action) {
         for (var i = 0; i < obj_ids.length; i++) {
             $.post("/api/interface/" + obj_ids[i] + "," + action, function(data) {
-                 M.toast({html: data == 1 ? "Actie uitgevoerd" : "Mislukt"});
+                 Materialize.toast(data == 1 ? "Actie uitgevoerd" : "Mislukt", 1000);
             });
         }
     }
     function onNotifButtonClick(type) {
         $.post("/api/interface_notifications/" + type, function(data) {
-            M.toast({html: data == 1 ? "Actie uitgevoerd" : "Mislukt"});
+            Materialize.toast(data == 1 ? "Actie uitgevoerd" : "Mislukt", 1000);
         });
     }
 </script>

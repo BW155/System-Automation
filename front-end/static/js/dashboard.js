@@ -30,6 +30,8 @@ function renderObjects() {
     var template = $.templates("#dom_object");
     var htmlOutput = template.render(objects);
     $("#object-card-holder").html(htmlOutput);
+
+    var range = new RangeTouch('input[type="range"]', {});
     $('input[type="range"]').change(function () {
         var val = $(this).val();
         console.log(val);
@@ -39,7 +41,6 @@ function renderObjects() {
     }).bind("touchend", function() {
         mouseDown = false;
     });
-    var range = new RangeTouch('input[type="range"]', {});
 }
 
 function actionUpdate(obj_id, actuator, value) {
@@ -48,15 +49,15 @@ function actionUpdate(obj_id, actuator, value) {
         method: "POST",
         data: {"actuator": actuator, "value": value},
         success: function(data) {
-            // M.toast({html: "Bijgewerkt"});
+            Materialize.toast('Bijgewerkt', 4000) // 4000 is the duration of the toast
         }
     });
     mouseDown = false;
 }
 
-function pollNotifications(id) {
+function pollNotifications() {
     $.ajax({
-        url:"/api/interface_notifications?not_id=" + id,
+        url:"/api/interface_notifications",
         timeout: 10000,
         success: function(data) {
             console.log(data);
@@ -71,17 +72,16 @@ function pollNotifications(id) {
                 }
             }
             if (data.length > 0) {
-                var elem = document.getElementById("notifications");
-                var instance = M.Modal.getInstance(elem);
-                instance.open();
-                pollNotifications(data[data.length - 1]["not_id"]);
+                $("#notifications").modal("open");
+                console.log("opened modal");
+                pollNotifications();
             } else {
-                pollNotifications(id);
+                pollNotifications();
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {
             console.log(jqXHR.status + "," + textStatus + ", " + errorThrown);
-            pollNotifications(id);
+            setTimeout(pollNotifications, 500);
         }
     });
 }

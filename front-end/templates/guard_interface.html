@@ -6,6 +6,13 @@
 .dimmer-slider {
     height: 50px;
 }
+td {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+td:nth-child(2) {
+    text-align: right;
+}
 </style>
 {% endblock %}
 
@@ -44,18 +51,20 @@
         <hr size="2px" style="margin-top: 10px">
 
         <div class="card-content" style="padding: 5px">
+            <table class="striped">
             {{for sensors }}
-            <div class="row" style="margin-bottom: 5px">
-                <p class="col s10" style="font-size: auto">{{:name}}:</p>
-                <p class="col s2" id="{{ o.id }}{{ s.id }}"><b>{{:value }}</b></p>
-            </div>
+            <tr class="row" style="margin-bottom: 5px">
+                <td style="font-size: auto">{{:name}}:</td>
+                <td id="{{ o.id }}{{ s.id }}"><b>{{:value }}</b></td>
+            </tr>
             {{/for}}
             {{for actuators }}
-            <div class="row" style="margin-bottom: 5px">
-                <p class="col s10" style="font-size: auto">{{:name}}:</p>
-                <p class="col s2" id="{{ o.id }}{{ a.id }}"><b>{{:value}}</b></p>
-            </div>
+            <tr class="row" style="margin-bottom: 5px">
+                <td style="font-size: auto">{{:name}}:</td>
+                <td id="{{ o.id }}{{ a.id }}"><b>{{:value}}</b></td>
+            </tr>
             {{/for}}
+            </table>
         </div>
 
         <hr size="2px" style="margin-bottom: 10px">
@@ -100,9 +109,7 @@
     </div>
 </script>
 {% endraw %}
-
 <script src="/static/js/dashboard.js?version={{cur_time}}"></script>
-<script src="/static/js/rangetouch.js"></script>
 
 <script>
     {% if role == 2 %}
