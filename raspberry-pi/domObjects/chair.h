@@ -19,9 +19,11 @@ private:
     int updateForce;
     int counter;
     int startTime;
+    int lastNotification;
     char* wemosMessage();
     json pythonMessage();
     void updateAttributes(json result);
+    void toLogFile();
 public:
     void update();
     Chair(const char * IP, webSocket *s, TimeClass *t);

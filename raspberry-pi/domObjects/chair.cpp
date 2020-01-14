@@ -17,6 +17,7 @@ Chair::Chair(const char *IP, webSocket *s, TimeClass *t) : domObject(s, t, 2) {
     Socket temp(2,"Chair",IP);
     domObject::wemos = temp;
     startTimeMedication = 0;
+    lastNotification = 0;
 }
 
 using json = nlohmann::json ;
@@ -60,40 +61,52 @@ void Chair::update() {
     //Current time in seconds;
     cur_time = domObject::timeObj->getTime()[0]*3600 + domObject::timeObj->getTime()[1]*60 + domObject::timeObj->getTime()[2];
 
-//    if (startTimeMedication == 0) {
-//        startTimeMedication = cur_time;
-//        json message = {
-//                {"type", 4},
-//                {"id", 5}
-//        };
-//        python->sendNotification(toCharArray(message));
-//    } else if (cur_time-startTimeMedication > 599) {
-//        json message = {
-//                {"type", 4},
-//                {"id", 6}
-//        };
-//        python->sendNotification(toCharArray(message));
-//    } else if (cur_time-startTimeMedication > 1199) {
-//        json message = {
-//                {"type", 4},
-//                {"id", 7}
-//        };
-//        python->sendNotification(toCharArray(message));
-//    } else if (cur_time-startTimeMedication > 1799) {
-//        json message = {
-//                {"type", 4},
-//                {"id", 8}
-//        };
-//        python->sendNotification(toCharArray(message));
-//        if (cur_time-startTimeMedication > 2399) {
-//            startTimeMedication = 0;
-//        }
-//    }
+    if (startTimeMedication == 0 && lastNotification != 1) {
+        startTimeMedication = cur_time + 1;
+        lastNotification = 1;
+        json message = {
+                {"type", 4},
+                {"id", 5}
+        };
+        cout<<"MEDICATIE"<<endl;
+        python->sendNotification(toCharArray(message));
+    } else if (cur_time-startTimeMedication >= 599 && cur_time-startTimeMedication < 620 && lastNotification != 2) {
+        lastNotification = 2;
+        json message = {
+                {"type", 4},
+                {"id", 6}
+        };
+        cout<<"MEDICATIE 2"<<endl;
+        python->sendNotification(toCharArray(message));
+    } else if (cur_time-startTimeMedication >= 1199&& cur_time-startTimeMedication < 1220 && lastNotification != 3) {
+        lastNotification = 3;
+        json message = {
+                {"type", 4},
+                {"id", 7}
+        };
+        cout<<"MEDICATIE 3"<<endl;
+        python->sendNotification(toCharArray(message));
+    } else if (cur_time-startTimeMedication >= 1799&& cur_time-startTimeMedication < 1820 && lastNotification != 4) {
+        lastNotification = 4;
+        json message = {
+                {"type", 4},
+                {"id", 8}
+        };
+        cout<<"MEDICATIE 4"<<endl;
+        python->sendNotification(toCharArray(message));
+        if (cur_time-startTimeMedication >= 2399 && cur_time-startTimeMedication < 2420) {
+            startTimeMedication = 0;
+        }
+    }
     result = wemos.sendReceive(wemosMessage());
-    jsonResult = toJson(result);
-    updateAttributes(jsonResult);
-
-
+    if (result == NULL) {
+        cout<<"error receiving"<<endl;
+    }
+    else {
+        jsonResult = toJson(result);
+        updateAttributes(jsonResult);
+    }
+    cout<<"tijd: "<<cur_time<<endl;
 
 
     if (updateForce - forceSensor > 300) {
@@ -103,10 +116,9 @@ void Chair::update() {
             startTime = domObject::timeObj->getTime()[0]*3600 + domObject::timeObj->getTime()[1]*60 + domObject::timeObj->getTime()[2];
         }
     }
-    else if (cur_time - startTime > 6000) {
+    else if (cur_time - startTime > 600) {
         counter = 0;
         startTime = cur_time;
-        cout<<"tijd"<<endl;
     }
     else if (counter >= 5) {
         cout<<"epsoilepsieboy"<<endl;
@@ -127,7 +139,7 @@ void Chair::update() {
         start_time_max_massage = cur_time;
     }
 
-    if((cur_time-start_time_30min_check) > (30 * 600)){
+    if((cur_time-start_time_30min_check) > (30 * 60)){
         //60 seconds because time multiplier is above a minute. 2 minute pulse is 2 seconds real time vibrator pulse
         if((cur_time-start_time_30min_check) > ((30 * 60)+ 120)) {
             vibrator = false;
@@ -143,17 +155,20 @@ void Chair::update() {
             vibrator = true;
 
         }
-        else if ((cur_time - start_time_max_massage) > (5 * 600)&& vibrator) {
+        else if ((cur_time - start_time_max_massage) > (5 * 60)&& vibrator) {
             vibrator = false;
             timeOut = true;
         }
     }
     if(timeOut){
-        if((cur_time - start_timeOut) > (5 * 600))
+        if((cur_time - start_timeOut) > (5 * 60))
             timeOut = false;
     }else{
         start_timeOut = cur_time;
     }
+
+//    toLogFile();
+//    usleep(100000);
 }
 
 void Chair::updateAttributes(json result) {
@@ -161,4 +176,22 @@ void Chair::updateAttributes(json result) {
     updateForce = result["sensors"]["forceSensor"];
     button = result["sensors"]["button"];
     python->sendAll(2,pythonMessage());
+}
+
+void Chair::toLogFile() {
+    //log
+    ofstream myfile;
+    myfile.open("log.txt", ios::out | ios::app);
+    if (myfile.is_open()) {
+        myfile << domObject::timeObj->getTime()[0] << ":" << domObject::timeObj->getTime()[1] << ":"
+               << domObject::timeObj->getTime()[2] << "Chair: " << pythonMessage() << endl;
+        if  (myfile.bad()) {
+            cout<<"write failed"<<endl;
+        }
+
+    }
+    else {
+        cout<<"file not found"<<endl;
+    }
+    myfile.close();
 }

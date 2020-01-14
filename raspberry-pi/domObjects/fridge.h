@@ -6,6 +6,7 @@
 #include "../Socket/Socket.h"
 #include "../Socket/webSocket.h"
 #include "../json/json.hpp"
+#include <iostream>
 
 
 #ifndef FRIDGE_H
@@ -22,6 +23,7 @@ private:
     void updateAttributes(json);
     bool state;
     int start_time;
+    void toLogFile();
 public:
     void update() override;
     Fridge(const char * IP, webSocket *s, TimeClass *t);

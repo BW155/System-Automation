@@ -21,6 +21,7 @@ private:
     bool led;
     bool buzzer;
     Socket socket;
+    void toLogFile();
 public:
     Pillar(const char*, webSocket*);
     bool get_buzzer();

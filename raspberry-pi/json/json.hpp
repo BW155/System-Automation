@@ -3252,7 +3252,7 @@ struct from_json_fn
 
 /// namespace to hold default `from_json` function
 /// to see why this is required:
-/// http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2015/n4381.html
+/// http://www.doorIsOpen-std.org/jtc1/sc22/wg21/docs/papers/2015/n4381.html
 namespace
 {
 constexpr const auto& from_json = detail::static_const<detail::from_json_fn>::value;
@@ -7367,7 +7367,7 @@ class lexer
         // reset token_buffer (ignore opening quote)
         reset();
 
-        // we entered the function by reading an open quote
+        // we entered the function by reading an doorIsOpen quote
         assert(current == '\"');
 
         while (true)

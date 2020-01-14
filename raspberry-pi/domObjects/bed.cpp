@@ -109,6 +109,11 @@ void Bed::update(){
     json Mes = pythonMessage();
     python->sendAll(1, Mes);
 
+//    toLogFile();
+
+}
+
+void Bed::toLogFile() {
     //log
     ofstream myfile;
     myfile.open("log.txt", ios::out | ios::app);

@@ -43,13 +43,16 @@ void Wall::update(){
     int temp = wemosResult["sensors"]["dimmer"];
     if (dimmer - temp != 0) {
         led = wemosResult["sensors"]["dimmer"];
+        dimmer = wemosResult["sensors"]["dimmer"];
     }
-    dimmer = wemosResult["sensors"]["dimmer"];
+
     LDR = wemosResult["sensors"]["LDR"];
 
     //verstuur naar interface
     json Mes = pythonMessage();
     python->sendAll(5, Mes);
+
+//    toLogFile();
 }
 
 char* Wall::wemosMessage(){
@@ -78,4 +81,22 @@ json Wall::pythonMessage(){
             }
     };
     return message;
+}
+
+void Wall::toLogFile() {
+    //log
+    ofstream myfile;
+    myfile.open("log.txt", ios::out | ios::app);
+    if (myfile.is_open()) {
+        myfile << domObject::timeObj->getTime()[0] << ":" << domObject::timeObj->getTime()[1] << ":"
+               << domObject::timeObj->getTime()[2] << "Wall: " << pythonMessage() << endl;
+        if  (myfile.bad()) {
+            cout<<"write failed"<<endl;
+        }
+
+    }
+    else {
+        cout<<"file not found"<<endl;
+    }
+    myfile.close();
 }

@@ -20,6 +20,7 @@ private:
     int startTimeLed;
     int startTimeWakker;
     bool ledTimerStarted;
+    void toLogFile();
 
 public:
     Bed(const char*, webSocket*, TimeClass*);
