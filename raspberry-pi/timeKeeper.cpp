@@ -53,10 +53,10 @@ void TimeClass::autoIncreaseTime(){
             
         }
         //Debug purposes
-        cout << "hours: "  << hours   << endl;
-        cout << "Minutes: "<< minutes << endl;
-        cout << "seconds: "<< seconds << endl;
-        cout << " " << endl;
+//        cout << "hours: "  << hours   << endl;
+//        cout << "Minutes: "<< minutes << endl;
+//        cout << "seconds: "<< seconds << endl;
+//        cout << " " << endl;
     }
     prevTime = curTime;
 }
