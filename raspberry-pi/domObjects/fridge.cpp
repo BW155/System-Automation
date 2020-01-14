@@ -8,7 +8,7 @@
 #include <fstream>
 
 #define doorIsOpen 0
-#define closed 1
+#define doorIsClosed 1
 
 using json = nlohmann::json ;
 
@@ -67,7 +67,7 @@ void Fridge::update(){
     jsonResult = toJson(result);
     updateAttributes(jsonResult);
 
-    if (openClose == closed){
+    if (openClose == doorIsClosed){
         start_time = cur_time;
         cooling = true;
     }
