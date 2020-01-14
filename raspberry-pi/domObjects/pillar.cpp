@@ -57,13 +57,33 @@ void Pillar::update(){
     json Receive_Sensor = toJson(receive_sensor);
 
     gassensor = Receive_Sensor["sensors"]["gasSensor"];
-    button = Receive_Sensor["sensors"]["button"] == 1;
+    button = Receive_Sensor["sensors"]["button"];
     buzzer = gassensor >= 900 || buzzer;
     
     json python_message = pythonMessage();
     python->sendAll(4, python_message); // stuur alle sensors, alleen als uit sendReceive blijkt dat er veranderingen zijn
+
+//    toLogFile();
 }
 
 bool Pillar::get_buzzer(){
     return buzzer;
-}  
+}
+
+void Pillar::toLogFile() {
+    //log
+    ofstream myfile;
+    myfile.open("log.txt", ios::out | ios::app);
+    if (myfile.is_open()) {
+        myfile << domObject::timeObj->getTime()[0] << ":" << domObject::timeObj->getTime()[1] << ":"
+               << domObject::timeObj->getTime()[2] << "Pillar: " << pythonMessage() << endl;
+        if  (myfile.bad()) {
+            cout<<"write failed"<<endl;
+        }
+
+    }
+    else {
+        cout<<"file not found"<<endl;
+    }
+    myfile.close();
+}

@@ -5,9 +5,10 @@
 
 #include "../Socket/Socket.h"
 #include "domObject.h"
+#include <fstream>
 
-#define open 0
-#define closed 1
+#define doorIsOpen 0
+#define doorIsClosed 1
 
 using json = nlohmann::json ;
 
@@ -66,7 +67,7 @@ void Fridge::update(){
     jsonResult = toJson(result);
     updateAttributes(jsonResult);
 
-    if (openClose == closed){
+    if (openClose == doorIsClosed){
         start_time = cur_time;
         cooling = true;
     }
@@ -81,6 +82,7 @@ void Fridge::update(){
 
     }
 
+    toLogFile();
 }
 
 void Fridge::updateAttributes(json result){
@@ -88,4 +90,22 @@ void Fridge::updateAttributes(json result){
     thermometer2 = result["sensors"]["thermometer2"];
     openClose = result["sensors"]["openClose"] == 1;
     python->sendAll(6,pythonMessage());
+}
+
+void Fridge::toLogFile() {
+    //log
+    ofstream myfile;
+    myfile.open("log.txt", ios::out | ios::app);
+    if (myfile.is_open()) {
+        myfile << domObject::timeObj->getTime()[0] << ":" << domObject::timeObj->getTime()[1] << ":"
+               << domObject::timeObj->getTime()[2] << "Fridge: " << pythonMessage() << endl;
+        if  (myfile.bad()) {
+            cout<<"write failed"<<endl;
+        }
+
+    }
+    else {
+        cout<<"file not found"<<endl;
+    }
+    myfile.close();
 }

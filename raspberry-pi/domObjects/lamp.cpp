@@ -38,6 +38,8 @@ void Lamp::update(){
     }
     //doe iets
     python->sendAll(3, pythonMessage());
+
+//    toLogFile();
 }
 
 json Lamp::pythonMessage(){
@@ -79,4 +81,22 @@ void Lamp::stuurLamp(){
             led = false;
         }
     }
+}
+
+void Lamp::toLogFile() {
+    //log
+    ofstream myfile;
+    myfile.open("log.txt", ios::out | ios::app);
+    if (myfile.is_open()) {
+        myfile << domObject::timeObj->getTime()[0] << ":" << domObject::timeObj->getTime()[1] << ":"
+               << domObject::timeObj->getTime()[2] << "Lamp: " << pythonMessage() << endl;
+        if  (myfile.bad()) {
+            cout<<"write failed"<<endl;
+        }
+
+    }
+    else {
+        cout<<"file not found"<<endl;
+    }
+    myfile.close();
 }

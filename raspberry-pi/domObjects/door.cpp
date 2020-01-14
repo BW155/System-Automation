@@ -76,6 +76,8 @@ void Door::update() {
     buttonOutside = jsonResult["sensors"]["button2"];
 
     python->sendAll(7, pythonMessage());
+
+//    toLogFile();
 }
 
 char* Door::wemosMessage(bool ledIn, bool ledOut, int servo) {
@@ -113,4 +115,22 @@ json Door::pythonMessage() {
 
 void Door::setPillarPointer(Pillar* p){
     pillar = p;
+}
+
+void Door::toLogFile() {
+    //log
+    ofstream myfile;
+    myfile.open("log.txt", ios::out | ios::app);
+    if (myfile.is_open()) {
+        myfile << domObject::timeObj->getTime()[0] << ":" << domObject::timeObj->getTime()[1] << ":"
+               << domObject::timeObj->getTime()[2] << "Door: " << pythonMessage() << endl;
+        if  (myfile.bad()) {
+            cout<<"write failed"<<endl;
+        }
+
+    }
+    else {
+        cout<<"file not found"<<endl;
+    }
+    myfile.close();
 }

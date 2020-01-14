@@ -23,6 +23,7 @@ private:
     int startTime;
     char* wemosMessage();
     json pythonMessage();
+    void toLogFile();
 };
 
 

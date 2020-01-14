@@ -16,9 +16,14 @@ private:
     int start_timeOut;
     bool vibrator, button, timeOut;
     int startTimeMedication;
+    int updateForce;
+    int counter;
+    int startTime;
+    int lastNotification;
     char* wemosMessage();
     json pythonMessage();
     void updateAttributes(json result);
+    void toLogFile();
 public:
     void update();
     Chair(const char * IP, webSocket *s, TimeClass *t);

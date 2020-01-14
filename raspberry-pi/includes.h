@@ -55,7 +55,7 @@
 //    cout<<"Fridge:"<<endl;
 //    cout<<"Thermometer 1: "<<Result["sensors"]["thermometer1"]<<endl;
 //    cout<<"Thermometer 2: "<<Result["sensors"]["thermometer2"]<<endl;
-//    cout<<"Door open: "<<Result["sensors"]["openClose"]<<endl;
+//    cout<<"Door doorIsOpen: "<<Result["sensors"]["openClose"]<<endl;
 //    cout<<"\n"<<endl;
 //}
 //void coutDoor(json Result) {

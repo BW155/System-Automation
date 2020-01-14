@@ -7367,7 +7367,7 @@ class lexer
         // reset token_buffer (ignore opening quote)
         reset();
 
-        // we entered the function by reading an open quote
+        // we entered the function by reading an doorIsOpen quote
         assert(current == '\"');
 
         while (true)
