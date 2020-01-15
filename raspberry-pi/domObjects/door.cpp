@@ -25,29 +25,26 @@ void Door::update() {
     json jsonResult;
     int jsonServo = servo;
 
-    int time[] = {0,0,0,0}; // timeObject->getTime
     if(python->sendMessage(7)) {
         result = python->receiveActuators(7);
         jsonResult = toJson(result);
         //servo
         jsonServo = jsonResult["actuators"]["servo"];
 
-
-
         //ledIn
         ledInside = jsonResult["actuators"]["led1"] == 1;
-
-        //ledOut
-        ledOutside = time[0] < 6 || time[0] > 18 || buttonOutside;
     }
-    if(pillar->get_buzzer() && buttonInside) {
+
+    ledOutside = getTimePointer()->isNight();
+
+    /*if(pillar->get_buzzer() && buttonInside) {
         if (servo == 1) {
             servo = 0;
         }
         else {
             servo = 1;
         }
-    }else if (buttonInside) {
+    }else*/ if (buttonInside) {
         json message = {
                 {"type", 4},
                 {"id", 1}

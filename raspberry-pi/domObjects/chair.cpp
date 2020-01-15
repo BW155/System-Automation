@@ -106,7 +106,8 @@ void Chair::update() {
         jsonResult = toJson(result);
         updateAttributes(jsonResult);
     }
-    cout<<"tijd: "<<cur_time<<endl;
+
+    cout << "tijd: " << getTimePointer()->dump() << endl;
 
 
     if (updateForce - forceSensor > 300) {

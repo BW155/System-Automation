@@ -85,3 +85,13 @@ int* TimeClass::getTime(){
 
     return arr;
 }
+
+bool TimeClass::isNight() {
+    return hours >= 23 || hours <= 6;
+}
+
+string TimeClass::dump() {
+    char dump[10];
+    sprintf(dump, "%d:%d:%d", hours, minutes, seconds);
+    return dump;
+}
