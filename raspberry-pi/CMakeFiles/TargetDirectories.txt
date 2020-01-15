@@ -1,0 +1,3 @@
+/home/zep/Documents/System-Automation/raspberry-pi/CMakeFiles/rebuild_cache.dir
+/home/zep/Documents/System-Automation/raspberry-pi/CMakeFiles/Socket.dir
+/home/zep/Documents/System-Automation/raspberry-pi/CMakeFiles/edit_cache.dir

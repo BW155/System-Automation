@@ -12,52 +12,34 @@ TimeClass::TimeClass(int t, int h, int m, int s){
 void TimeClass::autoIncreaseTime(){
     time_t curTime;
     static time_t prevTime;
-    double diff_t, totalTime;
+    double diff_t;
+    int totalTime;
     int localMultiplier = timeMultiplier * 60;
 
     time(&curTime);
+
     //Calculate time difference between current time and previous time.
     if(prevTime != 0 )
         diff_t = difftime(curTime,prevTime);
 
     totalTime = diff_t * localMultiplier;
-    
-    if(diff_t > 0){
-        if(totalTime >= 3600){
-            while((totalTime - 3600) >= 0 ){
-                hours++;
-                if(hours > 23)
-                    hours = 0;
-                totalTime -= 3600;
-            }
-        }
-        if(totalTime > 0){
-            while((totalTime - 60) >= 0){
-                minutes++;
-                if(minutes >= 60){
-                    hours++;
-                    minutes = 0;
-                }
-                totalTime -= 60;
-            }
-        }
-        if(totalTime > 0){
-            while (totalTime > 0){
-                seconds++;
-                if(seconds >= 60){
-                    minutes++;
-                    seconds = 0;
-                }
-                totalTime -= 1;
-            }
-            
-        }
-        //Debug purposes
-//        cout << "hours: "  << hours   << endl;
-//        cout << "Minutes: "<< minutes << endl;
-//        cout << "seconds: "<< seconds << endl;
-//        cout << " " << endl;
+
+    if(diff_t > 0) {
+        hours += totalTime%3600;
+        totalTime -= hours * 3600;
+
+        minutes += totalTime%60;
+        totalTime -= minutes * 60;
+
+        seconds += totalTime%60;
+        totalTime -= seconds;
     }
+
+    //Debug purposes
+    //        cout << "hours: "  << hours   << endl;
+    //        cout << "Minutes: "<< minutes << endl;
+    //        cout << "seconds: "<< seconds << endl;
+    //        cout << " " << endl;
     prevTime = curTime;
 }
 

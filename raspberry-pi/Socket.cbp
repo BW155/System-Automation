@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="Socket"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/zep/Documents/System-Automation/raspberry-pi"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/zep/Documents/System-Automation/raspberry-pi/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/zep/Documents/System-Automation/raspberry-pi/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/zep/Documents/System-Automation/raspberry-pi/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/zep/Documents/System-Automation/raspberry-pi/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/zep/Documents/System-Automation/raspberry-pi"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/zep/Documents/System-Automation/raspberry-pi/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/zep/Documents/System-Automation/raspberry-pi/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/zep/Documents/System-Automation/raspberry-pi/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/zep/Documents/System-Automation/raspberry-pi/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Socket">
+				<Option output="/home/zep/Documents/System-Automation/raspberry-pi/Socket" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/zep/Documents/System-Automation/raspberry-pi"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/zep/Documents/System-Automation/raspberry-pi/Makefile&quot;  VERBOSE=1 Socket"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/zep/Documents/System-Automation/raspberry-pi/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/zep/Documents/System-Automation/raspberry-pi/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/zep/Documents/System-Automation/raspberry-pi/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Socket/fast">
+				<Option output="/home/zep/Documents/System-Automation/raspberry-pi/Socket" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/zep/Documents/System-Automation/raspberry-pi"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/zep/Documents/System-Automation/raspberry-pi/Makefile&quot;  VERBOSE=1 Socket/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/zep/Documents/System-Automation/raspberry-pi/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/zep/Documents/System-Automation/raspberry-pi/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/zep/Documents/System-Automation/raspberry-pi/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/zep/Documents/System-Automation/raspberry-pi"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/zep/Documents/System-Automation/raspberry-pi/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/zep/Documents/System-Automation/raspberry-pi/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/zep/Documents/System-Automation/raspberry-pi/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/zep/Documents/System-Automation/raspberry-pi/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/zep/Documents/System-Automation/raspberry-pi/Socket/Socket.cpp">
+			<Option target="Socket"/>
+		</Unit>
+		<Unit filename="/home/zep/Documents/System-Automation/raspberry-pi/Socket/Socket.h">
+			<Option target="Socket"/>
+		</Unit>
+		<Unit filename="/home/zep/Documents/System-Automation/raspberry-pi/Socket/webSocket.cpp">
+			<Option target="Socket"/>
+		</Unit>
+		<Unit filename="/home/zep/Documents/System-Automation/raspberry-pi/Socket/webSocket.h">
+			<Option target="Socket"/>
+		</Unit>
+		<Unit filename="/home/zep/Documents/System-Automation/raspberry-pi/domObjects/bed.cpp">
+			<Option target="Socket"/>
+		</Unit>
+		<Unit filename="/home/zep/Documents/System-Automation/raspberry-pi/domObjects/bed.h">
+			<Option target="Socket"/>
+		</Unit>
+		<Unit filename="/home/zep/Documents/System-Automation/raspberry-pi/domObjects/chair.cpp">
+			<Option target="Socket"/>
+		</Unit>
+		<Unit filename="/home/zep/Documents/System-Automation/raspberry-pi/domObjects/chair.h">
+			<Option target="Socket"/>
+		</Unit>
+		<Unit filename="/home/zep/Documents/System-Automation/raspberry-pi/domObjects/domObject.cpp">
+			<Option target="Socket"/>
+		</Unit>
+		<Unit filename="/home/zep/Documents/System-Automation/raspberry-pi/domObjects/domObject.h">
+			<Option target="Socket"/>
+		</Unit>
+		<Unit filename="/home/zep/Documents/System-Automation/raspberry-pi/domObjects/door.cpp">
+			<Option target="Socket"/>
+		</Unit>
+		<Unit filename="/home/zep/Documents/System-Automation/raspberry-pi/domObjects/door.h">
+			<Option target="Socket"/>
+		</Unit>
+		<Unit filename="/home/zep/Documents/System-Automation/raspberry-pi/domObjects/fridge.cpp">
+			<Option target="Socket"/>
+		</Unit>
+		<Unit filename="/home/zep/Documents/System-Automation/raspberry-pi/domObjects/fridge.h">
+			<Option target="Socket"/>
+		</Unit>
+		<Unit filename="/home/zep/Documents/System-Automation/raspberry-pi/domObjects/lamp.cpp">
+			<Option target="Socket"/>
+		</Unit>
+		<Unit filename="/home/zep/Documents/System-Automation/raspberry-pi/domObjects/lamp.h">
+			<Option target="Socket"/>
+		</Unit>
+		<Unit filename="/home/zep/Documents/System-Automation/raspberry-pi/domObjects/pillar.cpp">
+			<Option target="Socket"/>
+		</Unit>
+		<Unit filename="/home/zep/Documents/System-Automation/raspberry-pi/domObjects/pillar.h">
+			<Option target="Socket"/>
+		</Unit>
+		<Unit filename="/home/zep/Documents/System-Automation/raspberry-pi/domObjects/wall.cpp">
+			<Option target="Socket"/>
+		</Unit>
+		<Unit filename="/home/zep/Documents/System-Automation/raspberry-pi/domObjects/wall.h">
+			<Option target="Socket"/>
+		</Unit>
+		<Unit filename="/home/zep/Documents/System-Automation/raspberry-pi/includes.h">
+			<Option target="Socket"/>
+		</Unit>
+		<Unit filename="/home/zep/Documents/System-Automation/raspberry-pi/main.cpp">
+			<Option target="Socket"/>
+		</Unit>
+		<Unit filename="/home/zep/Documents/System-Automation/raspberry-pi/timeKeeper.cpp">
+			<Option target="Socket"/>
+		</Unit>
+		<Unit filename="/home/zep/Documents/System-Automation/raspberry-pi/timeKeeper.h">
+			<Option target="Socket"/>
+		</Unit>
+		<Unit filename="/home/zep/Documents/System-Automation/raspberry-pi/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
