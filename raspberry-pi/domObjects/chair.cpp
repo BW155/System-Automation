@@ -17,8 +17,7 @@ Chair::Chair(const char *IP, webSocket *w, TimeClass *t) : domObject(w, t, 2) {
     updateForce = 0;
     startTimeMedication = 0;
     lastNotification = 0;
-
-    Socket temp(2,"Chair",IP);
+    Socket temp(2,IP);
     domObject::wemos = temp;
 }
 

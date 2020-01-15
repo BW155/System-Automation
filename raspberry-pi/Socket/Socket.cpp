@@ -12,73 +12,92 @@
 using json = nlohmann::json ;
 using namespace std;
 #define PORT 8080
+
+// Empty constructor
 Socket::Socket() {connected = 0;}
-Socket::Socket(int id_, string name_,const char *IP_) {
+
+// Actual constructor, initiate variables
+Socket::Socket(int id_, const char *IP_) {
     id = id_;
     IP = IP_;
-    name = name_;
     sock = 0;
     struct sockaddr_in temp;
     sock_addr = temp;
+
+    // First a check whether the socket was made correctly
     if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0)
     {
-//        printf("\n Socket creation error \n");
+        printf("\n Socket creation error \n");
     }
+
+    // set some variables for the socket connection
     sock_addr.sin_family = AF_INET;
     sock_addr.sin_port = htons(PORT);
+
+    // check if the IP adress is correct
     if(inet_pton(AF_INET, IP, &sock_addr.sin_addr)<=0)
     {
-//        printf("\nInvalid address/ Address not supported \n");
+        printf("\nInvalid address/ Address not supported \n");
     }
 
-    if (connect(sock, (struct sockaddr *)&sock_addr, sizeof(sock_addr)) < 0)
-    {
-//        printf("\nConnection Failed \n");
-        connected = false;
-    }
-    else {
-        connected = true;
-    }
+    // check if a connection can be made with the socket
+    connected = connect(sock, (struct sockaddr *) &sock_addr, sizeof(sock_addr)) >= 0;
 
 }
-int Socket::getId() {return id;}
-string Socket::getIP() {return IP;}
-string Socket::getName() {return name;}
-void Socket::setName(string name_) {name = name_;}
 
+// To make a new connection to the socket
 void Socket::makeConnection() {
+    // First a check whether the socket was made correctly
     if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0)
     {
-//        printf("\n Socket creation error \n");
-    }
-    sock_addr.sin_family = AF_INET;
-    sock_addr.sin_port = htons(PORT);
-    if(inet_pton(AF_INET, IP, &sock_addr.sin_addr)<=0)
-    {
-//        printf("\nInvalid address/ Address not supported \n");
+        printf("\n Socket creation error \n");
     }
 
+    // set some variables for the socket connection
+    sock_addr.sin_family = AF_INET;
+    sock_addr.sin_port = htons(PORT);
+
+    // check if the IP adress is correct
+    if(inet_pton(AF_INET, IP, &sock_addr.sin_addr)<=0)
+    {
+        printf("\nInvalid address/ Address not supported \n");
+    }
+
+    // check if a connection can be made with the socket
     if (connect(sock, (struct sockaddr *)&sock_addr, sizeof(sock_addr)) < 0)
     {
-//        printf("\nConnection Failed \n");
+        printf("\nConnection Failed \n");
     }
 }
 
+// get the value of connected
 bool Socket::getConnected() {
     return connected;
 }
 
+// function to send actuators to wemos, and receive sensors
 char* Socket::sendReceive(char *message) {
-    char *temp;
+
+    char *result;
+
+    // make connection
     makeConnection();
-//    cout<<"twee"<<endl;
+
+    // make the buffer
     char buffer[1024] = {0};
+
+    // send message
     send(sock, message, strlen(message), 0);
-//    cout<<"twwee.5"<<endl;
+
+    // receive message
     int valread = read(sock, buffer, 1024);
-    temp = buffer;
+    result = buffer;
+
+    // close the socket
     close(sock);
-        return temp;
+
+    // return result
+    return result;
 }
 
 

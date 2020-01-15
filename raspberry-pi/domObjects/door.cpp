@@ -14,8 +14,7 @@ Door::Door(const char* IP, webSocket* w, TimeClass *t): domObject(w, t, 7){
     ledOutside = false;
     ledInside = false;
     pillar = NULL;
-    
-    Socket temp(7,"door",IP);
+    Socket temp(7, IP);
     domObject::wemos = temp;
 }
 
@@ -26,7 +25,7 @@ void Door::update() {
     int jsonServo = servo;
 
     domObject::timeObj->autoIncreaseTime();
-    int* currentTime = domObject::timeObj->getTime;
+    int* currentTime = domObject::timeObj->getTime();
 
     if(python->sendMessage(7)) {
         result = python->receiveActuators(7);

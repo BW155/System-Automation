@@ -2,7 +2,6 @@
 #include <unistd.h>
 #include <iostream>
 #include <sstream>
-#include <strings.h>
 #include <string>
 #include <stdlib.h>
 
