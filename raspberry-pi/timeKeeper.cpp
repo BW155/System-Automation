@@ -14,7 +14,7 @@ void TimeClass::autoIncreaseTime(){
     static time_t prevTime;
     double diff_t;
     int totalTime;
-    int localMultiplier = timeMultiplier * 60;
+    int localMultiplier = timeMultiplier;
 
     time(&curTime);
 
@@ -23,36 +23,44 @@ void TimeClass::autoIncreaseTime(){
         diff_t = difftime(curTime,prevTime);
 
     totalTime = diff_t * localMultiplier;
-    if(diff_t > 0){
-        if(totalTime >= 3600){
-            hours += totalTime%3600;
-                if(hours > 23)
-                    hours = 0;
-                totalTime -= hours * 3600;
+    if(diff_t > 0) {
+        if (totalTime >= 3600) {
+            hours += (totalTime - totalTime % 3600) / 3600;
+            totalTime -= (totalTime - totalTime % 3600);
         }
-        if(totalTime > 0){
-            minutes += totalTime%60;
-                if(minutes >= 60){
+        if (totalTime >= 60) {
+            minutes += (totalTime - totalTime % 60) / 60;
+            if (minutes > 59) {
+                hours++;
+                minutes = 0;
+            }
+            totalTime -= (totalTime - totalTime % 60);
+        }
+        if (totalTime > 0) {
+            seconds += totalTime;
+            if (seconds > 59) {
+                minutes++;
+                seconds = 0;
+                if (minutes > 59) {
                     hours++;
                     minutes = 0;
                 }
-                totalTime -= 60;
+            }
+            totalTime -= totalTime;
         }
-        if(totalTime > 0){
-            seconds += totalTime%60;
-                if(seconds >= 60){
-                    minutes++;
-                    seconds = 0;
-                }
-                totalTime -= 1;
+        if (hours > 23) {
+            hours = 0;
+            minutes = 0;
+            seconds = 0;
         }
 
-    //Debug purposes
-    //        cout << "hours: "  << hours   << endl;
-    //        cout << "Minutes: "<< minutes << endl;
-    //        cout << "seconds: "<< seconds << endl;
-    //        cout << " " << endl;
-    prevTime = curTime;
+        //Debug purposes
+                cout << "hours: "  << hours   << endl;
+                cout << "Minutes: "<< minutes << endl;
+                cout << "seconds: "<< seconds << endl;
+                cout << " " << endl;
+        prevTime = curTime;
+    }
 }
 
 void TimeClass::setTime(string TimeMultiplier, string Hours, string Minutes, string Seconds){
