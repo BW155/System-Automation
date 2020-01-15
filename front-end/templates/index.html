@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+<link rel="stylesheet" href="/static/css/index.css?version={{cur_time}}"/>
+
+<div class="button-holder center">
+    <button class="int-button green-button" onclick="onButtonClick([1], 'led')">LICHT BED</button>
+    <button class="int-button green-button" onclick="onButtonClick([2], 'led')">LICHT STOEL</button>
+    <button class="int-button green-button" onclick="onButtonClick([3], 'led')">LICHT TAFELLAMP</button>
+    <button class="int-button green-button" onclick="onButtonClick([4, 5], 'led'); onButtonClick([7], 'led1');">LICHT Muur,Zuil,Deur</button>
+    <button class="int-button red-button" onclick="onNotifButtonClick(0)"><i class="material-icons">warning</i></button>
+    <button class="int-button blue-button" onclick="onNotifButtonClick(1)">NAAR BUITEN</button>
+</div>
+{% endblock %}
+{% block scripts %}
+<script>
+    function onButtonClick(obj_ids, action) {
+        for (var i = 0; i < obj_ids.length; i++) {
+            $.post("/api/interface/" + obj_ids[i] + "," + action, function(data) {
+                 Materialize.toast(data == 1 ? "Actie uitgevoerd" : "Mislukt", 1000);
+            });
+        }
+    }
+    function onNotifButtonClick(type) {
+        $.post("/api/interface_notifications/" + type, function(data) {
+            Materialize.toast(data == 1 ? "Actie uitgevoerd" : "Mislukt", 1000);
+        });
+    }
+</script>
+{% endblock %}
+
