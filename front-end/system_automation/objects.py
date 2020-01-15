@@ -21,9 +21,10 @@ def get_objects():
 
 def set_object(obj):
     global objects
-    for i in objects:
-        if obj["id"] == i["id"]:
-            i = obj
+
+    for i, o in enumerate(objects):
+        if obj["id"] == o["id"]:
+            objects[i] = obj
             return True
     return False
 

@@ -33,6 +33,7 @@ class PiSocketServer(socketserver.BaseRequestHandler):
         response = process_message(self.data.decode("utf-8"))
         # just send back the same data, but upper-cased
         self.request.sendall(bytes(response, "utf-8"))
+        print("END\n")
 
 
 def data_socket_routine():
@@ -75,11 +76,11 @@ def process_message(message):
             return "UNKOWN ID"
 
         if messsage_type == 3:
-            data = js.get("data")
-            if data:
-                set_object(data)
-                if data["id"] == 4:
-                    if data["sensors"]["button"] == 1:
+            if js:
+                del js["type"]
+                set_object(js)
+                if js["id"] == 4:
+                    if js["sensors"]["button"] == 1:
                         add_notification(10, "NOODKNOP INGEDRUKT");
                 return "1"
             return "0"
@@ -94,7 +95,8 @@ def process_message(message):
 
 
         return "UNKOWN"
-    except JSONDecodeError:
+    except JSONDecodeError as e:
+        print(e)
         return "JSONError"
 
 
