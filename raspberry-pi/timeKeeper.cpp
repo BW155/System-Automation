@@ -23,28 +23,29 @@ void TimeClass::autoIncreaseTime(){
         diff_t = difftime(curTime,prevTime);
 
     totalTime = diff_t * localMultiplier;
-
-    if(diff_t > 0) {
-        hours += totalTime%3600;
-        if(hours == 24)
-            hours = 0;
-        totalTime -= hours * 3600;
-
-        minutes += totalTime%60;
-        if(minutes == 60 && hours == 23){
-            hours = 0;
-            minutes = 0;
+    if(diff_t > 0){
+        if(totalTime >= 3600){
+            hours += totalTime%3600;
+                if(hours > 23)
+                    hours = 0;
+                totalTime -= hours * 3600;
         }
-        else if(minutes == 60) {
-            minutes = 0;
+        if(totalTime > 0){
+            minutes += totalTime%60;
+                if(minutes >= 60){
+                    hours++;
+                    minutes = 0;
+                }
+                totalTime -= 60;
         }
-        totalTime -= minutes * 60;
-
-        seconds += totalTime%60;
-        if(seconds == 60)
-            seconds = 0;
-        totalTime -= seconds;
-    }
+        if(totalTime > 0){
+            seconds += totalTime%60;
+                if(seconds >= 60){
+                    minutes++;
+                    seconds = 0;
+                }
+                totalTime -= 1;
+        }
 
     //Debug purposes
     //        cout << "hours: "  << hours   << endl;
