@@ -55,18 +55,30 @@ td:nth-child(2) {
             {{for sensors }}
             <tr class="row" style="margin-bottom: 5px">
                 <td style="font-size: auto">{{:name}}:</td>
-                <td id="{{ o.id }}{{ s.id }}"><b>{{:value }}</b></td>
+                <td id="{{ o.id }}{{ s.id }}">
+                    <b>
+                        {{if id.indexOf("button") >= 0}}
+                            {{if value == 1}}Klik{{else}}Los{{/if}}
+                        {{else}}
+                            {{:value}}
+                        {{/if}}
+                    </b>
+                </td>
             </tr>
             {{/for}}
+            </table>
+            <br>
+            <table class="striped">
             {{for actuators }}
             <tr class="row" style="margin-bottom: 5px">
                 <td style="font-size: auto">{{:name}}:</td>
-                <td id="{{ o.id }}{{ a.id }}"><b>{{:value}}</b></td>
+                <td id="{{ o.id }}{{ a.id }}"><b>{{if value == 1}}Aan{{else}}Uit{{/if}}</b></td>
             </tr>
             {{/for}}
             </table>
         </div>
 
+        {{if actions["buttons"].length > 0 || actions["switches"].length > 0 || actions["sliders"].length > 0}}
         <hr size="2px" style="margin-bottom: 10px">
         {% endraw %}
         {% endif %}
@@ -106,6 +118,7 @@ td:nth-child(2) {
                     style="margin-top: 15px; font-size: 12px">{{:name}}</button>
             {{/for}}
         </div>
+        {{/if}}
     </div>
 </script>
 {% endraw %}

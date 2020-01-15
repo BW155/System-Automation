@@ -66,6 +66,7 @@ def get_actuator(obj_id, actuator):
 
 def set_actuator(obj_id, actuator, value):
     global objects
+
     for i in objects:
         if i["id"] == obj_id:
             for a in i["actuators"]:
