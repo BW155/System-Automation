@@ -37,14 +37,14 @@ void Door::update() {
 
     ledOutside = getTimePointer()->isNight();
 
-    /*if(pillar->get_buzzer() && buttonInside) {
+    if(pillar->get_buzzer() && buttonInside) {
         if (servo == 1) {
             servo = 0;
         }
         else {
             servo = 1;
         }
-    }else*/ if (buttonInside) {
+    }else if (buttonInside) {
         json message = {
                 {"type", 4},
                 {"id", 1}
@@ -124,7 +124,6 @@ void Door::toLogFile() {
         if  (myfile.bad()) {
             cout<<"write failed"<<endl;
         }
-
     }
     else {
         cout<<"file not found"<<endl;
