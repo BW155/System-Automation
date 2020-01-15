@@ -1,3 +1,0 @@
-/home/programmer/Documents/git/System-Automation/raspberry-pi/build/CMakeFiles/rebuild_cache.dir
-/home/programmer/Documents/git/System-Automation/raspberry-pi/build/CMakeFiles/Socket.dir
-/home/programmer/Documents/git/System-Automation/raspberry-pi/build/CMakeFiles/edit_cache.dir
