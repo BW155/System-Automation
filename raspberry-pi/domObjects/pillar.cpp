@@ -2,43 +2,18 @@
 // Created by LarsLinux on 16-12-19.
 //
 #include "pillar.h"
+#include "../json/json.hpp"
 
-Pillar::Pillar(const char* IP, webSocket *x) : domObject(x, 4){
+using json = nlohmann::json;
+
+Pillar::Pillar(const char* IP, webSocket *w) : domObject(w, 4){
     gassensor = 0;
     button = 0;
     led = 0;
     buzzer = 0;
+    
     Socket temp(4, "pillar", IP);
     domObject::wemos = temp;
-}
-
-char* Pillar::wemosMessage(){
-    json wemos_Message = {
-            {"id",4},
-            {"actuators", {
-                        {"led", led},
-                        {"buzzer", buzzer}
-                    }
-            }
-    };
-    char *wemos_message = toCharArray(wemos_Message);
-    return wemos_message;
-}
-
-json Pillar::pythonMessage() {
-    json Message = {
-                {"actuators", {
-                            {"led", led},
-                            {"buzzer", buzzer}
-                        }
-                },
-                {"sensors", {
-                            {"gasSensor", gassensor},
-                            {"button", button}
-                    }
-                }
-        };
-    return Message;
 }
 
 void Pillar::update(){
@@ -60,10 +35,37 @@ void Pillar::update(){
     button = Receive_Sensor["sensors"]["button"];
     buzzer = gassensor >= 900 || buzzer;
     
-    json python_message = pythonMessage();
-    python->sendAll(4, python_message); // stuur alle sensors, alleen als uit sendReceive blijkt dat er veranderingen zijn
+    python->sendAll(4, pythonMessage()); // stuur alle sensors, alleen als uit sendReceive blijkt dat er veranderingen zijn
 
 //    toLogFile();
+}
+
+char* Pillar::wemosMessage(){
+    json message = {
+            {"id",4},
+            {"actuators", {
+                        {"led", led},
+                        {"buzzer", buzzer}
+                    }
+            }
+    };
+    return toCharArray(message);
+}
+
+json Pillar::pythonMessage() {
+    json message = {
+                {"actuators", {
+                            {"led", led},
+                            {"buzzer", buzzer}
+                        }
+                },
+                {"sensors", {
+                            {"gasSensor", gassensor},
+                            {"button", button}
+                    }
+                }
+        };
+    return message;
 }
 
 bool Pillar::get_buzzer(){
@@ -75,8 +77,7 @@ void Pillar::toLogFile() {
     ofstream myfile;
     myfile.open("log.txt", ios::out | ios::app);
     if (myfile.is_open()) {
-        myfile << domObject::timeObj->getTime()[0] << ":" << domObject::timeObj->getTime()[1] << ":"
-               << domObject::timeObj->getTime()[2] << "Pillar: " << pythonMessage() << endl;
+        myfile << domObject::timeObj->getTimeString() << "Pillar: " << pythonMessage() << endl;
         if  (myfile.bad()) {
             cout<<"write failed"<<endl;
         }

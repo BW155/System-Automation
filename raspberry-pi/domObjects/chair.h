@@ -5,9 +5,8 @@
 #ifndef CHAIR_H
 #define CHAIR_H
 
-#include "domObject.h"
-#include "../Socket/webSocket.h"
 #include "../Socket/Socket.h"
+#include "domObject.h"
 
 class Chair : public domObject {
 private:
@@ -26,7 +25,7 @@ private:
     void toLogFile();
 public:
     void update();
-    Chair(const char * IP, webSocket *s, TimeClass *t);
+    Chair(const char*, webSocket*, TimeClass*);
 
 };
 #endif //CHAIR_H

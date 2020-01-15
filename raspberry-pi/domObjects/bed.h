@@ -18,7 +18,7 @@ private:
     bool buttonPressed;
     int startTime;
     int startTimeLed;
-    int startTimeWakker;
+    int startTimeAwake;
     bool ledTimerStarted;
     void toLogFile();
 

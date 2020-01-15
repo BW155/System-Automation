@@ -2,8 +2,8 @@
 // Created by LarsLinux on 18-12-19.
 //
 
-#ifndef RASPBERRY_PI_DOMOBJECT_H
-#define RASPBERRY_PI_DOMOBJECT_H
+#ifndef DOMOBJECT_H
+#define DOMOBJECT_H
 
 #include "../Socket/Socket.h"
 #include "../Socket/webSocket.h"

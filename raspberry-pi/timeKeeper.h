@@ -15,6 +15,8 @@ class TimeClass{
         void autoIncreaseTime();
         void setTime(std::string, std::string, std::string, std::string);
         int*  getTime();
+        int getTimeSeconds();
+        string getTimeString();
     private:
         int minutes;
         int hours;

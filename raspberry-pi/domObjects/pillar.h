@@ -6,13 +6,7 @@
 #define PILLAR_H
 
 #include "../Socket/Socket.h"
-#include <iostream>
-#include <string>
-#include "../json/json.hpp"
-#include "../Socket/webSocket.h"
 #include "domObject.h"
-using namespace std;
-using json = nlohmann::json;
 
 class Pillar : public domObject{
 private:

@@ -2,15 +2,11 @@
 // Created by Zep on 16-12-19.
 //
 
-#include "domObject.h"
-#include "../Socket/Socket.h"
-#include "../Socket/webSocket.h"
-#include "../json/json.hpp"
-#include <iostream>
-
-
 #ifndef FRIDGE_H
 #define FRIDGE_H
+
+#include "../Socket/Socket.h"
+#include "domObject.h"
 
 class Fridge : public domObject{
 private:
@@ -22,10 +18,10 @@ private:
     json pythonMessage();
     void updateAttributes(json);
     bool state;
-    int start_time;
+    int startTime;
     void toLogFile();
 public:
     void update() override;
-    Fridge(const char * IP, webSocket *s, TimeClass *t);
+    Fridge(const char*, webSocket*, TimeClass*);
 };
 #endif //SOCKET_BED_H

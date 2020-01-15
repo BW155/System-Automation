@@ -3,7 +3,6 @@
 //
 
 #include "door.h"
-#include "../timeKeeper.h"
 #include "../json/json.hpp"
 
 using json = nlohmann::json;
@@ -15,6 +14,7 @@ Door::Door(const char* IP, webSocket* w, TimeClass *t): domObject(w, t, 7){
     ledOutside = false;
     ledInside = false;
     pillar = NULL;
+    
     Socket temp(7,"door",IP);
     domObject::wemos = temp;
 }
@@ -25,21 +25,22 @@ void Door::update() {
     json jsonResult;
     int jsonServo = servo;
 
-    int time[] = {0,0,0,0}; // timeObject->getTime
+    domObject::timeObj->autoIncreaseTime();
+    int* currentTime = domObject::timeObj->getTime;
+
     if(python->sendMessage(7)) {
         result = python->receiveActuators(7);
         jsonResult = toJson(result);
         //servo
         jsonServo = jsonResult["actuators"]["servo"];
 
-
-
         //ledIn
         ledInside = jsonResult["actuators"]["led1"] == 1;
 
         //ledOut
-        ledOutside = time[0] < 6 || time[0] > 18 || buttonOutside;
+        ledOutside = currentTime[0] < 6 || currentTime[0] > 18 || buttonOutside;
     }
+
     if(pillar->get_buzzer() && buttonInside) {
         if (servo == 1) {
             servo = 0;
@@ -81,7 +82,7 @@ void Door::update() {
 }
 
 char* Door::wemosMessage(bool ledIn, bool ledOut, int servo) {
-    json Message = {
+    json message = {
             {"id",7},
             {"actuators", {
                           {"led1", ledIn},
@@ -90,12 +91,11 @@ char* Door::wemosMessage(bool ledIn, bool ledOut, int servo) {
                   }
             }
     };
-    char *message = toCharArray(Message);
-    return message;
+    return toCharArray(message);
 }
 
 json Door::pythonMessage() {
-    json Message = {
+    json message = {
             {"id", 7},
             {"actuators", {
                            {"led1", ledInside},
@@ -109,8 +109,7 @@ json Door::pythonMessage() {
                    }
             }
     };
-    char *message = toCharArray(Message);
-    return Message;
+    return message;
 }
 
 void Door::setPillarPointer(Pillar* p){
@@ -122,8 +121,7 @@ void Door::toLogFile() {
     ofstream myfile;
     myfile.open("log.txt", ios::out | ios::app);
     if (myfile.is_open()) {
-        myfile << domObject::timeObj->getTime()[0] << ":" << domObject::timeObj->getTime()[1] << ":"
-               << domObject::timeObj->getTime()[2] << "Door: " << pythonMessage() << endl;
+        myfile << domObject::timeObj->getTimeString() << "Door: " << pythonMessage() << endl;
         if  (myfile.bad()) {
             cout<<"write failed"<<endl;
         }

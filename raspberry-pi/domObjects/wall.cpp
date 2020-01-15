@@ -12,6 +12,7 @@ Wall::Wall(const char* IP, webSocket* w): domObject(w, 5){
     window = false;
     dimmer = 0;
     LDR = 0;
+    
     Socket temp(5, "wall", IP);
     domObject::wemos = temp;
 }
@@ -49,8 +50,7 @@ void Wall::update(){
     LDR = wemosResult["sensors"]["LDR"];
 
     //verstuur naar interface
-    json Mes = pythonMessage();
-    python->sendAll(5, Mes);
+    python->sendAll(5, pythonMessage());
 
 //    toLogFile();
 }
@@ -88,8 +88,7 @@ void Wall::toLogFile() {
     ofstream myfile;
     myfile.open("log.txt", ios::out | ios::app);
     if (myfile.is_open()) {
-        myfile << domObject::timeObj->getTime()[0] << ":" << domObject::timeObj->getTime()[1] << ":"
-               << domObject::timeObj->getTime()[2] << "Wall: " << pythonMessage() << endl;
+        myfile << domObject::timeObj->getTimeString() << "Wall: " << pythonMessage() << endl;
         if  (myfile.bad()) {
             cout<<"write failed"<<endl;
         }

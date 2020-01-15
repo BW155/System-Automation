@@ -9,17 +9,18 @@
 
 using json = nlohmann::json;
 
-Bed::Bed(const char* IP, webSocket* w, TimeClass *t): domObject(w,t, 1){
+Bed::Bed(const char* IP, webSocket* w, TimeClass *t): domObject(w, t, 1){
     led = false;
     forceSensor = 0;
     updateForce = 0;
     button = false;
     startTime = 0;
     startTimeLed = 0;
+    startTimeAwake = 0;
     buttonPressed = false;
     ledTimerStarted = false;
     counter = 0;
-    startTimeWakker = 0;
+
     Socket temp(5, "wall", IP);
     domObject::wemos = temp;
 }
@@ -59,14 +60,14 @@ void Bed::update(){
 
     forceSensor = updateForce;
     updateForce = wemosResult["sensors"]["forceSensor"];
-    int currentTime = domObject::timeObj->getTime()[0]*3600 + domObject::timeObj->getTime()[1]*60 + domObject::timeObj->getTime()[2];
+    int currentTime = domObject::timeObj->getTimeSeconds();
 
     if (updateForce - forceSensor > 300) {
         counter++;
         if (counter == 1) {
-            startTime = domObject::timeObj->getTime()[0]*3600 + domObject::timeObj->getTime()[1]*60 + domObject::timeObj->getTime()[2];
+            startTime = domObject::timeObj->getTimeSeconds();
         }
-        startTimeWakker = currentTime;
+        startTimeAwake = currentTime;
     }
     if (currentTime - startTime > 300) {
         counter = 0;
@@ -81,7 +82,7 @@ void Bed::update(){
                 {"id", 0}
         };
         python->sendNotification(toCharArray(message));
-        startTimeWakker = currentTime;
+        startTimeAwake = currentTime;
     }
 
     if (led && !ledTimerStarted) {
@@ -96,18 +97,17 @@ void Bed::update(){
         ledTimerStarted = false;
     }
 
-    if (forceSensor - updateForce > 600 && currentTime - startTimeWakker > 600) {
+    if (forceSensor - updateForce > 600 && currentTime - startTimeAwake > 600) {
         json message = {
                 {"type", 4},
                 {"id", 3}
         };
         python->sendNotification(toCharArray(message));
-        startTimeWakker = currentTime;
+        startTimeAwake = currentTime;
     }
 
     //verstuur naar interface
-    json Mes = pythonMessage();
-    python->sendAll(1, Mes);
+    python->sendAll(1, pythonMessage());
 
 //    toLogFile();
 
@@ -118,8 +118,7 @@ void Bed::toLogFile() {
     ofstream myfile;
     myfile.open("log.txt", ios::out | ios::app);
     if (myfile.is_open()) {
-        myfile << domObject::timeObj->getTime()[0] << ":" << domObject::timeObj->getTime()[1] << ":"
-               << domObject::timeObj->getTime()[2] << "Bed: " << pythonMessage() << endl;
+        myfile << domObject::timeObj->getTimeString() << "Bed: " << pythonMessage() << endl;
         if  (myfile.bad()) {
             cout<<"write failed"<<endl;
         }

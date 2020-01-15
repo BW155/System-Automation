@@ -1,42 +1,74 @@
 //
 // Created by Zep on 16-12-19.
 //
-#include "fridge.h"
-
-#include "../Socket/Socket.h"
-#include "domObject.h"
-#include <fstream>
 
 #define doorIsOpen 0
 #define doorIsClosed 1
 
-using json = nlohmann::json ;
+#include "fridge.h"
+#include "../json/json.hpp"
+#include <fstream>
 
-Fridge::Fridge(const char * IP, webSocket *s, TimeClass *t) : domObject(s, t, 6){
+using json = nlohmann::json;
+
+Fridge::Fridge(const char * IP, webSocket *w, TimeClass *t) : domObject(w, t, 6){
     cooling = false;
     thermometer1 = 0;
     thermometer2 = 0;
     openClose = 0 ;
-    Socket temp(6,"Fridge",IP);
-    wemos = temp;
     state = false;
-    start_time = 0;
+    startTime = 0;
+
+    Socket temp(6,"Fridge",IP);
+    domObject::wemos = temp;
+}
+
+void Fridge::update(){
+    //Logic for the fridge
+    char *result;
+    json jsonResult;
+    int currentTime;
+
+    domObject::timeObj->autoIncreaseTime();
+
+    //Ask for current time in seconds
+    currentTime = domObject::timeObj->getTimeSeconds();
+
+    result = wemos.sendReceive(wemosMessage());
+    jsonResult = toJson(result);
+    updateAttributes(jsonResult);
+
+    if (openClose == doorIsClosed){
+        startTime = currentTime;
+        cooling = true;
+    }
+
+    if((currentTime-startTime) > (5 * 60)){
+        cooling = false;
+        json message = {
+                {"type", 4},
+                {"id", 4}
+        };
+        python->sendNotification(toCharArray(message));
+
+    }
+
+    toLogFile();
 }
 
 char* Fridge::wemosMessage(){
-    json Message = {
+    json message = {
             {"id",6},
             {"actuators", {
                           {"cooling", cooling}
                   }
             }
     };
-    char *message = toCharArray(Message);
-    return message;
+    return toCharArray(message);
 }
 
 json Fridge::pythonMessage() {
-    json Message = {
+    json message = {
             {"actuators", {
                            {"cooling", cooling}
                    }
@@ -48,41 +80,7 @@ json Fridge::pythonMessage() {
                    }
             }
     };
-    char *message = toCharArray(Message);
-    return Message;
-}
-
-void Fridge::update(){
-    //Logic for the fridge
-    char *result;
-    json jsonResult;
-    int cur_time;
-
-    domObject::timeObj->autoIncreaseTime();
-
-    //Ask for current time in seconds
-    cur_time = domObject::timeObj->getTime()[0]*3600 + domObject::timeObj->getTime()[1]*60  + domObject::timeObj->getTime()[2];
-
-    result = wemos.sendReceive(wemosMessage());
-    jsonResult = toJson(result);
-    updateAttributes(jsonResult);
-
-    if (openClose == doorIsClosed){
-        start_time = cur_time;
-        cooling = true;
-    }
-
-    if((cur_time-start_time) > (5 * 60)){
-        cooling = false;
-        json message = {
-                {"type", 4},
-                {"id", 4}
-        };
-        python->sendNotification(toCharArray(message));
-
-    }
-
-    toLogFile();
+    return message;
 }
 
 void Fridge::updateAttributes(json result){
@@ -97,8 +95,7 @@ void Fridge::toLogFile() {
     ofstream myfile;
     myfile.open("log.txt", ios::out | ios::app);
     if (myfile.is_open()) {
-        myfile << domObject::timeObj->getTime()[0] << ":" << domObject::timeObj->getTime()[1] << ":"
-               << domObject::timeObj->getTime()[2] << "Fridge: " << pythonMessage() << endl;
+        myfile << domObject::timeObj->getTimeString() << "Fridge: " << pythonMessage() << endl;
         if  (myfile.bad()) {
             cout<<"write failed"<<endl;
         }
