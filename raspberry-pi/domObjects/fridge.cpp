@@ -18,8 +18,7 @@ Fridge::Fridge(const char * IP, webSocket *w, TimeClass *t) : domObject(w, t, 6)
     openClose = 0 ;
     state = false;
     startTime = 0;
-
-    Socket temp(6,"Fridge",IP);
+    Socket temp(6,IP);
     domObject::wemos = temp;
 }
 

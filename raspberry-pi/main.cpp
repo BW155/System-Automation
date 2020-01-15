@@ -30,7 +30,7 @@ void discoverDevices() {
     int Device;
 
     // Loop through all IP adresses
-    for (int x = 180; x < 200; x+=1) {
+    for (int x = 189; x < 190; x+=1) {
 
         // Standard variables for Socket communication
         int valread;
@@ -44,7 +44,7 @@ void discoverDevices() {
         const char *IP = tmp.c_str();
 
         // Make the socket
-        Socket test(100,"test",IP);
+        Socket test(100,IP);
 
         // Check if the socket is connected
         if (test.getConnected()) {

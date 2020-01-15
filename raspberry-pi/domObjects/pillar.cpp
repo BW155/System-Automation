@@ -11,8 +11,7 @@ Pillar::Pillar(const char* IP, webSocket *w) : domObject(w, 4){
     button = 0;
     led = 0;
     buzzer = 0;
-    
-    Socket temp(4, "pillar", IP);
+    Socket temp(4,IP);
     domObject::wemos = temp;
 }
 

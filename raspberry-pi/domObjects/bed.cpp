@@ -20,8 +20,7 @@ Bed::Bed(const char* IP, webSocket* w, TimeClass *t): domObject(w, t, 1){
     buttonPressed = false;
     ledTimerStarted = false;
     counter = 0;
-
-    Socket temp(5, "wall", IP);
+    Socket temp(5, IP);
     domObject::wemos = temp;
 }
 

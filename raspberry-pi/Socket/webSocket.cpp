@@ -9,20 +9,21 @@
 
 #define PORT2 9001
 
-
-
+// constructor, make the websocket
 webSocket::webSocket() {
     sock = 0;
     struct sockaddr_in temp;
     sock_addr = temp;
 }
 
+// function to change json object to char *
 char* webSocket::toCharArray(json jsonObj) {
     std::string temp = jsonObj.dump();
     char *result = new char[temp.length()+1];
     strcpy(result, temp.c_str());
     return result;
 }
+
 
 void webSocket::makeConnection() {
     if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0)
@@ -34,7 +35,7 @@ void webSocket::makeConnection() {
     }
     sock_addr.sin_family = AF_INET;
     sock_addr.sin_port = htons(PORT2);
-    if(inet_pton(AF_INET, "127.0.0.1", &sock_addr.sin_addr)<=0)
+    if(inet_pton(AF_INET, "192.168.2.186", &sock_addr.sin_addr)<=0)
     {
 //        printf("\nInvalid address/ Address not supported \n");
     }

@@ -11,15 +11,18 @@
 using json = nlohmann::json;
 
 class webSocket {
+private:
+    void makeConnection();
+    char *toCharArray(json jsonObj);
 public:
     int sock;
     sockaddr_in sock_addr;
+
     char* receiveActuators(int id);
     bool sendMessage(int id);
     void sendAll(int id, json everything);
     void sendNotification(char *message);
-    void makeConnection();
-    char *toCharArray(json jsonObj);
+
     webSocket();
 
 };

@@ -9,8 +9,7 @@ Lamp::Lamp(const char * IP, webSocket *w, TimeClass *t): domObject(w, t, 3){
     startTime = 0;
     led = false;
     motionSensor = false;
-
-    Socket temp(3, "tableLamp", IP);
+    Socket temp(3,IP);
     domObject::wemos = temp;
 }
 

@@ -12,8 +12,7 @@ Wall::Wall(const char* IP, webSocket* w): domObject(w, 5){
     window = false;
     dimmer = 0;
     LDR = 0;
-    
-    Socket temp(5, "wall", IP);
+    Socket temp(5,IP);
     domObject::wemos = temp;
 }
 
