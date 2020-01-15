@@ -1,10 +1,12 @@
-// Created by LarsLinux on 16-12-19.
+//
+// Created by Ramon
 //
 #include "lamp.h"
 #include "../json/json.hpp"
 
 using json = nlohmann::json;
 
+// constructor for lamp
 Lamp::Lamp(const char * IP, webSocket *w, TimeClass *t): domObject(w, t, 3){
     startTime = 0;
     led = false;
@@ -13,24 +15,46 @@ Lamp::Lamp(const char * IP, webSocket *w, TimeClass *t): domObject(w, t, 3){
     domObject::wemos = temp;
 }
 
-
+// Communicates with webserver and wemos, updates sensors and actuators accordingly
 void Lamp::update(){
+
+    // char*'s for storing result and message
     char * message;
     char * result;
+
+    // json for storing results in json format
     json jsonResult;
 
+    // update lamp
     stuurLamp();
+
+    // check if a message has been received
     if(python->sendMessage(3)){
+        // receive result, change to json
         result = python->receiveActuators(3);
         jsonResult = toJson(result);
+
+        // update actuator
         led = jsonResult["actuators"]["led"] == 1;
     }
-    message = wemosMessage();
-    result = wemos.sendReceive(message);
-    jsonResult = toJson(result);
-    
-    motionSensor = jsonResult["sensors"]["motionSensor"] == 1;
 
+    // make message for wemos and receive sensors
+    message = wemosMessage();
+
+    // send to wemos and receive sensors
+    result = wemos.sendReceive(message);
+
+    // check if wemos didnt send an empty message
+    if (result == NULL) {
+        cout<<"error receiving"<<endl;
+    }
+    else {
+        // change to json, update attribute
+        jsonResult = toJson(result);
+        motionSensor = jsonResult["sensors"]["motionSensor"] == 1;
+    }
+
+    //send all sensors and actuators to webserver
     python->sendAll(3, pythonMessage());
 
 //    toLogFile();
@@ -60,19 +84,21 @@ json Lamp::pythonMessage(){
     return message;
 }
 
+// function to control lamp
 void Lamp::stuurLamp(){
-    int currentTime;
+    // increase the time object
     domObject::timeObj->autoIncreaseTime();
-    currentTime = domObject::timeObj->getTimeSeconds();
+
+    //Current time in seconds
+    int currentTime = domObject::timeObj->getTimeSeconds();
+
+    // turn led on on motionsensor, when there is no movement, turn off after 5 sec
     if (motionSensor){
         led = true;
         startTime = currentTime;
 
-    }
-    if(!motionSensor){
-        if((currentTime - startTime) > (300)){  //5 minuten (5 x 60)
+    } else if(currentTime - startTime > 300){
             led = false;
-        }
     }
 }
 

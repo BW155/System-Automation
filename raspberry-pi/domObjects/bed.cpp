@@ -1,14 +1,13 @@
 //
-// Created by LarsLinux on 16-12-19.
+// Created by Jasper & Lars
 //
 #include "bed.h"
-#include "../json/json.hpp"
-#include <fstream>
 #include <iostream>
 #include <string>
 
 using json = nlohmann::json;
 
+// constructor for bed
 Bed::Bed(const char* IP, webSocket* w, TimeClass *t): domObject(w, t, 1){
     led = false;
     forceSensor = 0;
@@ -24,56 +23,79 @@ Bed::Bed(const char* IP, webSocket* w, TimeClass *t): domObject(w, t, 1){
     domObject::wemos = temp;
 }
 
-
+// Communicates with webserver and wemos, updates sensors and actuators accordingly
 void Bed::update(){
+
+    // char*'s for storing result and message
     char* result;
     char* message;
+
+    // jsons for storing results in json format
     json pythonResult;
     json wemosResult;
 
+    // increase the time object
     domObject::timeObj->autoIncreaseTime();
 
-    //ontvang van interface
+    // check if a message has been received
     if(python->sendMessage(1)){
+        // receive result, change to json
         result = python->receiveActuators(1);
         pythonResult = toJson(result);
+
+        // change actuator value
         if (!(buttonPressed && led)) {
             led = pythonResult["actuators"]["led"] == 1;
-
         }
     }
 
-    //wemos
+    // make message for wemos and receive sensors
     message = wemosMessage();
+
+    // send to wemos and receive sensors
     result = wemos.sendReceive(message);
-    wemosResult = toJson(result);
 
-    if (wemosResult["sensors"]["button"] && !buttonPressed) {
-        led = true;
-        buttonPressed = true;
+    // check if wemos didnt send an empty message
+    if (result == NULL) {
+        cout<<"error receiving"<<endl;
     }
-    else if (wemosResult["sensors"]["button"] && led){
-        led = false;
-        buttonPressed = false;
+    else {
+        // change to json, update attributes
+        wemosResult = toJson(result);
+        if (wemosResult["sensors"]["button"] && !buttonPressed) {
+            led = true;
+            buttonPressed = true;
+        }
+        else if (wemosResult["sensors"]["button"] && led){
+            led = false;
+            buttonPressed = false;
+        }
+
+        forceSensor = updateForce;
+        updateForce = wemosResult["sensors"]["forceSensor"];
     }
 
-    forceSensor = updateForce;
-    updateForce = wemosResult["sensors"]["forceSensor"];
+    // get the current time
     int currentTime = domObject::timeObj->getTimeSeconds();
 
+    // check for changes in the forcesensor
     if (updateForce - forceSensor > 300) {
+        // update counter
         counter++;
         if (counter == 1) {
             startTime = domObject::timeObj->getTimeSeconds();
         }
+
+        // reset the timer that checks if Client is awake
         startTimeAwake = currentTime;
     }
-    if (currentTime - startTime > 300) {
+
+    // after 10 seconds, reset the timer that checks for epilepsy, else, if counter == 5, give an epilepsy notification
+    if (currentTime - startTime > 600) {
         counter = 0;
         startTime = currentTime;
     }
     else if (counter >= 5) {
-        cout<<"epsoilepsieboy"<<endl;
         counter = 0;
         startTime = currentTime;
         json message = {
@@ -84,11 +106,13 @@ void Bed::update(){
         startTimeAwake = currentTime;
     }
 
+    // start timer for led if led is on and timer isn't started yet
     if (led && !ledTimerStarted) {
         startTimeLed = currentTime;
         ledTimerStarted = true;
     }
 
+    // turn led off after 10 seconds
     if (currentTime-startTimeLed > 600) {
         led = false;
         buttonPressed = false;
@@ -96,6 +120,7 @@ void Bed::update(){
         ledTimerStarted = false;
     }
 
+    // send notification when Client wakes up
     if (forceSensor - updateForce > 600 && currentTime - startTimeAwake > 600) {
         json message = {
                 {"type", 4},
@@ -105,7 +130,7 @@ void Bed::update(){
         startTimeAwake = currentTime;
     }
 
-    //verstuur naar interface
+    //send all sensors and actuators to webserver
     python->sendAll(1, pythonMessage());
 
 //    toLogFile();
@@ -129,6 +154,7 @@ void Bed::toLogFile() {
     myfile.close();
 }
 
+// make message for wemos
 char* Bed::wemosMessage(){
     json message = {
             {"id", 1},
@@ -140,6 +166,7 @@ char* Bed::wemosMessage(){
     return toCharArray(message);
 }
 
+// make message for webserver
 json Bed::pythonMessage(){
     json message = {
             {"actuators", {

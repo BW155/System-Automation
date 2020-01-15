@@ -11,7 +11,6 @@ class Lamp: public domObject {
 private:
     bool led;
     bool motionSensor;
-    Socket socket;
     int startTime;
     char* wemosMessage();
     json pythonMessage();

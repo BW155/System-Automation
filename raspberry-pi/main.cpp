@@ -30,7 +30,7 @@ void discoverDevices() {
     int Device;
 
     // Loop through all IP adresses
-    for (int x = 189; x < 190; x+=1) {
+    for (int x = 189; x < 195; x+=5) {
 
         // Standard variables for Socket communication
         int valread;

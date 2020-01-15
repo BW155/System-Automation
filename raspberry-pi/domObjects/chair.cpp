@@ -1,11 +1,12 @@
 //
-// Created by LarsLinux on 16-12-19.
+// Created by Zep
 //
 #include "chair.h"
 #include "../json/json.hpp"
 
 using json = nlohmann::json;
 
+// constructor for chair
 Chair::Chair(const char *IP, webSocket *w, TimeClass *t) : domObject(w, t, 2) {
     led = false;
     forceSensor = 0;
@@ -21,16 +22,25 @@ Chair::Chair(const char *IP, webSocket *w, TimeClass *t) : domObject(w, t, 2) {
     domObject::wemos = temp;
 }
 
+// Communicates with webserver and wemos, updates sensors and actuators accordingly
 void Chair::update() {
+
+    // char*'s for storing result
     char* result;
+
+    // jsons for storing results in json format
     json jsonResult;
+
+    // int for storing time
     int currentTime;
 
+    // increase the time object
     domObject::timeObj->autoIncreaseTime();
 
-    //Current time in seconds;
+    //Current time in seconds
     currentTime = domObject::timeObj->getTimeSeconds();
 
+    // The system for sending a notification when Client should take medicine
     if (startTimeMedication == 0 && lastNotification != 1) {
         startTimeMedication = currentTime + 1;
         lastNotification = 1;
@@ -38,7 +48,6 @@ void Chair::update() {
                 {"type", 4},
                 {"id", 5}
         };
-        cout<<"MEDICATIE"<<endl;
         python->sendNotification(toCharArray(message));
     } else if (currentTime-startTimeMedication >= 599 && currentTime-startTimeMedication < 620 && lastNotification != 2) {
         lastNotification = 2;
@@ -46,7 +55,6 @@ void Chair::update() {
                 {"type", 4},
                 {"id", 6}
         };
-        cout<<"MEDICATIE 2"<<endl;
         python->sendNotification(toCharArray(message));
     } else if (currentTime-startTimeMedication >= 1199&& currentTime-startTimeMedication < 1220 && lastNotification != 3) {
         lastNotification = 3;
@@ -54,7 +62,6 @@ void Chair::update() {
                 {"type", 4},
                 {"id", 7}
         };
-        cout<<"MEDICATIE 3"<<endl;
         python->sendNotification(toCharArray(message));
     } else if (currentTime-startTimeMedication >= 1799&& currentTime-startTimeMedication < 1820 && lastNotification != 4) {
         lastNotification = 4;
@@ -62,36 +69,40 @@ void Chair::update() {
                 {"type", 4},
                 {"id", 8}
         };
-        cout<<"MEDICATIE 4"<<endl;
         python->sendNotification(toCharArray(message));
         if (currentTime-startTimeMedication >= 2399 && currentTime-startTimeMedication < 2420) {
             startTimeMedication = 0;
         }
     }
+
+    // send message to wemos and receive sensors
     result = wemos.sendReceive(wemosMessage());
+
+    // check if wemos didnt send an empty message
     if (result == NULL) {
         cout<<"error receiving"<<endl;
     }
     else {
+        // change to json, update attributes
         jsonResult = toJson(result);
         updateAttributes(jsonResult);
     }
-    cout<<"tijd: "<<currentTime<<endl;
 
-
+    // check for changes in the forcesensor
     if (updateForce - forceSensor > 300) {
+        // update counter
         counter++;
-        cout<<counter<<endl;
         if (counter == 1) {
             startTime = domObject::timeObj->getTimeSeconds();
         }
     }
-    else if (currentTime - startTime > 600) {
+
+    // after 10 seconds, reset the timer that checks for epilepsy, else, if counter == 5, give an epilepsy notification
+    if (currentTime - startTime > 600) {
         counter = 0;
         startTime = currentTime;
     }
     else if (counter >= 5) {
-        cout<<"epsoilepsieboy"<<endl;
         counter = 0;
         startTime = currentTime;
         json message = {
@@ -109,6 +120,7 @@ void Chair::update() {
         start_time_max_massage = currentTime;
     }
 
+    // when client sits on chair, chair will shake after 30 seconds
     if((currentTime-start_time_30min_check) > (30 * 60)){
         //60 seconds because time multiplier is above a minute. 2 minute pulse is 2 seconds real time vibrator pulse
         if((currentTime-start_time_30min_check) > ((30 * 60)+ 120)) {
@@ -119,7 +131,7 @@ void Chair::update() {
         }
     }
 
-    //Chair massage
+    //Chair massage, for 5 seconds
     if(forceSensor > 10) {
         if (button && !timeOut&& !vibrator) {
             vibrator = true;
@@ -130,6 +142,8 @@ void Chair::update() {
             timeOut = true;
         }
     }
+
+    // timout between massages, 5 seconds
     if(timeOut){
         if((currentTime - start_timeOut) > (5 * 60))
             timeOut = false;
@@ -138,9 +152,9 @@ void Chair::update() {
     }
 
 //    toLogFile();
-//    usleep(100000);
 }
 
+// make message for wemos
 char* Chair::wemosMessage() {
     json message = {
             {"id",2},
@@ -153,6 +167,7 @@ char* Chair::wemosMessage() {
     return toCharArray(message);
 }
 
+// make message for webserver
 json Chair::pythonMessage() {
     json message = {
             {"actuators", {
@@ -169,6 +184,7 @@ json Chair::pythonMessage() {
     return message;
 }
 
+// update all atributes according to json
 void Chair::updateAttributes(json result) {
     forceSensor = updateForce;
     updateForce = result["sensors"]["forceSensor"];

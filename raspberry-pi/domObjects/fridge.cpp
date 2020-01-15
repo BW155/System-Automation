@@ -1,5 +1,5 @@
 //
-// Created by Zep on 16-12-19.
+// Created by Zep
 //
 
 #define doorIsOpen 0
@@ -11,6 +11,7 @@
 
 using json = nlohmann::json;
 
+// constructor for fridge
 Fridge::Fridge(const char * IP, webSocket *w, TimeClass *t) : domObject(w, t, 6){
     cooling = false;
     thermometer1 = 0;
@@ -22,26 +23,44 @@ Fridge::Fridge(const char * IP, webSocket *w, TimeClass *t) : domObject(w, t, 6)
     domObject::wemos = temp;
 }
 
+// Communicates with webserver and wemos, updates sensors and actuators accordingly
 void Fridge::update(){
-    //Logic for the fridge
+
+    // char* for storing result and message
     char *result;
+
+    // json for storing results in json format
     json jsonResult;
+
+    // int for storing time
     int currentTime;
 
+    // increase the time object
     domObject::timeObj->autoIncreaseTime();
 
-    //Ask for current time in seconds
+    //Current time in seconds
     currentTime = domObject::timeObj->getTimeSeconds();
 
+    // send message to wemos and receive sensors
     result = wemos.sendReceive(wemosMessage());
-    jsonResult = toJson(result);
-    updateAttributes(jsonResult);
 
+    // check if wemos didnt send an empty message
+    if (result == NULL) {
+        cout<<"error receiving"<<endl;
+    }
+    else {
+        // change to json, update attributes
+        jsonResult = toJson(result);
+        updateAttributes(jsonResult);
+    }
+
+    // Cool when fridge is closed
     if (openClose == doorIsClosed){
         startTime = currentTime;
         cooling = true;
     }
 
+    // when the fridge is opened for 5 seconds, stop cooling and send notification
     if((currentTime-startTime) > (5 * 60)){
         cooling = false;
         json message = {
@@ -52,9 +71,13 @@ void Fridge::update(){
 
     }
 
-    toLogFile();
+    //send all sensors and actuators to webserver
+    python->sendAll(6,pythonMessage());
+
+//    toLogFile();
 }
 
+// make message for wemos
 char* Fridge::wemosMessage(){
     json message = {
             {"id",6},
@@ -66,6 +89,7 @@ char* Fridge::wemosMessage(){
     return toCharArray(message);
 }
 
+// make message for webserver
 json Fridge::pythonMessage() {
     json message = {
             {"actuators", {
@@ -82,11 +106,11 @@ json Fridge::pythonMessage() {
     return message;
 }
 
+// function to update attributes
 void Fridge::updateAttributes(json result){
     thermometer1 = result["sensors"]["thermometer1"];
     thermometer2 = result["sensors"]["thermometer2"];
     openClose = result["sensors"]["openClose"] == 1;
-    python->sendAll(6,pythonMessage());
 }
 
 void Fridge::toLogFile() {

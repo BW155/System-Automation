@@ -38,15 +38,19 @@ void Wall::update(){
     //wemos
     message = wemosMessage();
     result = wemos.sendReceive(message);
-    cout<<result<<endl;
-    wemosResult = toJson(result);
-    int temp = wemosResult["sensors"]["dimmer"];
-    if (dimmer - temp != 0) {
-        led = wemosResult["sensors"]["dimmer"];
-        dimmer = wemosResult["sensors"]["dimmer"];
+    if (result == NULL) {
+        cout<<"error receiving"<<endl;
     }
+    else {
+        wemosResult = toJson(result);
+        int temp = wemosResult["sensors"]["dimmer"];
+        if (dimmer - temp != 0) {
+            led = wemosResult["sensors"]["dimmer"];
+            dimmer = wemosResult["sensors"]["dimmer"];
+        }
 
-    LDR = wemosResult["sensors"]["LDR"];
+        LDR = wemosResult["sensors"]["LDR"];
+    }
 
     //verstuur naar interface
     python->sendAll(5, pythonMessage());

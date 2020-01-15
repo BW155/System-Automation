@@ -60,7 +60,7 @@ void Socket::makeConnection() {
     // check if the IP adress is correct
     if(inet_pton(AF_INET, IP, &sock_addr.sin_addr)<=0)
     {
-        printf("\nInvalid address/ Address not supported \n");
+//        printf("\nInvalid address/ Address not supported \n");
     }
 
     // check if a connection can be made with the socket

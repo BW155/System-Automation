@@ -22,17 +22,21 @@ void Pillar::update(){
         json Result = toJson(result);
         buzzer = Result["actuators"]["buzzer"] == 1;
         led = Result["actuators"]["led"] == 1;
-        cout<<"een"<<endl;
     }
     
     char *wemos_message = wemosMessage();
      
     char* receive_sensor = wemos.sendReceive(wemos_message);
-    json Receive_Sensor = toJson(receive_sensor);
+    if (result == NULL) {
+        cout<<"error receiving"<<endl;
+    }
+    else {
+        json Receive_Sensor = toJson(receive_sensor);
 
-    gassensor = Receive_Sensor["sensors"]["gasSensor"];
-    button = Receive_Sensor["sensors"]["button"];
-    buzzer = gassensor >= 900 || buzzer;
+        gassensor = Receive_Sensor["sensors"]["gasSensor"];
+        button = Receive_Sensor["sensors"]["button"];
+        buzzer = gassensor >= 900 || buzzer;
+    }
     
     python->sendAll(4, pythonMessage()); // stuur alle sensors, alleen als uit sendReceive blijkt dat er veranderingen zijn
 

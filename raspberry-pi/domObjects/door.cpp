@@ -1,5 +1,5 @@
 //
-// Created by LarsLinux on 16-12-19.
+// Created by Jasper
 //
 
 #include "door.h"
@@ -7,6 +7,7 @@
 
 using json = nlohmann::json;
 
+// constructor for door
 Door::Door(const char* IP, webSocket* w, TimeClass *t): domObject(w, t, 7){
     servo = 0;
     buttonOutside = false;
@@ -18,28 +19,38 @@ Door::Door(const char* IP, webSocket* w, TimeClass *t): domObject(w, t, 7){
     domObject::wemos = temp;
 }
 
+// Communicates with webserver and wemos, updates sensors and actuators accordingly
 void Door::update() {
+
+    // char*'s for storing result and message
     char* result;
     char* message;
+
+    // json for storing results in json format
     json jsonResult;
+
+    // int for checking change in servo
     int jsonServo = servo;
 
+    // increase the time object
     domObject::timeObj->autoIncreaseTime();
+
+    //Current time in seconds;
     int* currentTime = domObject::timeObj->getTime();
 
+    // check if a message has been received
     if(python->sendMessage(7)) {
+        // receive result, change to json
         result = python->receiveActuators(7);
         jsonResult = toJson(result);
-        //servo
+
+        // update actuator values
         jsonServo = jsonResult["actuators"]["servo"];
-
-        //ledIn
         ledInside = jsonResult["actuators"]["led1"] == 1;
-
-        //ledOut
         ledOutside = currentTime[0] < 6 || currentTime[0] > 18 || buttonOutside;
     }
 
+    // when alarm is raised, door can be opened with button
     if(pillar->get_buzzer() && buttonInside) {
         if (servo == 1) {
             servo = 0;
@@ -47,13 +58,17 @@ void Door::update() {
         else {
             servo = 1;
         }
-    }else if (buttonInside) {
+    }
+    // when there is no alarm, pressing the button will send a message to the guard
+    else if (buttonInside) {
         json message = {
                 {"type", 4},
                 {"id", 1}
         };
         python->sendNotification(toCharArray(message));
-    }else{
+    }
+    // when button is not pressed, change state of door
+    else{
         if(jsonServo != 0){
             servo = jsonServo;
         }else{
@@ -61,6 +76,7 @@ void Door::update() {
         }
     }
 
+    // when button outside is pressed, send notification to guard
     if (buttonOutside) {
         json message = {
                 {"type", 4},
@@ -68,24 +84,37 @@ void Door::update() {
         };
         python->sendNotification(toCharArray(message));
     }
-    //wemos
-    message = wemosMessage(ledInside, ledOutside, servo); //verstuur dit naar wemos
-    result = wemos.sendReceive(message);
-    jsonResult = toJson(result); //ontvangen van wemos
-    buttonInside = jsonResult["sensors"]["button1"];
-    buttonOutside = jsonResult["sensors"]["button2"];
 
+    // make message for wemos and receive sensors
+    message = wemosMessage(); //verstuur dit naar wemos
+
+    // send to wemos and receive sensors
+    result = wemos.sendReceive(message);
+
+    // check if wemos didnt send an empty message
+    if (result == NULL) {
+        cout<<"error receiving"<<endl;
+    }
+    else {
+        // change to json, update attributes
+        jsonResult = toJson(result);
+        buttonInside = jsonResult["sensors"]["button1"];
+        buttonOutside = jsonResult["sensors"]["button2"];
+    }
+
+    //send all sensors and actuators to webserver
     python->sendAll(7, pythonMessage());
 
 //    toLogFile();
 }
 
-char* Door::wemosMessage(bool ledIn, bool ledOut, int servo) {
+// make message for wemos
+char* Door::wemosMessage() {
     json message = {
             {"id",7},
             {"actuators", {
-                          {"led1", ledIn},
-                          {"led2", ledOut},
+                          {"led1", ledInside},
+                          {"led2", ledOutside},
                           {"servo", servo}
                   }
             }
@@ -93,6 +122,7 @@ char* Door::wemosMessage(bool ledIn, bool ledOut, int servo) {
     return toCharArray(message);
 }
 
+// make message for webserver
 json Door::pythonMessage() {
     json message = {
             {"id", 7},
@@ -111,6 +141,7 @@ json Door::pythonMessage() {
     return message;
 }
 
+// link door and Pillar
 void Door::setPillarPointer(Pillar* p){
     pillar = p;
 }
