@@ -26,12 +26,23 @@ void TimeClass::autoIncreaseTime(){
 
     if(diff_t > 0) {
         hours += totalTime%3600;
+        if(hours == 24)
+            hours = 0;
         totalTime -= hours * 3600;
 
         minutes += totalTime%60;
+        if(minutes == 60 && hours == 23){
+            hours = 0;
+            minutes = 0;
+        }
+        else if(minutes == 60) {
+            minutes = 0;
+        }
         totalTime -= minutes * 60;
 
         seconds += totalTime%60;
+        if(seconds == 60)
+            seconds = 0;
         totalTime -= seconds;
     }
 
