@@ -10,7 +10,7 @@ using namespace std;
 webSocket pyt;
 
 // Timeclass used by domObjects
-TimeClass obj1 (1,0,0,0);
+TimeClass obj1 (10, 1, 0, 0);
 
 // Vector containing the domObjects
 vector<domObject*> objects;
@@ -30,7 +30,7 @@ void discoverDevices() {
     int Device;
 
     // Loop through all IP adresses
-    for (int x = 180; x < 200; x+=1) {
+    for (int x = 189; x <= 194; x+=5) {
 
         // Standard variables for Socket communication
         int valread;

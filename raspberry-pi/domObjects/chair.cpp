@@ -107,7 +107,6 @@ void Chair::update() {
         updateAttributes(jsonResult);
     }
 
-
     if (updateForce - forceSensor > 300) {
         counter++;
         cout<<counter<<endl;

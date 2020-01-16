@@ -25,21 +25,18 @@ void Door::update() {
     json jsonResult;
     int jsonServo = servo;
 
-    int time[] = {0,0,0,0}; // timeObject->getTime
     if(python->sendMessage(7)) {
         result = python->receiveActuators(7);
         jsonResult = toJson(result);
         //servo
         jsonServo = jsonResult["actuators"]["servo"];
 
-
-
         //ledIn
         ledInside = jsonResult["actuators"]["led1"] == 1;
-
-        //ledOut
-        ledOutside = time[0] < 6 || time[0] > 18 || buttonOutside;
     }
+
+    ledOutside = getTimePointer()->isNight();
+
     if(pillar->get_buzzer() && buttonInside) {
         if (servo == 1) {
             servo = 0;
@@ -127,7 +124,6 @@ void Door::toLogFile() {
         if  (myfile.bad()) {
             cout<<"write failed"<<endl;
         }
-
     }
     else {
         cout<<"file not found"<<endl;
