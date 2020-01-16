@@ -7,7 +7,7 @@ tmp_objects = []
 objects = [
     {"id": 1, "actuators": {"led": 0},                          "sensors": {"forceSensor": 0, "button": 0}},
     {"id": 2, "actuators": {"led": 0, "vibrator": 0},           "sensors": {"forceSensor": 0, "button": 0}},
-    {"id": 3, "actuators": {"led": 0},                          "sensors": {"motionSensor": 0, "button": 0}},
+    {"id": 3, "actuators": {"led": 0},                          "sensors": {"motionSensor": 0}},
     {"id": 4, "actuators": {"led": 0, "buzzer": 0},             "sensors": {"gasSensor": 0, "button": 0}},
     {"id": 5, "actuators": {"led": 0, "window": 0},             "sensors": {"dimmer": 0, "LDR": 0}},
     {"id": 6, "actuators": {"cooling": 0},                      "sensors": {"thermometer1": 0,"thermometer2": 0, "openClose": 0}},
@@ -20,11 +20,12 @@ def get_objects():
 
 
 def set_object(obj):
-    global objects
+    global objects, tmp_objects
 
     for i, o in enumerate(objects):
         if obj["id"] == o["id"]:
             objects[i] = obj
+            tmp_objects[i] = obj
             return True
     return False
 
