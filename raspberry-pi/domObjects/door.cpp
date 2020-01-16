@@ -47,7 +47,6 @@ void Door::update() {
         // update actuator values
         jsonServo = jsonResult["actuators"]["servo"];
         ledInside = jsonResult["actuators"]["led1"] == 1;
-        ledOutside = currentTime[0] < 6 || currentTime[0] > 18 || buttonOutside;
     }
 
     // when alarm is raised, door can be opened with button
@@ -100,6 +99,18 @@ void Door::update() {
         jsonResult = toJson(result);
         buttonInside = jsonResult["sensors"]["button1"];
         buttonOutside = jsonResult["sensors"]["button2"];
+    }
+
+    // led outside during night always on, during day controlled by button
+    ledOutside = currentTime[0] < 6 || currentTime[0] > 18 || buttonOutside;
+
+    // when button outside is pressed, send notification to guard
+    if (buttonOutside) {
+        json message = {
+                {"type", 4},
+                {"id", 2}
+        };
+        python->sendNotification(toCharArray(message));
     }
 
     //send all sensors and actuators to webserver
