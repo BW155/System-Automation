@@ -51,6 +51,7 @@ def process_actuator(obj_id, actuator, toggle=True, value=None):
                         o["actuators"][a] = o["actuators"][a] ^ 1
                     elif value is not None:
                         o["actuators"][a] = value
+                    actuator_change[obj_id - 1] = True
 
 
 def get_actuator(obj_id, actuator):
