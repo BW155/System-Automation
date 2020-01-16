@@ -60,6 +60,7 @@ void Lamp::update(){
 //    toLogFile();
 }
 
+// make message for wemos
 char * Lamp::wemosMessage(){
     json message = {
             {"id", 3},
@@ -71,6 +72,7 @@ char * Lamp::wemosMessage(){
     return toCharArray(message);
 }
 
+// make message for webserver
 json Lamp::pythonMessage(){
     json message = {
             {"actuators", {

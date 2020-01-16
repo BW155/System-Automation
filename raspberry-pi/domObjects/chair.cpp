@@ -25,7 +25,7 @@ Chair::Chair(const char *IP, webSocket *w, TimeClass *t) : domObject(w, t, 2) {
 // Communicates with webserver and wemos, updates sensors and actuators accordingly
 void Chair::update() {
 
-    // char*'s for storing result
+    // char*' for storing result
     char* result;
 
     // jsons for storing results in json format
