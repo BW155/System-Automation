@@ -1,0 +1,14 @@
+- Deur
+- Alarm
+- SchemerLamp
+- BedLamp
+- MuurLamp
+
+
+Timothy
+- Bed Lamp
+- Stoel Lamp
+- Schemer Lamp
+- Muur, Pillar, Deur lichten samen 1 knop
+- Noodknop
+- Buiten knop

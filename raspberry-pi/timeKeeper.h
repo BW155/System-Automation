@@ -19,6 +19,8 @@ class TimeClass{
         int*  getTime();
         int getTimeSeconds();
         string getTimeString();
+        bool isNight();
+        string dump();
     private:
         int minutes;
         int hours;

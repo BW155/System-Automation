@@ -102,7 +102,7 @@ void Door::update() {
     }
 
     // led outside during night always on, during day controlled by button
-    ledOutside = currentTime[0] < 6 || currentTime[0] > 18 || buttonOutside;
+    ledOutside = getTimePointer()->isNight() || buttonOutside;
 
     // when button outside is pressed, send notification to guard
     if (buttonOutside) {
@@ -166,7 +166,6 @@ void Door::toLogFile() {
         if  (myfile.bad()) {
             cout<<"write failed"<<endl;
         }
-
     }
     else {
         cout<<"file not found"<<endl;

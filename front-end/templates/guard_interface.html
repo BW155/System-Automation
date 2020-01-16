@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+
+{% block styles %}
+<link rel="stylesheet" href="/static/css/dashboard.css?version={{cur_time}}"/>
+<style>
+.dimmer-slider {
+    height: 50px;
+}
+td {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+td:nth-child(2) {
+    text-align: right;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div id="object-card-holder">
+</div>
+
+<div id="notifications" class="modal">
+    <div class="modal-content">
+        <h4>Notificaties</h4>
+        <div id="notification-holder">
+
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a class="modal-close waves-effect waves-green btn" 
+           style="width: 100%" 
+           onclick="clearNotifications()">
+            Sluiten
+        </a>
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
+{% raw %}
+<script src="/static/js/jsrender.min.js"></script>
+<script id="dom_object" type="text/x-jsrender">
+    <div class="object-card card">
+        <h5 style="margin-left: 10px; margin-top: 10px;">{{:name}}</h5>
+
+        <hr size="2px" style="margin-bottom: 10px">
+        {% endraw %}
+        {% if role == 2 %}
+        {% raw %}
+        <b style="margin-left: 10px">Status</b>
+        <hr size="2px" style="margin-top: 10px">
+
+        <div class="card-content" style="padding: 5px">
+            <table class="striped">
+            {{for sensors }}
+            <tr class="row" style="margin-bottom: 5px">
+                <td style="font-size: auto">{{:name}}:</td>
+                <td id="{{ o.id }}{{ s.id }}">
+                    <b>
+                        {{if id.indexOf("button") >= 0}}
+                            {{if value == 1}}Klik{{else}}Los{{/if}}
+                        {{else}}
+                            {{:value}}
+                        {{/if}}
+                    </b>
+                </td>
+            </tr>
+            {{/for}}
+            </table>
+            <br>
+            <table class="striped">
+            {{for actuators }}
+            <tr class="row" style="margin-bottom: 5px">
+                <td style="font-size: auto">{{:name}}:</td>
+                <td id="{{ o.id }}{{ a.id }}"><b>{{if value == 1}}Aan{{else}}Uit{{/if}}</b></td>
+            </tr>
+            {{/for}}
+            </table>
+        </div>
+
+        {{if actions["buttons"].length > 0 || actions["switches"].length > 0 || actions["sliders"].length > 0}}
+        <hr size="2px" style="margin-bottom: 10px">
+        {% endraw %}
+        {% endif %}
+        {% raw %}
+        <b style="margin-left: 10px">Acties</b>
+        <hr size="2px" style="margin-top: 10px">
+
+        <div class="card-content">
+            {{for actions["switches"] ~o_id=id }}
+                <div class="switch">
+                    <label class="black-text">
+                        {{:name}}:<br>
+                        Uit
+                        <input 
+                            type="checkbox" {{if value == 1}}checked{{/if}}
+                            onclick="actionUpdate({{:~o_id}}, '{{:id}}', this.checked ? 1 : 0)">
+                        <span class="lever"></span>
+                        Aan
+                    </label>
+                </div>
+            {{/for}}
+            {{for actions["sliders"] ~o_id=id }}
+                <p class="range-field">
+                    {{:name}}:
+                    <input 
+                        class="dimmer-slider"
+                        type="range"
+                        min="0"
+                        max="1024"
+                        value="{{:value}}"/>
+                </p>
+            {{/for}}
+            {{for actions["buttons"] ~o_id=id }}
+                <button 
+                    class="btn {{:color}}" 
+                    onclick="actionUpdate({{:~o_id}}, '{{:id}}', {{:value}})" 
+                    style="margin-top: 15px; font-size: 12px">{{:name}}</button>
+            {{/for}}
+        </div>
+        {{/if}}
+    </div>
+</script>
+{% endraw %}
+<script src="/static/js/dashboard.js?version={{cur_time}}"></script>
+
+<script>
+    {% if role == 2 %}
+    pollNotifications({{last_not_id}});
+    {% endif %}
+</script>
+{% endblock %}

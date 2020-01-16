@@ -24,6 +24,5 @@ public:
     Door(const char*, webSocket*, TimeClass*);
     void setPillarPointer(Pillar*);
     void update();
-
 };
 #endif //DOOR_H
