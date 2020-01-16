@@ -15,10 +15,6 @@ objects = [
 ]
 
 
-def clean_object(obj):
-    for i in obj["actuators"]:
-        if obj["actuators"][i]
-
 def get_objects():
     return jsonify(web_translate_objects())
 
@@ -53,7 +49,7 @@ def process_actuator(obj_id, actuator, toggle=True, value=None):
                 if a == actuator:
                     if toggle:
                         o["actuators"][a] = o["actuators"][a] ^ 1
-                    if value is not None:
+                    elif value is not None:
                         o["actuators"][a] = value
 
 
