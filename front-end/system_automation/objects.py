@@ -2,7 +2,7 @@ import json
 from flask import jsonify
 import copy
 
-tmp_objects = []
+actuator_change = [False] * 7
 
 objects = [
     {"id": 1, "actuators": {"led": 0},                          "sensors": {"forceSensor": 0, "button": 0}},
@@ -20,26 +20,24 @@ def get_objects():
 
 
 def set_object(obj):
-    global objects, tmp_objects
+    global objects
 
     for i, o in enumerate(objects):
         if obj["id"] == o["id"]:
-            objects[i] = obj
-            tmp_objects[i] = obj
+            objects[i] = copy.deepcopy(obj)
             return True
     return False
 
 
 def check_objects_change(obj_id):
-    global tmp_objects
+    global actuator_change
+    print(obj_id, actuator_change[obj_id - 1])
 
-    for i in objects:
-        for u in tmp_objects:
-            if i["id"] == obj_id and u["id"] == obj_id and i == u:
-                return False
+    if actuator_change[obj_id - 1] == True:
+        actuator_change[obj_id - 1] = False
+        return "1"
 
-    tmp_objects = copy.deepcopy(objects)
-    return True
+    return "0"
 
 
 def process_actuator(obj_id, actuator, toggle=True, value=None):
@@ -66,7 +64,7 @@ def get_actuator(obj_id, actuator):
 
 
 def set_actuator(obj_id, actuator, value):
-    global objects
+    global objects, actuator_change
 
     for i in objects:
         if i["id"] == obj_id:
@@ -74,6 +72,7 @@ def set_actuator(obj_id, actuator, value):
                 if a == actuator:
                     if value.isdigit():
                         i["actuators"][a] = int(value)
+                        actuator_change[obj_id - 1] = True
                         return "1"
     return "0"
 

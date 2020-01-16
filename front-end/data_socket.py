@@ -64,7 +64,7 @@ def process_message(message):
         if messsage_type == 1:
             obj_id = js.get("id")
             if obj_id and obj_id >= 1 and obj_id <= 7:
-                return "1" if check_objects_change(obj_id) else "0"
+                return check_objects_change(obj_id)
             return "UNKOWN ID"
 
         if messsage_type == 2:
