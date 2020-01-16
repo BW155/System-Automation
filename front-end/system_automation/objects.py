@@ -15,6 +15,10 @@ objects = [
 ]
 
 
+def clean_object(obj):
+    for i in obj["actuators"]:
+        if obj["actuators"][i]
+
 def get_objects():
     return jsonify(web_translate_objects())
 
@@ -195,7 +199,7 @@ def translate_actions(obj):
 
     actions = {"switches": [], "buttons": [], "sliders": []}
 
-    if obj_id in [1, 2, 3, 4]:
+    if obj_id in [1, 3, 4]:
         actions["switches"].append({"id": "led", "name": "Licht", "value": actuators["led"]})
 
     if obj_id == 4:
@@ -206,8 +210,7 @@ def translate_actions(obj):
         actions["sliders"].append({"id": "led", "name": "Dimmer", "value": actuators["led"]})
 
     if obj_id == 7:
-        actions["switches"].append({"id": "led1", "name": "Licht1", "value": actuators["led1"]})
-        actions["switches"].append({"id": "led2", "name": "Licht2", "value": actuators["led2"]})
+        actions["switches"].append({"id": "led1", "name": "Licht Binnen", "value": actuators["led1"]})
         actions["switches"].append({"id": "servo", "name": "Deur Stand", "value": actuators["servo"]})
 
     return actions
