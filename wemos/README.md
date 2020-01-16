@@ -19,3 +19,5 @@ Bij `DOMOBJECT` moet de naam van het juiste object worden ingevoerd. Keuze besta
 * fridge
 
 Bij `UPLOAD_PORT` moet de juiste USB port geselecteerd worden, dit is per besturingssysteem anders.
+
+Verder kan er `pio device monitor` gebruikt worden om de Serial van de wemos uit te lezen.
