@@ -1,5 +1,5 @@
 //
-// Created by LarsLinux on 16-12-19.
+// Created by Jasper
 //
 
 #include "wall.h"
@@ -7,54 +7,69 @@
 
 using json = nlohmann::json;
 
+// constructor for wall
 Wall::Wall(const char* IP, webSocket* w): domObject(w, 5){
     led = 0;
     window = false;
     dimmer = 0;
     LDR = 0;
-    Socket temp(5, "wall", IP);
+    Socket temp(5,IP);
     domObject::wemos = temp;
 }
 
+// Communicates with webserver and wemos, updates sensors and actuators accordingly
 void Wall::update(){
+
+    // char*'s for storing result and message
     char* result;
     char* message;
+
+    // jsons for storing results in json format
     json pythonResult;
     json wemosResult;
 
-    //ontvang van interface
-    if(python->sendMessage(5)){
+    // check if a message has been received
+    if(python->sendMessage(5)) {
+        // receive result, change to json
         result = python->receiveActuators(5);
         pythonResult = toJson(result);
+
+        // change actuator value
         led = pythonResult["actuators"]["led"];
+
+        if (pythonResult["actuators"]["window"] == 1) {
+            window = true;
+        } else window = LDR < 500;
     }
-    //window
-    if(pythonResult["actuators"]["window"] == 1){
-        window = true;
-    }else window = LDR < 500;
-    //ledstrip
-
-
-    //wemos
+    // make message for wemos and receive sensors
     message = wemosMessage();
+
+    // send to wemos and receive sensors
     result = wemos.sendReceive(message);
-    cout<<result<<endl;
-    wemosResult = toJson(result);
-    int temp = wemosResult["sensors"]["dimmer"];
-    if (dimmer - temp != 0) {
-        led = wemosResult["sensors"]["dimmer"];
-        dimmer = wemosResult["sensors"]["dimmer"];
+
+    // check if wemos didnt send an empty message
+    if (result == NULL) {
+        cout<<"error receiving"<<endl;
+    }
+    else {
+        // change to json, update attributes
+        wemosResult = toJson(result);
+
+        int temp = wemosResult["sensors"]["dimmer"];
+        if (dimmer - temp != 0) {
+            led = wemosResult["sensors"]["dimmer"];
+            dimmer = wemosResult["sensors"]["dimmer"];
+        }
+        LDR = wemosResult["sensors"]["LDR"];
     }
 
-    LDR = wemosResult["sensors"]["LDR"];
-
-    //verstuur naar interface
-    json Mes = pythonMessage();
-    python->sendAll(5, Mes);
+    //send all sensors and actuators to webserver
+    python->sendAll(5, pythonMessage());
 
 //    toLogFile();
 }
 
+// make message for wemos
 char* Wall::wemosMessage(){
     json message = {
             {"id", 5},
@@ -67,6 +82,7 @@ char* Wall::wemosMessage(){
     return toCharArray(message);
 }
 
+// make message for webserver
 json Wall::pythonMessage(){
     json message = {
             {"actuators", {
@@ -88,8 +104,7 @@ void Wall::toLogFile() {
     ofstream myfile;
     myfile.open("log.txt", ios::out | ios::app);
     if (myfile.is_open()) {
-        myfile << domObject::timeObj->getTime()[0] << ":" << domObject::timeObj->getTime()[1] << ":"
-               << domObject::timeObj->getTime()[2] << "Wall: " << pythonMessage() << endl;
+        myfile << domObject::timeObj->getTimeString() << "Wall: " << pythonMessage() << endl;
         if  (myfile.bad()) {
             cout<<"write failed"<<endl;
         }

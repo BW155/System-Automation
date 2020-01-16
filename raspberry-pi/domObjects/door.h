@@ -17,7 +17,7 @@ private:
     bool ledOutside;
     bool ledInside;
     Pillar* pillar;
-    char* wemosMessage(bool, bool, int);
+    char* wemosMessage();
     json pythonMessage();
     void toLogFile();
 public:

@@ -1,30 +1,26 @@
 // Created by LarsLinux on 16-12-19.
 //
 
-#ifndef RASPBERRY_PI_BED_H
-#define RASPBERRY_PI_BED_H
+#ifndef LAMP_H
+#define LAMP_H
 
 #include "../Socket/Socket.h"
 #include "domObject.h"
-#include "../timeKeeper.h"
-
 
 class Lamp: public domObject {
+private:
+    bool led;
+    bool motionSensor;
+    int startTime;
+    char* wemosMessage();
+    json pythonMessage();
+    void toLogFile();
 public:
     Lamp(const char* IP, webSocket *s, TimeClass *t);
     void stuurLamp();
     void update();
 
-
-private:
-    bool led;
-    bool motionSensor;
-    Socket socket;
-    int startTime;
-    char* wemosMessage();
-    json pythonMessage();
-    void toLogFile();
 };
 
 
-#endif //RASPBERRY_PI_BED_H
+#endif //LAMP_H

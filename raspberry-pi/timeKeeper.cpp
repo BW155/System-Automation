@@ -88,6 +88,14 @@ int* TimeClass::getTime(){
     return arr;
 }
 
+int TimeClass::getTimeSeconds(){
+    return hours * 3600 + minutes * 60 + seconds;
+}
+
+string TimeClass::getTimeString(){
+    return to_string(hours) + ":" + to_string(minutes) + ":" + to_string(seconds);
+}
+
 bool TimeClass::isNight() {
     return hours >= 23 || hours <= 6;
 }

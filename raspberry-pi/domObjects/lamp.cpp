@@ -1,49 +1,80 @@
-// Created by LarsLinux on 16-12-19.
+//
+// Created by Ramon
 //
 #include "lamp.h"
+#include "../json/json.hpp"
 
-//Pi stuurt:		{"id":3, "actuators":{"led":x}}
-//Wemos stuurt:	{"error":"err", "sensors":{"motionSensor":x, "button":x}}
+using json = nlohmann::json;
 
-Lamp::Lamp(const char * IP, webSocket *s, TimeClass *t):  led(false), motionSensor(false), domObject(s, t, 3){
-    Socket temp(3, "tableLamp", IP);
-    domObject::wemos = temp;
+// constructor for lamp
+Lamp::Lamp(const char * IP, webSocket *w, TimeClass *t): domObject(w, t, 3){
     startTime = 0;
+    led = false;
+    motionSensor = false;
+    Socket temp(3,IP);
+    domObject::wemos = temp;
 }
 
-
+// Communicates with webserver and wemos, updates sensors and actuators accordingly
 void Lamp::update(){
+
+    // char*'s for storing result and message
     char * message;
     char * result;
+
+    // json for storing results in json format
     json jsonResult;
+
+    // update lamp
     stuurLamp();
+
+    // check if a message has been received
     if(python->sendMessage(3)){
+        // receive result, change to json
         result = python->receiveActuators(3);
         jsonResult = toJson(result);
-        bool light = jsonResult["actuators"]["led"] == 1;
-        if(light == led){
 
-        }
-        else{
-            led = !led;
-        }
+        // update actuator
+        led = jsonResult["actuators"]["led"] == 1;
     }
+
+    // make message for wemos and receive sensors
     message = wemosMessage();
-    result = wemos.sendReceive(message);
-    jsonResult = toJson(result);
-    bool motion = jsonResult["sensors"]["motionSensor"] ==1;
 
-    if(motion != motionSensor) {
-        motionSensor = !motionSensor;
+    // send to wemos and receive sensors
+    result = wemos.sendReceive(message);
+
+    // check if wemos didnt send an empty message
+    if (result == NULL) {
+        cout<<"error receiving"<<endl;
     }
-    //doe iets
+    else {
+        // change to json, update attribute
+        jsonResult = toJson(result);
+        motionSensor = jsonResult["sensors"]["motionSensor"] == 1;
+    }
+
+    //send all sensors and actuators to webserver
     python->sendAll(3, pythonMessage());
 
 //    toLogFile();
 }
 
+// make message for wemos
+char * Lamp::wemosMessage(){
+    json message = {
+            {"id", 3},
+            {"actuators",{
+                           {"led",led}
+                   }
+            }
+    };
+    return toCharArray(message);
+}
+
+// make message for webserver
 json Lamp::pythonMessage(){
-    json motionmsg = {
+    json message = {
             {"actuators", {
                 {"led",led}
                      }},
@@ -52,34 +83,24 @@ json Lamp::pythonMessage(){
                    }
                     }
     };
-    return motionmsg;
+    return message;
 }
 
-char * Lamp::wemosMessage(){
-    json ledmsg = {
-            {"id", 3},
-            {"actuators",{
-                           {"led",led}
-                   }
-            }
-    };
-    char* ledMsg = toCharArray(ledmsg);
-    return ledMsg;
-}
-
+// function to control lamp
 void Lamp::stuurLamp(){
-    int currentTime;
+    // increase the time object
     domObject::timeObj->autoIncreaseTime();
-    currentTime = domObject::timeObj->getTime()[0]*3600 + domObject::timeObj->getTime()[1]*60 + domObject::timeObj->getTime()[2];
+
+    //Current time in seconds
+    int currentTime = domObject::timeObj->getTimeSeconds();
+
+    // turn led on on motionsensor, when there is no movement, turn off after 5 sec
     if (motionSensor){
         led = true;
         startTime = currentTime;
 
-    }
-    if(!motionSensor){
-        if((currentTime - startTime) > (300)){  //5 minuten (5 x 60)
+    } else if(currentTime - startTime > 300){
             led = false;
-        }
     }
 }
 
@@ -88,8 +109,7 @@ void Lamp::toLogFile() {
     ofstream myfile;
     myfile.open("log.txt", ios::out | ios::app);
     if (myfile.is_open()) {
-        myfile << domObject::timeObj->getTime()[0] << ":" << domObject::timeObj->getTime()[1] << ":"
-               << domObject::timeObj->getTime()[2] << "Lamp: " << pythonMessage() << endl;
+        myfile << domObject::timeObj->getTimeString() << "Lamp: " << pythonMessage() << endl;
         if  (myfile.bad()) {
             cout<<"write failed"<<endl;
         }
