@@ -9,6 +9,15 @@
     <button class="int-button red-button" onclick="onNotifButtonClick(0)"><i class="material-icons">warning</i></button>
     <button class="int-button blue-button" onclick="onNotifButtonClick(1)">NAAR BUITEN</button>
 </div>
+<br>
+
+{% if medicine_button %}
+<div class="button-holder center" id="medicine">
+    <form method="POST">
+    <button class="int-button blue-button">MEDICIJNEN INGENOMEN?</button>
+</div>
+{% endif %}
+
 {% endblock %}
 {% block scripts %}
 <script>
@@ -24,6 +33,10 @@
             Materialize.toast(data == 1 ? "Actie uitgevoerd" : "Mislukt", 1000);
         });
     }
+
+    setInterval(function () {
+        location.reload();
+    }, 10000);
 </script>
 {% endblock %}
 
