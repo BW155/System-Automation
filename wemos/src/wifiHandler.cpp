@@ -1,7 +1,7 @@
 #include <wifiHandler.h>
 
 const char* ssid = "de Berlijnse muur";
-const char* password = "adolfhitler";
+const char* password = "09111989";
 
 WiFiServer wifiServer(8080);
 
@@ -12,11 +12,11 @@ void wifiSetup() {
     // Wifi connection
     Serial.println();
     Serial.println("==================");
+    Serial.println("WiFi starting up...");
     Serial.print("Connecting to: ");
     Serial.println(ssid);
     
     connectWifi();
-
 
     Serial.println("Server starts...");
     wifiServer.begin();
@@ -61,7 +61,6 @@ void handleWifi(DomObject* object) {
         // Deserializing json
         DynamicJsonDocument doc(1024);
         DeserializationError error = deserializeJson(doc, data);
-        JsonObject actuators = doc["actuators"];
         
         // If there is an error, send error result back to client
         if (error) {
@@ -71,6 +70,8 @@ void handleWifi(DomObject* object) {
             client.stop();
             return;
         }
+
+        JsonObject actuators = doc["actuators"];
 
         // Check if message is meant for me
         if (doc[String("id")] == object->getId()) {
@@ -120,8 +121,10 @@ void connectWifi() {
         delay(500);
         Serial.print(".");
     }
+
     Serial.println();
     Serial.println("WiFi connected");  
     Serial.println("IP address: ");
     Serial.println(WiFi.localIP());
 }
+

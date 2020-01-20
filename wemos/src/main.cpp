@@ -36,10 +36,16 @@ Wall object;
 #ifdef FRIDGE
 Fridge object;
 #endif
+
 Ticker tick(brightness, 0.05);
 
+
 void setup() {
+    delay(100);
     Serial.begin(9600);
+    Serial.println();
+    Serial.println("Hi, my id is " + String(object.getId()));
+    Serial.println("Starting up....");
     Wire.begin();
 
     // Config maxi 16647 (analog part)
@@ -59,9 +65,8 @@ void setup() {
     initLed();
     wifiSetup();
 
-    Serial.println("Hi, my id is " + String(object.getId()));
-    
     tick.start();
+    Serial.println("READY TO SERVE");
 }
 
 void loop() {
@@ -70,3 +75,4 @@ void loop() {
     componentCheckLoop();
     tick.update();  
 }
+
