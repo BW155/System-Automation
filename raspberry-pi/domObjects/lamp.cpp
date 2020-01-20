@@ -18,6 +18,11 @@ Lamp::Lamp(const char * IP, webSocket *w, TimeClass *t): domObject(w, t, 3){
 // Communicates with webserver and wemos, updates sensors and actuators accordingly
 void Lamp::update(){
 
+    string log;
+
+    // increase the time object
+    domObject::timeObj->autoIncreaseTime();
+
     // char*'s for storing result and message
     char * message;
     char * result;
@@ -25,19 +30,19 @@ void Lamp::update(){
     // json for storing results in json format
     json jsonResult;
 
-    // update lamp
-    stuurLamp();
-
     // check if a message has been received
     if(python->sendMessage(3)){
         // receive result, change to json
         result = python->receiveActuators(3);
         jsonResult = toJson(result);
-
         // update actuator
-        led = jsonResult["actuators"]["led"] == 1;
+        led = jsonResult["actuators"]["led"] == 1 && !domObject::timeObj->isNight();
+        log += "led = ";
+        log += led;
+        log += " | ";
     }
 
+    result = nullptr;
     // make message for wemos and receive sensors
     message = wemosMessage();
 
@@ -45,19 +50,38 @@ void Lamp::update(){
     result = wemos.sendReceive(message);
 
     // check if wemos didnt send an empty message
-    if (result == NULL) {
+    if (result == nullptr) {
         cout<<"error receiving"<<endl;
     }
     else {
         // change to json, update attribute
         jsonResult = toJson(result);
-        motionSensor = jsonResult["sensors"]["motionSensor"] == 1;
+        if (jsonResult["error"] != "NoDataReceived") {
+            motionSensor = jsonResult["sensors"]["motionSensor"] == 1;
+            if (motionSensor) {
+                log += "beweging bij lamp | ";
+            }
+        }
     }
 
-    //send all sensors and actuators to webserver
-    python->sendAll(3, pythonMessage());
+    // update lamp
+    updateActuators(&log);
 
-//    toLogFile();
+    //send all sensors and actuators to webserver
+    if (!python->sendMessage(3)) {
+        python->sendAll(3, pythonMessage());
+    } else {
+        // receive result, change to json
+        result = python->receiveActuators(3);
+        jsonResult = toJson(result);
+        // update actuator
+        led = jsonResult["actuators"]["led"] == 1 && !domObject::timeObj->isNight();
+        log += "led = ";
+        log += led;
+        log += " | ";
+    }
+
+    logToFile(domObject::timeObj, log);
 }
 
 // make message for wemos
@@ -87,20 +111,19 @@ json Lamp::pythonMessage(){
 }
 
 // function to control lamp
-void Lamp::stuurLamp(){
-    // increase the time object
-    domObject::timeObj->autoIncreaseTime();
+void Lamp::updateActuators(string *log){
 
     //Current time in seconds
     int currentTime = domObject::timeObj->getTimeSeconds();
 
     // turn led on on motionsensor, when there is no movement, turn off after 5 sec
-    if (motionSensor){
+    if (motionSensor && domObject::timeObj->isNight()) {
         led = true;
         startTime = currentTime;
-
-    } else if(currentTime - startTime > 300){
+        *log += "led = 1 | ";
+    } else if(currentTime - startTime > 300 && domObject::timeObj->isNight()){
             led = false;
+            *log += "led = 0 | ";
     }
 }
 

@@ -26,6 +26,8 @@ Fridge::Fridge(const char * IP, webSocket *w, TimeClass *t) : domObject(w, t, 6)
 // Communicates with webserver and wemos, updates sensors and actuators accordingly
 void Fridge::update(){
 
+    string log;
+
     // char* for storing result and message
     char *result;
 
@@ -45,13 +47,15 @@ void Fridge::update(){
     result = wemos.sendReceive(wemosMessage());
 
     // check if wemos didnt send an empty message
-    if (result == NULL) {
+    if (result == nullptr) {
         cout<<"error receiving"<<endl;
     }
     else {
         // change to json, update attributes
         jsonResult = toJson(result);
-        updateAttributes(jsonResult);
+        if (jsonResult["error"] != "NoDataReceived") {
+            updateAttributes(jsonResult, &log);
+        }
     }
 
     // Cool when fridge is closed
@@ -68,13 +72,14 @@ void Fridge::update(){
                 {"id", 4}
         };
         python->sendNotification(toCharArray(message));
+        log += "koelkast uit | ";
 
     }
 
     //send all sensors and actuators to webserver
     python->sendAll(6,pythonMessage());
 
-//    toLogFile();
+    logToFile(domObject::timeObj, log);
 }
 
 // make message for wemos
@@ -107,9 +112,18 @@ json Fridge::pythonMessage() {
 }
 
 // function to update attributes
-void Fridge::updateAttributes(json result){
+void Fridge::updateAttributes(json result, string *log){
     thermometer1 = result["sensors"]["thermometer1"];
     thermometer2 = result["sensors"]["thermometer2"];
+    if (openClose != result["sensors"]["openClose"]) {
+        if (result["sensors"]["openClose"] == 1) {
+            *log += "deur is open | ";
+        }
+        else {
+            *log += "deur is dicht | ";
+        }
+    }
     openClose = result["sensors"]["openClose"] == 1;
+
 }
 

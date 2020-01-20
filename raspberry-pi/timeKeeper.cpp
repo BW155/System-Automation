@@ -24,29 +24,17 @@ void TimeClass::autoIncreaseTime(){
 
     totalTime = diff_t * localMultiplier;
     if(diff_t > 0) {
-        if (totalTime >= 3600) {
-            hours += (totalTime - totalTime % 3600) / 3600;
-            totalTime -= (totalTime - totalTime % 3600);
+        seconds += (totalTime%3600)%60;
+        minutes += (totalTime - totalTime%3600 - (totalTime - totalTime%60));
+        hours += totalTime - (totalTime % 3600);
+
+        if (seconds > 59) {
+            seconds = 0;
+            minutes++;
         }
-        if (totalTime >= 60) {
-            minutes += (totalTime - totalTime % 60) / 60;
-            if (minutes > 59) {
-                hours++;
-                minutes = 0;
-            }
-            totalTime -= (totalTime - totalTime % 60);
-        }
-        if (totalTime > 0) {
-            seconds += totalTime;
-            if (seconds > 59) {
-                minutes++;
-                seconds = 0;
-                if (minutes > 59) {
-                    hours++;
-                    minutes = 0;
-                }
-            }
-            totalTime -= totalTime;
+        if (minutes > 59) {
+            minutes = 0;
+            hours++;
         }
         if (hours > 23) {
             hours = 0;
@@ -55,10 +43,10 @@ void TimeClass::autoIncreaseTime(){
         }
 
         //Debug purposes
-                cout << "hours: "  << hours   << endl;
-                cout << "Minutes: "<< minutes << endl;
-                cout << "seconds: "<< seconds << endl;
-                cout << " " << endl;
+//                cout << "hours: "  << hours   << endl;
+//                cout << "Minutes: "<< minutes << endl;
+//                cout << "seconds: "<< seconds << endl;
+//                cout << " " << endl;
         prevTime = curTime;
     }
 }
@@ -107,10 +95,4 @@ string TimeClass::getTimeString(){
 
 bool TimeClass::isNight() {
     return hours >= 23 || hours <= 6;
-}
-
-string TimeClass::dump() {
-    char dump[10];
-    sprintf(dump, "%d:%d:%d", hours, minutes, seconds);
-    return dump;
 }

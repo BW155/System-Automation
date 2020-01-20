@@ -26,6 +26,8 @@ Bed::Bed(const char* IP, webSocket* w, TimeClass *t): domObject(w, t, 1){
 // Communicates with webserver and wemos, updates sensors and actuators accordingly
 void Bed::update(){
 
+    string log;
+
     // char*'s for storing result and message
     char* result;
     char* message;
@@ -46,9 +48,14 @@ void Bed::update(){
         // change actuator value
         if (!(buttonPressed && led)) {
             led = pythonResult["actuators"]["led"] == 1;
+            log += "led = ";
+            log += to_string(led);
+            log += " | ";
         }
     }
 
+
+    result = nullptr;
     // make message for wemos and receive sensors
     message = wemosMessage();
 
@@ -56,23 +63,28 @@ void Bed::update(){
     result = wemos.sendReceive(message);
 
     // check if wemos didnt send an empty message
-    if (result == NULL) {
+    if (result == nullptr) {
         cout<<"error receiving"<<endl;
     }
     else {
         // change to json, update attributes
         wemosResult = toJson(result);
-        if (wemosResult["sensors"]["button"] && !buttonPressed) {
-            led = true;
-            buttonPressed = true;
-        }
-        else if (wemosResult["sensors"]["button"] && led){
-            led = false;
-            buttonPressed = false;
-        }
+        if (wemosResult["error"] != "NoDataReceived") {
+            if (wemosResult["sensors"]["button"] && !buttonPressed) {
+                led = true;
+                buttonPressed = true;
+                log += "knop ingedrukt | ";
+                log += "led = 1 | ";
+            } else if (wemosResult["sensors"]["button"] && led) {
+                led = false;
+                buttonPressed = false;
+                log += "knop ingedrukt | ";
+                log += "led = 0 | ";
+            }
 
-        forceSensor = updateForce;
-        updateForce = wemosResult["sensors"]["forceSensor"];
+            forceSensor = updateForce;
+            updateForce = wemosResult["sensors"]["forceSensor"];
+        }
     }
 
     // get the current time
@@ -85,7 +97,9 @@ void Bed::update(){
         if (counter == 1) {
             startTime = domObject::timeObj->getTimeSeconds();
         }
-
+        log += "forceSensor waarde: ";
+        log += to_string(updateForce);
+        log += " | ";
         // reset the timer that checks if Client is awake
         startTimeAwake = currentTime;
     }
@@ -104,6 +118,7 @@ void Bed::update(){
         };
         python->sendNotification(toCharArray(message));
         startTimeAwake = currentTime;
+        log += "Epilepsie!! | ";
     }
 
     // start timer for led if led is on and timer isn't started yet
@@ -118,6 +133,7 @@ void Bed::update(){
         buttonPressed = false;
         startTimeLed = currentTime;
         ledTimerStarted = false;
+        log += "led = 0 | ";
     }
 
     // send notification when Client wakes up
@@ -128,30 +144,28 @@ void Bed::update(){
         };
         python->sendNotification(toCharArray(message));
         startTimeAwake = currentTime;
+        log += "Client uit bed | ";
     }
 
     //send all sensors and actuators to webserver
-    python->sendAll(1, pythonMessage());
+    if (!python->sendMessage(1)) {
+        python->sendAll(1, pythonMessage());
+    } else {
+        // receive result, change to json
+        result = python->receiveActuators(1);
+        pythonResult = toJson(result);
 
-//    toLogFile();
-
-}
-
-void Bed::toLogFile() {
-    //log
-    ofstream myfile;
-    myfile.open("log.txt", ios::out | ios::app);
-    if (myfile.is_open()) {
-        myfile << domObject::timeObj->getTimeString() << "Bed: " << pythonMessage() << endl;
-        if  (myfile.bad()) {
-            cout<<"write failed"<<endl;
+        // change actuator value
+        if (!(buttonPressed && led)) {
+            led = pythonResult["actuators"]["led"] == 1;
+            log += "led = ";
+            log += to_string(led);
+            log += " | ";
         }
+    }
 
-    }
-    else {
-        cout<<"file not found"<<endl;
-    }
-    myfile.close();
+    logToFile(domObject::timeObj, log);
+
 }
 
 // make message for wemos

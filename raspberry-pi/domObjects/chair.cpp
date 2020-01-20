@@ -25,12 +25,14 @@ Chair::Chair(const char *IP, webSocket *w, TimeClass *t) : domObject(w, t, 2) {
 // Communicates with webserver and wemos, updates sensors and actuators accordingly
 void Chair::update() {
 
+    string log;
+
     // char*' for storing result
     char* result;
 
     // jsons for storing results in json format
     json jsonResult;
-
+//    toLogFile();
     // int for storing time
     int currentTime;
 
@@ -75,17 +77,20 @@ void Chair::update() {
         }
     }
 
+    result = nullptr;
     // send message to wemos and receive sensors
     result = wemos.sendReceive(wemosMessage());
 
     // check if wemos didnt send an empty message
-    if (result == NULL) {
+    if (result == nullptr) {
         cout<<"error receiving"<<endl;
     }
     else {
         // change to json, update attributes
         jsonResult = toJson(result);
-        updateAttributes(jsonResult);
+        if (jsonResult["error"] != "NoDataReceived") {
+            updateAttributes(jsonResult, &log);
+        }
     }
 
     // check for changes in the forcesensor
@@ -110,6 +115,7 @@ void Chair::update() {
                 {"id", 0}
         };
         python->sendNotification(toCharArray(message));
+        log += "Epilepsie!! | ";
     }
 
     //30 min auto massage
@@ -135,11 +141,13 @@ void Chair::update() {
     if(forceSensor > 10) {
         if (button && !timeOut&& !vibrator) {
             vibrator = true;
-
+            log += "knop ingedrukt | ";
+            log += "massage aan | ";
         }
         else if ((currentTime - start_time_max_massage) > (5 * 60)&& vibrator) {
             vibrator = false;
             timeOut = true;
+            log += "massage uit | ";
         }
     }
 
@@ -151,7 +159,7 @@ void Chair::update() {
         start_timeOut = currentTime;
     }
 
-//    toLogFile();
+    logToFile(domObject::timeObj, log);
 }
 
 // make message for wemos
@@ -185,10 +193,23 @@ json Chair::pythonMessage() {
 }
 
 // update all atributes according to json
-void Chair::updateAttributes(json result) {
+void Chair::updateAttributes(json result, string *log) {
     forceSensor = updateForce;
     updateForce = result["sensors"]["forceSensor"];
+    if (updateForce - forceSensor > 300) {
+        *log += "forceSensor waarde: ";
+        *log += to_string(updateForce);
+    }
     button = result["sensors"]["button"];
-    python->sendAll(2,pythonMessage());
+    if (!python->sendMessage(2)) {
+        python->sendAll(2, pythonMessage());
+    } else {
+        char *result2 = python->receiveActuators(2);
+        json jsonResult = toJson(result2);
+        led = jsonResult["actuators"]["led"] == 1;
+        *log += "led = ";
+        *log += to_string(led);
+        *log = " | ";
+    }
 }
 

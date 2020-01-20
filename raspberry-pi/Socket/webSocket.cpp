@@ -123,6 +123,7 @@ char* webSocket::receiveActuators(int id) {
 // function type 3, to send all sensors and actuators
 void webSocket::sendAll(int id, json everything) {
 
+
     // everything contains sensors and actuators
     json message = everything;
 
