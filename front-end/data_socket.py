@@ -6,6 +6,7 @@ import json
 from json import JSONDecodeError
 from system_automation.objects import objects, set_object, check_objects_change
 from system_automation.api import add_notification
+from system_automation.methods import set_medicine_button
 
 bind_ip = '0.0.0.0'
 bind_port = 9001
@@ -89,6 +90,8 @@ def process_message(message):
             n_id = js.get("id")
             notification = pi_notification_templates[n_id]
             if notification is not None:
+                if n_id >= 5 and n_id <= 8:
+                    set_medicine_button()
                 add_notification(n_id, None, notification)
                 return "1"
             return "0"

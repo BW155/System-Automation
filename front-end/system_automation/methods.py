@@ -6,16 +6,31 @@ from flask_login import login_required, login_user, logout_user, current_user
 from . import app, User, Role
 from .objects import web_translate_objects, set_actuator
 import system_automation.objects as objects
+from system_automation.api import add_notification
 from .api import notifications
 from .utility import roles_allowed
+
+
+medicine_button = False;
+
+
+def set_medicine_button():
+    global medicine_button
+    medicine_button = True
+
 
 @app.context_processor
 def inject_cur_time():
     return {"cur_time": time.time()}
 
-@app.route("/")
+@app.route("/", methods=["GET", "POST"])
 def index():
-    return flask.render_template("index.html")
+    global medicine_button
+    if flask.request.method == "POST":
+        medicine_button = False
+        add_notification(0, None, "Medicatie ingenomen")
+        return flask.redirect(flask.url_for("index"))
+    return flask.render_template("index.html", medicine_button=medicine_button)
 
 
 @app.route("/login", methods=["GET", "POST"])
