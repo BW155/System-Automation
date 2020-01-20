@@ -14,7 +14,6 @@ private:
     bool window;
     int dimmer;
     int LDR;
-    void toLogFile();
 public:
     Wall(const char*, webSocket*);
     char* wemosMessage();

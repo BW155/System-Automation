@@ -2,12 +2,12 @@ import json
 from flask import jsonify
 import copy
 
-tmp_objects = []
+actuator_change = [False] * 7
 
 objects = [
     {"id": 1, "actuators": {"led": 0},                          "sensors": {"forceSensor": 0, "button": 0}},
     {"id": 2, "actuators": {"led": 0, "vibrator": 0},           "sensors": {"forceSensor": 0, "button": 0}},
-    {"id": 3, "actuators": {"led": 0},                          "sensors": {"motionSensor": 0, "button": 0}},
+    {"id": 3, "actuators": {"led": 0},                          "sensors": {"motionSensor": 0}},
     {"id": 4, "actuators": {"led": 0, "buzzer": 0},             "sensors": {"gasSensor": 0, "button": 0}},
     {"id": 5, "actuators": {"led": 0, "window": 0},             "sensors": {"dimmer": 0, "LDR": 0}},
     {"id": 6, "actuators": {"cooling": 0},                      "sensors": {"thermometer1": 0,"thermometer2": 0, "openClose": 0}},
@@ -24,21 +24,20 @@ def set_object(obj):
 
     for i, o in enumerate(objects):
         if obj["id"] == o["id"]:
-            objects[i] = obj
+            objects[i] = copy.deepcopy(obj)
             return True
     return False
 
 
 def check_objects_change(obj_id):
-    global tmp_objects
+    global actuator_change
+    print(obj_id, actuator_change[obj_id - 1])
 
-    for i in objects:
-        for u in tmp_objects:
-            if i["id"] == obj_id and u["id"] == obj_id and i == u:
-                return False
+    if actuator_change[obj_id - 1] == True:
+        actuator_change[obj_id - 1] = False
+        return "1"
 
-    tmp_objects = copy.deepcopy(objects)
-    return True
+    return "0"
 
 
 def process_actuator(obj_id, actuator, toggle=True, value=None):
@@ -50,8 +49,9 @@ def process_actuator(obj_id, actuator, toggle=True, value=None):
                 if a == actuator:
                     if toggle:
                         o["actuators"][a] = o["actuators"][a] ^ 1
-                    if value is not None:
+                    elif value is not None:
                         o["actuators"][a] = value
+                    actuator_change[obj_id - 1] = True
 
 
 def get_actuator(obj_id, actuator):
@@ -65,7 +65,7 @@ def get_actuator(obj_id, actuator):
 
 
 def set_actuator(obj_id, actuator, value):
-    global objects
+    global objects, actuator_change
 
     for i in objects:
         if i["id"] == obj_id:
@@ -73,6 +73,7 @@ def set_actuator(obj_id, actuator, value):
                 if a == actuator:
                     if value.isdigit():
                         i["actuators"][a] = int(value)
+                        actuator_change[obj_id - 1] = True
                         return "1"
     return "0"
 
@@ -195,7 +196,7 @@ def translate_actions(obj):
 
     actions = {"switches": [], "buttons": [], "sliders": []}
 
-    if obj_id in [1, 2, 3, 4]:
+    if obj_id in [1, 3, 4]:
         actions["switches"].append({"id": "led", "name": "Licht", "value": actuators["led"]})
 
     if obj_id == 4:
@@ -206,8 +207,7 @@ def translate_actions(obj):
         actions["sliders"].append({"id": "led", "name": "Dimmer", "value": actuators["led"]})
 
     if obj_id == 7:
-        actions["switches"].append({"id": "led1", "name": "Licht1", "value": actuators["led1"]})
-        actions["switches"].append({"id": "led2", "name": "Licht2", "value": actuators["led2"]})
+        actions["switches"].append({"id": "led1", "name": "Licht Binnen", "value": actuators["led1"]})
         actions["switches"].append({"id": "servo", "name": "Deur Stand", "value": actuators["servo"]})
 
     return actions

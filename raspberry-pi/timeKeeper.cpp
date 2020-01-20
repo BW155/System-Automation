@@ -81,7 +81,16 @@ int TimeClass::getTimeSeconds(){
 }
 
 string TimeClass::getTimeString(){
-    return to_string(hours) + ":" + to_string(minutes) + ":" + to_string(seconds);
+    string hour_prefix = "";
+    string minute_prefix = "";
+    string second_prefix = "";
+    if (hours < 10) hour_prefix = "0";
+    if (minutes < 10) minute_prefix = "0";
+    if (seconds < 10) second_prefix = "0";
+    return 
+        hour_prefix + to_string(hours) + ":" +
+        minute_prefix + to_string(minutes) + ":" +
+        second_prefix + to_string(seconds);
 }
 
 bool TimeClass::isNight() {

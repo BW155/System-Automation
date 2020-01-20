@@ -57,7 +57,12 @@ def interface_api(action):
         if obj_id.isdigit():
             val = get_actuator(int(obj_id), parts[1])
             if val is not None:
-                process_actuator(int(obj_id), parts[1])
+                if int(obj_id) == 5:
+                    process_actuator(int(obj_id), parts[1], toggle=False, value= 0 if val == 1024 else 1024)
+                    print(val)
+                else:
+                    process_actuator(int(obj_id), parts[1])
+
                 return "1"
     return "0"
 

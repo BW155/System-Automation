@@ -22,10 +22,8 @@ private:
     char* wemosMessage();
     json pythonMessage();
     void updateAttributes(json result);
-    void toLogFile();
 public:
     void update();
     Chair(const char*, webSocket*, TimeClass*);
-
 };
 #endif //CHAIR_H
