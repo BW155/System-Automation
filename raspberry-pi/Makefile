@@ -111,17 +111,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named Socke
+# Target rules for targets named PiClient
 
 # Build rule for target.
-Socke: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 Socke
-.PHONY : Socke
+PiClient: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 PiClient
+.PHONY : PiClient
 
 # fast build rule for target.
-Socke/fast:
-	$(MAKE) -f CMakeFiles/Socke.dir/build.make CMakeFiles/Socke.dir/build
-.PHONY : Socke/fast
+PiClient/fast:
+	$(MAKE) -f CMakeFiles/PiClient.dir/build.make CMakeFiles/PiClient.dir/build
+.PHONY : PiClient/fast
 
 Socket/Socket.o: Socket/Socket.cpp.o
 
@@ -129,7 +129,7 @@ Socket/Socket.o: Socket/Socket.cpp.o
 
 # target to build an object file
 Socket/Socket.cpp.o:
-	$(MAKE) -f CMakeFiles/Socke.dir/build.make CMakeFiles/Socke.dir/Socket/Socket.cpp.o
+	$(MAKE) -f CMakeFiles/PiClient.dir/build.make CMakeFiles/PiClient.dir/Socket/Socket.cpp.o
 .PHONY : Socket/Socket.cpp.o
 
 Socket/Socket.i: Socket/Socket.cpp.i
@@ -138,7 +138,7 @@ Socket/Socket.i: Socket/Socket.cpp.i
 
 # target to preprocess a source file
 Socket/Socket.cpp.i:
-	$(MAKE) -f CMakeFiles/Socke.dir/build.make CMakeFiles/Socke.dir/Socket/Socket.cpp.i
+	$(MAKE) -f CMakeFiles/PiClient.dir/build.make CMakeFiles/PiClient.dir/Socket/Socket.cpp.i
 .PHONY : Socket/Socket.cpp.i
 
 Socket/Socket.s: Socket/Socket.cpp.s
@@ -147,7 +147,7 @@ Socket/Socket.s: Socket/Socket.cpp.s
 
 # target to generate assembly for a file
 Socket/Socket.cpp.s:
-	$(MAKE) -f CMakeFiles/Socke.dir/build.make CMakeFiles/Socke.dir/Socket/Socket.cpp.s
+	$(MAKE) -f CMakeFiles/PiClient.dir/build.make CMakeFiles/PiClient.dir/Socket/Socket.cpp.s
 .PHONY : Socket/Socket.cpp.s
 
 Socket/webSocket.o: Socket/webSocket.cpp.o
@@ -156,7 +156,7 @@ Socket/webSocket.o: Socket/webSocket.cpp.o
 
 # target to build an object file
 Socket/webSocket.cpp.o:
-	$(MAKE) -f CMakeFiles/Socke.dir/build.make CMakeFiles/Socke.dir/Socket/webSocket.cpp.o
+	$(MAKE) -f CMakeFiles/PiClient.dir/build.make CMakeFiles/PiClient.dir/Socket/webSocket.cpp.o
 .PHONY : Socket/webSocket.cpp.o
 
 Socket/webSocket.i: Socket/webSocket.cpp.i
@@ -165,7 +165,7 @@ Socket/webSocket.i: Socket/webSocket.cpp.i
 
 # target to preprocess a source file
 Socket/webSocket.cpp.i:
-	$(MAKE) -f CMakeFiles/Socke.dir/build.make CMakeFiles/Socke.dir/Socket/webSocket.cpp.i
+	$(MAKE) -f CMakeFiles/PiClient.dir/build.make CMakeFiles/PiClient.dir/Socket/webSocket.cpp.i
 .PHONY : Socket/webSocket.cpp.i
 
 Socket/webSocket.s: Socket/webSocket.cpp.s
@@ -174,7 +174,7 @@ Socket/webSocket.s: Socket/webSocket.cpp.s
 
 # target to generate assembly for a file
 Socket/webSocket.cpp.s:
-	$(MAKE) -f CMakeFiles/Socke.dir/build.make CMakeFiles/Socke.dir/Socket/webSocket.cpp.s
+	$(MAKE) -f CMakeFiles/PiClient.dir/build.make CMakeFiles/PiClient.dir/Socket/webSocket.cpp.s
 .PHONY : Socket/webSocket.cpp.s
 
 domObjects/bed.o: domObjects/bed.cpp.o
@@ -183,7 +183,7 @@ domObjects/bed.o: domObjects/bed.cpp.o
 
 # target to build an object file
 domObjects/bed.cpp.o:
-	$(MAKE) -f CMakeFiles/Socke.dir/build.make CMakeFiles/Socke.dir/domObjects/bed.cpp.o
+	$(MAKE) -f CMakeFiles/PiClient.dir/build.make CMakeFiles/PiClient.dir/domObjects/bed.cpp.o
 .PHONY : domObjects/bed.cpp.o
 
 domObjects/bed.i: domObjects/bed.cpp.i
@@ -192,7 +192,7 @@ domObjects/bed.i: domObjects/bed.cpp.i
 
 # target to preprocess a source file
 domObjects/bed.cpp.i:
-	$(MAKE) -f CMakeFiles/Socke.dir/build.make CMakeFiles/Socke.dir/domObjects/bed.cpp.i
+	$(MAKE) -f CMakeFiles/PiClient.dir/build.make CMakeFiles/PiClient.dir/domObjects/bed.cpp.i
 .PHONY : domObjects/bed.cpp.i
 
 domObjects/bed.s: domObjects/bed.cpp.s
@@ -201,7 +201,7 @@ domObjects/bed.s: domObjects/bed.cpp.s
 
 # target to generate assembly for a file
 domObjects/bed.cpp.s:
-	$(MAKE) -f CMakeFiles/Socke.dir/build.make CMakeFiles/Socke.dir/domObjects/bed.cpp.s
+	$(MAKE) -f CMakeFiles/PiClient.dir/build.make CMakeFiles/PiClient.dir/domObjects/bed.cpp.s
 .PHONY : domObjects/bed.cpp.s
 
 domObjects/chair.o: domObjects/chair.cpp.o
@@ -210,7 +210,7 @@ domObjects/chair.o: domObjects/chair.cpp.o
 
 # target to build an object file
 domObjects/chair.cpp.o:
-	$(MAKE) -f CMakeFiles/Socke.dir/build.make CMakeFiles/Socke.dir/domObjects/chair.cpp.o
+	$(MAKE) -f CMakeFiles/PiClient.dir/build.make CMakeFiles/PiClient.dir/domObjects/chair.cpp.o
 .PHONY : domObjects/chair.cpp.o
 
 domObjects/chair.i: domObjects/chair.cpp.i
@@ -219,7 +219,7 @@ domObjects/chair.i: domObjects/chair.cpp.i
 
 # target to preprocess a source file
 domObjects/chair.cpp.i:
-	$(MAKE) -f CMakeFiles/Socke.dir/build.make CMakeFiles/Socke.dir/domObjects/chair.cpp.i
+	$(MAKE) -f CMakeFiles/PiClient.dir/build.make CMakeFiles/PiClient.dir/domObjects/chair.cpp.i
 .PHONY : domObjects/chair.cpp.i
 
 domObjects/chair.s: domObjects/chair.cpp.s
@@ -228,7 +228,7 @@ domObjects/chair.s: domObjects/chair.cpp.s
 
 # target to generate assembly for a file
 domObjects/chair.cpp.s:
-	$(MAKE) -f CMakeFiles/Socke.dir/build.make CMakeFiles/Socke.dir/domObjects/chair.cpp.s
+	$(MAKE) -f CMakeFiles/PiClient.dir/build.make CMakeFiles/PiClient.dir/domObjects/chair.cpp.s
 .PHONY : domObjects/chair.cpp.s
 
 domObjects/domObject.o: domObjects/domObject.cpp.o
@@ -237,7 +237,7 @@ domObjects/domObject.o: domObjects/domObject.cpp.o
 
 # target to build an object file
 domObjects/domObject.cpp.o:
-	$(MAKE) -f CMakeFiles/Socke.dir/build.make CMakeFiles/Socke.dir/domObjects/domObject.cpp.o
+	$(MAKE) -f CMakeFiles/PiClient.dir/build.make CMakeFiles/PiClient.dir/domObjects/domObject.cpp.o
 .PHONY : domObjects/domObject.cpp.o
 
 domObjects/domObject.i: domObjects/domObject.cpp.i
@@ -246,7 +246,7 @@ domObjects/domObject.i: domObjects/domObject.cpp.i
 
 # target to preprocess a source file
 domObjects/domObject.cpp.i:
-	$(MAKE) -f CMakeFiles/Socke.dir/build.make CMakeFiles/Socke.dir/domObjects/domObject.cpp.i
+	$(MAKE) -f CMakeFiles/PiClient.dir/build.make CMakeFiles/PiClient.dir/domObjects/domObject.cpp.i
 .PHONY : domObjects/domObject.cpp.i
 
 domObjects/domObject.s: domObjects/domObject.cpp.s
@@ -255,7 +255,7 @@ domObjects/domObject.s: domObjects/domObject.cpp.s
 
 # target to generate assembly for a file
 domObjects/domObject.cpp.s:
-	$(MAKE) -f CMakeFiles/Socke.dir/build.make CMakeFiles/Socke.dir/domObjects/domObject.cpp.s
+	$(MAKE) -f CMakeFiles/PiClient.dir/build.make CMakeFiles/PiClient.dir/domObjects/domObject.cpp.s
 .PHONY : domObjects/domObject.cpp.s
 
 domObjects/door.o: domObjects/door.cpp.o
@@ -264,7 +264,7 @@ domObjects/door.o: domObjects/door.cpp.o
 
 # target to build an object file
 domObjects/door.cpp.o:
-	$(MAKE) -f CMakeFiles/Socke.dir/build.make CMakeFiles/Socke.dir/domObjects/door.cpp.o
+	$(MAKE) -f CMakeFiles/PiClient.dir/build.make CMakeFiles/PiClient.dir/domObjects/door.cpp.o
 .PHONY : domObjects/door.cpp.o
 
 domObjects/door.i: domObjects/door.cpp.i
@@ -273,7 +273,7 @@ domObjects/door.i: domObjects/door.cpp.i
 
 # target to preprocess a source file
 domObjects/door.cpp.i:
-	$(MAKE) -f CMakeFiles/Socke.dir/build.make CMakeFiles/Socke.dir/domObjects/door.cpp.i
+	$(MAKE) -f CMakeFiles/PiClient.dir/build.make CMakeFiles/PiClient.dir/domObjects/door.cpp.i
 .PHONY : domObjects/door.cpp.i
 
 domObjects/door.s: domObjects/door.cpp.s
@@ -282,7 +282,7 @@ domObjects/door.s: domObjects/door.cpp.s
 
 # target to generate assembly for a file
 domObjects/door.cpp.s:
-	$(MAKE) -f CMakeFiles/Socke.dir/build.make CMakeFiles/Socke.dir/domObjects/door.cpp.s
+	$(MAKE) -f CMakeFiles/PiClient.dir/build.make CMakeFiles/PiClient.dir/domObjects/door.cpp.s
 .PHONY : domObjects/door.cpp.s
 
 domObjects/fridge.o: domObjects/fridge.cpp.o
@@ -291,7 +291,7 @@ domObjects/fridge.o: domObjects/fridge.cpp.o
 
 # target to build an object file
 domObjects/fridge.cpp.o:
-	$(MAKE) -f CMakeFiles/Socke.dir/build.make CMakeFiles/Socke.dir/domObjects/fridge.cpp.o
+	$(MAKE) -f CMakeFiles/PiClient.dir/build.make CMakeFiles/PiClient.dir/domObjects/fridge.cpp.o
 .PHONY : domObjects/fridge.cpp.o
 
 domObjects/fridge.i: domObjects/fridge.cpp.i
@@ -300,7 +300,7 @@ domObjects/fridge.i: domObjects/fridge.cpp.i
 
 # target to preprocess a source file
 domObjects/fridge.cpp.i:
-	$(MAKE) -f CMakeFiles/Socke.dir/build.make CMakeFiles/Socke.dir/domObjects/fridge.cpp.i
+	$(MAKE) -f CMakeFiles/PiClient.dir/build.make CMakeFiles/PiClient.dir/domObjects/fridge.cpp.i
 .PHONY : domObjects/fridge.cpp.i
 
 domObjects/fridge.s: domObjects/fridge.cpp.s
@@ -309,7 +309,7 @@ domObjects/fridge.s: domObjects/fridge.cpp.s
 
 # target to generate assembly for a file
 domObjects/fridge.cpp.s:
-	$(MAKE) -f CMakeFiles/Socke.dir/build.make CMakeFiles/Socke.dir/domObjects/fridge.cpp.s
+	$(MAKE) -f CMakeFiles/PiClient.dir/build.make CMakeFiles/PiClient.dir/domObjects/fridge.cpp.s
 .PHONY : domObjects/fridge.cpp.s
 
 domObjects/lamp.o: domObjects/lamp.cpp.o
@@ -318,7 +318,7 @@ domObjects/lamp.o: domObjects/lamp.cpp.o
 
 # target to build an object file
 domObjects/lamp.cpp.o:
-	$(MAKE) -f CMakeFiles/Socke.dir/build.make CMakeFiles/Socke.dir/domObjects/lamp.cpp.o
+	$(MAKE) -f CMakeFiles/PiClient.dir/build.make CMakeFiles/PiClient.dir/domObjects/lamp.cpp.o
 .PHONY : domObjects/lamp.cpp.o
 
 domObjects/lamp.i: domObjects/lamp.cpp.i
@@ -327,7 +327,7 @@ domObjects/lamp.i: domObjects/lamp.cpp.i
 
 # target to preprocess a source file
 domObjects/lamp.cpp.i:
-	$(MAKE) -f CMakeFiles/Socke.dir/build.make CMakeFiles/Socke.dir/domObjects/lamp.cpp.i
+	$(MAKE) -f CMakeFiles/PiClient.dir/build.make CMakeFiles/PiClient.dir/domObjects/lamp.cpp.i
 .PHONY : domObjects/lamp.cpp.i
 
 domObjects/lamp.s: domObjects/lamp.cpp.s
@@ -336,7 +336,7 @@ domObjects/lamp.s: domObjects/lamp.cpp.s
 
 # target to generate assembly for a file
 domObjects/lamp.cpp.s:
-	$(MAKE) -f CMakeFiles/Socke.dir/build.make CMakeFiles/Socke.dir/domObjects/lamp.cpp.s
+	$(MAKE) -f CMakeFiles/PiClient.dir/build.make CMakeFiles/PiClient.dir/domObjects/lamp.cpp.s
 .PHONY : domObjects/lamp.cpp.s
 
 domObjects/pillar.o: domObjects/pillar.cpp.o
@@ -345,7 +345,7 @@ domObjects/pillar.o: domObjects/pillar.cpp.o
 
 # target to build an object file
 domObjects/pillar.cpp.o:
-	$(MAKE) -f CMakeFiles/Socke.dir/build.make CMakeFiles/Socke.dir/domObjects/pillar.cpp.o
+	$(MAKE) -f CMakeFiles/PiClient.dir/build.make CMakeFiles/PiClient.dir/domObjects/pillar.cpp.o
 .PHONY : domObjects/pillar.cpp.o
 
 domObjects/pillar.i: domObjects/pillar.cpp.i
@@ -354,7 +354,7 @@ domObjects/pillar.i: domObjects/pillar.cpp.i
 
 # target to preprocess a source file
 domObjects/pillar.cpp.i:
-	$(MAKE) -f CMakeFiles/Socke.dir/build.make CMakeFiles/Socke.dir/domObjects/pillar.cpp.i
+	$(MAKE) -f CMakeFiles/PiClient.dir/build.make CMakeFiles/PiClient.dir/domObjects/pillar.cpp.i
 .PHONY : domObjects/pillar.cpp.i
 
 domObjects/pillar.s: domObjects/pillar.cpp.s
@@ -363,7 +363,7 @@ domObjects/pillar.s: domObjects/pillar.cpp.s
 
 # target to generate assembly for a file
 domObjects/pillar.cpp.s:
-	$(MAKE) -f CMakeFiles/Socke.dir/build.make CMakeFiles/Socke.dir/domObjects/pillar.cpp.s
+	$(MAKE) -f CMakeFiles/PiClient.dir/build.make CMakeFiles/PiClient.dir/domObjects/pillar.cpp.s
 .PHONY : domObjects/pillar.cpp.s
 
 domObjects/wall.o: domObjects/wall.cpp.o
@@ -372,7 +372,7 @@ domObjects/wall.o: domObjects/wall.cpp.o
 
 # target to build an object file
 domObjects/wall.cpp.o:
-	$(MAKE) -f CMakeFiles/Socke.dir/build.make CMakeFiles/Socke.dir/domObjects/wall.cpp.o
+	$(MAKE) -f CMakeFiles/PiClient.dir/build.make CMakeFiles/PiClient.dir/domObjects/wall.cpp.o
 .PHONY : domObjects/wall.cpp.o
 
 domObjects/wall.i: domObjects/wall.cpp.i
@@ -381,7 +381,7 @@ domObjects/wall.i: domObjects/wall.cpp.i
 
 # target to preprocess a source file
 domObjects/wall.cpp.i:
-	$(MAKE) -f CMakeFiles/Socke.dir/build.make CMakeFiles/Socke.dir/domObjects/wall.cpp.i
+	$(MAKE) -f CMakeFiles/PiClient.dir/build.make CMakeFiles/PiClient.dir/domObjects/wall.cpp.i
 .PHONY : domObjects/wall.cpp.i
 
 domObjects/wall.s: domObjects/wall.cpp.s
@@ -390,7 +390,7 @@ domObjects/wall.s: domObjects/wall.cpp.s
 
 # target to generate assembly for a file
 domObjects/wall.cpp.s:
-	$(MAKE) -f CMakeFiles/Socke.dir/build.make CMakeFiles/Socke.dir/domObjects/wall.cpp.s
+	$(MAKE) -f CMakeFiles/PiClient.dir/build.make CMakeFiles/PiClient.dir/domObjects/wall.cpp.s
 .PHONY : domObjects/wall.cpp.s
 
 main.o: main.cpp.o
@@ -399,7 +399,7 @@ main.o: main.cpp.o
 
 # target to build an object file
 main.cpp.o:
-	$(MAKE) -f CMakeFiles/Socke.dir/build.make CMakeFiles/Socke.dir/main.cpp.o
+	$(MAKE) -f CMakeFiles/PiClient.dir/build.make CMakeFiles/PiClient.dir/main.cpp.o
 .PHONY : main.cpp.o
 
 main.i: main.cpp.i
@@ -408,7 +408,7 @@ main.i: main.cpp.i
 
 # target to preprocess a source file
 main.cpp.i:
-	$(MAKE) -f CMakeFiles/Socke.dir/build.make CMakeFiles/Socke.dir/main.cpp.i
+	$(MAKE) -f CMakeFiles/PiClient.dir/build.make CMakeFiles/PiClient.dir/main.cpp.i
 .PHONY : main.cpp.i
 
 main.s: main.cpp.s
@@ -417,7 +417,7 @@ main.s: main.cpp.s
 
 # target to generate assembly for a file
 main.cpp.s:
-	$(MAKE) -f CMakeFiles/Socke.dir/build.make CMakeFiles/Socke.dir/main.cpp.s
+	$(MAKE) -f CMakeFiles/PiClient.dir/build.make CMakeFiles/PiClient.dir/main.cpp.s
 .PHONY : main.cpp.s
 
 timeKeeper.o: timeKeeper.cpp.o
@@ -426,7 +426,7 @@ timeKeeper.o: timeKeeper.cpp.o
 
 # target to build an object file
 timeKeeper.cpp.o:
-	$(MAKE) -f CMakeFiles/Socke.dir/build.make CMakeFiles/Socke.dir/timeKeeper.cpp.o
+	$(MAKE) -f CMakeFiles/PiClient.dir/build.make CMakeFiles/PiClient.dir/timeKeeper.cpp.o
 .PHONY : timeKeeper.cpp.o
 
 timeKeeper.i: timeKeeper.cpp.i
@@ -435,7 +435,7 @@ timeKeeper.i: timeKeeper.cpp.i
 
 # target to preprocess a source file
 timeKeeper.cpp.i:
-	$(MAKE) -f CMakeFiles/Socke.dir/build.make CMakeFiles/Socke.dir/timeKeeper.cpp.i
+	$(MAKE) -f CMakeFiles/PiClient.dir/build.make CMakeFiles/PiClient.dir/timeKeeper.cpp.i
 .PHONY : timeKeeper.cpp.i
 
 timeKeeper.s: timeKeeper.cpp.s
@@ -444,7 +444,7 @@ timeKeeper.s: timeKeeper.cpp.s
 
 # target to generate assembly for a file
 timeKeeper.cpp.s:
-	$(MAKE) -f CMakeFiles/Socke.dir/build.make CMakeFiles/Socke.dir/timeKeeper.cpp.s
+	$(MAKE) -f CMakeFiles/PiClient.dir/build.make CMakeFiles/PiClient.dir/timeKeeper.cpp.s
 .PHONY : timeKeeper.cpp.s
 
 # Help Target
@@ -454,7 +454,7 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
-	@echo "... Socke"
+	@echo "... PiClient"
 	@echo "... edit_cache"
 	@echo "... Socket/Socket.o"
 	@echo "... Socket/Socket.i"

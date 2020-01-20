@@ -10,7 +10,7 @@ using namespace std;
 webSocket pyt;
 
 // Timeclass used by domObjects
-TimeClass obj1 (10, 1, 0, 0);
+TimeClass obj1 (10, 0, 0, 0);
 
 // Vector containing the domObjects
 vector<domObject*> objects;

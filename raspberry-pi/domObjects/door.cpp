@@ -84,6 +84,7 @@ void Door::update() {
         python->sendNotification(toCharArray(message));
     }
 
+    result = nullptr;
     // make message for wemos and receive sensors
     message = wemosMessage(); //verstuur dit naar wemos
 
@@ -91,7 +92,7 @@ void Door::update() {
     result = wemos.sendReceive(message);
 
     // check if wemos didnt send an empty message
-    if (result == NULL) {
+    if (result == nullptr) {
         cout<<"error receiving"<<endl;
     }
     else {

@@ -20,7 +20,6 @@ class TimeClass{
         int getTimeSeconds();
         string getTimeString();
         bool isNight();
-        string dump();
     private:
         int minutes;
         int hours;

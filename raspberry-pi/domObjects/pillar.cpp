@@ -33,6 +33,7 @@ void Pillar::update(){
         led = Result["actuators"]["led"] == 1;
     }
 
+    result = nullptr;
     // make message for wemos and receive sensors
     char *wemos_message = wemosMessage();
 
@@ -40,7 +41,7 @@ void Pillar::update(){
     char* receive_sensor = wemos.sendReceive(wemos_message);
 
     // check if wemos didnt send an empty message
-    if (result == NULL) {
+    if (receive_sensor == NULL) {
         cout<<"error receiving"<<endl;
     }
     else {

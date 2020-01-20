@@ -49,6 +49,7 @@ void Bed::update(){
         }
     }
 
+    result = nullptr;
     // make message for wemos and receive sensors
     message = wemosMessage();
 
@@ -56,7 +57,7 @@ void Bed::update(){
     result = wemos.sendReceive(message);
 
     // check if wemos didnt send an empty message
-    if (result == NULL) {
+    if (result == nullptr) {
         cout<<"error receiving"<<endl;
     }
     else {
@@ -131,7 +132,18 @@ void Bed::update(){
     }
 
     //send all sensors and actuators to webserver
-    python->sendAll(1, pythonMessage());
+    if (!python->sendMessage(1)) {
+        python->sendAll(1, pythonMessage());
+    } else {
+        // receive result, change to json
+        result = python->receiveActuators(1);
+        pythonResult = toJson(result);
+
+        // change actuator value
+        if (!(buttonPressed && led)) {
+            led = pythonResult["actuators"]["led"] == 1;
+        }
+    }
 
 //    toLogFile();
 

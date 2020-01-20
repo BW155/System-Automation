@@ -189,7 +189,13 @@ void Chair::updateAttributes(json result) {
     forceSensor = updateForce;
     updateForce = result["sensors"]["forceSensor"];
     button = result["sensors"]["button"];
-    python->sendAll(2,pythonMessage());
+    if (!python->sendMessage(2)) {
+        python->sendAll(2, pythonMessage());
+    } else {
+        char *result = python->receiveActuators(2);
+        json jsonResult = toJson(result);
+        led = jsonResult["actuators"]["led"] == 1;
+    }
 }
 
 void Chair::toLogFile() {

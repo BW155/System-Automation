@@ -41,6 +41,8 @@ void Wall::update(){
             window = true;
         } else window = LDR < 500;
     }
+
+    result = nullptr;
     // make message for wemos and receive sensors
     message = wemosMessage();
 
@@ -48,7 +50,7 @@ void Wall::update(){
     result = wemos.sendReceive(message);
 
     // check if wemos didnt send an empty message
-    if (result == NULL) {
+    if (result == nullptr) {
         cout<<"error receiving"<<endl;
     }
     else {
