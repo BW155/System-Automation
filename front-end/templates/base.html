@@ -132,7 +132,8 @@
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 $(".button-collapse").sideNav();
-                $(".modal").modal();
+                $(".modal").modal({dismissible: false});
+
                 setTimeout(function() { 
                     $(".info-box").animate({
                         opacity: '0.0',

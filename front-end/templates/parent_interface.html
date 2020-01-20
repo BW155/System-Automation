@@ -81,9 +81,7 @@ form {
     }
 
     function openModal() {
-        var elem = document.getElementById('warning-modal');
-        var instance = M.Modal.getInstance(elem);
-        instance.open();
+        $('#warning-modal').modal('open');
     }
 
     if (time_started + duration - Date.now() < 0 ) {
