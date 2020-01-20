@@ -153,6 +153,12 @@
 		<Unit filename="/home/LarsLinux/Documenten/System-Automation/raspberry-pi/includes.h">
 			<Option target="PiClient"/>
 		</Unit>
+		<Unit filename="/home/LarsLinux/Documenten/System-Automation/raspberry-pi/logger.cpp">
+			<Option target="PiClient"/>
+		</Unit>
+		<Unit filename="/home/LarsLinux/Documenten/System-Automation/raspberry-pi/logger.h">
+			<Option target="PiClient"/>
+		</Unit>
 		<Unit filename="/home/LarsLinux/Documenten/System-Automation/raspberry-pi/main.cpp">
 			<Option target="PiClient"/>
 		</Unit>

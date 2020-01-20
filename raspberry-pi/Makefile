@@ -393,6 +393,33 @@ domObjects/wall.cpp.s:
 	$(MAKE) -f CMakeFiles/PiClient.dir/build.make CMakeFiles/PiClient.dir/domObjects/wall.cpp.s
 .PHONY : domObjects/wall.cpp.s
 
+logger.o: logger.cpp.o
+
+.PHONY : logger.o
+
+# target to build an object file
+logger.cpp.o:
+	$(MAKE) -f CMakeFiles/PiClient.dir/build.make CMakeFiles/PiClient.dir/logger.cpp.o
+.PHONY : logger.cpp.o
+
+logger.i: logger.cpp.i
+
+.PHONY : logger.i
+
+# target to preprocess a source file
+logger.cpp.i:
+	$(MAKE) -f CMakeFiles/PiClient.dir/build.make CMakeFiles/PiClient.dir/logger.cpp.i
+.PHONY : logger.cpp.i
+
+logger.s: logger.cpp.s
+
+.PHONY : logger.s
+
+# target to generate assembly for a file
+logger.cpp.s:
+	$(MAKE) -f CMakeFiles/PiClient.dir/build.make CMakeFiles/PiClient.dir/logger.cpp.s
+.PHONY : logger.cpp.s
+
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -486,6 +513,9 @@ help:
 	@echo "... domObjects/wall.o"
 	@echo "... domObjects/wall.i"
 	@echo "... domObjects/wall.s"
+	@echo "... logger.o"
+	@echo "... logger.i"
+	@echo "... logger.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

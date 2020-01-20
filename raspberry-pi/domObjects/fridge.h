@@ -16,7 +16,7 @@ private:
     int openClose;
     char* wemosMessage();
     json pythonMessage();
-    void updateAttributes(json);
+    void updateAttributes(json, string*);
     bool state;
     int startTime;
 public:

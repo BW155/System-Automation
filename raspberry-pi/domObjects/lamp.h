@@ -16,7 +16,7 @@ private:
     json pythonMessage();
 public:
     Lamp(const char* IP, webSocket *s, TimeClass *t);
-    void stuurLamp();
+    void updateActuators(string*);
     void update();
 };
 

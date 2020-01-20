@@ -18,6 +18,8 @@ Lamp::Lamp(const char * IP, webSocket *w, TimeClass *t): domObject(w, t, 3){
 // Communicates with webserver and wemos, updates sensors and actuators accordingly
 void Lamp::update(){
 
+    string log;
+
     // increase the time object
     domObject::timeObj->autoIncreaseTime();
 
@@ -33,10 +35,11 @@ void Lamp::update(){
         // receive result, change to json
         result = python->receiveActuators(3);
         jsonResult = toJson(result);
-        cout<<"led result: "<<jsonResult["actuators"]["led"];
         // update actuator
         led = jsonResult["actuators"]["led"] == 1 && !domObject::timeObj->isNight();
-        cout<<"led status: "<<led<<endl;
+        log += "led = ";
+        log += led;
+        log += " | ";
     }
 
     result = nullptr;
@@ -53,11 +56,16 @@ void Lamp::update(){
     else {
         // change to json, update attribute
         jsonResult = toJson(result);
-        motionSensor = jsonResult["sensors"]["motionSensor"] == 1;
+        if (jsonResult["error"] != "NoDataReceived") {
+            motionSensor = jsonResult["sensors"]["motionSensor"] == 1;
+            if (motionSensor) {
+                log += "beweging bij lamp | ";
+            }
+        }
     }
 
     // update lamp
-    stuurLamp();
+    updateActuators(&log);
 
     //send all sensors and actuators to webserver
     if (!python->sendMessage(3)) {
@@ -66,12 +74,14 @@ void Lamp::update(){
         // receive result, change to json
         result = python->receiveActuators(3);
         jsonResult = toJson(result);
-
         // update actuator
         led = jsonResult["actuators"]["led"] == 1 && !domObject::timeObj->isNight();
+        log += "led = ";
+        log += led;
+        log += " | ";
     }
 
-//    toLogFile();
+    logToFile(domObject::timeObj, log);
 }
 
 // make message for wemos
@@ -101,7 +111,7 @@ json Lamp::pythonMessage(){
 }
 
 // function to control lamp
-void Lamp::stuurLamp(){
+void Lamp::updateActuators(string *log){
 
     //Current time in seconds
     int currentTime = domObject::timeObj->getTimeSeconds();
@@ -110,8 +120,10 @@ void Lamp::stuurLamp(){
     if (motionSensor && domObject::timeObj->isNight()) {
         led = true;
         startTime = currentTime;
+        *log += "led = 1 | ";
     } else if(currentTime - startTime > 300 && domObject::timeObj->isNight()){
             led = false;
+            *log += "led = 0 | ";
     }
 }
 

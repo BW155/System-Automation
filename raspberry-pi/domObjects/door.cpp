@@ -22,6 +22,8 @@ Door::Door(const char* IP, webSocket* w, TimeClass *t): domObject(w, t, 7){
 // Communicates with webserver and wemos, updates sensors and actuators accordingly
 void Door::update() {
 
+    string log;
+
     // char*'s for storing result and message
     char* result;
     char* message;
@@ -47,6 +49,13 @@ void Door::update() {
         // update actuator values
         jsonServo = jsonResult["actuators"]["servo"];
         ledInside = jsonResult["actuators"]["led1"] == 1;
+        log += "deur = ";
+        log += servo;
+        log += " | ";
+
+        log += "led binnen = ";
+        log += ledInside;
+        log += " | ";
     }
 
     // when alarm is raised, door can be opened with button
@@ -57,6 +66,9 @@ void Door::update() {
         else {
             servo = 1;
         }
+        log += "deur = ";
+        log += servo;
+        log += " | ";
     }
     // when there is no alarm, pressing the button will send a message to the guard
     else if (buttonInside) {
@@ -65,6 +77,7 @@ void Door::update() {
                 {"id", 1}
         };
         python->sendNotification(toCharArray(message));
+        log += "button inside pressed";
     }
     // when button is not pressed, change state of door
     else{
@@ -82,6 +95,7 @@ void Door::update() {
                 {"id", 2}
         };
         python->sendNotification(toCharArray(message));
+        log += "button outside pressed";
     }
 
     result = nullptr;
@@ -98,26 +112,19 @@ void Door::update() {
     else {
         // change to json, update attributes
         jsonResult = toJson(result);
-        buttonInside = jsonResult["sensors"]["button1"];
-        buttonOutside = jsonResult["sensors"]["button2"];
+        if (jsonResult["error"] != "NoDataReceived") {
+            buttonInside = jsonResult["sensors"]["button1"];
+            buttonOutside = jsonResult["sensors"]["button2"];
+        }
     }
 
     // led outside during night always on, during day controlled by button
     ledOutside = getTimePointer()->isNight() || buttonOutside;
 
-    // when button outside is pressed, send notification to guard
-    if (buttonOutside) {
-        json message = {
-                {"type", 4},
-                {"id", 2}
-        };
-        python->sendNotification(toCharArray(message));
-    }
-
     //send all sensors and actuators to webserver
     python->sendAll(7, pythonMessage());
 
-//    toLogFile();
+    logToFile(domObject::timeObj, log);
 }
 
 // make message for wemos

@@ -20,6 +20,8 @@ Wall::Wall(const char* IP, webSocket* w): domObject(w, 5){
 // Communicates with webserver and wemos, updates sensors and actuators accordingly
 void Wall::update(){
 
+    string log;
+
     // char*'s for storing result and message
     char* result;
     char* message;
@@ -37,9 +39,17 @@ void Wall::update(){
         // change actuator value
         led = pythonResult["actuators"]["led"];
 
-        if (pythonResult["actuators"]["window"] == 1) {
-            window = true;
-        } else window = LDR < 500;
+        log += "led = ";
+        log += to_string(led);
+        log += " | ";
+    }
+
+    if ((LDR < 500) != window) {
+        window = LDR < 500;
+
+        log += "window = ";
+        log += window;
+        log += " | ";
     }
 
     result = nullptr;
@@ -56,19 +66,20 @@ void Wall::update(){
     else {
         // change to json, update attributes
         wemosResult = toJson(result);
-
-        int temp = wemosResult["sensors"]["dimmer"];
-        if (dimmer - temp != 0) {
-            led = wemosResult["sensors"]["dimmer"];
-            dimmer = wemosResult["sensors"]["dimmer"];
+        if (wemosResult["error"] != "NoDataReceived") {
+            int temp = wemosResult["sensors"]["dimmer"];
+            if (dimmer - temp != 0) {
+                led = wemosResult["sensors"]["dimmer"];
+                dimmer = wemosResult["sensors"]["dimmer"];
+            }
+            LDR = wemosResult["sensors"]["LDR"];
         }
-        LDR = wemosResult["sensors"]["LDR"];
     }
 
     //send all sensors and actuators to webserver
     python->sendAll(5, pythonMessage());
 
-//    toLogFile();
+    logToFile(domObject::timeObj, log);
 }
 
 // make message for wemos

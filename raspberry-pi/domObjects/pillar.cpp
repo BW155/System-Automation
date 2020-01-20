@@ -19,6 +19,8 @@ Pillar::Pillar(const char* IP, webSocket *w) : domObject(w, 4){
 // Communicates with webserver and wemos, updates sensors and actuators accordingly
 void Pillar::update(){
 
+    string log;
+
     // char*' for storing result
     char *result;
 
@@ -31,6 +33,14 @@ void Pillar::update(){
         // change actuator value
         buzzer = Result["actuators"]["buzzer"] == 1;
         led = Result["actuators"]["led"] == 1;
+
+        log += "led = ";
+        log += to_string(led);
+        log += " | ";
+
+        log += "buzzer = ";
+        log += to_string(buzzer);
+        log += " | ";
     }
 
     result = nullptr;
@@ -41,22 +51,33 @@ void Pillar::update(){
     char* receive_sensor = wemos.sendReceive(wemos_message);
 
     // check if wemos didnt send an empty message
-    if (receive_sensor == NULL) {
+    if (receive_sensor == nullptr) {
         cout<<"error receiving"<<endl;
     }
     else {
         // change to json, update attributes
         json Receive_Sensor = toJson(receive_sensor);
+        if (Receive_Sensor["error"] != "NoDataReceived") {
+            gassensor = Receive_Sensor["sensors"]["gasSensor"];
 
-        gassensor = Receive_Sensor["sensors"]["gasSensor"];
-        button = Receive_Sensor["sensors"]["button"];
-        buzzer = gassensor >= 900 || buzzer;
+            if (Receive_Sensor["sensors"]["button"] != button) {
+                log += "button = ";
+                log += to_string(Receive_Sensor["sensors"]["button"]);
+                log += " | ";
+            }
+            button = Receive_Sensor["sensors"]["button"];
+            buzzer = gassensor >= 900 || buzzer;
+
+            if (buzzer) {
+                log += "ALARM";
+            }
+        }
     }
 
     //send all sensors and actuators to webserver
     python->sendAll(4, pythonMessage()); // stuur alle sensors, alleen als uit sendReceive blijkt dat er veranderingen zijn
 
-//    toLogFile();
+    logToFile(domObject::timeObj, log);
 }
 
 // make message for wemos

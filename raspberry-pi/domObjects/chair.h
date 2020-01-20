@@ -21,7 +21,7 @@ private:
     int lastNotification;
     char* wemosMessage();
     json pythonMessage();
-    void updateAttributes(json result);
+    void updateAttributes(json result, string *log);
 public:
     void update();
     Chair(const char*, webSocket*, TimeClass*);

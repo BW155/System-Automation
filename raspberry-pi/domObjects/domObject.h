@@ -9,6 +9,7 @@
 #include "../Socket/webSocket.h"
 #include "../json/json.hpp"
 #include "../timeKeeper.h"
+#include "../logger.h"
 
 using json = nlohmann::json;
 
