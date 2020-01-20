@@ -19,7 +19,6 @@ private:
     void updateAttributes(json);
     bool state;
     int startTime;
-    void toLogFile();
 public:
     void update() override;
     Fridge(const char*, webSocket*, TimeClass*);

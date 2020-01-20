@@ -192,19 +192,3 @@ void Chair::updateAttributes(json result) {
     python->sendAll(2,pythonMessage());
 }
 
-void Chair::toLogFile() {
-    //log
-    ofstream myfile;
-    myfile.open("log.txt", ios::out | ios::app);
-    if (myfile.is_open()) {
-        myfile << domObject::timeObj->getTimeString() << "Chair: " << pythonMessage() << endl;
-        if  (myfile.bad()) {
-            cout<<"write failed"<<endl;
-        }
-
-    }
-    else {
-        cout<<"file not found"<<endl;
-    }
-    myfile.close();
-}

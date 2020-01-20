@@ -19,7 +19,6 @@ private:
     Pillar* pillar;
     char* wemosMessage();
     json pythonMessage();
-    void toLogFile();
 public:
     Door(const char*, webSocket*, TimeClass*);
     void setPillarPointer(Pillar*);

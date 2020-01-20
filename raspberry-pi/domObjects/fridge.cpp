@@ -113,19 +113,3 @@ void Fridge::updateAttributes(json result){
     openClose = result["sensors"]["openClose"] == 1;
 }
 
-void Fridge::toLogFile() {
-    //log
-    ofstream myfile;
-    myfile.open("log.txt", ios::out | ios::app);
-    if (myfile.is_open()) {
-        myfile << domObject::timeObj->getTimeString() << "Fridge: " << pythonMessage() << endl;
-        if  (myfile.bad()) {
-            cout<<"write failed"<<endl;
-        }
-
-    }
-    else {
-        cout<<"file not found"<<endl;
-    }
-    myfile.close();
-}

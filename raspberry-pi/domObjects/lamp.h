@@ -14,13 +14,10 @@ private:
     int startTime;
     char* wemosMessage();
     json pythonMessage();
-    void toLogFile();
 public:
     Lamp(const char* IP, webSocket *s, TimeClass *t);
     void stuurLamp();
     void update();
-
 };
-
 
 #endif //LAMP_H

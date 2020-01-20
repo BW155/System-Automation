@@ -104,19 +104,3 @@ void Lamp::stuurLamp(){
     }
 }
 
-void Lamp::toLogFile() {
-    //log
-    ofstream myfile;
-    myfile.open("log.txt", ios::out | ios::app);
-    if (myfile.is_open()) {
-        myfile << domObject::timeObj->getTimeString() << "Lamp: " << pythonMessage() << endl;
-        if  (myfile.bad()) {
-            cout<<"write failed"<<endl;
-        }
-
-    }
-    else {
-        cout<<"file not found"<<endl;
-    }
-    myfile.close();
-}
