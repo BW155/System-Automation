@@ -7,10 +7,11 @@
 
 class DomObject {
     public:
-        virtual int getId();
-        virtual void getSensors(JsonObject&);
-        virtual void writeActuators(JsonObject&);
+        virtual int getId() = 0;
+        virtual void getSensors(JsonObject&) = 0;
+        virtual void writeActuators(JsonObject&) = 0;
 };
+
 
 class Bed: public DomObject {
     public:

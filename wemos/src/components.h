@@ -18,6 +18,7 @@
 
 double calculateThermistor(int RawADC);
 void brightness();
+
 /////////////////////
 /// Set Actuators ///
 /////////////////////

@@ -23,16 +23,6 @@ void initLed() {
     ledje.show();
 }
 
-
-double calculateThermistor(int RawADC) {  //Function to perform the fancy math of the Steinhart-Hart equation
-    double temperature;
-    temperature = log(((10240000 / RawADC) - 10000));
-    temperature = 1 / (0.001129148 + (0.000234125 + (0.0000000876741 * temperature * temperature ))* temperature );
-    temperature = temperature - 273.15;              // Convert Kelvin to Celsius
-    return temperature;
-}
-
-
 /////////////////////
 /// Set Actuators ///
 /////////////////////
@@ -82,6 +72,50 @@ void writeActuators(int output) {
     Wire.endTransmission();
 }
 
+/////////////////////////////////
+// Individual Actuator Setters //
+/////////////////////////////////
+
+void setPeltier(bool state){
+    void setPeltier(bool state);
+    pinMode(14, OUTPUT);
+    digitalWrite(14, state);
+}
+
+void setLamp(bool state) {
+    if(state){
+        target = 255;
+    }
+    if(!state){
+        target = 0;
+    }
+}
+
+void setWallLamp(int value) {
+    target = value;
+}
+
+void brightness() {
+    ledje.setBrightness(bright);
+    for (int i = 0; i < NUM_LEDS; i++) {
+        ledje.setPixelColor(i, 255, 50, 0);
+    }
+    ledje.show();
+    if(bright < target){
+        bright++;
+    }
+    if(bright > target){
+        bright--;
+    } 
+}
+
+void setServo(int angle) {
+    servo.write(angle);
+}
+
+///////////////////
+/// Get Sensors ///
+///////////////////
 
 int getWallSensors(int choice) {
     Wire.requestFrom(0x36, 4);   
@@ -110,48 +144,6 @@ int getFridgeClicker(){
     Serial.println(anin0);
     return anin0;
 }
-
-//Set Peltier Module Fridge
-void setPeltier(bool state){
-    void setPeltier(bool state);
-    pinMode(14, OUTPUT);
-    digitalWrite(14, state);
-}
-
-void setLamp(bool state) {
-    if(state){
-        target = 255;
-    }
-    if(!state){
-        target = 0;
-    }
-}
-
-void setWallLamp(int value){
-    target = value;
-}
-
-void brightness(){
-    ledje.setBrightness(bright);
-    for (int i = 0; i < NUM_LEDS; i++) {
-        ledje.setPixelColor(i, 255, 50, 0);
-    }
-    ledje.show();
-    if(bright < target){
-        bright++;
-    }
-    if(bright > target){
-        bright--;
-    } 
-}
-
-void setServo(int angle) {
-    servo.write(angle);
-}
-
-///////////////////
-/// Get Sensors ///
-///////////////////
 
 double getFridgeTempSensor(int choice){
     Wire.requestFrom(0x36, 4);   
@@ -236,6 +228,7 @@ bool getDoorButton2() {
     }
     return inputs & DOOR_BUTTON_2;
 }
+
 unsigned int getMotionSensor() {
     Wire.beginTransmission(0x38); 
     Wire.write(byte(0x00));      
@@ -265,8 +258,23 @@ int getGassensor() {
 }
 
 ///////////////////////////////
-// Loop that the main loop goes through to check components that require more realtime checking, like buttons.
+//     Helper Methods        //
 ///////////////////////////////
+
+double calculateThermistor(int RawADC) {  //Function to perform the fancy math of the Steinhart-Hart equation
+    double temperature;
+    temperature = log(((10240000 / RawADC) - 10000));
+    temperature = 1 / (0.001129148 + (0.000234125 + (0.0000000876741 * temperature * temperature ))* temperature ); // Get temperature in Kelvin
+    temperature = temperature - 273.15; // Convert Kelvin to Celsius
+    return temperature;
+}
+
+
+///////////////////////////////////////////
+// Loop that the main loop goes through  //
+// to check components that require      //
+// more realtime checking, like buttons. //
+///////////////////////////////////////////
 
 void componentCheckLoop(){
     getGassensor();
@@ -275,3 +283,4 @@ void componentCheckLoop(){
     getDoorButton1();
     getDoorButton2();
 }
+
