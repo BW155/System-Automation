@@ -22,6 +22,7 @@ pi_notification_templates = {
     6: "Medicijnen 13:00",
     7: "Medicijnen 18:00",
     8: "Medicijnen 23:00",
+    9: "Alarm, Timothy heeft hulp nodig"
 }
 
 class PiSocketServer(socketserver.BaseRequestHandler):
