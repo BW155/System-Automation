@@ -8,7 +8,7 @@
 using json = nlohmann::json;
 
 // constructor for wall
-Wall::Wall(const char* IP, webSocket* w): domObject(w, 5){
+Wall::Wall(const char* IP, webSocket* w, TimeClass *t): domObject(w, t, 5){
     led = 0;
     window = false;
     dimmer = 0;

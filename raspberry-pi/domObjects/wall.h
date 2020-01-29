@@ -15,7 +15,7 @@ private:
     int dimmer;
     int LDR;
 public:
-    Wall(const char*, webSocket*);
+    Wall(const char*, webSocket*, TimeClass *);
     char* wemosMessage();
     json pythonMessage();
     void update();

@@ -25,8 +25,8 @@ void TimeClass::autoIncreaseTime(){
     totalTime = diff_t * localMultiplier;
     if(diff_t > 0) {
         seconds += (totalTime%3600)%60;
-        minutes += (totalTime - totalTime%3600 - (totalTime - totalTime%60));
-        hours += totalTime - (totalTime % 3600);
+        minutes += (totalTime%3600 - ((totalTime%3600)%60))/60;
+        hours += (totalTime - (totalTime % 3600))/3600;
 
         if (seconds > 59) {
             seconds = 0;
