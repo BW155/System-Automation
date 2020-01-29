@@ -16,7 +16,7 @@ private:
     bool buzzer;
     Socket socket;
 public:
-    Pillar(const char*, webSocket*);
+    Pillar(const char*, webSocket*, TimeClass *);
     bool get_buzzer();
     char* wemosMessage();
     json pythonMessage();

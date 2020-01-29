@@ -77,12 +77,12 @@ void discoverDevices() {
                     break;
                 }
                 case 4 : {
-                    objects.push_back(new Pillar(IP,&pyt));
+                    objects.push_back(new Pillar(IP,&pyt, &obj1));
                     cout << "Pillar was made\n" << endl;
                     break;
                 }
                 case 5 : {
-                    objects.push_back(new Wall(IP,&pyt));
+                    objects.push_back(new Wall(IP,&pyt, &obj1));
                     cout << "Wall was made\n" << endl;
                     break;
                 }

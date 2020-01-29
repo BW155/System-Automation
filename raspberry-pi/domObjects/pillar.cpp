@@ -7,7 +7,7 @@
 using json = nlohmann::json;
 
 // constructor for pillar
-Pillar::Pillar(const char* IP, webSocket *w) : domObject(w, 4){
+Pillar::Pillar(const char* IP, webSocket *w, TimeClass *t) : domObject(w, t, 4){
     gassensor = 0;
     button = 0;
     led = 0;
