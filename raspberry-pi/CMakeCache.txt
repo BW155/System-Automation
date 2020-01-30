@@ -223,24 +223,6 @@ ProcessorCount_cmd_nproc:FILEPATH=/usr/bin/nproc
 //Path to a program.
 ProcessorCount_cmd_sysctl:FILEPATH=/usr/sbin/sysctl
 
-//Value Computed by CMake
-Sock_BINARY_DIR:STATIC=/home/LarsLinux/Documenten/System-Automation/raspberry-pi
-
-//Value Computed by CMake
-Sock_SOURCE_DIR:STATIC=/home/LarsLinux/Documenten/System-Automation/raspberry-pi
-
-//Value Computed by CMake
-Socke_BINARY_DIR:STATIC=/home/LarsLinux/Documenten/System-Automation/raspberry-pi
-
-//Value Computed by CMake
-Socke_SOURCE_DIR:STATIC=/home/LarsLinux/Documenten/System-Automation/raspberry-pi
-
-//Value Computed by CMake
-Socket_BINARY_DIR:STATIC=/home/LarsLinux/Documenten/System-Automation/raspberry-pi
-
-//Value Computed by CMake
-Socket_SOURCE_DIR:STATIC=/home/LarsLinux/Documenten/System-Automation/raspberry-pi
-
 
 ########################
 # INTERNAL cache entries
