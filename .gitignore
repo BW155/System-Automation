@@ -1,5 +1,7 @@
 .DS_store
-
+.vscode
+.pio
+.idea
 
 # Prerequisites
 *.d
