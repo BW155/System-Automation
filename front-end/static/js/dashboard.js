@@ -63,7 +63,7 @@ function pollNotifications() {
             console.log(data);
             data = JSON.parse(data);
             for (var i = 0; i < data.length; i++) {
-                if (data[i].id == 0) {
+                if (data[i].id == 0 || data[i].id == 9) {
                     $("<p class=\"flow-text white-text\" style=\"background: red\">" 
                         + data[i].time + " | " + data[i].message + "</p>").appendTo("#notification-holder");
                 } else {
