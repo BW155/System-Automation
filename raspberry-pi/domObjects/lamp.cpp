@@ -38,7 +38,7 @@ void Lamp::update(){
         // update actuator
         led = jsonResult["actuators"]["led"] == 1 && !domObject::timeObj->isNight();
         log += "led = ";
-        log += led;
+        log += to_string(led);
         log += " | ";
     }
 
@@ -77,7 +77,7 @@ void Lamp::update(){
         // update actuator
         led = jsonResult["actuators"]["led"] == 1 && !domObject::timeObj->isNight();
         log += "led = ";
-        log += led;
+        log += to_string(led);
         log += " | ";
     }
 

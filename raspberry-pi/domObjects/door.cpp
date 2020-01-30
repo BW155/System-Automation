@@ -50,24 +50,19 @@ void Door::update() {
         jsonServo = jsonResult["actuators"]["servo"];
         ledInside = jsonResult["actuators"]["led1"] == 1;
         log += "deur = ";
-        log += servo;
+        log += to_string(servo);
         log += " | ";
 
         log += "led binnen = ";
-        log += ledInside;
+        log += to_string(ledInside);
         log += " | ";
     }
 
     // when alarm is raised, door can be opened with button
     if(pillar->get_buzzer() && buttonInside) {
-        if (servo == 1) {
-            servo = 0;
-        }
-        else {
-            servo = 1;
-        }
+        servo = 1;
         log += "deur = ";
-        log += servo;
+        log += to_string(servo);
         log += " | ";
     }
     // when there is no alarm, pressing the button will send a message to the guard

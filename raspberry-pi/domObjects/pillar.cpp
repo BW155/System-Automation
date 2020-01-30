@@ -7,7 +7,7 @@
 using json = nlohmann::json;
 
 // constructor for pillar
-Pillar::Pillar(const char* IP, webSocket *w) : domObject(w, 4){
+Pillar::Pillar(const char* IP, webSocket *w, TimeClass *t) : domObject(w, t, 4){
     gassensor = 0;
     button = 0;
     led = 0;
@@ -66,6 +66,13 @@ void Pillar::update(){
                 log += " | ";
             }
             button = Receive_Sensor["sensors"]["button"];
+            if (button) {
+                json message = {
+                        {"type", 4},
+                        {"id", 9}
+                };
+                python->sendNotification(toCharArray(message));
+            }
             buzzer = gassensor >= 900 || buzzer;
 
             if (buzzer) {

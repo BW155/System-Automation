@@ -156,6 +156,7 @@ void Chair::update() {
         if((currentTime - start_timeOut) > (5 * 60))
             timeOut = false;
     }else{
+
         start_timeOut = currentTime;
     }
 
