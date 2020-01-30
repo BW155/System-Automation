@@ -128,7 +128,7 @@ void Bed::update(){
     }
 
     // turn led off after 10 seconds
-    if (currentTime-startTimeLed > 600) {
+    if (currentTime-startTimeLed > 60) {
         led = false;
         buttonPressed = false;
         startTimeLed = currentTime;

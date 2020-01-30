@@ -66,6 +66,13 @@ void Pillar::update(){
                 log += " | ";
             }
             button = Receive_Sensor["sensors"]["button"];
+            if (button) {
+                json message = {
+                        {"type", 4},
+                        {"id", 9}
+                };
+                python->sendNotification(toCharArray(message));
+            }
             buzzer = gassensor >= 900 || buzzer;
 
             if (buzzer) {
